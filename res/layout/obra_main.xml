@@ -1,28 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/FrameLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
+    
+     <ImageSwitcher
+  		android:id="@+id/Gallery02"
+   		android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+   		android:layout_centerHorizontal="true"
+   		android:layout_centerVertical="true" >
+	</ImageSwitcher>
     
     
-    <Gallery
-    android:id="@+id/gallery"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:spacing="8dp"
-    android:background="@android:color/darker_gray"
-    android:paddingTop="4dp"
-/>
- 
-<ImageView
-    android:id="@+id/seleccionada"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/gallery"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="30dp"
-    android:contentDescription="@string/seleccionada" />
- 
-    
+
+   
 
 </LinearLayout>
