@@ -46,8 +46,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="85dp"
-        android:layout_y="304dp"
+        android:layout_x="85sp"
+        android:layout_y="304sp"
         android:text="TextView" />
 
     <TextView
