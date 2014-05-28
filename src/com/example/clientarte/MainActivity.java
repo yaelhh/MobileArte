@@ -3,7 +3,6 @@ package com.example.clientarte;
 import com.example.imageswitcher.R;
 
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,35 +14,37 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
-import android.widget.ImageView;
+//import android.widget.ImageView;
 import android.widget.Toast;
-import android.os.Build;
+/*import android.os.Build;
 import android.widget.ViewSwitcher.ViewFactory;
-import android.app.ActionBar.LayoutParams;
+import android.app.ActionBar.LayoutParams;*/
 
 public class MainActivity extends ActionBarActivity {
 
-	private ImageButton img;
+	 
 	private ImageSwitcher imageSwitcher;
+	 
 	
-    @Override
+    
     protected void onCreate(Bundle savedInstanceState) {
+		ImageButton img;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         img = (ImageButton)findViewById(R.id.imageButton1);
         imageSwitcher = (ImageSwitcher)findViewById(R.id.Gallery02);
 
-        imageSwitcher.setFactory(new ViewFactory() {
+        //imageSwitcher.setFactory(new ViewFactory() ;
 			
-			@Override
-			public View makeView() {
+			
+			/*public View makeView() {
 				ImageView myView = new ImageView(getApplicationContext());
 			      myView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 			      myView.setLayoutParams(new ImageSwitcher.LayoutParams(LayoutParams.
 			      FILL_PARENT,LayoutParams.FILL_PARENT));
 			      return myView;
 			}
-        });
+        });*/
      }
     
     public void next(View view){
