@@ -526,7 +526,7 @@ int layout abc_search_dropdown_item_icons_2line 0x7f030015
 int layout abc_search_view 0x7f030016
 int layout abc_simple_decor 0x7f030017
 int layout activity_main 0x7f030018
-int layout inicio 0x7f030019
+int layout inicio_main 0x7f030019
 int layout obra_main 0x7f03001a
 int layout principal_main 0x7f03001b
 int layout programacion_main 0x7f03001c
