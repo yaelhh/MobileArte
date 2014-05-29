@@ -1,65 +1,54 @@
 package com.example.clientarte;
 
+
+
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
+
+
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
+
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+
+import android.widget.AdapterView;
+import android.widget.Gallery;
+
+import android.widget.ImageView;
+import android.widget.Toast;
+
 
 public class MainActivity extends ActionBarActivity {
 
+	ImageView selectedImage;  
+    private Integer[] mImageIds = {
+               R.drawable.comunidad,
+               R.drawable.logo_app,
+               R.drawable.nosotros,
+             
+       };
+    
+    
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) 
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.principal_main);
+        setContentView(R.layout.obra_main);
+       
+             Gallery gallery = (Gallery) findViewById(R.id.gallery1);
+        selectedImage=(ImageView)findViewById(R.id.Gallery02);
+        gallery.setSpacing(1);
+        gallery.setAdapter(new GalleryImageAdapter(this));
 
-      //  if (savedInstanceState == null) {
-         //   getSupportFragmentManager().beginTransaction()
-           //         .add(R.id., new PlaceholderFragment())
-             //       .commit();
-      //  }
+         // clicklistener for Gallery
+        gallery.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Toast.makeText(MainActivity.this, "Your selected position = " + position, Toast.LENGTH_SHORT).show();
+                // show the selected Image
+                selectedImage.setImageResource(mImageIds[position]);
+            }
+        });
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.activity_main, container, false);
-            return rootView;
-        }
-    }
-
+  
 }
+ 
+
+
