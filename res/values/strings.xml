@@ -5,6 +5,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="seleccionada">Yael</string>
+    <string name="button_iconFire">Extintor</string>
+    <string name="button_iconWifi">Wifi</string>
+    <string name="idObra">Obra de prueba</string>
     
 
 </resources>

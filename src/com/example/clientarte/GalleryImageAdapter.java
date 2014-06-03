@@ -11,8 +11,8 @@ public class GalleryImageAdapter extends BaseAdapter {
 	 private Context mContext;
 
 	    private Integer[] mImageIds = {
-	    		R.drawable.comunidad,
-	               R.drawable.logo_app,
+	    		R.drawable.logo_app,
+	               R.drawable.novedades,
 	               R.drawable.nosotros,
 	    };
 

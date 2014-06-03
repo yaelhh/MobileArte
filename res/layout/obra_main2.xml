@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+     <Gallery
+         android:id="@+id/gallery1"
+         android:layout_width="400dp"
+         android:layout_height="150dp"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentTop="true" />
+
+     <ImageButton
+         android:id="@+id/iconFire"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_below="@+id/gallery1"
+         android:layout_marginRight="114dp"
+         android:layout_marginTop="32dp"
+         android:contentDescription="@string/button_iconFire"
+         android:src="@drawable/ic_fire_icon" />
+
+     <ImageButton
+         android:id="@+id/iconWifi"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignTop="@+id/iconFire"
+         android:layout_marginRight="29dp"
+         android:layout_toLeftOf="@+id/iconFire"
+         android:contentDescription="@string/button_iconWifi"
+         android:src="@drawable/ic_wifi_icon" />
+
+     <TextView
+         android:id="@+id/textView1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_below="@+id/gallery1"
+         android:text="@string/idObra" />
+
+     <ExpandableListView
+         android:id="@+id/expandableListView1"
+         android:layout_width="match_parent"
+         android:layout_height="100dp"
+         android:layout_alignParentLeft="true"
+         android:layout_below="@+id/iconFire" >
+     </ExpandableListView>
+
+</RelativeLayout>
