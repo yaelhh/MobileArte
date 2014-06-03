@@ -27,7 +27,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 public class MainActivity extends ActionBarActivity {
-private ImageButton botonprogramacion, botonComunidad;
+private ImageButton botonprogramacion, botonComunidad, botonNosotros, botonNovedades;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,9 @@ private ImageButton botonprogramacion, botonComunidad;
 		setContentView(R.layout.activity_principal);
 		botonprogramacion = (ImageButton) findViewById(R.id.imageProgramacion);
 		botonComunidad= (ImageButton) findViewById(R.id.ImageComunidad);
+		botonNosotros=(ImageButton) findViewById(R.id.ImageNosotros);
+		botonNovedades =(ImageButton) findViewById(R.id.imageNovedades);
+		
 		addListenerOnButton();
 	}
 	
@@ -47,10 +50,44 @@ private ImageButton botonprogramacion, botonComunidad;
 				Intent intent = new Intent(MainActivity.this, ProgramacionActivity.class);
 				startActivity(intent);
 			}
+			
+			
+
+		});
+		botonComunidad.setOnClickListener(new OnClickListener() {
+ 
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
+				startActivity(intent);
+			}
+			
+			
 
 		});
 		
-	
+		botonNosotros.setOnClickListener(new OnClickListener() {
+			 
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
+				startActivity(intent);
+			}
+			
+			
+
+		});
+		botonNovedades.setOnClickListener(new OnClickListener() {
+			 
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
+				startActivity(intent);
+			}
+			
+			
+
+		});
 
 	/*@Override
 	protected void onCreate(Bundle savedInstanceState) {
