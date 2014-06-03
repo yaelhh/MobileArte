@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="10"
+        android:minSdkVersion="11"
         android:targetSdkVersion="19" />
 
     <application
@@ -21,6 +21,22 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.clientarte.PrincipalActivity"
+            android:label="@string/title_activity_principal" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.ProgramacionActivity"
+            android:label="@string/title_activity_programacion" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.BusquedaActivity"
+            android:label="@string/title_activity_busqueda" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.PerfilActivity"
+            android:label="@string/title_activity_perfil" >
         </activity>
     </application>
 
