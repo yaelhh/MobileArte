@@ -29,7 +29,7 @@ import android.os.Bundle;
 public class MainActivity extends ActionBarActivity {
 private ImageButton botonprogramacion, botonComunidad, botonNosotros, botonNovedades;
 	
-	@Override
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_principal);
