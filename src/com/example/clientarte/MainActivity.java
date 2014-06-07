@@ -127,31 +127,34 @@ protected void onCreate(Bundle savedInstanceState) {
 /*Pasando la posicion de la opcion en el menu nos mostrara el Fragment correspondiente*/
 private void MostrarFragment(int position) {
     // update the main content by replacing fragments
-    Fragment fragment = null;
+    Activity fragment = null;
     switch (position) {
     case 1:
-        fragment = new Fragment_menu_1();
+        fragment = new PrincipalActivity();
         break;
-   /* case 2:
-        fragment = new ProfileFragment();
-        break;*/
+    case 2:
+        fragment = new ProgramacionActivity();
+        break;
+    case 3:
+        fragment = new PerfilActivity();
+        break;
  
 
     default:
     	//si no esta la opcion mostrara un toast y nos mandara a Home
     	Toast.makeText(getApplicationContext(),"Opcion "+titulos[position-1]+"no disponible!", Toast.LENGTH_SHORT).show();
-        fragment = new Fragment_menu_1();
+        fragment = new PrincipalActivity();
         position=1;
         break;
     }
     //Validamos si el fragment no es nulo
     if (fragment != null) {
-    	FragmentManager fragmentManager = getFragmentManager();
+    	/*	FragmentManager fragmentManager = getFragmentManager();
         
         fragmentManager.beginTransaction()
             .replace(R.id.content_frame, fragment)
             .commit();
-
+*/
         // Actualizamos el contenido segun la opcion elegida
         NavList.setItemChecked(position, true);
         NavList.setSelection(position);
