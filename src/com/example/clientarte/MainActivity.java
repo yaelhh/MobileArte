@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.content.Intent;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -23,9 +23,9 @@ import android.widget.Toast;
 
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnQueryTextListener {
 
-private ImageButton botonprogramacion, botonComunidad, botonNosotros, botonNovedades;
+
 private String[] titulos;
 private DrawerLayout NavDrawerLayout;
 private ListView NavList;
@@ -37,19 +37,17 @@ private CharSequence mDrawerTitle;
 @SuppressWarnings("unused")
 private CharSequence mTitle;
 private NavigationAdapter NavAdapter;
+private SearchView mSearchView;
+
+
+
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_principal);	
+		setContentView(R.layout.activity_main);	
 		
-		botonprogramacion = (ImageButton) findViewById(R.id.imageProgramacion);
-		botonComunidad= (ImageButton) findViewById(R.id.ImageComunidad);
-
-		botonNosotros=(ImageButton) findViewById(R.id.ImageNosotros);
-		botonNovedades =(ImageButton) findViewById(R.id.imageNovedades);
 		
-		addListenerOnButton();
 
 		//Drawer Layout
 		NavDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -123,38 +121,48 @@ protected void onCreate(Bundle savedInstanceState) {
         
         //Cuando la aplicacion cargue por defecto mostrar la opcion Home
         MostrarFragment(1);
+        
+     
+        
 }
+
 /*Pasando la posicion de la opcion en el menu nos mostrara el Fragment correspondiente*/
-private void MostrarFragment(int position) {
+@SuppressWarnings("unused")
+public void MostrarFragment(int position) {
     // update the main content by replacing fragments
-    Activity fragment = null;
+    Fragment fragment = null;
     switch (position) {
     case 1:
-        fragment = new PrincipalActivity();
+        fragment = new HomeFragment();
         break;
     case 2:
-        fragment = new ProgramacionActivity();
+        fragment = new ProgramacionFragment();
         break;
     case 3:
-        fragment = new PerfilActivity();
+        fragment = new NosotrosFragment();
         break;
- 
-
+    case 4:
+        fragment = new ComunidadFragment();
+        break;
+    case 5:
+        fragment = new NovedadesFragment();
+        break;  
+    case 6:
+        fragment = new PerfilFragment();
+        break;          
+        
     default:
     	//si no esta la opcion mostrara un toast y nos mandara a Home
     	Toast.makeText(getApplicationContext(),"Opcion "+titulos[position-1]+"no disponible!", Toast.LENGTH_SHORT).show();
-        fragment = new PrincipalActivity();
+        fragment = new HomeFragment();
         position=1;
         break;
     }
     //Validamos si el fragment no es nulo
     if (fragment != null) {
-    	/*	FragmentManager fragmentManager = getFragmentManager();
-        
-        fragmentManager.beginTransaction()
-            .replace(R.id.content_frame, fragment)
-            .commit();
-*/
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
         // Actualizamos el contenido segun la opcion elegida
         NavList.setItemChecked(position, true);
         NavList.setSelection(position);
@@ -162,11 +170,12 @@ private void MostrarFragment(int position) {
         setTitle(titulos[position-1]);
         //Cerramos el menu deslizable
         NavDrawerLayout.closeDrawer(NavList);
-    } else {
-        //Si el fragment es nulo mostramos un mensaje de error.
-        Log.e("Error  ","MostrarFragment"+position);
-    }
+    } else
+		//Si el fragment es nulo mostramos un mensaje de error.
+        Log.e("Error  ", "MostrarFragment"+position);
 }
+
+
 
 @Override
 protected void onPostCreate(Bundle savedInstanceState) {
@@ -190,55 +199,32 @@ public boolean onOptionsItemSelected(MenuItem item) {
     // Handle your other action bar items...
     return super.onOptionsItemSelected(item);
 }  
+//@Override
+public boolean onQueryTextChange(String newText) {
 
-	public void addListenerOnButton() {
-		 
-		botonprogramacion.setOnClickListener(new OnClickListener() {
- 
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, ProgramacionActivity.class);
-				startActivity(intent);
-			}
-			
-			
+    Toast.makeText(this, newText, Toast.LENGTH_SHORT).show();
 
-		});
-		botonComunidad.setOnClickListener(new OnClickListener() {
- 
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
-				startActivity(intent);
-			}
-			
-			
-
-		});
-		
-		botonNosotros.setOnClickListener(new OnClickListener() {
-			 
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
-				startActivity(intent);
-			}
-			
-			
-
-		});
-		botonNovedades.setOnClickListener(new OnClickListener() {
-			 
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
-				startActivity(intent);
-			}
-			
-			
-
-		});
-
-	
+    return false;
 }
+//@Override
+public boolean onQueryTextSubmit(String text) {
+
+    Toast.makeText(this, "Searching for " + text, Toast.LENGTH_LONG).show();
+    return false;
+}
+
+
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    // Inflate the menu; this adds items to the action bar if it is present.
+    getMenuInflater().inflate(R.menu.main, menu);
+
+    MenuItem searchItem = menu.findItem(R.id.action_search);
+    mSearchView = (SearchView) searchItem.getActionView();
+    mSearchView.setQueryHint("Search...");
+    mSearchView.setOnQueryTextListener((OnQueryTextListener) this);
+
+    return true;
+}
+	
 }

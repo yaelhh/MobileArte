@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.clientarte.MainActivity"
+            android:name="com.example.clientarte.PerfilActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,10 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+       
         <activity
             android:name="com.example.clientarte.PrincipalActivity"
             android:label="@string/title_activity_principal" >
         </activity>
+       
         <activity
             android:name="com.example.clientarte.ProgramacionActivity"
             android:label="@string/title_activity_programacion" >
@@ -34,10 +36,14 @@
             android:name="com.example.clientarte.BusquedaActivity"
             android:label="@string/title_activity_busqueda" >
         </activity>
-        <activity
+        <!-- <activity
             android:name="com.example.clientarte.PerfilActivity"
-            android:label="@string/title_activity_perfil" >
+            android:label="@string/title_activity_perfil" > -->
+        <activity
+            android:name="com.example.clientarte.MainActivity"
+            android:label="@string/title_activity_splash_screen" >
         </activity>
+        
     </application>
 
 </manifest>
