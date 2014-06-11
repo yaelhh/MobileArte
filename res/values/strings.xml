@@ -22,8 +22,15 @@
     <string name="fragment1">fragment1</string>
     <string name="menu_open">menu_open</string>
     <string name="menu_close">menu_close</string>
+    <string name="action_bar_notification">Notificaciones</string>
+    <string name="back">volver</string>
+	<string name="Cuenta">Cuenta</string>
+	<string name="Prox_obras">Próximas obras</string>
+	<string name="Obras_vistas">Obras vistas</string>
+	<string name="Mascaras">Mascaras</string>
+	<string name="Canjear">Canjear mascaras</string>
     
-     <!-- Lista de iconos de navegacion-->
+    <!-- Lista de iconos de navegacion -->
     <array name="navigation_iconos">
         <item>@drawable/ic_action_home</item>
         <item>@drawable/ic_action_user</item>
@@ -32,10 +39,10 @@
         <item>@drawable/ic_action_place</item>
         <item>@drawable/ic_action_labels</item>
         <item>@drawable/ic_action_settings</item>
-        <item>@drawable/ic_action_share</item>        
-    </array>    
-    
-    <!-- Lista de titulos de navegacion-->    
+        <item>@drawable/ic_action_share</item>
+    </array>
+
+    <!-- Lista de titulos de navegacion -->
     <string-array name="nav_options">
         <item>Home</item>
         <item>Programacion</item>
@@ -45,7 +52,7 @@
         <item>Perfil</item>
         <item>Ajustes</item>
     </string-array>
-    
-    
+
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
 
 </resources>

@@ -1,15 +1,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-	<item
-		android:id="@+id/item_refresh"
-		android:icon="@drawable/ic_action_event"
-		android:title="Refresh"
-		android:showAsAction="ifRoom|withText" />
-	
-	<item
-		android:id="@+id/item_save"
-		android:icon="@drawable/ic_action_labels"
-		android:title="Save"
-		android:showAsAction="ifRoom|withText" />
-</menu>
+
+   <!--   <item
+        android:id="@+id/backgrd"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_revert"
+        android:scaleType="centerCrop"
+        android:title="@string/back"
+        
+	 /> -->
+    <item
+        android:id="@+id/action_search"
+        android:actionViewClass="android.widget.SearchView"
+        android:icon="@android:drawable/ic_menu_search"
+        android:showAsAction="always"
+        android:title="@string/abc_searchview_description_search"/>
+    <item
+        android:id="@+id/menu_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/abc_action_bar_home_description"/>
+    <item 
+        android:id="@+id/action_notification"
+       android:icon="@android:drawable/ic_dialog_email"
+        android:showAsAction="always"
+        android:title="@string/action_bar_notification"/>
     
 
+</menu>
