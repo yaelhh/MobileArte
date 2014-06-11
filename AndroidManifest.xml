@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.clientarte.MainActivity"
+            android:name="com.example.clientarte.Ejemplo1Activity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--
         <activity
             android:name="com.example.clientarte.PrincipalActivity"
             android:label="@string/title_activity_principal" >
@@ -38,6 +40,55 @@
             android:name="com.example.clientarte.PerfilActivity"
             android:label="@string/title_activity_perfil" >
         </activity>
-    </application>
+        <activity
+            android:name="com.example.clientarte.NovedadesActivity"
+            android:label="@string/title_activity_novedades_main" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.LoginActivity"
+            android:label="@string/title_activity_login" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        -->
+        <!--
+        <activity
+            android:name="com.example.clientarte.CreateAccountActivity"
+            android:label="@string/title_activity_create_account" >
+        </activity>
+        -->
+        <!--
+        <activity
+            android:name="com.example.clientarte.ObraActivity"
+            android:label="@string/title_activity_obra" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        -->
+        <!--
+        <activity
+            android:name="com.example.clientarte.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        -->
+        <!--
+        <activity
+            android:name="com.example.clientarte.CompraActivity"
+            android:label="@string/title_activity_compra" >
+        </activity>
+        -->
+        <!--
+        <activity
+            android:name="com.example.clientarte.PruebaasientosActivity"
+            android:label="@string/title_activity_pruebaasientos" >
+        </activity>
+        -->
+            </application>
 
 </manifest>
