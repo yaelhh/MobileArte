@@ -1,37 +1,28 @@
 package com.example.clientarte;
 
 
+
 //import java.util.ArrayList;
 
 //import android.app.ActionBar;
 //import android.app.Activity;
 //import android.content.Context;
 
-import java.util.ArrayList;
 
-import android.annotation.TargetApi;
+
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.os.Build;
-//import android.content.res.TypedArray;
-//import android.opengl.Visibility;
+
 import android.os.Bundle;
 //import android.support.v4.app.ActionBarDrawerToggle;
 //import android.support.v4.widget.DrawerLayout;
 
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 //import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 //import android.widget.ListView;
@@ -57,7 +48,7 @@ private SearchView mSearchView;
 		botonComunidad= (ImageButton) findViewById(R.id.ImageComunidad);
 
 		botonNosotros=(ImageButton) findViewById(R.id.ImageNosotros);
-		botonNovedades =(ImageButton) findViewById(R.id.imageNovedades);
+		botonNovedades =(ImageButton) findViewById(R.id.ImageNovedades);
 		
 		addListenerOnButton();
 		

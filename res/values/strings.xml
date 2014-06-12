@@ -12,6 +12,7 @@
     <string name="title_activity_principal">Principal</string>
     <string name="title_activity_programacion">Programacion</string>
     <string name="title_activity_busqueda">BusquedaActivity</string>
+    <string name="title_activity_obra">Obra</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
@@ -19,6 +20,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="title_activity_perfil">PerfilActivity</string>
+
     <string name="fragment1">fragment1</string>
     <string name="menu_open">menu_open</string>
     <string name="menu_close">menu_close</string>
@@ -54,5 +56,42 @@
     </string-array>
 
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
+
+    <string name="idObra">LA MADRASTRA</string>
+    <string name="idFunciones">FUNCIONES:</string>
+    <string name="button_iconCompra">Compra</string>
+    <string name="button_iconFire">Fuego</string>
+    <string name="button_iconWifi">Wifi</string>
+    <string name="title_activity_novedades_main">NovedadesMainActivity</string>
+    <string name="title_activity_login">Login</string>
+    <string name="Arte">ART-E</string>
+    <string name="txtEmail">E-mail</string>
+    <string name="txtPassword">Password</string>
+    <string name="button_login">Login</string>
+    <string name="button_recuperarPass">Recuperar su contraseña</string>
+    <string name="button_registrarse">Registrarse</string>
+    <string name="title_activity_create_account">CreateAccountActivity</string>
+    <string name="txtUserName">Nombre de Usuario</string>
+    <string name="label_date">dd/mm/aaaa</string>
+    <string name="title_activity_preferences">MainActivity</string>
+    <string name="textExpand">Texto de prueba</string>
+    <string name="descripcionObra">María Fernández Acuña de San Román, es una mujer que está a punto de salir de la cárcel después de pasar 20 años encerrada por un crimen que no cometió. La historia comienza 20 años atrás en un viaje a la ciudad de Aruba, al que asistieron María, su marido Esteban San Román, las tías de este; Alba y Carmela San Román, los socios de Esteban con sus respectivas mujeres, Demetrio Rivero, Daniela Márquez, Bruno Mendizábal, Fabiola Morán, Arturo Ibáñez, Patricia de Ibáñez y Servando Maldonado, en ese viaje Patricia es asesinada, María encuentra el cadáver y toma del suelo el arma homicida, provocando que piensen que ella cometió el crimen y por el que va a parar a la cárcel durante 20 largos años. Ahora que María está libre, solo piensa en volver a ver a sus hijos: Héctor y Estrella, y vengarse por todo los daños que le hicieron. Pero las cosas no son tan fáciles ya que Esteban les hizo creer a sus hijos que su madre murió. Otro propósito de María es demostrar que ella no mató a Patricia y que fue otro de los que asistieron a aquel viaje, María reúne a su esposo y amigos y todos se quedan impresionados por verla viva y frente a ellos. Todos la odian porque su regreso puede desenterrar secretos del pasado que todos creían enterrados, y esque todos tenían un motivo para matar a Patricia, pero no se imaginan que María en la cárcel se ha convertido en una mujer dura y cruel, y no está dispuesta a volverse a dejar pisotear por nadie más.</string>
+    <string name="title_activity_pref">PrefActivity</string>
+    <string name="title_activity_preferencias">MainActivity</string>
+    <string name="id_perfil">Perfil</string>
+    <string name="id_Notificaciones">Notificaciones</string>
+    <string name="id_contrasena">Cambiar Contraseña</string>
+    <string name="id_email">Configurar Email</string>
+    <string name="id_sesion">Cerrar sesión</string>
+    <string name="title_activity_compra">MainActivity</string>
+    <string name="sp_horario">Horarios</string>
+    <string name="sp_sala">Salas</string>
+    <string name="idCantidadEn">Entradas</string>
+    <string name="idPrecio">Total:</string>
+    <string name="idComprar">Comprar</string>
+    <string name="pulsado">Pulsado</string>
+    <string name="title_activity_pruebaasientos">MainActivity</string>
+    <string name="title_activity_ejemplo1">MainActivity</string>
+
 
 </resources>

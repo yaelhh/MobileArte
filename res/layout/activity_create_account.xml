@@ -1,0 +1,97 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_create_account"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+	tools:context=".LoginActivity"
+	android:background="@color/Gray">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1.33"
+        android:background="@drawable/ic_fondo_mdpi"
+        android:padding="5dp" >
+
+        <TextView
+            android:id="@+id/textArte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="26dp"
+            android:text="@string/Arte"
+            android:textAppearance="@style/AppBaseTheme"
+            android:textColor="@color/Black"
+            android:textColorLink="@color/Black"
+            android:textSize="40sp"
+            android:textStyle="bold|bold"
+            android:typeface="serif" />
+
+        <EditText
+            android:id="@+id/txtUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textArte"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:drawableBottom="@color/Black"
+            android:drawableLeft="@drawable/ic_action_user"
+            android:drawableTop="@color/Black"
+            android:ems="10"
+            android:hint="@string/txtUserName"
+            android:textColorHint="@color/Black" />
+
+        <Button
+            android:id="@+id/buttonRegistrarse"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="51dp"
+            android:text="@string/button_registrarse" />
+
+        <EditText
+            android:id="@+id/txtEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/txtPass"
+            android:layout_below="@+id/txtPass"
+            android:drawableLeft="@drawable/ic_action_mail"
+            android:ems="10"
+            android:hint="@string/txtEmail"
+            android:textColorHint="@color/Black" />
+
+        <EditText
+            android:id="@+id/txtPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/txtUserName"
+            android:layout_below="@+id/txtUserName"
+            android:drawableLeft="@drawable/ic_action_edit"
+            android:ems="10"
+            android:hint="@string/txtPassword"
+            android:textColorHint="@color/Black" >
+
+            <requestFocus />
+        </EditText>
+        
+        <TextView android:id="@+id/dateDisplay"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text=""/>
+
+		<Button
+		    android:id="@+id/pickDate"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignRight="@+id/txtEmail"
+		    android:layout_below="@+id/txtEmail"
+		    android:layout_marginTop="30dp"
+		    android:text="@string/label_date" />
+
+    </RelativeLayout>
+
+</LinearLayout>
+

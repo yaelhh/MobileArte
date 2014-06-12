@@ -107,7 +107,7 @@
          android:padding="5dp" >
 
         <ImageButton
-            android:id="@+id/imageNovedades"
+            android:id="@+id/ImageNovedades"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:background="@drawable/novedades"
