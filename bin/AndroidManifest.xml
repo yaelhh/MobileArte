@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.clientarte.Ejemplo1Activity"
+            android:name="com.example.clientarte.ObraActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,8 +23,8 @@
             </intent-filter>
         </activity>
 
-        <!--
-        <activity
+       
+         <!-- <activity
             android:name="com.example.clientarte.PrincipalActivity"
             android:label="@string/title_activity_principal" >
         </activity>
@@ -43,8 +43,8 @@
         <activity
             android:name="com.example.clientarte.NovedadesActivity"
             android:label="@string/title_activity_novedades_main" >
-        </activity>
-        <activity
+        </activity>-->
+        <!-- <activity
             android:name="com.example.clientarte.LoginActivity"
             android:label="@string/title_activity_login" >
             <intent-filter>
@@ -52,15 +52,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        -->
-        <!--
-        <activity
+        </activity>-->      
+       
+        <!-- <activity
             android:name="com.example.clientarte.CreateAccountActivity"
             android:label="@string/title_activity_create_account" >
-        </activity>
-        -->
-        <!--
+        </activity>    
+        
         <activity
             android:name="com.example.clientarte.ObraActivity"
             android:label="@string/title_activity_obra" >
@@ -70,25 +68,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        -->
-        <!--
+       
         <activity
             android:name="com.example.clientarte.SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/action_settings" >
         </activity>
-        -->
-        <!--
+        
         <activity
             android:name="com.example.clientarte.CompraActivity"
             android:label="@string/title_activity_compra" >
         </activity>
-        -->
-        <!--
+        
         <activity
             android:name="com.example.clientarte.PruebaasientosActivity"
             android:label="@string/title_activity_pruebaasientos" >
-        </activity>
-        -->
+        </activity>-->
+       
             </application>
 
 </manifest>

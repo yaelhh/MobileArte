@@ -28,6 +28,7 @@ public class CreateAccountActivity extends ActionBarActivity {
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.activity_create_account, new PlaceholderFragment()).commit();
+			
 		}
 		
 		/*pickDate.setOnClickListener(new View.OnClickListener() { public void onClick(View v) { showDialog(DATE_DIALOG_ID); } });
