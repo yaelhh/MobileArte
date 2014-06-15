@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/*  Fragment para seccion perfil */ 
+/*  Fragment para seccion Programacion */ 
 public class ProgramacionFragment extends Fragment {
      
     public ProgramacionFragment(){}

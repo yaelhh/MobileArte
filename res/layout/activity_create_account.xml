@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1.33"
-        android:background="@drawable/ic_fondo_mdpi"
+        android:background="@drawable/telon"
         android:padding="5dp" >
 
         <TextView

@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/*  Fragment para seccion perfil */ 
+/*  Fragment para seccion Nosotros */ 
 public class NosotrosFragment extends Fragment {
      
     public NosotrosFragment(){}
@@ -15,7 +15,7 @@ public class NosotrosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
   
-        View rootView = inflater.inflate(R.layout.activity_perfil, container, false);
+        View rootView = inflater.inflate(R.layout.activity_nosotros, container, false);
           
         return rootView;
     }

@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/fondo" >
+        android:background="@drawable/telon" >
 
         <TextView
             android:id="@+id/n"
@@ -30,44 +30,6 @@
             android:src="@drawable/usuario" />
 
         <Button
-            android:id="@+id/btnPrxObras"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/button1"
-            android:layout_marginTop="20dp"
-            android:text="@string/Prox_obras" />
-
-        <Button
-            android:id="@+id/BtnObrasVistas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/Button01"
-            android:text="@string/Obras_vistas" />
-
-        <Button
-            android:id="@+id/btnMascaras"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/Button02"
-            android:layout_marginTop="24dp"
-            android:text="@string/Mascaras" />
-
-        <Button
-            android:id="@+id/btnCanjear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/Button03"
-            android:text="@string/Canjear" />
-
-        <Button
             android:id="@+id/btnCuenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,6 +38,43 @@
             android:layout_below="@+id/n"
             android:layout_marginTop="38dp"
             android:text="@string/Cuenta" />
+
+        <Button
+            android:id="@+id/btnCanjear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/Canjear" />
+
+        <Button
+            android:id="@+id/btnMascaras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnCanjear"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/Mascaras" />
+
+        <Button
+            android:id="@+id/btnPrxObras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/BtnObrasVistas"
+            android:text="@string/Prox_obras" />
+
+        <Button
+            android:id="@+id/BtnObrasVistas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/btnCuenta"
+            android:layout_marginTop="16dp"
+            android:text="@string/Obras_vistas" />
 
     </RelativeLayout>
 

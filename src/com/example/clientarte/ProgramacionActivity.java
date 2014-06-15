@@ -1,11 +1,15 @@
 package com.example.clientarte;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.os.Bundle;
 import android.widget.CalendarView;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.SearchView.OnQueryTextListener;
@@ -15,6 +19,7 @@ import android.widget.Toast;
 public class ProgramacionActivity extends Activity implements OnQueryTextListener{         
 CalendarView cal;
 private SearchView mSearchView;
+private ImageButton mObra;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,9 @@ private SearchView mSearchView;
 				Toast.LENGTH_LONG).show();
 		}
 	});
+        mObra= (ImageButton)findViewById(R.id.GalleryObra);
+        addListenerOnButton();
+		
     }
  
     
@@ -79,5 +87,18 @@ private SearchView mSearchView;
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
+	
+	public void addListenerOnButton() {
+		 
+		mObra.setOnClickListener(new OnClickListener() {
+ 
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ProgramacionActivity.this, ObraActivity.class);
+				startActivity(intent);
+			}
+
+		});
+}
 }
 		 

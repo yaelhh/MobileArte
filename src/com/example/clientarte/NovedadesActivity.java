@@ -42,7 +42,7 @@ public class NovedadesActivity extends ActionBarActivity {
 	        setContentView(R.layout.activity_obra);
 	       
 	             Gallery gallery = (Gallery) findViewById(R.id.gallery);
-	        selectedImage=(ImageView)findViewById(R.id.Gallery02);
+	        selectedImage=(ImageView)findViewById(R.id.iconCompra);
 	        gallery.setSpacing(1);
 	       // gallery.setAdapter(new GalleryImageAdapter(this));
 

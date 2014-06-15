@@ -79,7 +79,7 @@ private SearchView mSearchView;
 			 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(PrincipalActivity.this, PerfilActivity.class);
+				Intent intent = new Intent(PrincipalActivity.this, ComunidadFragment.class);
 				startActivity(intent);
 			}
 			
@@ -88,7 +88,7 @@ private SearchView mSearchView;
 			 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(PrincipalActivity.this, PerfilActivity.class);
+				Intent intent = new Intent(PrincipalActivity.this, NovedadesActivity.class);
 				startActivity(intent);
 			}
 			

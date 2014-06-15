@@ -76,6 +76,8 @@ protected void onCreate(Bundle savedInstanceState) {
         NavItms.add(new Item_objct(titulos[4], NavIcons.getResourceId(4, -1)));
         //Perfil
         NavItms.add(new Item_objct(titulos[5], NavIcons.getResourceId(5, -1)));
+      //Ajustes
+        NavItms.add(new Item_objct(titulos[6], NavIcons.getResourceId(6, -1)));
        
       
         //Declaramos y seteamos nuestro adaptador al cual le pasamos el array con los titulos	       
@@ -150,7 +152,9 @@ public void MostrarFragment(int position) {
     case 6:
         fragment = new PerfilFragment();
         break;          
-        
+    case 7:
+        fragment = new AjustesFragment();
+        break;    
     default:
     	//si no esta la opcion mostrara un toast y nos mandara a Home
     	Toast.makeText(getApplicationContext(),"Opcion "+titulos[position-1]+"no disponible!", Toast.LENGTH_SHORT).show();

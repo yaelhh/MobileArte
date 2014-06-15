@@ -20,18 +20,17 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="title_activity_perfil">PerfilActivity</string>
-
     <string name="fragment1">fragment1</string>
     <string name="menu_open">menu_open</string>
     <string name="menu_close">menu_close</string>
     <string name="action_bar_notification">Notificaciones</string>
     <string name="back">volver</string>
-	<string name="Cuenta">Cuenta</string>
-	<string name="Prox_obras">Próximas obras</string>
-	<string name="Obras_vistas">Obras vistas</string>
-	<string name="Mascaras">Mascaras</string>
-	<string name="Canjear">Canjear mascaras</string>
-    
+    <string name="Cuenta">Cuenta</string>
+    <string name="Prox_obras">Próximas obras</string>
+    <string name="Obras_vistas">Obras vistas</string>
+    <string name="Mascaras">Mascaras</string>
+    <string name="Canjear">Canjear mascaras</string>
+
     <!-- Lista de iconos de navegacion -->
     <array name="navigation_iconos">
         <item>@drawable/ic_action_home</item>
@@ -56,7 +55,6 @@
     </string-array>
 
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
-
     <string name="idObra">LA MADRASTRA</string>
     <string name="idFunciones">FUNCIONES:</string>
     <string name="button_iconCompra">Compra</string>
@@ -92,6 +90,19 @@
     <string name="pulsado">Pulsado</string>
     <string name="title_activity_pruebaasientos">MainActivity</string>
     <string name="title_activity_ejemplo1">MainActivity</string>
+    <string name="title_activity_nosotros">NosotrosActivity</string>
+    <string name="HistoriaSodre">Nuestro cliente El Servicio Oficial de Difusión, Radiotelevisión y Espectáculos (SODRE) es un instituto dependiente del Ministerio de Educación y Cultura de Uruguay dedicado a la difusión y generación de información, arte y cultura en general. Creado como Servicio Oficial de Difusión Radio Eléctrica, su función inicial era la de "perifonear programas culturales e informativos", </string>
+    <string name="HorarioSodre"> Dirección: Calle Andes esquina Mercedes  11100 Montevideo
 
+Información general y boletería 2 900 70 84
+
+Horario de boletería El horario de atención al público es de lunes a sábado de 10 a 19hs. y siempre que haya espectáculo, desde 2 horas antes del inicio hasta el comienzo del mismo.
+
+Atención al público atencionalpublico@auditorio.uy
+
+Boletería boleteria@auditorio.uy
+
+Prensa y comunicación comunicacion@auditorio.uy   </string>
+    <string name="title_activity_comunidad">ComunidadActivity</string>
 
 </resources>

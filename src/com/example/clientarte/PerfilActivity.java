@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;*/
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -36,15 +37,16 @@ public class PerfilActivity extends Activity {
 		addListenerOnButton();
     }
     
+    
     public void addListenerOnButton() {
 		 
     	btnCuenta.setOnClickListener(new OnClickListener() {
+    		
  
 			@Override
 			public void onClick(View v) {
-				//Intent intent = new Intent(PrincipalActivity.this, ProgramacionActivity.class);
-				//startActivity(intent);
-			}
+							
+				}
 
 		});
     	
@@ -57,6 +59,8 @@ public class PerfilActivity extends Activity {
 			}
 
 		});
+    	
 		
     }
+   
 }

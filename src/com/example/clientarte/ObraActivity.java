@@ -9,9 +9,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.Gallery;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -35,7 +37,7 @@ public class ObraActivity extends ActionBarActivity {
     	setContentView(R.layout.activity_obra);
         
         Gallery gallery = (Gallery) findViewById(R.id.gallery);
-        selectedImage=(ImageView)findViewById(R.id.Gallery02);
+        selectedImage=(ImageView)findViewById(R.id.iconCompra);
         gallery.setSpacing(1);
         gallery.setAdapter(new GalleryImageAdapter(this));
 
@@ -45,7 +47,7 @@ public class ObraActivity extends ActionBarActivity {
                 Toast.makeText(ObraActivity.this, "Your selected position = " + position, Toast.LENGTH_SHORT).show();
                 // show the selected Image
                 selectedImage.setImageResource(mImageIds[position]);
-                
+                addListenerOnButton();
             }
         });
        
@@ -53,6 +55,7 @@ public class ObraActivity extends ActionBarActivity {
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.listViewexp);
         Adaptador adapter = new Adaptador(this, grupos);
         listView.setAdapter(adapter);
+        
        
     }
         
@@ -102,5 +105,18 @@ public class ObraActivity extends ActionBarActivity {
         //grupo2.children.add("20:00 - Sala 1");
         grupos.append(2, grupo2);
      }
+    
+    public void addListenerOnButton() {
+		 
+    	selectedImage.setOnClickListener(new OnClickListener() {
+ 
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ObraActivity.this, CompraActivity.class);
+				startActivity(intent);
+			}
+
+		});
+}
   
 }
