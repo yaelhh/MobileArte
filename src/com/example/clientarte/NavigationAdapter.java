@@ -2,8 +2,6 @@ package com.example.clientarte;
 
 import java.util.ArrayList;
 
-import com.example.clientarte.Item_objct;
-
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;

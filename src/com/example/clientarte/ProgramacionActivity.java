@@ -2,16 +2,15 @@ package com.example.clientarte;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.os.Bundle;
 import android.widget.CalendarView;
+import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.ImageButton;
 import android.widget.SearchView;
-import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Toast;
 

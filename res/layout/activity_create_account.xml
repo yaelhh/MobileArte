@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1.33"
-        android:background="@drawable/telon"
+        android:background="@color/Gray"
         android:padding="5dp" >
-
+<!--  android:background="@drawable/telon"-->
         <TextView
             android:id="@+id/textArte"
             android:layout_width="wrap_content"
