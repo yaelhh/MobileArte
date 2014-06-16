@@ -1,53 +1,78 @@
 package com.example.clientarte;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CompraActivity extends ActionBarActivity {
 
 	TextView lblPulsado;
 	GridView grdOpciones;
-	String[] datos;
-	ArrayAdapter<String> adaptador;
 	
+	
+	ArrayAdapter<String> adaptador;
+	ImageButton butaca;
+	private ArrayList<ImageButton> listaButacas = new ArrayList<ImageButton>();
+	Integer[] butacaXSector;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_compra);
 
-		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.activity_Compra, new PlaceholderFragment()).commit();
+//		if (savedInstanceState == null) {
+//			getSupportFragmentManager().beginTransaction()
+//					.add(R.id.activity_Compra, new PlaceholderFragment()).commit();
+//		}
+		ImageAdapter IA= new ImageAdapter(this);
+		GridView gridview = (GridView) findViewById(R.id.gridview);
+		butacaXSector= IA.getmThumbIds();
+		Integer cantButaca=25;
+		Log.e("but"+butacaXSector,"IA"+IA);
+		
+		for(int i=1; i<=cantButaca; i++){
+		butacaXSector[i]=R.drawable.butaca_roja;
+		Log.e("butacaXSector"+butacaXSector[i], "cant butaca"+i);
 		}
+		IA.setmThumbIds(butacaXSector);
+		gridview.setAdapter(IA);
+		
 		
 		//cargarCombos();
-		crearMatriz ();
+		//crearMatriz ();
 	}
 	
 	public void crearMatriz (){
 		
-		String[][] datos = new String[25][15];
-		//...
-		for(int i=1; i<=25; i++)
-			for(int x=1; x<=25; x++)
-		        datos[i] [x]= "Dato " + datos[i][x];
-		 
-		ArrayAdapter<String> adaptador =
-		        new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
-		 
-		grdOpciones = (GridView)findViewById(R.id.GridOpciones);
-		 
+		//butaca= (ImageButton)findViewById(R.id.imageButaca);
+		int text=0;
+		String [] datos= new String[25];
+		for(int i=0; i<=25; i++)
+			datos[i-1]="Datos"+i;
+			text++;
+//		listaButacas.add(butaca);
+		
+		
+		ArrayAdapter<ImageButton> adaptador =new ArrayAdapter<ImageButton>(this, text,listaButacas);
+		final GridView grdOpciones = (GridView)findViewById(R.id.GridOpciones);
 		grdOpciones.setAdapter(adaptador);
+		
 	}
 	
 	public void cargarCombos (){
@@ -99,5 +124,7 @@ public class CompraActivity extends ActionBarActivity {
 			return rootView;
 		}
 	}
+	
+	
 
 }

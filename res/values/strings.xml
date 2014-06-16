@@ -30,6 +30,7 @@
     <string name="Obras_vistas">Obras vistas</string>
     <string name="Mascaras">Mascaras</string>
     <string name="Canjear">Canjear mascaras</string>
+    <string name="butacas">Butacas</string>
 
     <!-- Lista de iconos de navegacion -->
     <array name="navigation_iconos">

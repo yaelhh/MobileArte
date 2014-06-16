@@ -11,8 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Gallery;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -55,6 +57,8 @@ public class ObraActivity extends ActionBarActivity {
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.listViewexp);
         Adaptador adapter = new Adaptador(this, grupos);
         listView.setAdapter(adapter);
+        
+        
         
        
     }
@@ -118,5 +122,5 @@ public class ObraActivity extends ActionBarActivity {
 
 		});
 }
-  
+    
 }
