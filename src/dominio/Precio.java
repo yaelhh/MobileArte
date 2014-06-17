@@ -1,7 +1,5 @@
 package dominio;
 
-import java.util.Date;
-
 import android.R.integer;
 
 public class Precio {

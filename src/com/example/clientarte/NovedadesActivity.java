@@ -1,5 +1,6 @@
 package com.example.clientarte;
 
+import com.example.clientarte.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;

@@ -5,10 +5,10 @@ package com.example.clientarte;
 import android.support.v7.app.ActionBar;*/
 
 
+import com.example.clientarte.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;

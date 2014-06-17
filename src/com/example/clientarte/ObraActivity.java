@@ -1,5 +1,6 @@
 package com.example.clientarte;
 
+import com.example.clientarte.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -13,7 +14,6 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.Gallery;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;

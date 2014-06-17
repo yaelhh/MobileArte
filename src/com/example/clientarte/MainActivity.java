@@ -3,8 +3,16 @@ package com.example.clientarte;
 
 import java.util.ArrayList;
 
+import com.example.clientarte.R;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.res.Configuration;
+import android.content.res.TypedArray;
+import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,13 +20,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
-import android.content.res.Configuration;
-import android.content.res.TypedArray;
-import android.os.Bundle;
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.util.Log;
 import android.widget.Toast;
 
 
@@ -152,9 +153,9 @@ public void MostrarFragment(int position) {
     case 6:
         fragment = new PerfilFragment();
         break;          
-    case 7:
+    /*case 7:
         fragment = new AjustesFragment();
-        break;    
+        break;*/    
     default:
     	//si no esta la opcion mostrara un toast y nos mandara a Home
     	Toast.makeText(getApplicationContext(),"Opcion "+titulos[position-1]+"no disponible!", Toast.LENGTH_SHORT).show();

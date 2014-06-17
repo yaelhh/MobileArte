@@ -1,6 +1,7 @@
 package com.example.clientarte;
 
-import android.app.Activity; 
+import com.example.clientarte.R;
+import android.app.Activity;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
