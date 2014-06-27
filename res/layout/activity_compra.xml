@@ -1,36 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-  <TextView
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
         android:id="@+id/idTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:paddingTop="20dp"
         android:text="@string/idObra"
-        android:textAppearance="?android:attr/textAppearanceMedium" />  
-    <Spinner
-        android:id="@+id/spinner_horario"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="44dp"
-        android:layout_marginTop="67dp" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-<GridView
-    android:id="@+id/gridview"
-    android:layout_width="250dp"
-    android:layout_height="250dp"
-    android:layout_below="@+id/spinner_horario"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="5dp"
-    android:columnWidth="20dp"
-    android:gravity="center"
-    android:horizontalSpacing="5dp"
-    android:numColumns="auto_fit"
-    android:stretchMode="columnWidth"
-    android:verticalSpacing="10dp" >
-</GridView>
-    
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/labelHorario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="@string/horario" />
+
+        <Spinner
+            android:id="@+id/spinner_horario"
+            android:layout_width="101dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp" />
+
+        <TextView
+            android:id="@+id/labelSala"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="@string/labelSalas" />
+
+        <Spinner
+            android:id="@+id/spinner_sala"
+            android:layout_width="101dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:orientation="horizontal"
+        android:paddingTop="20dp" >
+
+        <TextView
+            android:id="@+id/idTotalLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:text="@string/idPrecio" />
+
+        <EditText
+            android:id="@+id/idTotal"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberSigned"
+            android:paddingTop="30dp" />
+
+        <TextView
+            android:id="@+id/idCantEntradas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:text="@string/idCantEntradas" />
+
+        <EditText
+            android:id="@+id/idCantidadEntradas"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberSigned"
+            android:paddingTop="30dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_comprar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="@string/idComprar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/sectorA"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            
+            android:background="@color/Azure"
+            android:contentDescription="@string/sectorA"
+             />
+
+        <LinearLayout
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/sectorB"
+                android:layout_width="match_parent"
+                android:layout_height="104dp"
+                
+                android:background="@color/Chartreuse"
+                android:contentDescription="@string/sectorB" />
+
+            <ImageButton
+                android:id="@+id/Escenario"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:background="@color/LightPink"
+                android:contentDescription="@string/escenario" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/sectorC"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:background="@color/Gold"
+            android:contentDescription="@string/sectorC" />
+    </LinearLayout>
+
+</LinearLayout>

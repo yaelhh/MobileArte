@@ -1,20 +1,27 @@
 package com.example.clientarte;
 
+
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.os.Bundle;
 import android.widget.CalendarView;
+import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Toast;
 
+//
 
 public class ProgramacionActivity extends Activity implements OnQueryTextListener{         
 CalendarView cal;
@@ -25,7 +32,15 @@ private ImageButton mObra;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_programacion);
+       
+//        if (savedInstanceState == null) {
+//			getSupportFragmentManager().beginTransaction()
+//					.add(R.id.containerProgramacion, new PlaceholderFragment()).commit();
+//		}
         
+        mObra= (ImageButton)findViewById(R.id.GalleryObra);
+        
+        addListenerOnButton();
         cal = (CalendarView) findViewById(R.id.calendarView1);
         
         cal.setOnDateChangeListener(new OnDateChangeListener() {
@@ -40,8 +55,7 @@ private ImageButton mObra;
 				Toast.LENGTH_LONG).show();
 		}
 	});
-        mObra= (ImageButton)findViewById(R.id.GalleryObra);
-        addListenerOnButton();
+      
 		
     }
  
@@ -88,6 +102,7 @@ private ImageButton mObra;
 	    }
 	}
 	
+	
 	public void addListenerOnButton() {
 		 
 		mObra.setOnClickListener(new OnClickListener() {
@@ -100,5 +115,17 @@ private ImageButton mObra;
 
 		});
 }
+	public static class PlaceholderFragment extends Fragment {
+
+		public PlaceholderFragment() {
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_programacion, container, false);
+			return rootView;
+		}
+	}
 }
 		 

@@ -41,7 +41,7 @@ private SearchView mSearchView;
 //	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH) @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_principal);
+		setContentView(R.layout.fragment_pricipal);
 		
   
 		botonprogramacion = (ImageButton) findViewById(R.id.imageProgramacion);
@@ -60,7 +60,7 @@ private SearchView mSearchView;
  
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(PrincipalActivity.this, ProgramacionActivity.class);
+				Intent intent = new Intent(PrincipalActivity.this, ProgramacionFragment.class);
 				startActivity(intent);
 			}
 

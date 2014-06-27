@@ -1,15 +1,17 @@
 package com.example.clientarte;
 
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
 
-public class PreferencesFromXml extends PreferenceActivity {
+
+
+
+public class PreferencesFromXml extends PreferenceFragment {
 	 
-	  @Override
-	  protected void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    // Load the preferences from an XML resource
-	    addPreferencesFromResource(R.xml.preferences);
-	  }
-	 
-	}
+	
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.preferences);
+        }
+    }
