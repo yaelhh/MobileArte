@@ -4,14 +4,15 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-     <uses-permission android:name="android.permission.INTERNET"/>
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-<uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
-    
-<uses-feature android:glEsVersion="0x00020000"
-              android:required="true"/>
-    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="19" />
@@ -21,8 +22,9 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name="com.example.clientarte.SplashScreenActivity"
+        
+         <activity
+            android:name="com.example.clientarte.ObraActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +32,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
+        <service android:name="backend.DBAdapter"></service> 
+        
+           <!-- <activity
+            android:name="com.example.clientarte.SQLiteActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <service android:name="backend.DBAdapter"></service> -->
+        
+       
+        <!-- <activity
             android:name="com.example.clientarte.PrincipalActivity"
             android:label="@string/title_activity_principal" >
         </activity>
@@ -83,7 +99,7 @@
             android:name="com.example.clientarte.PruebaasientosActivity"
             android:label="@string/title_activity_pruebaasientos" >
         </activity>
-         <activity
+        <activity
             android:name="com.example.clientarte.NosotrosActivity"
             android:label="@string/title_activity_nosotros" >
         </activity>
@@ -94,10 +110,27 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCRJm4M9O6qUcB6gU40ZCBL8sGmRQglzzw" 
-            />
+            android:value="AIzaSyCRJm4M9O6qUcB6gU40ZCBL8sGmRQglzzw" />
+
+        <activity
+            android:name="com.example.clientarte.PrefActivity"
+            android:label="@string/title_activity_pref" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.PruebaObraActivity"
+            android:label="@string/title_activity_prueba_obra" >
+        </activity>-->
         
+       <!-- <activity
+            android:name="com.example.clientarte.SQLiteActivity"
+            android:label="@string/app_name" >
+           <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> 
+        </activity>-->
         
     </application>
 
-</manifest>
+ </manifest>

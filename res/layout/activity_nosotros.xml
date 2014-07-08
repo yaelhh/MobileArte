@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.clientarte.NosotrosActivity"
+    tools:ignore="MergeRootFrame"
+    android:background="@drawable/telon" >
+
+    <Gallery
+        android:id="@+id/gallery"
+        android:layout_width="fill_parent"
+        android:layout_height="138dp"
+        android:background="@drawable/nosotros"
+        android:padding="5dp"
+        android:spacing="8dp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="138sp"
+        android:layout_weight="0.39"
+        android:padding="5dp"
+        android:text="@string/HistoriaSodre" />
+
+    <LinearLayout
+        android:id="@+id/container2"
+        android:layout_width="match_parent"
+        android:layout_height="168dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="168dp"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:text="@string/HorarioSodre" />
+
+      <!--    <com.google.android.maps.MapView
+            android:id="@+id/mapa"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:apiKey="0ss-5q6s3FKYkkp3atMUH..."
+            android:clickable="true" />-->
+    </LinearLayout>
+
+</LinearLayout>
