@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ClientArte</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="seleccionada">Yael</string>
+    <string name="Programacion">Programacion</string>
+    <string name="Nosotros">Nosotros</string>
+    <string name="Comunidad">Comunidad</string>
+    <string name="Novedades">Novedades</string>
+    <string name="title_activity_principal">Principal</string>
+    <string name="title_activity_programacion">Programacion</string>
+    <string name="title_activity_busqueda">BusquedaActivity</string>
+    <string name="title_activity_obra">Obra</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="title_activity_perfil">PerfilActivity</string>
+    <string name="fragment1">fragment1</string>
+    <string name="menu_open">menu_open</string>
+    <string name="menu_close">menu_close</string>
+    <string name="action_bar_notification">Notificaciones</string>
+    <string name="back">volver</string>
+    <string name="Cuenta">Cuenta</string>
+    <string name="Prox_obras">Próximas obras</string>
+    <string name="Obras_vistas">Obras vistas</string>
+    <string name="Mascaras">Mascaras</string>
+    <string name="Canjear">Canjear mascaras</string>
+    <string name="butacas">Butacas</string>
+    <string name="containerProgramacion">containerProgramacion</string>
+    <string name="sectorA">Sector A</string>
+    <string name="sectorB">Sector B</string>
+    <string name="sectorC">Sector C</string>
+    <string name="escenario">Escenario</string>
+    <string name="tituloObra">LA MADRASTRA</string>
+    
+
+    <!-- Lista de iconos de navegacion -->
+    <array name="navigation_iconos">
+        <item>@drawable/ic_action_home</item>
+        <item>@drawable/ic_action_user</item>
+        <item>@drawable/ic_action_star</item>
+        <item>@drawable/ic_action_event</item>
+        <item>@drawable/ic_action_place</item>
+        <item>@drawable/ic_action_labels</item>
+        <item>@drawable/ic_action_settings</item>
+        <item>@drawable/ic_action_share</item>
+    </array>
+
+    <!-- Lista de titulos de navegacion -->
+    <string-array name="nav_options">
+        <item>Home</item>
+        <item>Programacion</item>
+        <item>Nosotros</item>
+        <item>Comunidad</item>
+        <item>Novedades</item>
+        <item>Perfil</item>
+        <item>Ajustes</item>
+    </string-array>
+
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="idObra">LA MADRASTRA</string>
+    <string name="idFunciones">FUNCIONES:</string>
+    <string name="button_iconCompra">Compra</string>
+    <string name="button_iconFire">Fuego</string>
+    <string name="button_iconWifi">Wifi</string>
+    <string name="title_activity_novedades_main">NovedadesMainActivity</string>
+    <string name="title_activity_login">Login</string>
+    <string name="Arte">ART-E</string>
+    <string name="txtEmail">E-mail</string>
+    <string name="txtPassword">Password</string>
+    <string name="button_login">Login</string>
+    <string name="button_recuperarPass">Recuperar su contraseña</string>
+    <string name="button_registrarse">Registrarse</string>
+    <string name="title_activity_create_account">CreateAccountActivity</string>
+    <string name="txtUserName">Nombre de Usuario</string>
+    <string name="label_date">dd/mm/aaaa</string>
+    <string name="title_activity_preferences">MainActivity</string>
+    <string name="textExpand">Texto de prueba</string>
+    <string name="descripcionObra">María Fernández Acuña de San Román, es una mujer que está a punto de salir de la cárcel después de pasar 20 años encerrada por un crimen que no cometió. La historia comienza 20 años atrás en un viaje a la ciudad de Aruba, al que asistieron María, su marido Esteban San Román, las tías de este; Alba y Carmela San Román, los socios de Esteban con sus respectivas mujeres, Demetrio Rivero, Daniela Márquez, Bruno Mendizábal, Fabiola Morán, Arturo Ibáñez, Patricia de Ibáñez y Servando Maldonado, en ese viaje Patricia es asesinada, María encuentra el cadáver y toma del suelo el arma homicida, provocando que piensen que ella cometió el crimen y por el que va a parar a la cárcel durante 20 largos años. Ahora que María está libre, solo piensa en volver a ver a sus hijos: Héctor y Estrella, y vengarse por todo los daños que le hicieron. Pero las cosas no son tan fáciles ya que Esteban les hizo creer a sus hijos que su madre murió. Otro propósito de María es demostrar que ella no mató a Patricia y que fue otro de los que asistieron a aquel viaje, María reúne a su esposo y amigos y todos se quedan impresionados por verla viva y frente a ellos. Todos la odian porque su regreso puede desenterrar secretos del pasado que todos creían enterrados, y esque todos tenían un motivo para matar a Patricia, pero no se imaginan que María en la cárcel se ha convertido en una mujer dura y cruel, y no está dispuesta a volverse a dejar pisotear por nadie más.</string>
+    <string name="title_activity_pref">PrefActivity</string>
+    <string name="title_activity_preferencias">MainActivity</string>
+    <string name="id_perfil">Perfil</string>
+    <string name="id_Notificaciones">Notificaciones</string>
+    <string name="id_contrasena">Cambiar Contraseña</string>
+    <string name="id_email">Configurar Email</string>
+    <string name="id_sesion">Cerrar sesión</string>
+    <string name="title_activity_compra">MainActivity</string>
+    <string name="sp_horario">Horarios</string>
+    <string name="sp_sala">Salas</string>
+    <string name="idCantidadEn">Entradas</string>
+    <string name="idPrecio">Total:</string>
+    <string name="idComprar">Comprar</string>
+    <string name="pulsado">Pulsado</string>
+    <string name="title_activity_pruebaasientos">MainActivity</string>
+    <string name="title_activity_ejemplo1">MainActivity</string>
+    <string name="title_activity_nosotros">NosotrosActivity</string>
+    <string name="HistoriaSodre">Nuestro cliente El Servicio Oficial de Difusión, Radiotelevisión y Espectáculos (SODRE) es un instituto dependiente del Ministerio de Educación y Cultura de Uruguay dedicado a la difusión y generación de información, arte y cultura en general. Creado como Servicio Oficial de Difusión Radio Eléctrica, su función inicial era la de "perifonear programas culturales e informativos", </string>
+    <string name="HorarioSodre"> Dirección: Calle Andes esquina Mercedes  11100 Montevideo
+	
+Información general y boletería 2 900 70 84
+
+Horario de boletería El horario de atención al público es de lunes a sábado de 10 a 19hs. y siempre que haya espectáculo, desde 2 horas antes del inicio hasta el comienzo del mismo.
+
+Atención al público atencionalpublico@auditorio.uy
+
+Boletería boleteria@auditorio.uy
+
+Prensa y comunicación comunicacion@auditorio.uy   </string>
+    <string name="title_activity_comunidad">ComunidadActivity</string>
+<<<<<<< HEAD
+    <string name="horario">Horarios:</string>
+    <string name="idCantEntradas">Entradas:</string>
+    <string name="labelSalas">Salas:</string>
+    <string name="labelEscenario">ESCENARIO</string>
+    <string name="title_activity_sectora">SectoraActivity</string>
+=======
+    <string name="title_activity_prueba_obra">PruebaObraActivity</string>
+>>>>>>> refs/heads/master
+
+    <string name="hello">Hello World, SQLiteActivity!</string>
+    
+    <string name="addCliente">Nuevo Cliente</string>
+</resources>

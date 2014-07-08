@@ -1,0 +1,68 @@
+BEGIN TRANSACTION;
+CREATE TABLE `Usuarios` (
+	`idUsuario`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`nombre`	TEXT NOT NULL,
+	`apellido`	TEXT NOT NULL,
+	`nombreUsuario`	TEXT NOT NULL,
+	`password`	TEXT NOT NULL,
+	`fechaNacimiento`	NUMERIC NOT NULL,
+	`cantMascaras`	INTEGER NOT NULL,
+	`estadoUsuario`	BLOB NOT NULL
+);
+CREATE TABLE `Entradas` (
+	`idEntrada`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`idCompra`	INTEGER NOT NULL,
+	`precioUnitario`	NUMERIC NOT NULL,
+	`idButaca`	INTEGER NOT NULL,
+	`idObra`	INTEGER NOT NULL
+);
+CREATE TABLE "Sectores" (
+	`idSector`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`idSala`	INTEGER NOT NULL,
+	`idPrecio`	NUMERIC NOT NULL
+);
+CREATE TABLE `Compras` (
+	`idCompra`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`idQR`	INTEGER NOT NULL,
+	`fechaRealizada`	NUMERIC NOT NULL,
+	`fechaVigencia`	NUMERIC NOT NULL,
+	`idPrecio`	NUMERIC NOT NULL,
+	`idUsuario`	INTEGER NOT NULL,
+	`precioTotal`	NUMERIC NOT NULL,
+	`estadoCompra`	BLOB NOT NULL
+);
+CREATE TABLE "Butacas" (
+	`idButaca`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`idSector`	INTEGER NOT NULL,
+	`estado`	BLOB NOT NULL
+);
+CREATE TABLE `Comodidades` (
+	`idComodidad`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`discapacitados`	BLOB NOT NULL,
+	`detectorHumo`	BLOB NOT NULL,
+	`salidaEmergencia`	BLOB NOT NULL,
+	`wifi`	BLOB NOT NULL
+);
+CREATE TABLE `Salas` (
+	`idSala`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`nombreSala`	TEXT NOT NULL,
+	`capacidadSala`	INTEGER NOT NULL
+);
+CREATE TABLE `Funciones` (
+	`idFunciones`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`duracionFuncion`	NUMERIC NOT NULL,
+	`horaComienzo`	NUMERIC NOT NULL,
+	`fechaFuncion`	NUMERIC NOT NULL,
+	`idSala`	INTEGER NOT NULL
+);
+CREATE TABLE `ObraImagen` (
+	`idObraImagen`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`idObra`	INTEGER NOT NULL,
+	`imagenObra`	TEXT NOT NULL
+);
+CREATE TABLE `obras` (
+	`idObra`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`nombreObra`	TEXT NOT NULL,
+	`descripcionObra`	TEXT NOT NULL
+);
+COMMIT;
