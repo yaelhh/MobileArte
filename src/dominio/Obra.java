@@ -4,19 +4,20 @@ package dominio;
 import java.util.ArrayList;
 
 import android.R.integer;
+import android.R.string;
 
 public class Obra {
 	//Variables
-	private integer idObra;
+	private int idObra;
 	private String nombre;
-	private ArrayList listaImagenes;
 	private String descripcion;
+	private ArrayList listaImagenes;
 	private ArrayList listaFunciones;
 //	get and set
-	public integer getIdObra() {
+	public int getIdObra() {
 		return idObra;
 	}
-	public void setIdObra(integer idObra) {
+	public void setIdObra(int idObra) {
 		this.idObra = idObra;
 	}
 	public String getNombre() {
@@ -44,11 +45,30 @@ public class Obra {
 		this.listaFunciones = listaFunciones;
 	}
 //	Constructor
-	public Obra(integer idObra, String nombre) {
+	public Obra(int idObra, String nombre) {
 		super();
 		this.idObra = idObra;
 		this.nombre = nombre;
 	}
+	public Obra() {
+		// TODO Auto-generated constructor stub
+	}
 	
+	public Obra(int idObra, String nombre, String descripcion) {
+		super();
+		this.idObra = idObra;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+	}
+	
+	public Obra(String nombre, String descripcion) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+	}
+
+	public Obra(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
 	
 }

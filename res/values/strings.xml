@@ -104,5 +104,9 @@ Boletería boleteria@auditorio.uy
 
 Prensa y comunicación comunicacion@auditorio.uy   </string>
     <string name="title_activity_comunidad">ComunidadActivity</string>
+    <string name="title_activity_prueba_obra">PruebaObraActivity</string>
 
+    <string name="hello">Hello World, SQLiteActivity!</string>
+    
+    <string name="addCliente">Nuevo Cliente</string>
 </resources>

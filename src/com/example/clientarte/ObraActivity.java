@@ -1,24 +1,195 @@
 package com.example.clientarte;
 
-import com.example.clientarte.R;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import backend.DatabaseHelper;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.FeatureInfo;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.provider.Settings.System;
 import android.support.v7.app.ActionBarActivity;
-import android.util.SparseArray;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.ExpandableListView;
-import android.widget.Gallery;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
+import backend.DB_Obra;
+import backend.MySQLiteOpenHelper;
+import dominio.Funcion;
+import dominio.Obra;
 
 public class ObraActivity extends ActionBarActivity {
+	
+//	private int requestCode = 1;
+//	private ListView lvObras;
+//	private DB_Obra dataSource;// = new DB_Obra(this);
+	
+	//final String[] from = { ObrasColumns.idObra, ObrasColumns.nombreObra, ObrasColumns.descripcionObra };
+	//final int[] to = new int[] { R.id., R.id.apellidos, R.id.edad };
+
+	/*DBAdapter dbAdapter;
+	Boolean mBound;*/
+	// Database Helper
+    DatabaseHelper db;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_obra);
+		
+		DatabaseHelper myDbHelper = new DatabaseHelper(this);
+		myDbHelper = new DatabaseHelper(this);
+		
+		
+		
+		try {
+			myDbHelper.createDataBase();
+			
+		} catch (IOException ioe) {
+
+			throw new Error("Unable to create database");
+
+		}
+		
+		Obra miObra = new Obra ("Redemption", "Jason Statham");
+		Obra miObra2 = new Obra ("La Madrastra", "Victoria Ruffo");
+		Obra miObra3 = new Obra ("The Wolf of Wall Street", "Leonardo DiCaprio");
+		Obra miObra4 = new Obra ("X-Men", "Hugh Jackman");
+		myDbHelper.createObra(miObra);
+		myDbHelper.createObra(miObra2);
+		myDbHelper.createObra(miObra3);
+		myDbHelper.createObra(miObra4);
+	
+		
+		
+
+		
+
+//		db = new DatabaseHelper(getApplicationContext());
+//		Obra tag1 = new Obra("Shopping");
+//        Obra tag2 = new Obra("Important");
+        //long tag1_id = db.createObra(tag1);
+        //long tag2_id = db.createObra(tag2);
+        
+		
+		
+//		MySQLiteOpenHelper db = new MySQLiteOpenHelper(this);
+//		System.out.println(db.TABLA_OBRAS.length());
+//		System.out.println(db.TABLA_OBRAS);
+		// Instanciamos NotasDataSource para
+		// poder realizar acciones con la base de datos
+		//dataSource = new DB_Obra(this);
+	/*	dataSource.open();
+		//dataSource.close();
+
+		// Instanciamos los elementos
+		lvObras = (ListView) findViewById(R.id.listViewexp);
+
+		// Cargamos la lista de notas disponibles
+		List<Obra> listaObras = dataSource.getAllObras();
+		ArrayAdapter<Obra> adapter = new ArrayAdapter<Obra>(this, android.R.layout.simple_list_item_1, listaObras);
+
+		// Establecemos el adapter
+		lvObras.setAdapter(adapter);
+
+		// Establecemos un Listener para el evento de pulsación
+		//lvObras.setOnItemClickListener(this);
+		lvObras.setOnItemClickListener((OnItemClickListener) this);
+*/
+	}
+
+	/*public void agregarObra(View v) {
+		Intent i = new Intent(this, NuevaNotaActivity.class);
+		startActivityForResult(i, requestCode);
+	}*/
+	
+//	public void onItemClick(final AdapterView<?> adapterView, View view, final int position, long id) {
+//		// TODO Auto-generated method stub
+//		AlertDialog.Builder builder = new AlertDialog.Builder(this)
+//		.setTitle("Borrar obra")
+//		.setMessage("¿Desea borrar esta obra?")
+//		.setPositiveButton("Aceptar",
+//				new DialogInterface.OnClickListener() {
+//
+//			@Override
+//			public void onClick(DialogInterface arg0, int arg1) {
+//				// TODO Auto-generated method stub
+//				Obra obra = (Obra) adapterView
+//						.getItemAtPosition(position);
+//				dataSource.borrarObra(obra);
+//
+//				// Refrescamos la lista
+//				refrescarLista();
+//			}
+//		})
+//
+//		.setNegativeButton("Cancelar",
+//				new DialogInterface.OnClickListener() {
+//
+//			@Override
+//			public void onClick(DialogInterface dialog,
+//					int which) {
+//				// TODO Auto-generated method stub
+//				return;
+//			}
+//		});
+//		builder.show();
+//	}
+	
+//	@Override
+//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		// TODO Auto-generated method stub
+//		Log.d("Result", "Se ejecuta onActivityResult");
+//		super.onActivityResult(requestCode, resultCode, data);
+//		if (requestCode == this.requestCode && resultCode == RESULT_OK) {
+//			// Actualizar el Adapter
+//			dataSource.open();
+//			refrescarLista();
+//		}
+//	}
+
+	private void refrescarLista() {
+//		List<Obra> listaObras = dataSource.getAllObras();
+//		ArrayAdapter<Obra> adapter = new ArrayAdapter<Obra>(this,
+//				android.R.layout.simple_list_item_1, listaObras);
+//		lvObras.setAdapter(adapter);
+	}
+  
+	
+	/*protected void onPause() {
+		// TODO Auto-generated method stub
+		dataSource.close();
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		dataSource.open();
+		super.onResume();
+	}*/
+}
+
+
+
+
+
+
+
+
+
+//////RESPALDO DE LA CLASE OBRA
+/*public class ObraActivity extends ActionBarActivity {
+	
+	private Fachada fachada = Fachada.getInstance();
+	private ArrayList listaObras = fachada.retornarObras();
+	//private ArrayList listaFunciones = fachada.retornarFuncionesObra("prueba");
 	
 	SparseArray<GrupoDeItems> grupos = new SparseArray<GrupoDeItems>();
 	ListView listView ;
@@ -66,10 +237,10 @@ public class ObraActivity extends ActionBarActivity {
         return super.onCreateOptionsMenu(menu);
      /*
         getMenuInflater().inflate(R.menu.main, menu);
-        return true;*/
+        return true;
     }
     
-    @Override
+   
     public boolean onOptionsItemSelected(MenuItem item) {
       switch (item.getItemId()) {
       case R.id.action_settings:
@@ -77,7 +248,7 @@ public class ObraActivity extends ActionBarActivity {
               intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
               startActivity(intent);
               break;
-      /*case R.id.action_settings:
+      case R.id.action_settings:
         Toast.makeText(this, "Reloading parkings...", Toast.LENGTH_LONG)
             .show();
         refresh();
@@ -85,11 +256,11 @@ public class ObraActivity extends ActionBarActivity {
      
       /*default:
         break;*/
-      }
-	return false;
-    }
+     // }
+	//return false;
+    //}
     
-    public void crearDatos() {
+    /*public void crearDatos() {
         GrupoDeItems grupo0 = new GrupoDeItems("Lunes 16/06");
         grupo0.children.add("20:00 - Sala 1");
         grupo0.children.add("22:00 - Sala 1");
@@ -119,4 +290,4 @@ public class ObraActivity extends ActionBarActivity {
 		});
 }
   
-}
+}*/

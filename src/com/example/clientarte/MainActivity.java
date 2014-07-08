@@ -3,7 +3,10 @@ package com.example.clientarte;
 
 import java.util.ArrayList;
 
+import backend.DB_Obra;
+
 import com.example.clientarte.R;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;

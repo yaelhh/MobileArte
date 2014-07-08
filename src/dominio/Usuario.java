@@ -15,10 +15,12 @@ public class Usuario {
 	private integer mascaras;
 	private ArrayList<Obra> misObrasVistas;
 	private ArrayList<Obra> misProximasObras;
+	private boolean estaLogueado;
+	
 //Constructor
 	public Usuario(integer idUsuario, String miNombre, String miApellido,
 			String miNombreUsuario, Date fechaNacimiento, integer mascaras,
-			ArrayList<Obra> misObrasVistas, ArrayList<Obra> misProximasObras) {
+			ArrayList<Obra> misObrasVistas, ArrayList<Obra> misProximasObras, boolean estaLogueado) {
 		super();
 		this.idUsuario = idUsuario;
 		this.miNombre = miNombre;
@@ -28,6 +30,7 @@ public class Usuario {
 		this.mascaras = mascaras;
 		this.misObrasVistas = misObrasVistas;
 		this.misProximasObras = misProximasObras;
+		this.estaLogueado = estaLogueado;
 	}
 //get and set
 	public integer getIdUsuario() {
@@ -77,6 +80,12 @@ public class Usuario {
 	}
 	public void setMisProximasObras(ArrayList<Obra> misProximasObras) {
 		this.misProximasObras = misProximasObras;
+	}
+	public boolean isEstaLogueado() {
+		return estaLogueado;
+	}
+	public void setEstaLogueado(boolean estaLogueado) {
+		this.estaLogueado = estaLogueado;
 	}
 	
 	

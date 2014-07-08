@@ -3,7 +3,10 @@ package com.example.clientarte;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import backend.DB_Obra;
+
 import com.example.clientarte.R;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -17,6 +20,8 @@ public class SplashScreenActivity extends Activity {
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+    	//DB_Obra o = new DB_Obra();
+		//o.crearObra();
         super.onCreate(savedInstanceState);
  
         // Set portrait orientation
