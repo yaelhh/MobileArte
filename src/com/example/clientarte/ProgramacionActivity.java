@@ -1,11 +1,18 @@
 package com.example.clientarte;
 
 
+import java.util.ArrayList;
+
+import dominio.Funcion;
+import dominio.Obra;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
+import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,22 +34,21 @@ public class ProgramacionActivity extends Activity implements OnQueryTextListene
 CalendarView cal;
 private SearchView mSearchView;
 private ImageButton mObra;
-	
+private ArrayList<Obra>listObras= new ArrayList<Obra>();
+private ArrayList<Funcion> listFunciones= new ArrayList<Funcion>();
+private ViewGroup layout;
+private Objetos obj;
+private ImageButton imageObra;
+private Obra miObra;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_programacion);
+       crearProgramacion();
        
-//        if (savedInstanceState == null) {
-//			getSupportFragmentManager().beginTransaction()
-//					.add(R.id.containerProgramacion, new PlaceholderFragment()).commit();
-//		}
-        
-        mObra= (ImageButton)findViewById(R.id.GalleryObra);
-        
-        addListenerOnButton();
-        cal = (CalendarView) findViewById(R.id.calendarView1);
-        
+       
+//       addListenerOnButton(); 
+
         cal.setOnDateChangeListener(new OnDateChangeListener() {
 			
 		@Override
@@ -58,7 +64,35 @@ private ImageButton mObra;
       
 		
     }
- 
+   public void crearProgramacion(){ 
+    obj=new Objetos();
+    cal = (CalendarView) findViewById(R.id.calendarView1);
+    layout= (ViewGroup)findViewById(R.id.containerProgramacion);
+    listObras=obj.getListObra();
+    ArrayList<View> listView= new ArrayList<View>();
+//    recorro la lista de obras existentes y agrego un imagenbutton por cada obra
+    for(int x=0; x<listObras.size();x++){
+    	miObra=listObras.get(x);
+       	imageObra= new ImageButton(this);
+      	imageObra.setId(x);
+       	imageObra.setContentDescription(miObra.getNombre());
+       	Integer imagen= miObra.getListaImagenes()[0];
+       	imageObra.setBackgroundResource(imagen);
+       	imageObra.setPadding(10, 10, 10, 10);
+        imageObra.setOnClickListener(new OnClickListener() {
+    	   
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ProgramacionActivity.this, ObraActivity.class);
+				intent.putExtra("obra",miObra); 
+				startActivity(intent);
+			}
+
+		});
+//Le agrego al layout el imageButton creado
+        layout.addView(imageObra, 400, 130);
+    }   
+    }
     
     
     @Override
@@ -103,18 +137,18 @@ private ImageButton mObra;
 	}
 	
 	
-	public void addListenerOnButton() {
-		 
-		mObra.setOnClickListener(new OnClickListener() {
- 
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(ProgramacionActivity.this, ObraActivity.class);
-				startActivity(intent);
-			}
-
-		});
-}
+//	public void addListenerOnButton() {
+//		 
+//		mObra.setOnClickListener(new OnClickListener() {
+// 
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent(ProgramacionActivity.this, ObraActivity.class);
+//				startActivity(intent);
+//			}
+//
+//		});
+//}
 	public static class PlaceholderFragment extends Fragment {
 
 		public PlaceholderFragment() {

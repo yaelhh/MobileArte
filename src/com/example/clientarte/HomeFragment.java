@@ -45,11 +45,10 @@ public class HomeFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				fragment = new ProgramacionFragment();
 				
-//				Intent intent = new Intent(getActivity(), ProgramacionActivity.class);
-//				startActivity(intent);
-			}
+			Intent intent = new Intent(getActivity(), ProgramacionActivity.class);
+				startActivity(intent);
+		}
 
 		});
 		botonComunidad.setOnClickListener(new OnClickListener() {

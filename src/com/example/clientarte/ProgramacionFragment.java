@@ -44,7 +44,7 @@ public class ProgramacionFragment extends Fragment {
 				Toast.LENGTH_LONG).show();
 		}
 	});
-       mObra= (ImageButton)rootView.findViewById(R.id.GalleryObra);
+//       mObra= (ImageButton)rootView.findViewById(R.id.GalleryObra);
         addListenerOnButton();
         return rootView;
     }

@@ -1,9 +1,11 @@
 package com.example.clientarte;
 
+import dominio.Obra;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +20,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ObraActivity extends ActionBarActivity {
@@ -25,6 +28,7 @@ public class ObraActivity extends ActionBarActivity {
 	SparseArray<GrupoDeItems> grupos = new SparseArray<GrupoDeItems>();
 	ListView listView ;
 	ImageView selectedImage;  
+	private Obra obra;
     private Integer[] mImageIds = {
                R.drawable.logo_app,
                R.drawable.novedades,
@@ -37,12 +41,20 @@ public class ObraActivity extends ActionBarActivity {
     	
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.activity_obra);
+        obra= getIntent().getParcelableExtra("obra");
+        Log.e("idObra","-"+obra.getIdObra());
+        Log.e("nombreObra","-"+obra.getNombre());
+        Log.e("descripcionObra","-"+obra.getDescripcion());
+        for(int x=0; x<obra.getListaImagenes().length;x++){
+        	Log.e("idObra","-"+obra.getListaImagenes()[x]);
+        }
         
         Gallery gallery = (Gallery) findViewById(R.id.gallery);
         selectedImage=(ImageView)findViewById(R.id.iconCompra);
         gallery.setSpacing(1);
         gallery.setAdapter(new GalleryImageAdapter(this));
-
+        TextView titulo=(TextView)findViewById(R.id.titulo);
+        titulo.setText(obra.getNombre());
          // clicklistener for Gallery
         gallery.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
