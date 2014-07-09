@@ -30,6 +30,14 @@
     <string name="Obras_vistas">Obras vistas</string>
     <string name="Mascaras">Mascaras</string>
     <string name="Canjear">Canjear mascaras</string>
+    <string name="butacas">Butacas</string>
+    <string name="containerProgramacion">containerProgramacion</string>
+    <string name="sectorA">Sector A</string>
+    <string name="sectorB">Sector B</string>
+    <string name="sectorC">Sector C</string>
+    <string name="escenario">Escenario</string>
+    <string name="tituloObra">LA MADRASTRA</string>
+    
 
     <!-- Lista de iconos de navegacion -->
     <array name="navigation_iconos">
@@ -93,7 +101,7 @@
     <string name="title_activity_nosotros">NosotrosActivity</string>
     <string name="HistoriaSodre">Nuestro cliente El Servicio Oficial de Difusión, Radiotelevisión y Espectáculos (SODRE) es un instituto dependiente del Ministerio de Educación y Cultura de Uruguay dedicado a la difusión y generación de información, arte y cultura en general. Creado como Servicio Oficial de Difusión Radio Eléctrica, su función inicial era la de "perifonear programas culturales e informativos", </string>
     <string name="HorarioSodre"> Dirección: Calle Andes esquina Mercedes  11100 Montevideo
-
+	
 Información general y boletería 2 900 70 84
 
 Horario de boletería El horario de atención al público es de lunes a sábado de 10 a 19hs. y siempre que haya espectáculo, desde 2 horas antes del inicio hasta el comienzo del mismo.
@@ -104,7 +112,15 @@ Boletería boleteria@auditorio.uy
 
 Prensa y comunicación comunicacion@auditorio.uy   </string>
     <string name="title_activity_comunidad">ComunidadActivity</string>
+<<<<<<< HEAD
+    <string name="horario">Horarios:</string>
+    <string name="idCantEntradas">Entradas:</string>
+    <string name="labelSalas">Salas:</string>
+    <string name="labelEscenario">ESCENARIO</string>
+    <string name="title_activity_sectora">SectoraActivity</string>
+=======
     <string name="title_activity_prueba_obra">PruebaObraActivity</string>
+>>>>>>> refs/heads/master
 
     <string name="hello">Hello World, SQLiteActivity!</string>
     

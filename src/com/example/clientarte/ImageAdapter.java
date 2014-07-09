@@ -43,20 +43,29 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     // references to our images
-    private Integer[] mThumbIds = {
-            R.drawable.ic_libre, R.drawable.ic_libre,
-            R.drawable.ic_libre, R.drawable.ic_libre,
-            R.drawable.ic_libre, R.drawable.ic_libre,
-            R.drawable.ic_libre, R.drawable.ic_libre,
-            R.drawable.ic_libre, R.drawable.ic_libre,
-            R.drawable.ic_libre, R.drawable.ic_libre,
-            R.drawable.ic_libre, R.drawable.ic_libre,
-            R.drawable.ic_libre, R.drawable.ic_libre,
-            R.drawable.ic_libre, R.drawable.ic_libre,
-            R.drawable.ic_libre, R.drawable.ic_libre,
-            R.drawable.ic_libre, R.drawable.ic_libre,
-            R.drawable.ic_libre, R.drawable.ic_libre,
-            R.drawable.ic_libre, R.drawable.ic_libre,
-           };
+    private Integer[] mThumbIds;
+//    	{
+//            R.drawable.butaca_roja, R.drawable.butaca_roja,
+//            R.drawable.butaca_roja, R.drawable.butaca_roja,
+//            R.drawable.ic_libre, R.drawable.ic_libre,
+//            R.drawable.ic_libre, R.drawable.ic_libre,
+//            R.drawable.ic_libre, R.drawable.ic_libre,
+//            R.drawable.ic_libre, R.drawable.ic_libre,
+//            R.drawable.ic_libre, R.drawable.ic_libre,
+//            R.drawable.ic_libre, R.drawable.ic_libre,
+//            R.drawable.ic_libre, R.drawable.ic_libre,
+//            R.drawable.ic_libre, R.drawable.ic_libre,
+//            R.drawable.ic_libre, R.drawable.ic_libre,
+//            R.drawable.ic_libre, R.drawable.ic_libre,
+//            R.drawable.ic_libre, R.drawable.ic_libre,
+//           };
+
+	public Integer[] getmThumbIds() {
+		return mThumbIds;
+	}
+
+	public void setmThumbIds(Integer[] mThumbIds) {
+		this.mThumbIds = mThumbIds;
+	}
 
 }

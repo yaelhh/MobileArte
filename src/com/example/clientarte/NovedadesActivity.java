@@ -39,7 +39,7 @@ public class NovedadesActivity extends ActionBarActivity {
 	        super.onCreate(savedInstanceState);
 	        //setContentView(R.layout.obra_main);
 	        //setContentView(R.layout.novedades_main);
-	        setContentView(R.layout.activity_obra);
+	        setContentView(R.layout.activity_novedades);
 	       
 	             Gallery gallery = (Gallery) findViewById(R.id.gallery);
 	        selectedImage=(ImageView)findViewById(R.id.iconCompra);
@@ -95,7 +95,7 @@ public class NovedadesActivity extends ActionBarActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
+			View rootView = inflater.inflate(R.layout.fragment_novedades, container,
 					false);
 			return rootView;
 		}

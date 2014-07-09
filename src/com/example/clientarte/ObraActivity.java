@@ -1,5 +1,8 @@
 package com.example.clientarte;
 
+<<<<<<< HEAD
+import dominio.Obra;
+=======
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,22 +13,47 @@ import java.util.GregorianCalendar;
 import backend.DatabaseHelper;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+>>>>>>> refs/heads/master
 import android.content.Intent;
 import android.content.pm.FeatureInfo;
 import android.os.Bundle;
 import android.provider.Settings.System;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+<<<<<<< HEAD
+import android.util.SparseArray;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+=======
+>>>>>>> refs/heads/master
 import android.view.View;
+<<<<<<< HEAD
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+=======
+import android.widget.AdapterView;
+>>>>>>> refs/heads/master
 import android.widget.ExpandableListView;
 import android.widget.Gallery;
+<<<<<<< HEAD
+import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+=======
+import android.widget.ImageView;
+>>>>>>> refs/heads/master
 import android.widget.ListView;
+<<<<<<< HEAD
+import android.widget.TextView;
+import android.widget.Toast;
+=======
 import backend.DB_Obra;
 import backend.MySQLiteOpenHelper;
 import dominio.Funcion;
 import dominio.Obra;
+>>>>>>> refs/heads/master
 
 public class ObraActivity extends ActionBarActivity {
 	
@@ -197,6 +225,7 @@ public class ObraActivity extends ActionBarActivity {
 	SparseArray<GrupoDeItems> grupos = new SparseArray<GrupoDeItems>();
 	ListView listView ;
 	ImageView selectedImage;  
+	private Obra obra;
     private Integer[] mImageIds = {
                R.drawable.logo_app,
                R.drawable.novedades,
@@ -209,12 +238,20 @@ public class ObraActivity extends ActionBarActivity {
     	
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.activity_obra);
+        obra= getIntent().getParcelableExtra("obra");
+        Log.e("idObra","-"+obra.getIdObra());
+        Log.e("nombreObra","-"+obra.getNombre());
+        Log.e("descripcionObra","-"+obra.getDescripcion());
+        for(int x=0; x<obra.getListaImagenes().length;x++){
+        	Log.e("idObra","-"+obra.getListaImagenes()[x]);
+        }
         
         Gallery gallery = (Gallery) findViewById(R.id.gallery);
         selectedImage=(ImageView)findViewById(R.id.iconCompra);
         gallery.setSpacing(1);
         gallery.setAdapter(new GalleryImageAdapter(this));
-
+        TextView titulo=(TextView)findViewById(R.id.titulo);
+        titulo.setText(obra.getNombre());
          // clicklistener for Gallery
         gallery.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -229,6 +266,8 @@ public class ObraActivity extends ActionBarActivity {
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.listViewexp);
         Adaptador adapter = new Adaptador(this, grupos);
         listView.setAdapter(adapter);
+        
+        
         
        
     }
@@ -292,5 +331,10 @@ public class ObraActivity extends ActionBarActivity {
 
 		});
 }
+<<<<<<< HEAD
+    
+}
+=======
   
 }*/
+>>>>>>> refs/heads/master
