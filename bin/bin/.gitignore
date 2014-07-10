@@ -1,0 +1,12 @@
+/.settings/
+/AndroidManifest.xml
+/ClientArte.apk
+/R.txt
+/classes/
+/classes.dex
+/dexedLibs/
+/gen/
+/jarlist.cache
+/project.properties
+/res/
+/resources.ap_
