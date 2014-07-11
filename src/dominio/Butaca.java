@@ -11,7 +11,7 @@ public class Butaca implements Parcelable{
 	
 	public Butaca() {
 		
-		
+		//un comentario de prueba
 		// TODO Auto-generated constructor stub
 	}
 
