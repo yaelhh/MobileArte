@@ -10,6 +10,8 @@ public class Butaca implements Parcelable{
 	private Boolean estadoButaca;
 	
 	public Butaca() {
+		
+		
 		// TODO Auto-generated constructor stub
 	}
 
