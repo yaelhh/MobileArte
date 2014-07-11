@@ -1,59 +1,14 @@
 package com.example.clientarte;
 
-<<<<<<< HEAD
-import dominio.Obra;
-=======
-
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
-import backend.DatabaseHelper;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
->>>>>>> refs/heads/master
-import android.content.Intent;
-import android.content.pm.FeatureInfo;
 import android.os.Bundle;
-import android.provider.Settings.System;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-<<<<<<< HEAD
-import android.util.SparseArray;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-=======
->>>>>>> refs/heads/master
-import android.view.View;
-<<<<<<< HEAD
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-=======
-import android.widget.AdapterView;
->>>>>>> refs/heads/master
-import android.widget.ExpandableListView;
-import android.widget.Gallery;
-<<<<<<< HEAD
-import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-=======
-import android.widget.ImageView;
->>>>>>> refs/heads/master
-import android.widget.ListView;
-<<<<<<< HEAD
-import android.widget.TextView;
-import android.widget.Toast;
-=======
-import backend.DB_Obra;
-import backend.MySQLiteOpenHelper;
-import dominio.Funcion;
+import backend.DatabaseHelper;
 import dominio.Obra;
->>>>>>> refs/heads/master
+
+
+
 
 public class ObraActivity extends ActionBarActivity {
 	
@@ -98,7 +53,7 @@ public class ObraActivity extends ActionBarActivity {
 		myDbHelper.createObra(miObra4);
 	
 		
-		
+	}		
 
 		
 
@@ -185,12 +140,12 @@ public class ObraActivity extends ActionBarActivity {
 //		}
 //	}
 
-	private void refrescarLista() {
+//	private void refrescarLista() {
 //		List<Obra> listaObras = dataSource.getAllObras();
 //		ArrayAdapter<Obra> adapter = new ArrayAdapter<Obra>(this,
 //				android.R.layout.simple_list_item_1, listaObras);
 //		lvObras.setAdapter(adapter);
-	}
+	
   
 	
 	/*protected void onPause() {
@@ -205,7 +160,7 @@ public class ObraActivity extends ActionBarActivity {
 		dataSource.open();
 		super.onResume();
 	}*/
-}
+//}
 
 
 
@@ -337,4 +292,4 @@ public class ObraActivity extends ActionBarActivity {
 =======
   
 }*/
->>>>>>> refs/heads/master
+

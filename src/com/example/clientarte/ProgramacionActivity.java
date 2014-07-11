@@ -1,40 +1,28 @@
 package com.example.clientarte;
 
-
 import java.util.ArrayList;
 
-import dominio.Funcion;
-import dominio.Obra;
 import android.app.Activity;
 import android.content.Intent;
-<<<<<<< HEAD
-import android.graphics.drawable.Drawable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.text.Layout;
-import android.util.Log;
-import android.view.LayoutInflater;
-=======
 import android.os.Bundle;
->>>>>>> refs/heads/master
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.CalendarView;
-<<<<<<< HEAD
-import android.widget.Gallery;
-=======
 import android.widget.CalendarView.OnDateChangeListener;
->>>>>>> refs/heads/master
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Toast;
+import dominio.Funcion;
+import dominio.Obra;
 
-//
+
+
 
 public class ProgramacionActivity extends Activity implements OnQueryTextListener{         
 CalendarView cal;

@@ -8,44 +8,33 @@ import android.os.Parcelable;
 
 public class Funcion implements Parcelable{
 	//Variables
-	private Integer idFuncion;
+	private int idFuncion;
 	private Double duracion;
-<<<<<<< HEAD
-	private Date horaComiento;
-	//Constructor
-	public Funcion(Integer idFuncion, Double duracion, Date horaComiento) {
-=======
 	private Date horaComienzo;
 	private Date fechaObra;
+	//Constructor
 	
-	public Funcion(integer idFuncion, Double duracion, Date horaComienzo,Date fechaObra) {
->>>>>>> refs/heads/master
+	public Funcion(int idFuncion, Double duracion,Date fechaObra) {
+
 		super();
 		this.idFuncion = idFuncion;
 		this.duracion = duracion;
 		this.horaComienzo = horaComienzo;
 		this.fechaObra = fechaObra;
 	}
-<<<<<<< HEAD
+
 	public Funcion (Parcel in) {
 //		listaButacas = new ArrayList<Butaca>();
 		readFromParcel(in);
 	}
 	
 	//get and set
-	public Integer getIdFuncion() {
-=======
+	public int getIdFuncion() {
 
-	public integer getIdFuncion() {
->>>>>>> refs/heads/master
 		return idFuncion;
 	}
-<<<<<<< HEAD
-	public void setIdFuncion(Integer idFuncion) {
-=======
 
-	public void setIdFuncion(integer idFuncion) {
->>>>>>> refs/heads/master
+	public void setIdFuncion(int idFuncion) {
 		this.idFuncion = idFuncion;
 	}
 
@@ -64,7 +53,15 @@ public class Funcion implements Parcelable{
 	public void setHoraComienzo(Date horaComienzo) {
 		this.horaComienzo = horaComienzo;
 	}
-<<<<<<< HEAD
+	public Date getFechaObra() {
+		return fechaObra;
+	}
+
+	public void setFechaObra(Date fechaObra) {
+		this.fechaObra = fechaObra;
+	}
+	
+
 	@Override
 	public int describeContents() {
 		// TODO Auto-generated method stub
@@ -73,7 +70,7 @@ public class Funcion implements Parcelable{
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		// TODO Auto-generated method stub
-		dest.writeSerializable(horaComiento);
+		dest.writeSerializable(horaComienzo);
 		dest.writeInt(idFuncion);
 		dest.writeDouble(duracion);
 		
@@ -81,7 +78,7 @@ public class Funcion implements Parcelable{
 	private void readFromParcel(Parcel in) {
 		idFuncion= in.readInt();
 		duracion= in.readDouble();
-		horaComiento= (java.util.Date) in.readSerializable();
+		horaComienzo= (java.util.Date) in.readSerializable();
 		
 	}
 	//Necesario para usar la clase en Arrays
@@ -94,21 +91,10 @@ public class Funcion implements Parcelable{
 					return new Funcion[size];
 				}
 			};
-=======
 
-	public Date getFechaObra() {
-		return fechaObra;
-	}
 
-	public void setFechaObra(Date fechaObra) {
-		this.fechaObra = fechaObra;
-	}
 	
-	
-	
-	
-	
->>>>>>> refs/heads/master
+
 	
 
 }

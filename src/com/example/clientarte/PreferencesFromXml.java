@@ -3,24 +3,18 @@ package com.example.clientarte;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> refs/heads/master
 public class PreferencesFromXml extends PreferenceFragment {
 	 
-<<<<<<< HEAD
+
 	
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
-        }
+        
     }
-=======
-	 
+ 
 	/*public void onCreate(Bundle savedInstanceState) {
 	    /*super.onCreate(savedInstanceState);
 	    // Load the preferences from an XML resource
@@ -33,11 +27,7 @@ public class PreferencesFromXml extends PreferenceFragment {
 	                .commit();
 	  }*/
 	
-	@Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences);
-    }
+	
 	 
 	}
->>>>>>> refs/heads/master
+
