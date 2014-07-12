@@ -7,7 +7,7 @@
     <!--  android:background="@drawable/telon"-->
     
   	<Gallery
-         android:id="@+id/gallery"
+         android:id="@+id/galleryObra"
          android:layout_width="fill_parent"
          android:layout_height="wrap_content"
          android:spacing="8dp"

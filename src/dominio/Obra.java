@@ -59,7 +59,7 @@ public class Obra implements Parcelable{
 	}
 	
 //	Constructor
-
+	
 	public Obra(int idObra, String nombre) {
 
 		super();

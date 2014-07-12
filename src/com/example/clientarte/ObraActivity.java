@@ -2,10 +2,12 @@ package com.example.clientarte;
 
 import java.io.IOException;
 
+import android.R;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.widget.Gallery;
 import backend.DatabaseHelper;
-import dominio.Obra;
+import dominio.*;
 
 
 
@@ -15,6 +17,7 @@ public class ObraActivity extends ActionBarActivity {
 //	private int requestCode = 1;
 //	private ListView lvObras;
 //	private DB_Obra dataSource;// = new DB_Obra(this);
+	Obra obra;
 	
 	//final String[] from = { ObrasColumns.idObra, ObrasColumns.nombreObra, ObrasColumns.descripcionObra };
 	//final int[] to = new int[] { R.id., R.id.apellidos, R.id.edad };
@@ -28,15 +31,18 @@ public class ObraActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_obra);
-		
+		obra= new Obra();
+		obra=getIntent().getParcelableExtra("obra");
+		obra.getTop; 
+		vbvcbv
+
 		DatabaseHelper myDbHelper = new DatabaseHelper(this);
 		myDbHelper = new DatabaseHelper(this);
-		
-		
+		crearActivity();
 		
 		try {
 			myDbHelper.createDataBase();
-			
+			h
 		} catch (IOException ioe) {
 
 			throw new Error("Unable to create database");
@@ -56,6 +62,15 @@ public class ObraActivity extends ActionBarActivity {
 	}		
 
 		
+	private void crearActivity(){
+		Gallery galleryObras= (Gallery)findViewById(R.id.galleryObra);
+		for(int x=0; x<obra.)
+	}
+}
+
+
+
+
 
 //		db = new DatabaseHelper(getApplicationContext());
 //		Obra tag1 = new Obra("Shopping");
@@ -286,10 +301,9 @@ public class ObraActivity extends ActionBarActivity {
 
 		});
 }
-<<<<<<< HEAD
-    
+
 }
-=======
+
   
 }*/
 
