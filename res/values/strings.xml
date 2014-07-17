@@ -95,6 +95,8 @@
     <string name="idCantidadEn">Entradas</string>
     <string name="idPrecio">Total:</string>
     <string name="idComprar">Comprar</string>
+        <string name="btnComprar">Comprar</string>
+    
     <string name="pulsado">Pulsado</string>
     <string name="title_activity_pruebaasientos">MainActivity</string>
     <string name="title_activity_ejemplo1">MainActivity</string>

@@ -1,48 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/Gray"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/idTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
-        android:text="@string/idObra"
+        android:padding="20dp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <LinearLayout
+    <!--
+          <LinearLayout
         android:layout_width="304dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="20dp" >
+    -->
+ 
+    <TextView
+        android:id="@+id/labelHorario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:text="@string/horario" />
 
-        <TextView
-            android:id="@+id/labelHorario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="10dp"
-            android:text="@string/horario" />
+    <Spinner
+        android:id="@+id/spinner_horario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal"
+     android:paddingTop="20dp" >
 
-        <Spinner
-            android:id="@+id/spinner_horario"
-            android:layout_width="70dp"
-            android:layout_height="36dp" />
+    <TextView
+        android:id="@+id/labelSala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"
+        android:text="@string/labelSalas" />
 
-        <TextView
-            android:id="@+id/labelSala"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingRight="10dp"
-            android:text="@string/labelSalas" />
-
-        <Spinner
-            android:id="@+id/spinner_sala"
-            android:layout_width="70dp"
-            android:layout_height="36dp" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/sala"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp" />
+</LinearLayout>
+    <!-- </LinearLayout> -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,20 +60,21 @@
         android:orientation="horizontal"
         android:paddingTop="20dp" >
 
-        <TextView
-            android:id="@+id/idTotalLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:text="@string/idPrecio" />
+        
+            <TextView
+                android:id="@+id/idTotalLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/idPrecio" />
 
-        <EditText
-            android:id="@+id/idTotal"
-            android:layout_width="60dp"
-            android:layout_height="39dp"
-            android:ems="10"
-            android:inputType="numberSigned" />
+            <TextView
+                android:id="@+id/idTotal"
+                android:layout_width="60dp"
+                android:layout_height="39dp"
+                android:ems="10" />
+        
 
         <TextView
             android:id="@+id/idCantEntradas"
@@ -86,53 +97,63 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <ImageButton
+        <Button
             android:id="@+id/sectorA"
             android:layout_width="70dp"
-            android:layout_height="100dp"
-            android:background="@color/Azure"
-            android:contentDescription="@string/sectorA" />
+            android:layout_height="104dp"
+            android:background="@color/IndianRed"
+            android:contentDescription="@string/sectorA"
+            android:textSize="10dp" />
 
         <LinearLayout
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <ImageButton
+            <Button
                 android:id="@+id/sectorB"
                 android:layout_width="match_parent"
                 android:layout_height="104dp"
-                android:background="@color/Chartreuse"
-                android:contentDescription="@string/sectorB" />
+                android:background="@color/Brown"
+                android:contentDescription="@string/sectorB"
+                android:textSize="10dp" />
 
-            <ImageButton
-                android:id="@+id/Escenario"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:background="@color/LightPink"
-                android:contentDescription="@string/escenario" />
+                android:layout_height="33dp" >
+
+                <Button
+                    android:id="@+id/Escenario"
+                    android:layout_width="match_parent"
+                    android:layout_height="33dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/LightPink"
+                    android:contentDescription="@string/escenario" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/escenario" />
+            </RelativeLayout>
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/sectorC"
-            android:layout_width="70dp"
-            android:layout_height="100dp"
-            android:background="@color/Gold"
-            android:contentDescription="@string/sectorC" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp" >
-
         <Button
-            android:id="@+id/button_comprar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:text="@string/idComprar" />
+            android:id="@+id/sectorC"
+            android:layout_width="93dp"
+            android:layout_height="104dp"
+            android:background="@color/Chocolate"
+            android:contentDescription="@string/sectorC"
+            android:textSize="10dp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_comprar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comprar" />
 
 </LinearLayout>

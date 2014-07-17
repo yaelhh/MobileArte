@@ -1,4 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/Gray" >
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:layout_gravity="right"
+        android:text="OK" />
+
+    <GridView
+        android:id="@+id/grdSectorA"
+        android:layout_width="503dp"
+        android:layout_height="196dp"
+        android:layout_gravity="center|bottom"
+        android:gravity="bottom"
+        android:scrollbars="vertical|horizontal" >
+
+    </GridView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp" >
+
+        
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:adjustViewBounds="true"
+            android:background="@color/BlanchedAlmond"
+            android:contentDescription="@string/escenario"
+            android:scaleType="center"
+            android:src="@drawable/abc_ab_stacked_transparent_dark_holo" />
+
+            <TextView
+                android:id="@+id/editText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/escenario" />
+
+    </RelativeLayout>
+
+</LinearLayout>
+
+<!-- 
 <GridView xmlns:android="http://schemas.android.com/apk/res/android"
 android:id="@+id/grdSectorA"
 android:layout_width="fill_parent"
@@ -10,3 +65,4 @@ android:horizontalSpacing="10dp"
 android:stretchMode="columnWidth"
 android:gravity="center"
 />
+ -->

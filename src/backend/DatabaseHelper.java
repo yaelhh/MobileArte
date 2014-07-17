@@ -352,8 +352,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	public long createFunciones(Funcion unaFuncion) {
         SQLiteDatabase db = this.getWritableDatabase();
         
-        Date fechaComienzo = (Date) unaFuncion.getFechaObra();
-        Date horaComienzo = (Date) unaFuncion.getHoraComienzo();
+        String fechaComienzo = (String) unaFuncion.getFechaObra();
+        String horaComienzo = (String) unaFuncion.getHoraComienzo();
         
         ContentValues values = new ContentValues();
         values.put(COLUMNA_DURACION, unaFuncion.getDuracion());

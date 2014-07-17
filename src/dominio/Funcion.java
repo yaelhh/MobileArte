@@ -10,17 +10,17 @@ public class Funcion implements Parcelable{
 	//Variables
 	private int idFuncion;
 	private Double duracion;
-	private Date horaComienzo;
-	private Date fechaObra;
+	private String horaComienzo;
+	private String fechaObra;
 	//Constructor
 	
-	public Funcion(int idFuncion, Double duracion,Date fechaObra) {
+	public Funcion(int idFuncion, Double duracion,String fechaObra,String horaComienzo) {
 
 		super();
 		this.idFuncion = idFuncion;
 		this.duracion = duracion;
-		this.horaComienzo = horaComienzo;
 		this.fechaObra = fechaObra;
+		this.horaComienzo= horaComienzo;
 	}
 
 	public Funcion (Parcel in) {
@@ -46,18 +46,18 @@ public class Funcion implements Parcelable{
 		this.duracion = duracion;
 	}
 
-	public Date getHoraComienzo() {
+	public String getHoraComienzo() {
 		return horaComienzo;
 	}
 
-	public void setHoraComienzo(Date horaComienzo) {
+	public void setHoraComienzo(String horaComienzo) {
 		this.horaComienzo = horaComienzo;
 	}
-	public Date getFechaObra() {
+	public String getFechaObra() {
 		return fechaObra;
 	}
 
-	public void setFechaObra(Date fechaObra) {
+	public void setFechaObra(String fechaObra) {
 		this.fechaObra = fechaObra;
 	}
 	
@@ -70,15 +70,19 @@ public class Funcion implements Parcelable{
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		// TODO Auto-generated method stub
-		dest.writeSerializable(horaComienzo);
 		dest.writeInt(idFuncion);
 		dest.writeDouble(duracion);
+		dest.writeString(fechaObra);
+		dest.writeString(horaComienzo);
 		
 	}
 	private void readFromParcel(Parcel in) {
 		idFuncion= in.readInt();
 		duracion= in.readDouble();
-		horaComienzo= (java.util.Date) in.readSerializable();
+		fechaObra= in.readString();
+		horaComienzo= in.readString();
+
+	
 		
 	}
 	//Necesario para usar la clase en Arrays
@@ -93,7 +97,9 @@ public class Funcion implements Parcelable{
 			};
 
 
-	
+	public String toString (){
+		return  fechaObra +" - " + horaComienzo;
+	}
 
 	
 

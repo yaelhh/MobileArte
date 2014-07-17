@@ -81,7 +81,8 @@
         <activity
             android:name="com.example.clientarte.ObraActivity"
             android:label="@string/title_activity_obra"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" 
+            >
         </activity>
         <activity
             android:name="com.example.clientarte.SettingsActivity"
@@ -117,13 +118,10 @@
 
         <activity
             android:name="com.example.clientarte.SectorAActivity"
-            android:label="@string/title_activity_sectora" >
+            android:label="@string/title_activity_sectora"
+            android:screenOrientation="landscape" >
         </activity>
-        <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
- 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        
     </application>
 
 </manifest>
