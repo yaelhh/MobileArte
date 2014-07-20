@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
+=======
+>>>>>>> origin/develop
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_login"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
+<<<<<<< HEAD
 	tools:context=".LoginActivity"
+=======
+	tools:context="com.example.clientarte.LoginActivity"
+>>>>>>> origin/develop
 	android:background="@drawable/fondo">
 
     <RelativeLayout
@@ -16,7 +23,11 @@
         android:padding="5dp" >
 
         <EditText
+<<<<<<< HEAD
             android:id="@+id/txtPassword"
+=======
+            android:id="@+id/txtPasswordLogin"
+>>>>>>> origin/develop
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/txtEmail"
@@ -45,16 +56,26 @@
             android:typeface="serif" />
 
         <EditText
+<<<<<<< HEAD
             android:id="@+id/txtEmail"
+=======
+            android:id="@+id/txtEmailLogin"
+>>>>>>> origin/develop
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textArte"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="14dp"
             android:ems="10"
+<<<<<<< HEAD
             android:inputType="@+id/txtEmail"
             android:hint="@string/txtEmail"
             android:textColorHint="@color/Black" />
+=======
+            android:hint="@string/txtEmail"
+            android:textColorHint="@color/Black" />
+        <!--  android:inputType="@+id/txtEmail" -->
+>>>>>>> origin/develop
 
         <Button
             android:id="@+id/buttonRegistrarse"
@@ -74,6 +95,10 @@
             android:layout_below="@+id/txtPassword"
             android:layout_marginTop="24dp"
             android:text="@string/button_login" />
+<<<<<<< HEAD
+=======
+        <!--  android:onClick="submit"-->
+>>>>>>> origin/develop
 
         <TextView
             android:id="@+id/buttonRecuperarPass"

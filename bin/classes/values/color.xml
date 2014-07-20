@@ -155,4 +155,14 @@
  <color name="DarkBlue">#00008B</color>
  <color name="Navy">#000080</color>
  <color name="Black">#000000</color>
+<<<<<<< HEAD
+=======
+ 
+ <!-- Valores opciones registro de usuarios -->
+  	<color name="form_highlight">#3A3A3A</color>
+    <color name="hint_color">#a2aa9c</color>
+    <color name="ghost_white">#F8F8FF</color>
+    <color name="ebony">#555D50</color>
+    
+>>>>>>> origin/develop
 </resources>

@@ -3,7 +3,10 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/develop
     android:background="@drawable/telon"
     android:orientation="vertical"
     tools:context="com.example.clientarte.NosotrosActivity"
@@ -38,6 +41,7 @@
             android:padding="5dp"
             android:text="@string/HorarioSodre" />
         </LinearLayout>
+<<<<<<< HEAD
 		
 
 		
@@ -46,11 +50,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         class="com.google.android.gms.maps.MapFragment"/>-->
+=======
+
+
+		
+		<fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        class="com.google.android.gms.maps.MapFragment"/>
+>>>>>>> origin/develop
         
        
  </LinearLayout>   
 
+<<<<<<< HEAD
   <!--  <Gallery
+=======
+   <!-- <Gallery
+>>>>>>> origin/develop
         android:id="@+id/gallery"
         android:layout_width="fill_parent"
         android:layout_height="138dp"
@@ -87,5 +105,10 @@
             android:clickable="true" />
     </LinearLayout>
 
+<<<<<<< HEAD
 </LinearLayout>-->
 
+=======
+</LinearLayout>
+-->
+>>>>>>> origin/develop

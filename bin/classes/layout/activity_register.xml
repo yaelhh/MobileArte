@@ -1,0 +1,112 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.clientarte.CreateAccountActivity" 
+    android:background="@color/ghost_white">
+	 
+	 <EditText
+        android:id="@+id/etFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/enter_first_name"
+        android:layout_marginTop="@dimen/login_spacing"
+        android:inputType="textPersonName"
+        android:textColor="@color/ebony"
+        android:textColorHint="@color/hint_color" />
+	 
+	<EditText
+        android:id="@+id/etLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etFirstName"
+        android:layout_alignLeft="@+id/etFirstName"
+        android:layout_centerHorizontal="true"
+        android:inputType="textPersonName" 
+        android:hint="@string/enter_last_name"
+        android:textColor="@color/ebony"
+        android:textColorHint="@color/hint_color"/>
+	 
+	<EditText 
+	    android:id="@+id/etEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etLastName"
+        android:layout_below="@+id/etLastName"
+        android:layout_marginTop="@dimen/view_break"
+        android:inputType="textEmailAddress"
+        android:hint="@string/enter_email"
+        android:textColor="@color/ebony"
+        android:textColorHint="@color/hint_color" /> 
+        
+	<EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etEmailAddress"
+        android:layout_below="@+id/etEmailAddress"
+        android:inputType="textPassword" 
+        android:layout_marginTop="@dimen/view_break"
+        android:hint="@string/enter_password"
+        android:textColor="@color/ebony"
+        android:textColorHint="@color/hint_color"/>
+
+    <EditText
+        android:id="@+id/etPasswordConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etPassword"
+        android:layout_below="@+id/etPassword"
+        android:inputType="textPassword" 
+        android:hint="@string/confirm_password"
+        android:textColor="@color/ebony"
+        android:textColorHint="@color/hint_color"/>
+    
+    <EditText
+        android:id="@+id/nomUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPasswordConfirm"
+        android:layout_alignLeft="@+id/nomUsuario"
+        android:layout_centerHorizontal="true"
+        android:inputType="textPersonName" 
+        android:hint="@string/nomUsuario"
+        android:textColor="@color/ebony"
+        android:textColorHint="@color/hint_color"/>
+
+     <Button
+         android:id="@+id/btnCancelar"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentRight="true"
+         android:layout_below="@+id/calendarViewCreateAccount"
+         android:layout_marginRight="36dp"
+         android:layout_marginTop="30dp"
+         android:minWidth="@dimen/button_min_width"
+         android:onClick="cancelarAccount"
+         android:text="@string/cancelar"
+         android:textColor="@color/ghost_white" />
+
+     <Button
+         android:id="@+id/btnRegister"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBaseline="@+id/btnCancelar"
+         android:layout_alignBottom="@+id/btnCancelar"
+         android:layout_marginRight="25dp"
+         android:layout_toLeftOf="@+id/btnCancelar"
+         android:minWidth="@dimen/button_min_width"
+         android:onClick="registerAccount"
+         android:text="@string/register"
+         android:textColor="@color/ghost_white" />
+
+     <CalendarView
+         android:id="@+id/calendarViewCreateAccount"
+         android:layout_width="match_parent"
+         android:layout_height="80dp"
+         android:layout_below="@+id/nomUsuario"
+         android:layout_margin="2dp"
+          />
+
+</RelativeLayout>

@@ -9,6 +9,10 @@
     <string name="Nosotros">Nosotros</string>
     <string name="Comunidad">Comunidad</string>
     <string name="Novedades">Novedades</string>
+<<<<<<< HEAD
+=======
+    <string name="cancelar">Cancelar</string>
+>>>>>>> origin/develop
     <string name="title_activity_principal">Principal</string>
     <string name="title_activity_programacion">Programacion</string>
     <string name="title_activity_busqueda">BusquedaActivity</string>
@@ -38,6 +42,25 @@
     <string name="escenario">Escenario</string>
     <string name="tituloObra">LA MADRASTRA</string>
     
+<<<<<<< HEAD
+=======
+    <!-- Valores de la opcion registro de usuarios -->
+    <string name="enter_email">Email</string>
+    <string name="enter_password">Password</string>
+    <string name="confirm_password">Confirme Password</string>
+    <string name="enter_first_name">Nombre</string>
+    <string name="enter_last_name">Apellido</string>
+    <string name="nomUsuario">Nombre de Usuario</string>
+    <string name="login">Login</string>
+    <string name="register">Registrar</string>
+    <string name="login_twitter">Login with Twitter</string>
+    <string name="login_facebook">Login with Facebook</string>
+    <string name="login_google">Login with Google+</string>
+    <string name="login_linkedin">Login with Linkedin</string>
+    <string name="facebook_app_id">your_facebook_signin</string>
+    
+    
+>>>>>>> origin/develop
 
     <!-- Lista de iconos de navegacion -->
     <array name="navigation_iconos">
@@ -95,8 +118,11 @@
     <string name="idCantidadEn">Entradas</string>
     <string name="idPrecio">Total:</string>
     <string name="idComprar">Comprar</string>
+<<<<<<< HEAD
         <string name="btnComprar">Comprar</string>
     
+=======
+>>>>>>> origin/develop
     <string name="pulsado">Pulsado</string>
     <string name="title_activity_pruebaasientos">MainActivity</string>
     <string name="title_activity_ejemplo1">MainActivity</string>
@@ -113,15 +139,25 @@ Atención al público atencionalpublico@auditorio.uy
 Boletería boleteria@auditorio.uy
 
 Prensa y comunicación comunicacion@auditorio.uy   </string>
+<<<<<<< HEAD
     <string name="title_activity_comunidad">ComunidadActivity</string>
+=======
+    <string name="title_activity_comunidad">ComunidadActivity</string>
+>>>>>>> origin/develop
     <string name="horario">Horarios:</string>
     <string name="idCantEntradas">Entradas:</string>
     <string name="labelSalas">Salas:</string>
     <string name="labelEscenario">ESCENARIO</string>
     <string name="title_activity_sectora">SectoraActivity</string>
+<<<<<<< HEAD
 
     <string name="title_activity_prueba_obra">PruebaObraActivity</string>
 
+=======
+    <string name="title_activity_prueba_obra">PruebaObraActivity</string>
+
+    <string name="hello">Hello World, SQLiteActivity!</string>
+>>>>>>> origin/develop
     
     <string name="addCliente">Nuevo Cliente</string>
 </resources>
