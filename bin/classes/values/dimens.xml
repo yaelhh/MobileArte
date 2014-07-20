@@ -5,8 +5,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="navigation_drawer_width">240dp</dimen>
-<<<<<<< HEAD
-=======
     
     <!-- Valores para registro de usuarios -->
     <dimen name="button_min_width">96dp</dimen>
@@ -17,6 +15,5 @@
     <dimen name="form_padding">6dp</dimen>
     <dimen name="layout_margin">6dp</dimen>
     <dimen name="layout_shadow_height">1dp</dimen>
->>>>>>> origin/develop
 
 </resources>

@@ -4,11 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-<<<<<<< HEAD
-	tools:context=".LoginActivity"
-=======
 	tools:context=".LoginActivity_OLD"
->>>>>>> origin/develop
 	android:background="@color/Gray">
 
     <RelativeLayout
