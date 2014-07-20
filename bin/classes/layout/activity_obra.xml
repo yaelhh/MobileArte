@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+   android:background="@color/Gray"
+    android:id="@+id/activity_obra" >
+    <!--  android:background="@drawable/telon"-->
+    
+  	<Gallery
+         android:id="@+id/gallery"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:spacing="8dp"
+         android:layout_alignParentLeft="false"
+         android:layout_alignParentTop="false"
+          />
+     
+     <ExpandableListView
+         android:id="@+id/listViewexp"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_below="@+id/iconFire"
+         android:layout_marginTop="34dp"
+         android:drawSelectorOnTop="true" >
+
+     </ExpandableListView>
+     
+     <ImageButton
+         android:id="@+id/iconFire"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignTop="@+id/iconWifi"
+         android:layout_below="@+id/gallery"
+         android:layout_toRightOf="@+id/iconWifi"
+         android:contentDescription="@string/button_iconFire"
+         android:src="@drawable/ic_icon_fire" />
+
+     <ImageButton
+         android:id="@+id/iconWifi"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/gallery"
+         android:layout_centerHorizontal="true"
+         android:contentDescription="@string/button_iconWifi"
+         android:src="@drawable/ic_icon_wifi" />
+     
+      <ImageButton
+            android:id="@+id/iconCompra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_below="@+id/gallery"
+            android:contentDescription="@string/button_iconCompra"
+            android:src="@drawable/ic_action_cut" />
+
+     <TextView
+         android:id="@+id/titulo"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/iconFire"
+         android:layout_toLeftOf="@+id/iconWifi"
+          />
+     
+     <TextView
+         android:id="@+id/textView2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/titulo"
+         android:text="@string/idFunciones" />
+     
+      <!--<TextView
+        android:id="@+id/descObra"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_below="@+id/listViewexp"
+        
+        android:text="@string/descripcionObra"
+        ></TextView>-->
+        
+        <ScrollView   
+       	 	android:id="@+id/ScrollView01"  
+      		android:layout_height="150dp"   
+     	 	android:layout_width="fill_parent"
+     	 	android:layout_below="@+id/listViewexp"> 
+       		<TextView
+        		android:id="@+id/descObra"
+        		android:layout_width="fill_parent"
+        		android:layout_height="wrap_content"
+        		android:textColor="#000000"
+        		android:textSize="17sp"
+        		android:inputType="textMultiLine"
+        		android:scrollbars="vertical"
+        		android:text="@string/descripcionObra"/>
+      </ScrollView>
+
+       
+
+</RelativeLayout>

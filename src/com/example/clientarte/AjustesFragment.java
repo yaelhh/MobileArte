@@ -12,9 +12,10 @@ import android.view.ViewGroup;
 
 /*  Fragment para seccion perfil */ 
 public class AjustesFragment extends Fragment {
-
+	private int j;
      
     public AjustesFragment(){}
+    
      
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

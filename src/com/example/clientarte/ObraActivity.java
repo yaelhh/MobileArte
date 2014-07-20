@@ -2,15 +2,38 @@ package com.example.clientarte;
 
 import java.io.IOException;
 
+import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
+import com.kinvey.android.callback.KinveyPingCallback;
+import com.kinvey.android.callback.KinveyUserCallback;
+import com.kinvey.java.Query;
+import com.kinvey.java.User;
+import com.kinvey.java.core.KinveyClientCallback;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import backend.DatabaseHelper;
+import backend.ObraBackend;
+import backend.SalaBackend;
 import dominio.Obra;
 
 
 
 
 public class ObraActivity extends ActionBarActivity {
+	
+	public static final String TAG = "ArteBackend";
+	private String appKey="kid_VT8_It3ePE";
+	private String appSecret="1b0fa51481984d2da5910f78a9d26ccc";
+	private String mensaje;
+	private Client kinveyClient;
 	
 //	private int requestCode = 1;
 //	private ListView lvObras;
@@ -29,34 +52,131 @@ public class ObraActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_obra);
 		
-		DatabaseHelper myDbHelper = new DatabaseHelper(this);
-		myDbHelper = new DatabaseHelper(this);
+//		DatabaseHelper myDbHelper = new DatabaseHelper(this);
+//		myDbHelper = new DatabaseHelper(this);
+		conectarBackend();
 		
-		
-		
-		try {
-			myDbHelper.createDataBase();
-			
-		} catch (IOException ioe) {
-
-			throw new Error("Unable to create database");
-
-		}
-		
-		Obra miObra = new Obra ("Redemption", "Jason Statham");
-		Obra miObra2 = new Obra ("La Madrastra", "Victoria Ruffo");
-		Obra miObra3 = new Obra ("The Wolf of Wall Street", "Leonardo DiCaprio");
-		Obra miObra4 = new Obra ("X-Men", "Hugh Jackman");
-		myDbHelper.createObra(miObra);
-		myDbHelper.createObra(miObra2);
-		myDbHelper.createObra(miObra3);
-		myDbHelper.createObra(miObra4);
+//		try {
+//			myDbHelper.createDataBase();
+//			
+//		} catch (IOException ioe) {
+//
+//			throw new Error("Unable to create database");
+//
+//		}
+//		
+//		Obra miObra = new Obra ("Redemption", "Jason Statham");
+//		Obra miObra2 = new Obra ("La Madrastra", "Victoria Ruffo");
+//		Obra miObra3 = new Obra ("The Wolf of Wall Street", "Leonardo DiCaprio");
+//		Obra miObra4 = new Obra ("X-Men", "Hugh Jackman");
+//		myDbHelper.createObra(miObra);
+//		myDbHelper.createObra(miObra2);
+//		myDbHelper.createObra(miObra3);
+//		myDbHelper.createObra(miObra4);
 	
 		
 	}		
-
+	
+	public void conectarBackend (){
+		kinveyClient = new Client.Builder(appKey, appSecret, this).build();
+		kinveyClient.ping(new KinveyPingCallback() {
+		    public void onFailure(Throwable t) {
+		        Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
+		    }
+		    public void onSuccess(Boolean b) {
+		        Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
+		    }
+		});
+		//mKinveyClient.user().login("nlema", "nlema", new KinveyUserCallback() {
+		if (!kinveyClient.user().isUserLoggedIn()) {
+			kinveyClient.user().login(new KinveyUserCallback() {
+				public void onFailure(Throwable error) {
+					mensaje = "Error al realizar el login.";
+					Log.e("Realizando Kinvey Login", mensaje, error);
+				}
+				@Override
+				public void onSuccess(User u) {
+					mensaje = "Bienvenido usuario: " + u.getId() + ".";
+					Log.d("Realizando Kinvey Login", mensaje);
+				}
+			});
+		} else {
+			mensaje = "Utilizando usuario implícito cacheado: " + kinveyClient.user().getId() + ".";
+			Log.d("Realizando Kinvey Login", mensaje);
+		}
 		
+	}
 
+	  //Recuperar una obra
+  	public void recuperarObra (View view) {
+          //appData es la interface para guardar y recuperar entidades 
+  		kinveyClient.appData("Obra", ObraBackend.class).getEntity("01", new KinveyClientCallback<ObraBackend>() {
+              @Override
+              public void onSuccess(ObraBackend result) {
+                  mensaje = "Obra id: " + result.getIdObra() + ", Nombre: " + result.getNombreObras()+ ", Descripcion: " + result.getDescripcipnObras();
+                  Log.d(TAG + "- recuperarObra", mensaje);
+              }
+              @Override
+              public void onFailure(Throwable error) {
+                  Log.e(TAG + "- recuperarObra", "Falla en AppData.getEntity", error);
+              }
+			
+          });
+      }
+  	
+  //Recuperar todas las obras
+    public void recuperarObras(View view) {
+        Query myQuery = kinveyClient.query();
+        kinveyClient.appData("Obra", ObraBackend.class).get(myQuery, new KinveyListCallback<ObraBackend>() {
+            @Override
+            public void onSuccess(ObraBackend[] resultadoconsulta) {
+                //for (Sala sala : result) {
+            	for (int i = 0; i < resultadoconsulta.length; i++) {
+                	mensaje = "Obra id: " + resultadoconsulta[i].getIdObra() + ", Nombre: " + resultadoconsulta[i].getNombreObras() + ", Descripcion: " + resultadoconsulta[i].getDescripcipnObras();
+                	Log.d(TAG + "- recuperarObras", mensaje);
+                }
+            }
+            @Override
+            public void onFailure(Throwable error) {
+                Log.e(TAG, "AppData.get by Query Failure", error);
+            }
+	    });
+    }
+	
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main_backend, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	/**
+	 * A placeholder fragment containing a simple view.
+	 */
+	public static class PlaceholderFragment extends Fragment {
+
+		public PlaceholderFragment() {
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_main_backend, container,
+					false);
+			return rootView;
+		}
+	}
 //		db = new DatabaseHelper(getApplicationContext());
 //		Obra tag1 = new Obra("Shopping");
 //        Obra tag2 = new Obra("Important");

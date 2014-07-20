@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen 
+  xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:key="preferencias_principal" > 
+  
+  <CheckBoxPreference
+   android:key="perfil" 
+   android:title="@string/id_perfil" 
+   android:summary="Se configura perfil de usuario"/>
+  
+  <CheckBoxPreference
+   android:key="noti"
+   android:title="@string/id_Notificaciones" 
+   android:summary="Se escoge Notificaciones"/>
+  
+  <!--<ListPreference 
+   android:key="notificaciones" 
+   android:title="@string/id_Notificaciones" 
+   android:summary="Se escoge Notificaciones" 
+   android:entries="@array/tiposGraficos"
+   android:entryValues="@array/tiposGraficosValores" 
+   android:defaultValue="1"/> -->
+  
+  <EditTextPreference 
+    android:key="contrasena" 
+    android:title="@string/id_contrasena" 
+    android:summary="Cambiar contraseña" 
+    android:defaultValue="Levanta valor anterior"/>
+  
+  <EditTextPreference 
+    android:key="email" 
+    android:title="@string/id_email" 
+    android:summary="Cambiar e-mail" 
+    android:defaultValue="Levanta valor anterior"/>
+  
+  <CheckBoxPreference 
+    android:key="ses"
+    android:title="@string/id_sesion" 
+    android:summary="CerrarSesion" />
+  </PreferenceScreen>
