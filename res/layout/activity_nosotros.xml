@@ -3,7 +3,10 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop
     android:background="@drawable/telon"
     android:orientation="vertical"
     tools:context="com.example.clientarte.NosotrosActivity"
@@ -48,9 +51,15 @@
         class="com.google.android.gms.maps.MapFragment"/>-->
         
        
+<<<<<<< HEAD
  </LinearLayout>   
 
   <!--  <Gallery
+=======
+ </LinearLayout>   
+
+   <!-- <Gallery
+>>>>>>> develop
         android:id="@+id/gallery"
         android:layout_width="fill_parent"
         android:layout_height="138dp"
@@ -87,5 +96,10 @@
             android:clickable="true" />
     </LinearLayout>
 
+<<<<<<< HEAD
 </LinearLayout>-->
 
+=======
+</LinearLayout>
+-->
+>>>>>>> develop
