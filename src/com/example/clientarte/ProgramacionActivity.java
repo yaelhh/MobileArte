@@ -78,16 +78,6 @@ public class ProgramacionActivity extends Activity implements OnQueryTextListene
 			imageObra.setBackgroundResource(imagen);
 			imageObra.setPadding(10, 10, 10, 10);
 			ingresoObra(imageObra); 
-			//        imageObra.setOnClickListener(new OnClickListener() {
-			//    	   
-			//			@Override
-			//			public void onClick(View v) {
-			//				Intent intent = new Intent(ProgramacionActivity.this, ObraActivity.class);
-			//				intent.putExtra("obra",miObra); 
-			//				startActivity(intent);
-			//			}
-			//
-			//		});
 			//Le agrego al layout el imageButton creado
 			layout.addView(imageObra, 470, 140);
 		}   

@@ -2,40 +2,13 @@ package com.example.clientarte;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 import dominio.*;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -43,9 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,8 +24,6 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v4.app.FragmentActivity;
-//import android.support.v4.app.FragmentManager;
 
 public class CompraActivity extends Activity {
 
@@ -77,16 +45,18 @@ public class CompraActivity extends Activity {
 	Integer cantButaca;
 	ArrayList<Butaca> listabutacas;
 	ArrayList<Sector> listSectores= new ArrayList<Sector>();
-	private HashMap<String, Boolean> hashComodidades = new HashMap <String, Boolean> ();
-	
+	private HashMap<String, Boolean> hashComodidades = new HashMap <String, Boolean> ();	
 	private Sala sala;
 	private Butaca miButaca;
 	private Objetos obj;
 	private Obra obra;
-	Sector sectorA;
-	Sector sectorB;
-	Sector sectorC;
-	EditText cantEntradas;
+	private Sector sectorA;
+	private Sector sectorB;
+	private Sector sectorC;
+	private EditText cantEntradas;
+	private Usuario usuario;
+	private int cant;
+	private Boolean yaSeleccionada;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -107,17 +77,10 @@ public class CompraActivity extends Activity {
         TextView txtSala= (TextView)findViewById(R.id.sala);
         txtSala.setText(sala.getNombreSala());
         cantEntradas=(EditText)findViewById(R.id.idCantidadEntradas);
+//        cant=cantEntradas.getText().toString();
+        usuario= new Usuario();
        
-       
-        
-//				if (savedInstanceState == null) {
-//					getSupportFragmentManager().beginTransaction()
-//							.add(R.id.activity_Compra, new PlaceholderFragment()).commit();
-//				}
-
 		//El cantButaca va a ser de acuerdo al sector que estemos creando, aca lo inicializamos asi
-		//Integer[] butacaXSector=new Integer[25];		
-//		Integer cantButacaSectorA=25;
 		bttnSectorA=(Button)findViewById(R.id.sectorA);
 		bttnSectorB=(Button)findViewById(R.id.sectorB);
 		bttnSectorC=(Button)findViewById(R.id.sectorC);
@@ -128,17 +91,22 @@ public class CompraActivity extends Activity {
 		sectorB=sala.getListaSectores().get(1);
 		sectorC= new Sector();
 		sectorC=sala.getListaSectores().get(2);
-		bttnSectorA.setText("Precio "+sectorA.getPrecioSector());
-		bttnSectorB.setText("Precio "+sectorB.getPrecioSector());
-		bttnSectorC.setText("Precio "+sectorC.getPrecioSector());
+		bttnSectorA.setText("Precio "+ sectorA.getPrecioSector());
+		bttnSectorB.setText("Precio "+ sectorB.getPrecioSector());
+		bttnSectorC.setText("Precio "+ sectorC.getPrecioSector());
+//		bttnSectorA.setOnClickListener((OnClickListener) entrarSector());		
 
 //		crearObjetos();
-		addListenerOnButton();
+//		addListenerOnButton();
 
 
 
 	}
-    
+    @Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data){
+		yaSeleccionada= data.getBooleanExtra("yaSeleccionada",false);
+		Log.e("yaSeleciconada",""+yaSeleccionada);
+	}
 //  	private void crearObjetos() {
 //  		//Crear sector
 //  		sector = new Sector();
@@ -163,6 +131,37 @@ public class CompraActivity extends Activity {
 //		miSala.setListaSectores(listSectores);
 ////		Log.e("Mi sala 1",Integer.toString(miSala.getIdSala()));		
 //	}
+	
+	public void entrarSector(View v){
+		cantEntradas=(EditText)findViewById(R.id.idCantidadEntradas);
+		String s=cantEntradas.getText().toString();
+		if(!s.equals("")){
+			cant= Integer.parseInt(cantEntradas.getText().toString());
+			Intent intent = new Intent(CompraActivity.this, SectorAActivity.class);
+			intent.putExtra("cantEntrada", cant);
+			Log.e("v.getId "+ v.getId(), " A "+R.id.sectorA +" B "+R.id.sectorB +" C "+R.id.sectorC );
+		switch (v.getId()){
+		case R.id.sectorA:
+			intent.putExtra("sector",sectorA );
+			break;
+		case R.id.sectorB:
+			intent.putExtra("sector",sectorB );	
+			break;
+		case R.id.sectorC:
+			intent.putExtra("sector",sectorC );
+			break;
+		}	
+		startActivity(intent);
+			
+		}else{
+            Toast.makeText(this,"Debe seleccionar la cantidad de entradas a seleccionar" , Toast.LENGTH_SHORT).show();
+		}
+		
+		
+		}
+		
+	
+	
 
 	public void addListenerOnButton() {
 //		 final boolean bol = false;
@@ -172,7 +171,9 @@ public class CompraActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(CompraActivity.this, SectorAActivity.class);
-				intent.putExtra("cantEntrada", cantEntradas.getText().toString());
+				cantEntradas=(EditText)findViewById(R.id.idCantidadEntradas);
+//				cant= cantEntradas.getText().toString();
+				intent.putExtra("cantEntrada",cant );
 				intent.putExtra("sector",sectorA ); 
 				startActivity(intent);				    
 	        }
@@ -201,7 +202,16 @@ public class CompraActivity extends Activity {
 		btnComprar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				
+				if(usuario.getLogueado()){
+					Intent intent = new Intent(CompraActivity.this, SectorAActivity.class);
+					intent.putExtra("usuario",usuario);			
+					startActivity(intent);
+				}else{
+					Intent intent = new Intent(CompraActivity.this, LoginActivity.class);
+					
+					startActivity(intent);
+
+				}		
 
 				
 	        }

@@ -15,10 +15,10 @@ public class LoginActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 
-		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.activity_login, new PlaceholderFragment()).commit();
-		}
+//		if (savedInstanceState == null) {
+//			getSupportFragmentManager().beginTransaction()
+//					.add(R.id.activity_login, new PlaceholderFragment()).commit();
+//		}
 	}
 
 	@Override

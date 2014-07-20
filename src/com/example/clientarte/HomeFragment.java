@@ -48,6 +48,7 @@ public class HomeFragment extends Fragment {
 				
 			Intent intent = new Intent(getActivity(), ProgramacionActivity.class);
 				startActivity(intent);
+				
 		}
 
 		});

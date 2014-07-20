@@ -103,7 +103,10 @@
             android:layout_height="104dp"
             android:background="@color/IndianRed"
             android:contentDescription="@string/sectorA"
-            android:textSize="10dp" />
+            android:onClick="entrarSector"
+            android:textSize="10dp"
+            
+             />
 
         <LinearLayout
             android:layout_width="140dp"
@@ -116,6 +119,7 @@
                 android:layout_height="104dp"
                 android:background="@color/Brown"
                 android:contentDescription="@string/sectorB"
+                android:onClick="entrarSector"
                 android:textSize="10dp" />
 
             <RelativeLayout
@@ -129,7 +133,8 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentTop="true"
                     android:background="@color/LightPink"
-                    android:contentDescription="@string/escenario" />
+                    android:contentDescription="@string/escenario"
+                     />
 
                 <TextView
                     android:id="@+id/textView1"
@@ -147,7 +152,9 @@
             android:layout_height="104dp"
             android:background="@color/Chocolate"
             android:contentDescription="@string/sectorC"
-            android:textSize="10dp" />
+            android:textSize="10dp"
+            android:onClick="entrarSector"
+             />
     </LinearLayout>
 
     <Button
