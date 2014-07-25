@@ -50,15 +50,6 @@ public class ComunidadActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-<<<<<<< HEAD
-		setContentView(R.layout.activity_comunidad);
-
-//		if (savedInstanceState == null) {
-//			getSupportFragmentManager().beginTransaction()
-//					.add(R.id.container, new PlaceholderFragment()).commit();
-//		}
-=======
-		//setContentView(R.layout.activity_listado);
 		setContentView(R.layout.activity_listado);
 		//layout= (ViewGroup)findViewById(R.id.containerComunidad);
 		//scroll = (ScrollView)findViewById(R.id.ScrollViewComunidad);
@@ -73,7 +64,7 @@ public class ComunidadActivity extends ActionBarActivity {
 		agregarComentarios();
 		//mostrarImagen();
 		
->>>>>>> develop
+
 	}
 
 

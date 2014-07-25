@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:layout_margin="2dp"
     android:orientation="vertical"
-    tools:context=".ProgramacionActivity" >
+    tools:context=".ProgramacionActivity"
+    android:background="@color/Gray"
+     >
 
    <!--   android:background="@drawable/telon"-->
      

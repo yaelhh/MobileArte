@@ -3,11 +3,10 @@ package com.example.clientarte;
 import java.io.IOException;
 import java.util.ArrayList;
 
-<<<<<<< HEAD
+
 import android.app.ActionBar.LayoutParams;
 import android.app.ProgressDialog;
 import android.content.Intent;
-=======
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyPingCallback;
@@ -15,12 +14,9 @@ import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.Query;
 import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
-
->>>>>>> develop
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-<<<<<<< HEAD
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -33,7 +29,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import backend.DatabaseHelper;
 import dominio.Funcion;
-=======
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -43,33 +38,30 @@ import android.view.ViewGroup;
 import backend.DatabaseHelper;
 import backend.ObraBackend;
 import backend.SalaBackend;
->>>>>>> develop
 import dominio.Obra;
 
 
 
 
 public class ObraActivity extends ActionBarActivity {
-<<<<<<< HEAD
+
 
 	//	private int requestCode = 1;
 	//	private ListView lvObras;
 	//	private DB_Obra dataSource;// = new DB_Obra(this);
 	private Obra obra;
 	private Button btnComprar;
-=======
-	
 	public static final String TAG = "ArteBackend";
 	private String appKey="kid_VT8_It3ePE";
 	private String appSecret="1b0fa51481984d2da5910f78a9d26ccc";
 	private String mensaje;
 	private Client kinveyClient;
-	
-//	private int requestCode = 1;
-//	private ListView lvObras;
-//	private DB_Obra dataSource;// = new DB_Obra(this);
-	
->>>>>>> develop
+
+	//	private int requestCode = 1;
+	//	private ListView lvObras;
+	//	private DB_Obra dataSource;// = new DB_Obra(this);
+
+
 	//final String[] from = { ObrasColumns.idObra, ObrasColumns.nombreObra, ObrasColumns.descripcionObra };
 	//final int[] to = new int[] { R.id., R.id.apellidos, R.id.edad };
 
@@ -94,7 +86,8 @@ public class ObraActivity extends ActionBarActivity {
 		crearActivity();
 		addListenerOnButton();
 		
-<<<<<<< HEAD
+		//conectarBackend();
+
 		//		try {
 		//			myDbHelper.createDataBase();
 		//			
@@ -115,7 +108,7 @@ public class ObraActivity extends ActionBarActivity {
 		//	
 		//		
 	}		
-	
+
 	//Funcion donde se crea el activity en funcion a la obra que se obtenga
 	public void crearActivity(){
 		//Cargo galeria de imagenes
@@ -135,28 +128,28 @@ public class ObraActivity extends ActionBarActivity {
 		listFunciones= (Spinner) findViewById(R.id.listfechas);		
 		ArrayList<Funcion>lista= obra.getListaFunciones();	
 		//Creamos el adaptador
-        ArrayAdapter<Funcion> spinner_adapter = new ArrayAdapter<Funcion>(this,android.R.layout.simple_spinner_item, lista);
+		ArrayAdapter<Funcion> spinner_adapter = new ArrayAdapter<Funcion>(this,android.R.layout.simple_spinner_item, lista);
 		listFunciones.setAdapter(spinner_adapter);
-		
+
 	}
-	
+
 	public void addListenerOnButton(){
 		btnComprar.setOnClickListener(new OnClickListener() {
-			 
-						@Override
-						public void onClick(View v) {
-							Intent intent = new Intent(ObraActivity.this, CompraActivity.class);
-							intent.putExtra("obra",obra); 
-							startActivity(intent);
-						}
-			
-					});
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ObraActivity.this, CompraActivity.class);
+				intent.putExtra("obra",obra); 
+				startActivity(intent);
+			}
+
+		});
 	}
-	}
-	
-	
-		
-		//		listFunciones.setAdapter(new itemAdapter(this, R.layout.activity_obra, obra.getListaFunciones()) {
+
+
+
+
+//		listFunciones.setAdapter(new itemAdapter(this, R.layout.activity_obra, obra.getListaFunciones()) {
 //		IA= new itemAdapter(this, R.layout.activity_obra, obra.getListaFunciones()) {
 //
 //			@Override
@@ -169,39 +162,39 @@ public class ObraActivity extends ActionBarActivity {
 //
 //			}
 //		};
-	
 
 
-	//			@Override
-	//			public void onEntrada(Object entrada, View view) {
-	//				// TODO Auto-generated method stub
-	//				
-	//			 }
-	//		}
-	//	});
-	//		
-	//		
-	//		
-	//		
-	//
-	//			@Override
-	//			public void onEntrada(Object entrada, View view) {
-	//		        if (entrada != null) {
-	//		            TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior); 
-	//		            if (texto_superior_entrada != null) 
-	//		            	texto_superior_entrada.setText(((Lista_entrada) entrada).get_textoEncima()); 
-	//
-	//		            TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior); 
-	//		            if (texto_inferior_entrada != null)
-	//		            	texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo()); 
-	//
-	//		            ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen); 
-	//		            if (imagen_entrada != null)
-	//		            	imagen_entrada.setImageResource(((Lista_entrada) entrada).get_idImagen());
-	//		        }
-	//			}
-	//		});
-	//			
+
+//			@Override
+//			public void onEntrada(Object entrada, View view) {
+//				// TODO Auto-generated method stub
+//				
+//			 }
+//		}
+//	});
+//		
+//		
+//		
+//		
+//
+//			@Override
+//			public void onEntrada(Object entrada, View view) {
+//		        if (entrada != null) {
+//		            TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior); 
+//		            if (texto_superior_entrada != null) 
+//		            	texto_superior_entrada.setText(((Lista_entrada) entrada).get_textoEncima()); 
+//
+//		            TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior); 
+//		            if (texto_inferior_entrada != null)
+//		            	texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo()); 
+//
+//		            ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen); 
+//		            if (imagen_entrada != null)
+//		            	imagen_entrada.setImageResource(((Lista_entrada) entrada).get_idImagen());
+//		        }
+//			}
+//		});
+//			
 
 //}
 //listFunciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -213,26 +206,26 @@ public class ObraActivity extends ActionBarActivity {
 //		setProgressBarIndeterminateVisibility(true);
 //
 //		// Show progress dialog
-		//		       Di progressDialog = ProgressDialog.show(ObraActivity.this, "ProgressDialog", "Loading!");
-		//		 
-		//		        // Tells JavaScript to open windows automatically.
-		//		        webView.getSettings().setJavaScriptEnabled(true);
-		//		 
-		//		        // Sets our custom WebViewClient.
-		//		        webView.setWebViewClient(new myWebClient());
-		//		 
-		//		        // Loads the given URL
-		//		        Item item = (Item) listView.getAdapter().getItem(position);
-		//		            webView.loadUrl(item.getUrl());
+//		       Di progressDialog = ProgressDialog.show(ObraActivity.this, "ProgressDialog", "Loading!");
+//		 
+//		        // Tells JavaScript to open windows automatically.
+//		        webView.getSettings().setJavaScriptEnabled(true);
+//		 
+//		        // Sets our custom WebViewClient.
+//		        webView.setWebViewClient(new myWebClient());
+//		 
+//		        // Loads the given URL
+//		        Item item = (Item) listView.getAdapter().getItem(position);
+//		            webView.loadUrl(item.getUrl());
 //	}
 //});
 //}
 
-=======
+
 //		DatabaseHelper myDbHelper = new DatabaseHelper(this);
 //		myDbHelper = new DatabaseHelper(this);
-		conectarBackend();
-		
+
+
 //		try {
 //			myDbHelper.createDataBase();
 //			
@@ -250,111 +243,112 @@ public class ObraActivity extends ActionBarActivity {
 //		myDbHelper.createObra(miObra2);
 //		myDbHelper.createObra(miObra3);
 //		myDbHelper.createObra(miObra4);
-	
+
+
 		
-	}		
-	
-	public void conectarBackend (){
-		kinveyClient = new Client.Builder(appKey, appSecret, this).build();
-		kinveyClient.ping(new KinveyPingCallback() {
-		    public void onFailure(Throwable t) {
-		        Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
-		    }
-		    public void onSuccess(Boolean b) {
-		        Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
-		    }
-		});
-		//mKinveyClient.user().login("nlema", "nlema", new KinveyUserCallback() {
-		if (!kinveyClient.user().isUserLoggedIn()) {
-			kinveyClient.user().login(new KinveyUserCallback() {
-				public void onFailure(Throwable error) {
-					mensaje = "Error al realizar el login.";
-					Log.e("Realizando Kinvey Login", mensaje, error);
-				}
-				@Override
-				public void onSuccess(User u) {
-					mensaje = "Bienvenido usuario: " + u.getId() + ".";
-					Log.d("Realizando Kinvey Login", mensaje);
-				}
-			});
-		} else {
-			mensaje = "Utilizando usuario implícito cacheado: " + kinveyClient.user().getId() + ".";
-			Log.d("Realizando Kinvey Login", mensaje);
+
+public void conectarBackend (){
+	kinveyClient = new Client.Builder(appKey, appSecret, this).build();
+	kinveyClient.ping(new KinveyPingCallback() {
+		public void onFailure(Throwable t) {
+			Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
 		}
-		
+		public void onSuccess(Boolean b) {
+			Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
+		}
+	});
+	//mKinveyClient.user().login("nlema", "nlema", new KinveyUserCallback() {
+	if (!kinveyClient.user().isUserLoggedIn()) {
+		kinveyClient.user().login(new KinveyUserCallback() {
+			public void onFailure(Throwable error) {
+				mensaje = "Error al realizar el login.";
+				Log.e("Realizando Kinvey Login", mensaje, error);
+			}
+			@Override
+			public void onSuccess(User u) {
+				mensaje = "Bienvenido usuario: " + u.getId() + ".";
+				Log.d("Realizando Kinvey Login", mensaje);
+			}
+		});
+	} else {
+		mensaje = "Utilizando usuario implícito cacheado: " + kinveyClient.user().getId() + ".";
+		Log.d("Realizando Kinvey Login", mensaje);
 	}
 
-	  //Recuperar una obra
-  	public void recuperarObra (View view) {
-          //appData es la interface para guardar y recuperar entidades 
-  		kinveyClient.appData("Obra", ObraBackend.class).getEntity("01", new KinveyClientCallback<ObraBackend>() {
-              @Override
-              public void onSuccess(ObraBackend result) {
-                  mensaje = "Obra id: " + result.getIdObra() + ", Nombre: " + result.getNombreObras()+ ", Descripcion: " + result.getDescripcipnObras();
-                  Log.d(TAG + "- recuperarObra", mensaje);
-              }
-              @Override
-              public void onFailure(Throwable error) {
-                  Log.e(TAG + "- recuperarObra", "Falla en AppData.getEntity", error);
-              }
-			
-          });
-      }
-  	
-  //Recuperar todas las obras
-    public void recuperarObras(View view) {
-        Query myQuery = kinveyClient.query();
-        kinveyClient.appData("Obra", ObraBackend.class).get(myQuery, new KinveyListCallback<ObraBackend>() {
-            @Override
-            public void onSuccess(ObraBackend[] resultadoconsulta) {
-                //for (Sala sala : result) {
-            	for (int i = 0; i < resultadoconsulta.length; i++) {
-                	mensaje = "Obra id: " + resultadoconsulta[i].getIdObra() + ", Nombre: " + resultadoconsulta[i].getNombreObras() + ", Descripcion: " + resultadoconsulta[i].getDescripcipnObras();
-                	Log.d(TAG + "- recuperarObras", mensaje);
-                }
-            }
-            @Override
-            public void onFailure(Throwable error) {
-                Log.e(TAG, "AppData.get by Query Failure", error);
-            }
-	    });
-    }
-	
-    @Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main_backend, menu);
+}
+
+//Recuperar una obra
+public void recuperarObra (View view) {
+	//appData es la interface para guardar y recuperar entidades 
+	kinveyClient.appData("Obra", ObraBackend.class).getEntity("01", new KinveyClientCallback<ObraBackend>() {
+		@Override
+		public void onSuccess(ObraBackend result) {
+			mensaje = "Obra id: " + result.getIdObra() + ", Nombre: " + result.getNombreObras()+ ", Descripcion: " + result.getDescripcipnObras();
+			Log.d(TAG + "- recuperarObra", mensaje);
+		}
+		@Override
+		public void onFailure(Throwable error) {
+			Log.e(TAG + "- recuperarObra", "Falla en AppData.getEntity", error);
+		}
+
+	});
+}
+
+//Recuperar todas las obras
+public void recuperarObras(View view) {
+	Query myQuery = kinveyClient.query();
+	kinveyClient.appData("Obra", ObraBackend.class).get(myQuery, new KinveyListCallback<ObraBackend>() {
+		@Override
+		public void onSuccess(ObraBackend[] resultadoconsulta) {
+			//for (Sala sala : result) {
+			for (int i = 0; i < resultadoconsulta.length; i++) {
+				mensaje = "Obra id: " + resultadoconsulta[i].getIdObra() + ", Nombre: " + resultadoconsulta[i].getNombreObras() + ", Descripcion: " + resultadoconsulta[i].getDescripcipnObras();
+				Log.d(TAG + "- recuperarObras", mensaje);
+			}
+		}
+		@Override
+		public void onFailure(Throwable error) {
+			Log.e(TAG, "AppData.get by Query Failure", error);
+		}
+	});
+}
+
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+	getMenuInflater().inflate(R.menu.main_backend, menu);
+	return true;
+}
+
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+	// Handle action bar item clicks here. The action bar will
+	// automatically handle clicks on the Home/Up button, so long
+	// as you specify a parent activity in AndroidManifest.xml.
+	int id = item.getItemId();
+	if (id == R.id.action_settings) {
 		return true;
 	}
-	
+	return super.onOptionsItemSelected(item);
+}
+
+/**
+ * A placeholder fragment containing a simple view.
+ */
+public static class PlaceholderFragment extends Fragment {
+
+	public PlaceholderFragment() {
+	}
+
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.fragment_main_backend, container,
+				false);
+		return rootView;
 	}
+}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
->>>>>>> develop
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main_backend, container,
-					false);
-			return rootView;
-		}
-	}
+}	
 //		db = new DatabaseHelper(getApplicationContext());
 //		Obra tag1 = new Obra("Shopping");
 //        Obra tag2 = new Obra("Important");

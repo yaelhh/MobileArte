@@ -123,10 +123,11 @@ public class SectorAActivity extends Activity {
 		});
 	}
 	public void butacasElegidas(View v){
-		Intent intent = new Intent(SectorAActivity.this,CompraActivity.class);
+		Intent intent = new Intent();
 		intent.putExtra("sectorElegido",SectorA );
 		intent.putExtra("yaSeleccionadas", true);
-		startActivityForResult(intent, 2);
+        setResult( Activity.RESULT_OK, intent );
+        SectorAActivity.this.finish();
 //		finish();
 	}
 }
