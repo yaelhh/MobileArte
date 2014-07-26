@@ -56,6 +56,7 @@ public class ProgramacionFragment extends Fragment {
 			Toast.makeText(getActivity().getBaseContext(),"Selected Date is\n\n"
 				+dayOfMonth+" : "+month+" : "+year , 
 				Toast.LENGTH_LONG).show();
+			
 		}
 	});
 //       mObra= (ImageButton)rootView.findViewById(R.id.GalleryObra);
