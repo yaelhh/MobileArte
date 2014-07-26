@@ -75,11 +75,7 @@ public class ComunidadActivity extends ActionBarActivity {
 				cargarDatos();
 				agregarComentarios();
 		//mostrarImagen();
-<<<<<<< HEAD
-		
 
-=======
->>>>>>> feature/Feature-1
 
 	}
 
