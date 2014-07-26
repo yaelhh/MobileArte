@@ -112,15 +112,12 @@ Boletería boleteria@auditorio.uy
 
 Prensa y comunicación comunicacion@auditorio.uy   </string>
     <string name="title_activity_comunidad">ComunidadActivity</string>
-<<<<<<< HEAD
     <string name="horario">Horarios:</string>
     <string name="idCantEntradas">Entradas:</string>
     <string name="labelSalas">Salas:</string>
     <string name="labelEscenario">ESCENARIO</string>
     <string name="title_activity_sectora">SectoraActivity</string>
-=======
     <string name="title_activity_prueba_obra">PruebaObraActivity</string>
->>>>>>> refs/heads/master
 
     <string name="hello">Hello World, SQLiteActivity!</string>
     
