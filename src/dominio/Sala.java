@@ -26,6 +26,9 @@ public class Sala implements Parcelable{
 		this.listaComodidades = listaComodidades;
 		this.capacidad = capacidad;
 	}
+	public Sala(){
+		
+	}
 	public Sala(Parcel in) {
 //		super();
 //		this.idSala = idSala;

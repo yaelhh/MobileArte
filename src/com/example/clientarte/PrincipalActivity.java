@@ -8,6 +8,7 @@ package com.example.clientarte;
 //import android.app.Activity;
 //import android.content.Context;
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 //import android.support.v4.app.ActionBarDrawerToggle;
@@ -31,6 +32,7 @@ public class PrincipalActivity extends Activity implements OnQueryTextListener{
 
 private ImageButton botonprogramacion, botonComunidad, botonNosotros, botonNovedades;
 private SearchView mSearchView;
+Fragment fragment = null;
 
 
 //	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH) @Override
@@ -55,8 +57,9 @@ private SearchView mSearchView;
  
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(PrincipalActivity.this, ProgramacionFragment.class);
-				startActivity(intent);
+//				Intent intent = new Intent(PrincipalActivity.this, ProgramacionFragment.class);
+//				startActivity(intent);
+				fragment = new ProgramacionFragment();
 			}
 
 		});

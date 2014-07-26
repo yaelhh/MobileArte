@@ -12,7 +12,27 @@ public class Sector implements Parcelable {
 
 	private int idSector;
 	private int totalButacas;
+	private int linea;
 	private ArrayList<Butaca> listaButacas;
+	private int precioSector;
+
+	
+	public int getPrecioSector() {
+		return precioSector;
+	}
+
+	public void setPrecioSector(int precioSector) {
+		this.precioSector = precioSector;
+	}
+
+	public int getLinea() {
+		return linea;
+	}
+
+	public void setLinea(int linea) {
+		this.linea = linea;
+	}
+
 	
 	// Constructor por defecto
 	public Sector() {
@@ -65,6 +85,8 @@ public class Sector implements Parcelable {
 		arg0.writeInt(idSector);
 		arg0.writeInt(totalButacas);
 		arg0.writeTypedList(listaButacas);
+		arg0.writeInt(linea);
+		arg0.writeInt(precioSector);
 	}
 
 	//Clase para recuperar los datos, IMPORTANTE leerlos en el mismo orden en que se escribieron 
@@ -72,6 +94,8 @@ public class Sector implements Parcelable {
 		idSector = in.readInt();
 		totalButacas = in.readInt();
 		in.readTypedList(listaButacas, Butaca.CREATOR);
+		linea= in.readInt();
+		precioSector=in.readInt();
 	}
 
 	//Necesario para usar la clase en Arrays

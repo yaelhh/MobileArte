@@ -33,7 +33,8 @@ public class ImageAdapter extends BaseAdapter {
             imageView = new ImageView(mContext);
             imageView.setLayoutParams(new GridView.LayoutParams(50, 50));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
+            imageView.setPadding(14,8,14,8);
+           
         } else {
             imageView = (ImageView) convertView;
         }
@@ -44,21 +45,7 @@ public class ImageAdapter extends BaseAdapter {
 
     // references to our images
     private Integer[] mThumbIds;
-//    	{
-//            R.drawable.butaca_roja, R.drawable.butaca_roja,
-//            R.drawable.butaca_roja, R.drawable.butaca_roja,
-//            R.drawable.ic_libre, R.drawable.ic_libre,
-//            R.drawable.ic_libre, R.drawable.ic_libre,
-//            R.drawable.ic_libre, R.drawable.ic_libre,
-//            R.drawable.ic_libre, R.drawable.ic_libre,
-//            R.drawable.ic_libre, R.drawable.ic_libre,
-//            R.drawable.ic_libre, R.drawable.ic_libre,
-//            R.drawable.ic_libre, R.drawable.ic_libre,
-//            R.drawable.ic_libre, R.drawable.ic_libre,
-//            R.drawable.ic_libre, R.drawable.ic_libre,
-//            R.drawable.ic_libre, R.drawable.ic_libre,
-//            R.drawable.ic_libre, R.drawable.ic_libre,
-//           };
+
 
 	public Integer[] getmThumbIds() {
 		return mThumbIds;

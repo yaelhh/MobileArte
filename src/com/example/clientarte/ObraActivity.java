@@ -1,7 +1,12 @@
 package com.example.clientarte;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+
+import android.app.ActionBar.LayoutParams;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyPingCallback;
@@ -9,10 +14,21 @@ import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.Query;
 import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Gallery;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import backend.DatabaseHelper;
+import dominio.Funcion;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,34 +44,188 @@ import dominio.Obra;
 
 
 public class ObraActivity extends ActionBarActivity {
-	
+
+
+	//	private int requestCode = 1;
+	//	private ListView lvObras;
+	//	private DB_Obra dataSource;// = new DB_Obra(this);
+	private Obra obra;
+	private Button btnComprar;
 	public static final String TAG = "ArteBackend";
 	private String appKey="kid_VT8_It3ePE";
 	private String appSecret="1b0fa51481984d2da5910f78a9d26ccc";
 	private String mensaje;
 	private Client kinveyClient;
-	
-//	private int requestCode = 1;
-//	private ListView lvObras;
-//	private DB_Obra dataSource;// = new DB_Obra(this);
-	
+
+	//	private int requestCode = 1;
+	//	private ListView lvObras;
+	//	private DB_Obra dataSource;// = new DB_Obra(this);
+
+
 	//final String[] from = { ObrasColumns.idObra, ObrasColumns.nombreObra, ObrasColumns.descripcionObra };
 	//final int[] to = new int[] { R.id., R.id.apellidos, R.id.edad };
 
 	/*DBAdapter dbAdapter;
 	Boolean mBound;*/
 	// Database Helper
-    DatabaseHelper db;
-	
+	DatabaseHelper db;
+	Spinner listFunciones;
+	Spinner listHorarios;
+	itemAdapter IA;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_obra);
+
+		//		DatabaseHelper myDbHelper = new DatabaseHelper(this);
+		//		myDbHelper = new DatabaseHelper(this);
+		obra= new Obra();
+		obra= getIntent().getParcelableExtra("obra");
+		btnComprar= (Button)findViewById(R.id.bttnComprar);
+		crearActivity();
+		addListenerOnButton();
 		
+		//conectarBackend();
+
+		//		try {
+		//			myDbHelper.createDataBase();
+		//			
+		//		} catch (IOException ioe) {
+		//
+		//			throw new Error("Unable to create database");
+		//
+		//		}
+		//		
+		//		Obra miObra = new Obra ("Redemption", "Jason Statham");
+		//		Obra miObra2 = new Obra ("La Madrastra", "Victoria Ruffo");
+		//		Obra miObra3 = new Obra ("The Wolf of Wall Street", "Leonardo DiCaprio");
+		//		Obra miObra4 = new Obra ("X-Men", "Hugh Jackman");
+		//		myDbHelper.createObra(miObra);
+		//		myDbHelper.createObra(miObra2);
+		//		myDbHelper.createObra(miObra3);
+		//		myDbHelper.createObra(miObra4);
+		//	
+		//		
+	}		
+
+	//Funcion donde se crea el activity en funcion a la obra que se obtenga
+	public void crearActivity(){
+		//Cargo galeria de imagenes
+		Gallery galleryObra= (Gallery)findViewById(R.id.galleryObra);
+		galleryObra.setContentDescription(obra.getNombre());
+		GalleryImageAdapter IA= new GalleryImageAdapter(ObraActivity.this);
+		//		int[] imagenList= new int[obra.getListaImagenes().length];
+		IA.setmImageIds(obra.getListaImagenes());
+		galleryObra.setAdapter(IA);
+		//Cargo titulo
+		TextView titulo=(TextView)findViewById(R.id.titulo);
+		titulo.setText(obra.getNombre());
+		//Cargo descripción
+		TextView textDescripcion= (TextView)findViewById(R.id.descObra);
+		textDescripcion.setText(obra.getDescripcion());
+		//Cargo funciones
+		listFunciones= (Spinner) findViewById(R.id.listfechas);		
+		ArrayList<Funcion>lista= obra.getListaFunciones();	
+		//Creamos el adaptador
+		ArrayAdapter<Funcion> spinner_adapter = new ArrayAdapter<Funcion>(this,android.R.layout.simple_spinner_item, lista);
+		listFunciones.setAdapter(spinner_adapter);
+
+	}
+
+	public void addListenerOnButton(){
+		btnComprar.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ObraActivity.this, CompraActivity.class);
+				intent.putExtra("obra",obra); 
+				startActivity(intent);
+			}
+
+		});
+	}
+
+
+
+
+//		listFunciones.setAdapter(new itemAdapter(this, R.layout.activity_obra, obra.getListaFunciones()) {
+//		IA= new itemAdapter(this, R.layout.activity_obra, obra.getListaFunciones()) {
+//
+//			@Override
+//			public void onEntrada(Object entrada, View view) {
+//				if (entrada != null) {
+//					TextView texto_superior_entrada = (TextView) view.findViewById(R.id.labelHorario); 
+//					if (texto_superior_entrada != null) 
+//						texto_superior_entrada.setText("Hola"); 
+//				}
+//
+//			}
+//		};
+
+
+
+//			@Override
+//			public void onEntrada(Object entrada, View view) {
+//				// TODO Auto-generated method stub
+//				
+//			 }
+//		}
+//	});
+//		
+//		
+//		
+//		
+//
+//			@Override
+//			public void onEntrada(Object entrada, View view) {
+//		        if (entrada != null) {
+//		            TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior); 
+//		            if (texto_superior_entrada != null) 
+//		            	texto_superior_entrada.setText(((Lista_entrada) entrada).get_textoEncima()); 
+//
+//		            TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior); 
+//		            if (texto_inferior_entrada != null)
+//		            	texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo()); 
+//
+//		            ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen); 
+//		            if (imagen_entrada != null)
+//		            	imagen_entrada.setImageResource(((Lista_entrada) entrada).get_idImagen());
+//		        }
+//			}
+//		});
+//			
+
+//}
+//listFunciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//	@Override
+//	public void onItemClick(AdapterView adapter, View view, int position, long arg) {
+//
+//		// Sets the visibility of the indeterminate progress bar in the
+//		// title
+//		setProgressBarIndeterminateVisibility(true);
+//
+//		// Show progress dialog
+//		       Di progressDialog = ProgressDialog.show(ObraActivity.this, "ProgressDialog", "Loading!");
+//		 
+//		        // Tells JavaScript to open windows automatically.
+//		        webView.getSettings().setJavaScriptEnabled(true);
+//		 
+//		        // Sets our custom WebViewClient.
+//		        webView.setWebViewClient(new myWebClient());
+//		 
+//		        // Loads the given URL
+//		        Item item = (Item) listView.getAdapter().getItem(position);
+//		            webView.loadUrl(item.getUrl());
+//	}
+//});
+//}
+
+
 //		DatabaseHelper myDbHelper = new DatabaseHelper(this);
 //		myDbHelper = new DatabaseHelper(this);
-		conectarBackend();
-		
+
+
 //		try {
 //			myDbHelper.createDataBase();
 //			
@@ -73,125 +243,127 @@ public class ObraActivity extends ActionBarActivity {
 //		myDbHelper.createObra(miObra2);
 //		myDbHelper.createObra(miObra3);
 //		myDbHelper.createObra(miObra4);
-	
+
+
 		
-	}		
-	
-	public void conectarBackend (){
-		kinveyClient = new Client.Builder(appKey, appSecret, this).build();
-		kinveyClient.ping(new KinveyPingCallback() {
-		    public void onFailure(Throwable t) {
-		        Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
-		    }
-		    public void onSuccess(Boolean b) {
-		        Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
-		    }
-		});
-		//mKinveyClient.user().login("nlema", "nlema", new KinveyUserCallback() {
-		if (!kinveyClient.user().isUserLoggedIn()) {
-			kinveyClient.user().login(new KinveyUserCallback() {
-				public void onFailure(Throwable error) {
-					mensaje = "Error al realizar el login.";
-					Log.e("Realizando Kinvey Login", mensaje, error);
-				}
-				@Override
-				public void onSuccess(User u) {
-					mensaje = "Bienvenido usuario: " + u.getId() + ".";
-					Log.d("Realizando Kinvey Login", mensaje);
-				}
-			});
-		} else {
-			mensaje = "Utilizando usuario implícito cacheado: " + kinveyClient.user().getId() + ".";
-			Log.d("Realizando Kinvey Login", mensaje);
+
+public void conectarBackend (){
+	kinveyClient = new Client.Builder(appKey, appSecret, this).build();
+	kinveyClient.ping(new KinveyPingCallback() {
+		public void onFailure(Throwable t) {
+			Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
 		}
-		
+		public void onSuccess(Boolean b) {
+			Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
+		}
+	});
+	//mKinveyClient.user().login("nlema", "nlema", new KinveyUserCallback() {
+	if (!kinveyClient.user().isUserLoggedIn()) {
+		kinveyClient.user().login(new KinveyUserCallback() {
+			public void onFailure(Throwable error) {
+				mensaje = "Error al realizar el login.";
+				Log.e("Realizando Kinvey Login", mensaje, error);
+			}
+			@Override
+			public void onSuccess(User u) {
+				mensaje = "Bienvenido usuario: " + u.getId() + ".";
+				Log.d("Realizando Kinvey Login", mensaje);
+			}
+		});
+	} else {
+		mensaje = "Utilizando usuario implícito cacheado: " + kinveyClient.user().getId() + ".";
+		Log.d("Realizando Kinvey Login", mensaje);
 	}
 
-	  //Recuperar una obra
-  	public void recuperarObra (View view) {
-          //appData es la interface para guardar y recuperar entidades 
-  		kinveyClient.appData("Obra", ObraBackend.class).getEntity("01", new KinveyClientCallback<ObraBackend>() {
-              @Override
-              public void onSuccess(ObraBackend result) {
-                  mensaje = "Obra id: " + result.getIdObra() + ", Nombre: " + result.getNombreObras()+ ", Descripcion: " + result.getDescripcipnObras();
-                  Log.d(TAG + "- recuperarObra", mensaje);
-              }
-              @Override
-              public void onFailure(Throwable error) {
-                  Log.e(TAG + "- recuperarObra", "Falla en AppData.getEntity", error);
-              }
-			
-          });
-      }
-  	
-  //Recuperar todas las obras
-    public void recuperarObras(View view) {
-        Query myQuery = kinveyClient.query();
-        kinveyClient.appData("Obra", ObraBackend.class).get(myQuery, new KinveyListCallback<ObraBackend>() {
-            @Override
-            public void onSuccess(ObraBackend[] resultadoconsulta) {
-                //for (Sala sala : result) {
-            	for (int i = 0; i < resultadoconsulta.length; i++) {
-                	mensaje = "Obra id: " + resultadoconsulta[i].getIdObra() + ", Nombre: " + resultadoconsulta[i].getNombreObras() + ", Descripcion: " + resultadoconsulta[i].getDescripcipnObras();
-                	Log.d(TAG + "- recuperarObras", mensaje);
-                }
-            }
-            @Override
-            public void onFailure(Throwable error) {
-                Log.e(TAG, "AppData.get by Query Failure", error);
-            }
-	    });
-    }
-	
-    @Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main_backend, menu);
+}
+
+//Recuperar una obra
+public void recuperarObra (View view) {
+	//appData es la interface para guardar y recuperar entidades 
+	kinveyClient.appData("Obra", ObraBackend.class).getEntity("01", new KinveyClientCallback<ObraBackend>() {
+		@Override
+		public void onSuccess(ObraBackend result) {
+			mensaje = "Obra id: " + result.getIdObra() + ", Nombre: " + result.getNombreObras()+ ", Descripcion: " + result.getDescripcipnObras();
+			Log.d(TAG + "- recuperarObra", mensaje);
+		}
+		@Override
+		public void onFailure(Throwable error) {
+			Log.e(TAG + "- recuperarObra", "Falla en AppData.getEntity", error);
+		}
+
+	});
+}
+
+//Recuperar todas las obras
+public void recuperarObras(View view) {
+	Query myQuery = kinveyClient.query();
+	kinveyClient.appData("Obra", ObraBackend.class).get(myQuery, new KinveyListCallback<ObraBackend>() {
+		@Override
+		public void onSuccess(ObraBackend[] resultadoconsulta) {
+			//for (Sala sala : result) {
+			for (int i = 0; i < resultadoconsulta.length; i++) {
+				mensaje = "Obra id: " + resultadoconsulta[i].getIdObra() + ", Nombre: " + resultadoconsulta[i].getNombreObras() + ", Descripcion: " + resultadoconsulta[i].getDescripcipnObras();
+				Log.d(TAG + "- recuperarObras", mensaje);
+			}
+		}
+		@Override
+		public void onFailure(Throwable error) {
+			Log.e(TAG, "AppData.get by Query Failure", error);
+		}
+	});
+}
+
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+	getMenuInflater().inflate(R.menu.main_backend, menu);
+	return true;
+}
+
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+	// Handle action bar item clicks here. The action bar will
+	// automatically handle clicks on the Home/Up button, so long
+	// as you specify a parent activity in AndroidManifest.xml.
+	int id = item.getItemId();
+	if (id == R.id.action_settings) {
 		return true;
 	}
-	
+	return super.onOptionsItemSelected(item);
+}
+
+/**
+ * A placeholder fragment containing a simple view.
+ */
+public static class PlaceholderFragment extends Fragment {
+
+	public PlaceholderFragment() {
+	}
+
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.fragment_main_backend, container,
+				false);
+		return rootView;
 	}
+}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main_backend, container,
-					false);
-			return rootView;
-		}
-	}
+}	
 //		db = new DatabaseHelper(getApplicationContext());
 //		Obra tag1 = new Obra("Shopping");
 //        Obra tag2 = new Obra("Important");
-        //long tag1_id = db.createObra(tag1);
-        //long tag2_id = db.createObra(tag2);
-        
-		
-		
+//long tag1_id = db.createObra(tag1);
+//long tag2_id = db.createObra(tag2);
+
+
+
 //		MySQLiteOpenHelper db = new MySQLiteOpenHelper(this);
 //		System.out.println(db.TABLA_OBRAS.length());
 //		System.out.println(db.TABLA_OBRAS);
-		// Instanciamos NotasDataSource para
-		// poder realizar acciones con la base de datos
-		//dataSource = new DB_Obra(this);
-	/*	dataSource.open();
+// Instanciamos NotasDataSource para
+// poder realizar acciones con la base de datos
+//dataSource = new DB_Obra(this);
+/*	dataSource.open();
 		//dataSource.close();
 
 		// Instanciamos los elementos
@@ -207,14 +379,14 @@ public class ObraActivity extends ActionBarActivity {
 		// Establecemos un Listener para el evento de pulsación
 		//lvObras.setOnItemClickListener(this);
 		lvObras.setOnItemClickListener((OnItemClickListener) this);
-*/
-	}
+ */
 
-	/*public void agregarObra(View v) {
+
+/*public void agregarObra(View v) {
 		Intent i = new Intent(this, NuevaNotaActivity.class);
 		startActivityForResult(i, requestCode);
 	}*/
-	
+
 //	public void onItemClick(final AdapterView<?> adapterView, View view, final int position, long id) {
 //		// TODO Auto-generated method stub
 //		AlertDialog.Builder builder = new AlertDialog.Builder(this)
@@ -247,7 +419,7 @@ public class ObraActivity extends ActionBarActivity {
 //		});
 //		builder.show();
 //	}
-	
+
 //	@Override
 //	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //		// TODO Auto-generated method stub
@@ -265,10 +437,10 @@ public class ObraActivity extends ActionBarActivity {
 //		ArrayAdapter<Obra> adapter = new ArrayAdapter<Obra>(this,
 //				android.R.layout.simple_list_item_1, listaObras);
 //		lvObras.setAdapter(adapter);
-	
-  
-	
-	/*protected void onPause() {
+
+
+
+/*protected void onPause() {
 		// TODO Auto-generated method stub
 		dataSource.close();
 		super.onPause();
@@ -292,11 +464,11 @@ public class ObraActivity extends ActionBarActivity {
 
 //////RESPALDO DE LA CLASE OBRA
 /*public class ObraActivity extends ActionBarActivity {
-	
+
 	private Fachada fachada = Fachada.getInstance();
 	private ArrayList listaObras = fachada.retornarObras();
 	//private ArrayList listaFunciones = fachada.retornarFuncionesObra("prueba");
-	
+
 	SparseArray<GrupoDeItems> grupos = new SparseArray<GrupoDeItems>();
 	ListView listView ;
 	ImageView selectedImage;  
@@ -305,12 +477,12 @@ public class ObraActivity extends ActionBarActivity {
                R.drawable.logo_app,
                R.drawable.novedades,
                R.drawable.nosotros,
-             
+
        };
-    
+
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
-    	
+
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.activity_obra);
         obra= getIntent().getParcelableExtra("obra");
@@ -320,7 +492,7 @@ public class ObraActivity extends ActionBarActivity {
         for(int x=0; x<obra.getListaImagenes().length;x++){
         	Log.e("idObra","-"+obra.getListaImagenes()[x]);
         }
-        
+
         Gallery gallery = (Gallery) findViewById(R.id.gallery);
         selectedImage=(ImageView)findViewById(R.id.iconCompra);
         gallery.setSpacing(1);
@@ -336,17 +508,17 @@ public class ObraActivity extends ActionBarActivity {
                 addListenerOnButton();
             }
         });
-       
+
         crearDatos();
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.listViewexp);
         Adaptador adapter = new Adaptador(this, grupos);
         listView.setAdapter(adapter);
-        
-        
-        
-       
+
+
+
+
     }
-        
+
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
@@ -356,8 +528,8 @@ public class ObraActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    
-   
+
+
     public boolean onOptionsItemSelected(MenuItem item) {
       switch (item.getItemId()) {
       case R.id.action_settings:
@@ -370,14 +542,14 @@ public class ObraActivity extends ActionBarActivity {
             .show();
         refresh();
         break;*/
-     
-      /*default:
+
+/*default:
         break;*/
-     // }
-	//return false;
-    //}
-    
-    /*public void crearDatos() {
+// }
+//return false;
+//}
+
+/*public void crearDatos() {
         GrupoDeItems grupo0 = new GrupoDeItems("Lunes 16/06");
         grupo0.children.add("20:00 - Sala 1");
         grupo0.children.add("22:00 - Sala 1");
@@ -393,11 +565,11 @@ public class ObraActivity extends ActionBarActivity {
         //grupo2.children.add("20:00 - Sala 1");
         grupos.append(2, grupo2);
      }
-    
+
     public void addListenerOnButton() {
-		 
+
     	selectedImage.setOnClickListener(new OnClickListener() {
- 
+
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(ObraActivity.this, CompraActivity.class);
@@ -407,9 +579,9 @@ public class ObraActivity extends ActionBarActivity {
 		});
 }
 <<<<<<< HEAD
-    
+
 }
 =======
-  
+
 }*/
 

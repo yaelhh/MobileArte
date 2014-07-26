@@ -50,7 +50,6 @@ public class ComunidadActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.activity_listado);
 		setContentView(R.layout.activity_listado);
 		//layout= (ViewGroup)findViewById(R.id.containerComunidad);
 		//scroll = (ScrollView)findViewById(R.id.ScrollViewComunidad);
@@ -65,6 +64,7 @@ public class ComunidadActivity extends ActionBarActivity {
 		agregarComentarios();
 		//mostrarImagen();
 		
+
 	}
 
 

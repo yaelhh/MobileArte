@@ -1,101 +1,140 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_obra"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Gray"
     android:orientation="vertical"
-   android:background="@color/Gray"
-    android:id="@+id/activity_obra" >
-    <!--  android:background="@drawable/telon"-->
-    
-  	<Gallery
-         android:id="@+id/gallery"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:spacing="8dp"
-         android:layout_alignParentLeft="false"
-         android:layout_alignParentTop="false"
-          />
-     
-     <ExpandableListView
-         android:id="@+id/listViewexp"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/iconFire"
-         android:layout_marginTop="34dp"
-         android:drawSelectorOnTop="true" >
+     >
 
-     </ExpandableListView>
-     
-     <ImageButton
-         android:id="@+id/iconFire"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignTop="@+id/iconWifi"
-         android:layout_below="@+id/gallery"
-         android:layout_toRightOf="@+id/iconWifi"
-         android:contentDescription="@string/button_iconFire"
-         android:src="@drawable/ic_icon_fire" />
+    <!-- android:background="@drawable/telon" -->
 
-     <ImageButton
-         android:id="@+id/iconWifi"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_below="@+id/gallery"
-         android:layout_centerHorizontal="true"
-         android:contentDescription="@string/button_iconWifi"
-         android:src="@drawable/ic_icon_wifi" />
-     
-      <ImageButton
+    <Gallery
+        android:id="@+id/galleryObra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/linear_Comodidades"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Gray"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/iconFire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/button_iconFire"
+            android:src="@drawable/ic_icon_fire" />
+
+        <ImageButton
+            android:id="@+id/iconWifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/button_iconWifi"
+            android:src="@drawable/ic_icon_wifi" />
+
+        <ImageButton
             android:id="@+id/iconCompra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_below="@+id/gallery"
             android:contentDescription="@string/button_iconCompra"
             android:src="@drawable/ic_action_cut" />
+    </LinearLayout>
 
-     <TextView
-         android:id="@+id/titulo"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_below="@+id/iconFire"
-         android:layout_toLeftOf="@+id/iconWifi"
-          />
-     
-     <TextView
-         android:id="@+id/textView2"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_below="@+id/titulo"
-         android:text="@string/idFunciones" />
-     
-      <!--<TextView
-        android:id="@+id/descObra"
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/labelFunciones"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:ellipsize="end"
-        android:layout_below="@+id/listViewexp"
-        
-        android:text="@string/descripcionObra"
-        ></TextView>-->
-        
-        <ScrollView   
-       	 	android:id="@+id/ScrollView01"  
-      		android:layout_height="150dp"   
-     	 	android:layout_width="fill_parent"
-     	 	android:layout_below="@+id/listViewexp"> 
-       		<TextView
-        		android:id="@+id/descObra"
-        		android:layout_width="fill_parent"
-        		android:layout_height="wrap_content"
-        		android:textColor="#000000"
-        		android:textSize="17sp"
-        		android:inputType="textMultiLine"
-        		android:scrollbars="vertical"
-        		android:text="@string/descripcionObra"/>
-      </ScrollView>
+        android:text="@string/idFunciones" />
 
-       
+    <Spinner
+        android:id="@+id/listfechas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawSelectorOnTop="true" />
 
-</RelativeLayout>
+    <!--
+    <LinearLayout 
+        android:orientation="vertical" 
+    	android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/labelHorario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/idFunciones" />
+    
+    <Spinner
+        android:id="@+id/listHoras"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_marginTop="34dp"
+        android:layout_weight="0.15"
+        android:drawSelectorOnTop="true" />
+   
+    </LinearLayout>-->
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ScrollView
+            android:id="@+id/ScrollView01"
+            android:layout_width="184dp"
+            android:layout_height="150dp"
+            android:layout_weight="0.84" >
+
+            <TextView
+                android:id="@+id/descObra"
+                android:layout_width="fill_parent"
+                android:layout_height="59dp"
+                android:scrollbars="vertical"
+                android:textColor="#000000"
+                android:textSize="17sp" />
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_action_video" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@android:drawable/sym_action_chat" />
+
+            <ImageButton
+                android:id="@+id/imageButton1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@android:drawable/ic_menu_share" />
+
+            <ImageButton
+                android:id="@+id/favorito"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@android:drawable/btn_star_big_off" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bttnComprar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnComprar" />
+
+</LinearLayout>

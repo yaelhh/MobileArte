@@ -10,13 +10,18 @@ import android.widget.ImageView;
 public class GalleryImageAdapter extends BaseAdapter {
 	 private Context mContext;
 
-	    private Integer[] mImageIds = {
-	    		   R.drawable.logo_app,
-	               R.drawable.novedades,
-	               R.drawable.nosotros,
-	    };
+	    private int[] mImageIds;
+	    
 
-	    public GalleryImageAdapter(Context context) 
+	    public int[] getmImageIds() {
+			return mImageIds;
+		}
+
+		public void setmImageIds(int[] mImageIds) {
+			this.mImageIds = mImageIds;
+		}
+
+		public GalleryImageAdapter(Context context) 
 	    {
 	        mContext = context;
 	    }
@@ -41,7 +46,7 @@ public class GalleryImageAdapter extends BaseAdapter {
 	        ImageView i = new ImageView(mContext);
 
 	        i.setImageResource(mImageIds[index]);
-	        i.setLayoutParams(new Gallery.LayoutParams(200, 200));
+	        i.setLayoutParams(new Gallery.LayoutParams(500, 150));
 	    
 	        i.setScaleType(ImageView.ScaleType.FIT_XY);
 

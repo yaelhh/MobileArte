@@ -38,7 +38,7 @@
     <string name="sectorC">Sector C</string>
     <string name="escenario">Escenario</string>
     <string name="tituloObra">LA MADRASTRA</string>
-    
+
     <!-- Valores de la opcion registro de usuarios -->
     <string name="enter_email">Email</string>
     <string name="enter_password">Password</string>
@@ -53,8 +53,6 @@
     <string name="login_google">Login with Google+</string>
     <string name="login_linkedin">Login with Linkedin</string>
     <string name="facebook_app_id">your_facebook_signin</string>
-    
-    
 
     <!-- Lista de iconos de navegacion -->
     <array name="navigation_iconos">
@@ -112,6 +110,7 @@
     <string name="idCantidadEn">Entradas</string>
     <string name="idPrecio">Total:</string>
     <string name="idComprar">Comprar</string>
+    <string name="btnComprar">Comprar</string>
     <string name="pulsado">Pulsado</string>
     <string name="title_activity_pruebaasientos">MainActivity</string>
     <string name="title_activity_ejemplo1">MainActivity</string>
@@ -135,8 +134,7 @@ Prensa y comunicación comunicacion@auditorio.uy   </string>
     <string name="labelEscenario">ESCENARIO</string>
     <string name="title_activity_sectora">SectoraActivity</string>
     <string name="title_activity_prueba_obra">PruebaObraActivity</string>
-
-    <string name="hello">Hello World, SQLiteActivity!</string>
-    
     <string name="addCliente">Nuevo Cliente</string>
+    <string name="title_activity_compra_realizada">CompraRealizadaActivity</string>
+
 </resources>

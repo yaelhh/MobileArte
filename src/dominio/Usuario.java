@@ -3,23 +3,27 @@ package dominio;
 import java.util.ArrayList;
 import java.util.Date;
 
-import android.R.integer;
 
-public class Usuario {
+
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Usuario implements Parcelable{
 //	Variables
-	private integer idUsuario;
+	private int idUsuario;
 	private String miNombre;
 	private String miApellido;
 	private String miNombreUsuario;
-	private Date fechaNacimiento;
-	private integer mascaras;
+	private String fechaNacimiento;
+	private int mascaras;
 	private ArrayList<Obra> misObrasVistas;
 	private ArrayList<Obra> misProximasObras;
 	private boolean estaLogueado;
 	
 //Constructor
-	public Usuario(integer idUsuario, String miNombre, String miApellido,
-			String miNombreUsuario, Date fechaNacimiento, integer mascaras,
+	public Usuario(int idUsuario, String miNombre, String miApellido,
+			String miNombreUsuario, String fechaNacimiento, int mascaras,
 			ArrayList<Obra> misObrasVistas, ArrayList<Obra> misProximasObras, boolean estaLogueado) {
 		super();
 		this.idUsuario = idUsuario;
@@ -32,11 +36,18 @@ public class Usuario {
 		this.misProximasObras = misProximasObras;
 		this.estaLogueado = estaLogueado;
 	}
-//get and set
-	public integer getIdUsuario() {
+public Usuario() {
+		
+	}
+public Usuario(Parcel in){
+	readFromParcel(in);
+}
+
+	//get and set
+	public int getIdUsuario() {
 		return idUsuario;
 	}
-	public void setIdUsuario(integer idUsuario) {
+	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 	public String getMiNombre() {
@@ -57,16 +68,16 @@ public class Usuario {
 	public void setMiNombreUsuario(String miNombreUsuario) {
 		this.miNombreUsuario = miNombreUsuario;
 	}
-	public Date getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	public integer getMascaras() {
+	public int getMascaras() {
 		return mascaras;
 	}
-	public void setMascaras(integer mascaras) {
+	public void setMascaras(int mascaras) {
 		this.mascaras = mascaras;
 	}
 	public ArrayList<Obra> getMisObrasVistas() {
@@ -81,13 +92,55 @@ public class Usuario {
 	public void setMisProximasObras(ArrayList<Obra> misProximasObras) {
 		this.misProximasObras = misProximasObras;
 	}
-	public boolean isEstaLogueado() {
+	public boolean getLogueado() {
 		return estaLogueado;
 	}
 	public void setEstaLogueado(boolean estaLogueado) {
 		this.estaLogueado = estaLogueado;
 	}
 	
+	
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(this.idUsuario);
+		dest.writeString(this.miNombre);
+		dest.writeString(this.miApellido);
+		dest.writeString(miNombreUsuario);
+		dest.writeString(this.fechaNacimiento);
+		dest.writeInt(this.mascaras);
+		dest.writeTypedList(this.misObrasVistas);
+		dest.writeTypedList(this.misProximasObras);
+		dest.writeBooleanArray(new boolean[] {this.estaLogueado});
+	}	
+	private void readFromParcel(Parcel in) {
+		this.idUsuario = in.readInt();
+		this.miNombre = in.readString();
+		this.miApellido = in.readString();
+		this.miNombreUsuario = in.readString();
+		this.fechaNacimiento= in.readString();
+		this.mascaras = in.readInt();
+		in.readTypedList(misObrasVistas,Obra.CREATOR);
+		in.readTypedList(misProximasObras,Obra.CREATOR);
+		boolean[] temp = new boolean[1];
+		in.readBooleanArray(temp);
+		estaLogueado = temp[0];
+			
+   }
+	public static final Parcelable.Creator<Usuario> CREATOR
+    = new Parcelable.Creator<Usuario>() {
+        public Usuario createFromParcel(Parcel in) {
+            return new Usuario(in);
+        }
+ 
+        public Usuario[] newArray(int size) {
+            return new Usuario[size];
+        }
+    };
 	
 
 }
