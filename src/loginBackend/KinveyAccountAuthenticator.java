@@ -12,7 +12,6 @@
  * 
  */
 package loginBackend;
-
 import com.example.clientarte.LoginActivity;
 import com.kinvey.android.Client;
 import com.kinvey.java.User;
