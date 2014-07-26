@@ -75,12 +75,9 @@ public class ComunidadActivity extends ActionBarActivity {
 				cargarDatos();
 				agregarComentarios();
 		//mostrarImagen();
-<<<<<<< HEAD
 		
 
-=======
 
->>>>>>> 538c0ba... Commit con los siguientes puntos implementados:
 	}
 
 
