@@ -4,33 +4,19 @@
     android:id="@+id/activity_login"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/fondo"
     android:orientation="vertical"
-	tools:context="com.example.clientarte.LoginActivity"
-	android:background="@drawable/fondo">
-
+    tools:context="com.example.clientarte.LoginActivity" >
+    
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1.33"
         android:background="@drawable/ic_fondo_mdpi"
         android:padding="5dp" >
-
-        <EditText
-            android:id="@+id/txtPasswordLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/txtEmail"
-            android:layout_below="@+id/txtEmail"
-            android:layout_marginTop="24dp"
-            android:ems="10"
-            android:hint="@string/txtPassword"
-            android:textColorHint="@color/Black" >
-
-            <requestFocus />
-        </EditText>
-
+        
         <TextView
-            android:id="@+id/textArte"
+            android:id="@+id/textArteTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -43,26 +29,51 @@
             android:textSize="40sp"
             android:textStyle="bold|bold"
             android:typeface="serif" />
-
+        
         <EditText
-            android:id="@+id/txtEmailLogin"
+            android:id="@+id/txtMailUsuarioLogin"
+            style="@android:style/Widget.EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textArte"
+            android:layout_below="@+id/textArteTitulo"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="14dp"
             android:ems="10"
             android:hint="@string/txtEmail"
             android:textColorHint="@color/Black" />
-        <!--  android:inputType="@+id/txtEmail" -->
-
-        <Button
-            android:id="@+id/buttonRegistrarse"
-            android:layout_width="200dp"
+        
+        
+        <EditText
+            android:id="@+id/txtPassLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/txtMailUsuarioLogin"
+            android:layout_below="@+id/txtMailUsuarioLogin"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:hint="@string/txtPassword"
+            android:textColorHint="@color/Black" />
+        
+        <TextView
+            android:id="@+id/buttonRecuperarPass"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="51dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/button_recuperarPass"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:typeface="normal" />
+        
+        <Button
+            android:id="@+id/buttonRegistrarseLogin"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/buttonRecuperarPass"
+            android:layout_alignLeft="@+id/buttonLogin"
+            android:layout_marginBottom="55dp"
+            android:onClick="registroUsuario"
             android:text="@string/button_registrarse" />
 
         <Button
@@ -70,39 +81,32 @@
             style="@color/Blue"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/txtPassword"
-            android:layout_below="@+id/txtPassword"
-            android:layout_marginTop="24dp"
+            android:layout_above="@+id/buttonRegistrarseLogin"
+            android:layout_alignRight="@+id/txtPassLogin"
+            android:layout_marginBottom="16dp"
+            android:onClick="login"
             android:text="@string/button_login" />
-        <!--  android:onClick="submit"-->
 
-        <TextView
-            android:id="@+id/buttonRecuperarPass"
+        <Button
+            android:id="@+id/button1"
+            style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/textArte"
-            android:layout_below="@+id/buttonLogin"
-            android:layout_marginTop="14dp"
-            android:text="@string/button_recuperarPass"
-            android:textSize="10sp"
-            android:textStyle="normal"
-            android:typeface="normal" />
-
-    </RelativeLayout>
-
-    <!-- <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="162dp"
-        android:orientation="horizontal" >
-
-        	<RelativeLayout
-            	android:layout_width="162dp"
-            	android:layout_height="wrap_content" 
-            	android:paddingRight="5dp"
-            	android:paddingLeft="5dp">
-			</RelativeLayout>
-		</LinearLayout> -->
-
+            android:layout_above="@+id/buttonRecuperarPass"
+            android:layout_toLeftOf="@+id/buttonRecuperarPass"
+            android:onClick="cerrar"/>
+            
+        <Button
+            android:id="@+id/button2"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button1"
+            android:layout_toLeftOf="@+id/button2"
+            android:onClick="recuperarSala"/>
+            
+        
+     </RelativeLayout>
     
 
 </LinearLayout>

@@ -7,6 +7,7 @@
     android:layout_margin="2dp"
     android:background="@color/Gray"
     android:orientation="vertical"
+<<<<<<< HEAD
     tools:context=".ProgramacionActivity" >
 
     <TextView
@@ -24,6 +25,28 @@
         <!--
 <TextView
 >>>>>>> develop
+=======
+    tools:context="com.example.clientarte.ComunidadActivity"
+    tools:ignore="MergeRootFrame"
+    android:background="@drawable/telon" >
+    
+    <ImageButton
+         android:id="@+id/btnEscribirComentario"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="10dp"
+         android:contentDescription="@string/button_escribirComentario"/>
+    
+    <ScrollView
+           android:id="@+id/ScrollViewComunidad"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_weight="0.84" >
+    </ScrollView>       
+        
+        
+   <!--   <TextView
+>>>>>>> 538c0ba... Commit con los siguientes puntos implementados:
         android:id="@+id/TextView05"
         android:layout_width="match_parent"
         android:layout_height="83dp"

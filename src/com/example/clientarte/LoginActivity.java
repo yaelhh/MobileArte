@@ -1,250 +1,187 @@
 package com.example.clientarte;
 
-import loginBackend.UserLogin;
-import com.example.clientarte.*;
-import android.accounts.Account;
-import android.accounts.AccountAuthenticatorActivity;
-import android.accounts.AccountManager;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import backend.SalaBackend;
 
 import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyPingCallback;
 import com.kinvey.android.callback.KinveyUserCallback;
+import com.kinvey.android.callback.KinveyUserDeleteCallback;
 import com.kinvey.java.User;
+import com.kinvey.java.core.KinveyClientCallback;
 
-import android.os.Bundle;
-import android.app.Dialog;
+import android.accounts.AccountAuthenticatorActivity;
+import android.accounts.AccountManager;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.text.TextUtils;
-import android.view.Gravity;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
-/**
- * 
- * This class handles Kinvey login authentication as well as storage of the User in Android's
- * AccountManager.  
- * 
- * The activity extends the Android AccountAuthenticatorActivity and prompts the user for a login (Email Address)
- * and password.  User also has the option to instead authenticate via Facebook or Twitter.  
- */
 public class LoginActivity extends AccountAuthenticatorActivity {
-
-	public static final String TAG = LoginActivity.class.getSimpleName();
 	
-	/**
-	 * Configuration parameters for Android's AbstractAuthenticator
-	 */
-	public static final String PARAM_CONFIRM_CREDENTIALS = "confirmCredentials";
-	public static final String PARAM_USERNAME = "username";
-	public static final String PARAM_AUTHTOKENTYPE="authtokenType";
-	//public static final String TAG = "ArteBackend";
+	//public static final String TAG = LoginActivity.class.getSimpleName();
+	public static final String TAG = "ArteBackend";
+	private EditText emailUsuario;
+	private EditText passUsuario;
 	private String appKey="kid_VT8_It3ePE";
 	private String appSecret="1b0fa51481984d2da5910f78a9d26ccc";
 	private String mensaje;
-	private Client kinveyClient;
 	
-	/**
-	 * Configuration parameters for Android's AbstractAuthenticator
-	 */
-	public static final String PARAM_LOGIN_TYPE_KINVEY = "kinvey";
 	
-	/**
-	 * Android AccountManager object
-	 */
-	private AccountManager mAccountManager;
+	private Client mKinveyClient;
 	
-	private ProgressDialog mProgressDialog = null;
-	
-	public static final int MIN_USERNAME_LENGTH = 8;
-	public static final int MIN_PASSWORD_LENGTH = 4;
-	private Boolean mConfirmCredentials = false;
-	
-	/**
-	 * KinveyClient
-	 */
-	//protected Client kinveyClient;
-	
-	private Button mButtonLogin;
-	private EditText mEditUserEmail;
-	private EditText mEditPassword;
-	private TextView mErrorMessage;
-	private String mUserEmail;
-	private String mPassword;
-	
-	protected Boolean mRequestNewAccount = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		mAccountManager = AccountManager.get(this);
-		final Intent intent = getIntent();
-		mUserEmail = intent.getStringExtra(PARAM_USERNAME);
-		
-		mRequestNewAccount = (mUserEmail == null);
-		mConfirmCredentials = intent.getBooleanExtra(PARAM_CONFIRM_CREDENTIALS,false);
-		//se parte
-		kinveyClient = ((UserLogin) getApplication()).getKinveyService();
-		
-		mEditPassword = (EditText)findViewById(R.id.txtPasswordLogin);
-		mEditUserEmail = (EditText)findViewById(R.id.txtEmailLogin);
-		
-		mButtonLogin = (Button) findViewById(R.id.buttonLogin);
-		
-		mUserEmail = findViewById(R.id.txtEmailLogin).toString();
-		mPassword = findViewById(R.id.txtPasswordLogin).toString();
-	}
-	
-	@Override
-	protected Dialog onCreateDialog(int id, Bundle args) {
-		final ProgressDialog dialog = new ProgressDialog(this);
-		dialog.setMessage("Authenticating...");
-		dialog.setIndeterminate(true);
-		
-		mProgressDialog = dialog;
-		return dialog;		
-	}
-	
-	/**
-	 * Method to handle Login button clicks - gets Username and Password and calls User Login method.  
-	 */
-	public void login(View view) {
-		if (mRequestNewAccount) {
-			mUserEmail = mEditUserEmail.getText().toString();
-		}
-		mPassword = mEditPassword.getText().toString();
-		if (TextUtils.isEmpty(mUserEmail) || TextUtils.isEmpty(mPassword)) {
-			mErrorMessage.setText("Please enter a valid username and password.");
-		} else {
-			showProgress();
-			userLogin();
-		}
-	}
-	
-//	public void launchTwitterLogin(View view) {
-//		LoginActivity.this.startActivity(new Intent(LoginActivity.this, TwitterLoginActivity.class));
-//        LoginActivity.this.finish();
-//	}
-//	
-//	public void launchFacebookLogin(View view) {
-//		LoginActivity.this.startActivity(new Intent(LoginActivity.this, FacebookLoginActivity.class));
-//        LoginActivity.this.finish();
-//	}
 
-//    public void launchGoogleLogin(View v){
-//        LoginActivity.this.startActivity(new Intent(LoginActivity.this, GoogleLoginActivity.class));
-//        LoginActivity.this.finish();
-//    }
-//
-//    public void launchLinkedInLogin(View v){
-//        LoginActivity.this.startActivity(new Intent(LoginActivity.this, LinkedinLoginActivity.class));
-//        LoginActivity.this.finish();
-//    }
+		setContentView(R.layout.activity_login);
 
-	public void registerAccount(View v) {
-		Intent intent = new Intent(this, CreateAccountActivity.class);
-        startActivity(intent);
-	}
-	
-	/**
-	 * Called as a result of a Kinvey Authentication if credentials needed to be confirmed 
-	 * (needed for Android Account Manager in case credentials change/expire.)
-	 */
-	private void finishConfirmCredentials(boolean result) {
-		final Account account = new Account(mUserEmail, UserLogin.ACCOUNT_TYPE);
-		mAccountManager.setPassword(account, mPassword);
-		mAccountManager.setUserData(account, UserLogin.LOGIN_TYPE_KEY, PARAM_LOGIN_TYPE_KINVEY);
-		final Intent intent = new Intent();
-		intent.putExtra(AccountManager.KEY_BOOLEAN_RESULT, result);
-		setResult(RESULT_OK, intent);
-		finish();
-	}
-	
-	/**
-	 * Finishes the login process by creating/updating the account with the Android
-	 * AccountManager.  
-	 */
-	private void finishLogin(String authToken) {
-		final Account account = new Account(mUserEmail, UserLogin.ACCOUNT_TYPE);
-		if (mRequestNewAccount) {
-			Bundle userData = new Bundle();
-			userData.putString(UserLogin.LOGIN_TYPE_KEY, PARAM_LOGIN_TYPE_KINVEY);
-			mAccountManager.addAccountExplicitly(account, mPassword, userData);
-		} else {
-			mAccountManager.setPassword(account, mPassword);
-			mAccountManager.setUserData(account, UserLogin.LOGIN_TYPE_KEY, PARAM_LOGIN_TYPE_KINVEY);
-		}
-		final Intent intent = new Intent();
-		intent.putExtra(AccountManager.KEY_ACCOUNT_NAME, mUserEmail);
-		intent.putExtra(AccountManager.KEY_ACCOUNT_TYPE, UserLogin.ACCOUNT_TYPE);
-		setAccountAuthenticatorResult(intent.getExtras());
-		setResult(RESULT_OK,intent);
-		finish();
-	}
-	
-	/**
-	 * Called following a successful KinveyLogin to process the result and persist to AccountManager
-	 */
-	public void onAuthenticationResult(String authToken) {
-		boolean success = ((authToken != null) && (authToken.length()>0));
-		hideProgress();
-		
-		if(success) {
-			if (!mConfirmCredentials) {
-				finishLogin(authToken);
-			} else {
-				finishConfirmCredentials(success);
+		//Conexión de la APP a Kinvey
+		mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
+		mKinveyClient.ping(new KinveyPingCallback() {
+			public void onFailure(Throwable t) {
+				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
 			}
-		} else {
-			if (mRequestNewAccount) {
-				mErrorMessage.setText("Por favor ingrese nombre de usuario y contrasena correctos");
-			} else {
-				mErrorMessage.setText("Por favor ingrese una contrasena correcta");
+			public void onSuccess(Boolean b) {
+				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
 			}
-			
-		}
-	}
-	
-	
-	// TODO:  Fix ShowDialog
-	@SuppressWarnings("deprecation")
-	public void showProgress() {
-		showDialog(0);
-	}
-	
-	private void hideProgress() {
-		if (mProgressDialog != null) {
-			mProgressDialog.dismiss();
-			mProgressDialog = null;
-		}
-	}
-	
-	/**
-	 * 
-	 * Method to log the twitter Kinvey user, passing a KinveyCallback.  
-	 */
-	public void userLogin() {
-		kinveyClient.user().login(mEditUserEmail.getText().toString(), mEditPassword.getText().toString(), new KinveyUserCallback() {
-            public void onFailure(Throwable t) {
-                CharSequence text = "Wrong username or password";
-                Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.show();
-                onAuthenticationResult(null);
-            }
+		});
+		emailUsuario = (EditText)findViewById(R.id.txtMailUsuarioLogin);
+		passUsuario = (EditText)findViewById(R.id.txtPassLogin);
 
-            public void onSuccess(User u) {
-                CharSequence text = "Logged in.";
-                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-                onAuthenticationResult(u.getId());
-                LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                LoginActivity.this.finish();
-            }
 
-        });
 	}
+	
+	//@Override
+		public void cerrar (View view) {
+			super.onDestroy();
+			mKinveyClient.user().logout().execute();
+			mensaje = "Hasta luego.";
+	       Log.d("Realizando Kinvey Logout", mensaje);
+		}
+		
+		//Registro usuario
+		public void registroUsuario (View view) {
+//			emailUsuario = (EditText) findViewById(R.id.etNombreUsuario);
+//			password = (EditText) findViewById(R.id.etPassUsuario);
+			final String usuario = emailUsuario.getText().toString();
+			String password = passUsuario.getText().toString();
+			//Crear nuevo usuario
+			//if (emailValidator(usuario)){
+			mKinveyClient.user().create(usuario, password, new KinveyUserCallback() {
+				public void onFailure(Throwable error) {
+					//onFailura se ejecuta si el usuario existe
+					//Se avisa al usuario por pantalla del error
+					mensaje = "El usuario: " + usuario + ", ya se encuentra registrado";
+					Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
+					//Se graba registro en el log de errores
+					Log.e("Realizando registro de usuario en Kinvey", mensaje, error);
+				}
+				@Override
+				public void onSuccess(User u) {
+					mensaje = "Se ha realizado el alta del usuario: " + u.getUsername() + ".";
+					Log.d("Realizando registro de usuario en Kinvey", mensaje);
+				}
+			});
+//			}else{
+//				mensaje = "El email ingresado no es correcto, revise formato";
+//				Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
+//			}
+		}
+	
+		//Login
+		public void login (View view) {
+			//			usuario = (EditText) findViewById(R.id.etNombreUsuario);
+			//			password = (EditText) findViewById(R.id.etPassUsuario);
+			//Verificar si el usuario está "logeado"
+			final String usuario = emailUsuario.getText().toString();
+			String password = passUsuario.getText().toString();
+			if (!mKinveyClient.user().isUserLoggedIn()) {
+				//Si no está "logeado" se realiza el login
+				//if (emailValidator(usuario)){
+				mKinveyClient.user().login(usuario, password, new KinveyUserCallback() {
+					public void onFailure(Throwable error) {
+						mensaje = "Error al realizar el login.";
+						Log.e("Realizando Kinvey Login", mensaje, error);
+					}
+					@Override
+					public void onSuccess(User u) {
+						//Se muestra mensaje de bienvenida por pantalla
+						mensaje = "Bienvenido usuario: " + u.getUsername() + ".";
+						Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
+						//Se graba registro en el log
+						Log.d("Realizando Kinvey Login", mensaje);
+						Intent intent = new Intent();
+						intent.putExtra("username",mKinveyClient.user().getUsername());
+						//intent.putExtra("logueado", true);
+						       setResult( Activity.RESULT_OK, intent );
+						       LoginActivity.this.finish();
+						//salirLoguin();
+					}
+				});
+			} else {
+				mensaje = "Utilizando usuario cacheado: " + mKinveyClient.user().getUsername() + ".";
+				Log.d("Realizando Kinvey Login", mensaje);
+			}
+			//			}else{
+			//				mensaje = "El email ingresado no es correcto, revise formato";
+			//				Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
+			//			}
+		}
+		
+		public void salirLoguin(){
+
+			finish();
+
+		}
+		
+		//Recuperar una sala
+		public void recuperarSala (View view) {
+	        //appData es la interface para guardar y recuperar entidades 
+			//Se buscan los datos de la sala 1
+	        mKinveyClient.appData("Sala", SalaBackend.class).getEntity("1", new KinveyClientCallback<SalaBackend>() {
+	            @Override
+	            public void onSuccess(SalaBackend result) {
+	            	//Se muestra por pantalla los datos de la sala
+	                mensaje = "Sala id: " + result.getIdSala() + ", Nombre: " + result.getNombreSala();
+					Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
+	                //Se graba registro en el log
+					Log.d(TAG + "- recuperarSala", mensaje);
+	            }
+	            @Override
+	            public void onFailure(Throwable error) {
+	            	//Se avisa por pantalla que el usuario tiene que estar logeado
+	            	mensaje = "Para acceder a los datos de la sala, debe estar logeado en la aplicación";
+	            	Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
+	                //Se graba registro en el log
+	            	Log.e(TAG + "- recuperarSala", "Falla en AppData.getEntity", error);
+	            }
+				
+	        });
+	    }
+		
+		
+		public boolean emailValidator(String email) {
+		    Pattern pattern;
+		    Matcher matcher;
+		    final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+		    pattern = Pattern.compile(EMAIL_PATTERN);
+		    matcher = pattern.matcher(email);
+		    return matcher.matches();
+		}
+		
+		
+	
+	
+	
+	
+	
+
 }
-
