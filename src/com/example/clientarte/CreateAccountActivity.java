@@ -334,7 +334,7 @@ public class CreateAccountActivity extends ActionBarActivity {
 //	                u.put("lastname", mEditLastName.getText().toString());
 	                
 	                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-	                CreateAccountActivity.this.startActivity(new Intent(CreateAccountActivity.this, LoginActivity_OLD_DOS.class));
+	                CreateAccountActivity.this.startActivity(new Intent(CreateAccountActivity.this, LoginActivity.class));
 	                CreateAccountActivity.this.finish();
 
 	            }

@@ -14,7 +14,7 @@ import android.widget.Toast;
 import backend.ObraBackend;
 import backend.SalaBackend;
 
-import com.example.clientarte.MainActivityBackend_old.PlaceholderFragment;
+
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyPingCallback;

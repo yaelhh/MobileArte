@@ -45,7 +45,7 @@ public class ProgramacionFragment extends Fragment {
 		}
 	});
 //       mObra= (ImageButton)rootView.findViewById(R.id.GalleryObra);
-        addListenerOnButton();
+//        addListenerOnButton();
         return rootView;
     }
     
@@ -64,18 +64,18 @@ public class ProgramacionFragment extends Fragment {
    	}
    	
    	
-   	public void addListenerOnButton() {
-   		 
-   		mObra.setOnClickListener(new OnClickListener() {
-    
-   			@Override
-   			public void onClick(View v) {
-   				Intent intent = new Intent(getActivity(), ObraActivity.class);
-   				startActivity(intent);
-   			}
-
-   		});
-   }
+//   	public void addListenerOnButton() {
+//   		 
+//   		mObra.setOnClickListener(new OnClickListener() {
+//    
+//   			@Override
+//   			public void onClick(View v) {
+//   				Intent intent = new Intent(getActivity(), ObraActivity.class);
+//   				startActivity(intent);
+//   			}
+//
+//   		});
+//   }
    	public static class PlaceholderFragment extends Fragment {
 
    		public PlaceholderFragment() {

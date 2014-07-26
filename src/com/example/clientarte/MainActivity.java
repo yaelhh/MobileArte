@@ -230,5 +230,9 @@ public boolean onCreateOptionsMenu(Menu menu) {
 
     return true;
 }
-	
+
+
+public void validarUsuarioOpcion(View view){
+	Toast.makeText(this, "validarUsuarioOpcion ",Toast.LENGTH_LONG).show();
+}
 }

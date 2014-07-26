@@ -13,7 +13,8 @@
  */
 package loginBackend;
 
-import com.example.clientarte.LoginActivity_OLD_UNO;
+
+import com.example.clientarte.LoginActivity;
 import com.kinvey.android.Client;
 import com.kinvey.java.User;
 
@@ -59,7 +60,7 @@ public class KinveyAccountAuthenticator extends AbstractAccountAuthenticator {
 			String[] requiredFeatures, Bundle options)
 			throws NetworkErrorException {
 		
-		final Intent intent = new Intent(mContext, LoginActivity_OLD_UNO.class);
+		final Intent intent = new Intent(mContext, LoginActivity.class);
 		intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
 		final Bundle bundle = new Bundle();
 		bundle.putParcelable(AccountManager.KEY_INTENT, intent);
@@ -111,7 +112,7 @@ public class KinveyAccountAuthenticator extends AbstractAccountAuthenticator {
 		}
 		
 		// No valid user
-		final Intent intent = new Intent(mContext, LoginActivity_OLD_UNO.class);
+		final Intent intent = new Intent(mContext, LoginActivity.class);
 		
 		// TODO:  Remove comments on putExtras
 		//intent.putExtra(LoginActivity.PARAM_AUTHTOKEN_TYPE, authTokenType);

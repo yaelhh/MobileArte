@@ -27,7 +27,7 @@ import android.widget.Toast;
 
 public class PerfilActivity extends Activity {
 	
-	private Button btnCuenta;
+	//private Button btnCuenta;
 	private Button btnProxObras;
 	private Button btnObrasVistas;
 	private Button btnMascaras;
@@ -155,34 +155,33 @@ public class PerfilActivity extends Activity {
 
     
     
-    public void addListenerOnButton() {
-		 
-    	btnCuenta.setOnClickListener(new OnClickListener() {
-    		
- 
-			@Override
-			public void onClick(View v) {
-							
-				}
-
-		});
-    	
-    	btnProxObras.setOnClickListener(new OnClickListener() {
-    		 
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(PerfilActivity.this, ProgramacionActivity.class);
-				startActivity(intent);
-			}
-
-		});
-    	
-		
-    }
+//	public void addListenerOnButton() {
+//
+//		btnCuenta.setOnClickListener(new OnClickListener() {
+//
+//
+//			@Override
+//			public void onClick(View v) {
+//
+//			}
+//
+//		});
+//
+//		btnProxObras.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent(PerfilActivity.this, ProgramacionActivity.class);
+//				startActivity(intent);
+//			}
+//
+//		});
+//
+//
+//	}
     
     @Override 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    	View view = null;
 		if (requestCode == 2) { 
 			if (resultCode == RESULT_OK) { 
 				//BUSCO USUARIO SEGUN NOMBRE DE USUARIO KINVEY LOGUEADO

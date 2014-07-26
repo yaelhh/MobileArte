@@ -9,7 +9,6 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/Gray" >
-        <!--  android:background="@drawable/telon"-->
 
         <TextView
             android:id="@+id/n"
@@ -38,8 +37,8 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/n"
             android:layout_marginTop="38dp"
-            android:text="@string/Cuenta"
-            android:onClick="validarUsuarioOpcion"/>
+            android:onClick="validarUsuarioOpcion"
+            android:text="@string/Cuenta" />
 
         <Button
             android:id="@+id/btnCanjear"
@@ -77,7 +76,6 @@
             android:layout_below="@+id/btnCuenta"
             android:layout_marginTop="16dp"
             android:text="@string/Obras_vistas" />
-
     </RelativeLayout>
 
 </LinearLayout>
