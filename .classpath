@@ -3,8 +3,12 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/Agustina/Downloads/com.questoid.sqlitebrowser_1.2.0.jar"/>
+>>>>>>> feature/Feature-1
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
