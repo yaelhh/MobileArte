@@ -71,10 +71,10 @@ public class ComunidadActivity extends ActionBarActivity {
 			}
 		});
 		//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-		//		conectarBackend();
+				conectarBackend();
 				cargarDatos();
 				agregarComentarios();
-		//mostrarImagen();
+//		mostrarImagen();
 
 
 	}
