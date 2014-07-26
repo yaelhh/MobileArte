@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ private CharSequence mDrawerTitle;
 private CharSequence mTitle;
 private NavigationAdapter NavAdapter;
 private SearchView mSearchView;
+private static final int REQUEST_TEXT = 3;
 
 
 
@@ -151,6 +153,8 @@ public void MostrarFragment(int position) {
         break;  
     case 6:
         fragment = new PerfilFragment();
+//        Intent intent = new Intent(MainActivity.this, PerfilActivity.class); 
+//    	MainActivity.this.startActivityForResult(intent, REQUEST_TEXT);
         break;          
     /*case 7:
         fragment = new AjustesFragment();
@@ -232,7 +236,9 @@ public boolean onCreateOptionsMenu(Menu menu) {
 }
 
 
-public void validarUsuarioOpcion(View view){
-	Toast.makeText(this, "validarUsuarioOpcion ",Toast.LENGTH_LONG).show();
-}
+//public void validarUsuarioOpcion(View view){
+//
+//	Intent intent = new Intent(MainActivity.this, PerfilActivity.class); 
+//	MainActivity.this.startActivityForResult(intent, REQUEST_TEXT);
+//}
 }
