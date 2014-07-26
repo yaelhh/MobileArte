@@ -4,6 +4,11 @@ package dominio;
 import java.util.ArrayList;
 
 
+
+import com.kinvey.java.LinkedResources.LinkedGenericJson;
+import com.google.api.client.json.GenericJson;
+import com.google.api.client.util.Key;
+
 import android.R.integer;
 import android.os.Parcel;
 import android.os.Parcelable;

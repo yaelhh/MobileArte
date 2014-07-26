@@ -248,7 +248,7 @@ public class CompraActivity extends Activity {
 				//			intent.putExtra("ENCODE_TYPE", "TEXT_TYPE");
 				//			intent.putExtra("ENCODE_DATA", "Hola ZOMWI!!!");
 				//			startActivity(intent);
-				Intent emailIntent = new Intent(Intent.ACTION_SEND);
+//				Intent emailIntent = new Intent(Intent.ACTION_SEND);
 //		        emailIntent.setData(Uri.parse("mailto:"));
 //				emailIntent.putExtra(Intent.EXTRA_EMAIL, "yaelhh@gmail.com");
 //		       
@@ -258,10 +258,18 @@ public class CompraActivity extends Activity {
 //			    startActivity(Intent.createChooser(emailIntent, "Email "+intent));
 	        
 				String s= "El nombre de la obra es: "+obra.getNombre() + " la funcion elegida es  "+obra.getListaFunciones().get(0)+" y la cantidad de entradas elegidas es "+cantEntradas.getText().toString();
-
+				Funcion funcionElegida=obra.getListaFunciones().get(0);
+				String fecha= funcionElegida.getFechaObra();
+				String hora= funcionElegida.getHoraComienzo();
+				String duracion= Double.toString(funcionElegida.getDuracion());
 				Intent intent = new Intent("com.google.zxing.client.android.ENCODE");
 			    intent.putExtra("ENCODE_TYPE", "TEXT_TYPE");
 			    intent.putExtra("ENCODE_DATA", s);
+			    intent.putExtra("fecha", fecha);
+			    intent.putExtra("hora", hora);
+			    intent.putExtra("duracion", duracion);
+			    intent.putExtra("tituloObra", obra.getNombre());
+
 			    startActivity(intent);
 				
 
@@ -302,18 +310,18 @@ public class CompraActivity extends Activity {
 		finish();
 	}
 
-	private void enviar(String[] to, String[] cc, String asunto, String mensaje) {
-	        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-	        emailIntent.setData(Uri.parse("mailto:"));
-	        //String[] to = direccionesEmail;
-	        //String[] cc = copias;
-	        emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
-	        emailIntent.putExtra(Intent.EXTRA_CC, cc);
-	        emailIntent.putExtra(Intent.EXTRA_SUBJECT, asunto);
-	        emailIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
-	        emailIntent.setType("message/rfc822");
-	        startActivity(Intent.createChooser(emailIntent, "Email "));
-	    }
+//	private void enviar(String[] to, String[] cc, String asunto, String mensaje) {
+//	        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+//	        emailIntent.setData(Uri.parse("mailto:"));
+//	        //String[] to = direccionesEmail;
+//	        //String[] cc = copias;
+//	        emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
+//	        emailIntent.putExtra(Intent.EXTRA_CC, cc);
+//	        emailIntent.putExtra(Intent.EXTRA_SUBJECT, asunto);
+//	        emailIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
+//	        emailIntent.setType("message/rfc822");
+//	        startActivity(Intent.createChooser(emailIntent, "Email "));
+//	    }
 
 
 	@Override

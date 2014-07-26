@@ -5,7 +5,10 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.widget.TextView;
+
 import com.example.clientarte.R.drawable;
+import com.kinvey.android.Client;
 
 import dominio.*;
 
@@ -37,6 +40,9 @@ public class Objetos {
 
 	private Butaca miButaca;
 	private HashMap<String, Boolean> hashComodidades = new HashMap <String, Boolean> ();
+	
+	
+	
 
 	public void Objetos(){
 		ArrayList listaImagenes= new ArrayList();
