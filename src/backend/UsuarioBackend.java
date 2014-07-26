@@ -15,7 +15,7 @@ public class UsuarioBackend extends GenericJson {
 	@Key
 	private String apellido;
 	@Key
-	private String nombreUsuario;
+	private String username;
 	@Key
 	private String password;
 	@Key
@@ -42,7 +42,7 @@ public class UsuarioBackend extends GenericJson {
 	
 	public UsuarioBackend (String nu) {
 		super();
-		this.nombreUsuario = nu;
+		this.username = nu;
 	}
 
 	public String getIdUsuario() {
@@ -70,11 +70,11 @@ public class UsuarioBackend extends GenericJson {
 	}
 
 	public String getNombreUsuario() {
-		return nombreUsuario;
+		return username;
 	}
 
 	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+		this.username = nombreUsuario;
 	}
 
 	public String getPassword() {

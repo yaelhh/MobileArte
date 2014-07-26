@@ -6,5 +6,6 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/Agustina/Downloads/com.questoid.sqlitebrowser_1.2.0.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
