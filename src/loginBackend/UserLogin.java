@@ -28,6 +28,11 @@ public class UserLogin extends Application {
     public static final String AUTHTOKEN_TYPE = "com.kinvey.myapplogin";
     public static final String ACCOUNT_TYPE = "com.kinvey.myapplogin";
     public static final String LOGIN_TYPE_KEY = "loginType";
+    public static final String TAG = "ArteBackend";
+	private String appKey="kid_VT8_It3ePE";
+	private String appSecret="1b0fa51481984d2da5910f78a9d26ccc";
+	
+	
     
     @Override
     public void onCreate() {
@@ -38,7 +43,8 @@ public class UserLogin extends Application {
 
     private void initialize() {
 		// Enter your app credentials here
-		service = new Client.Builder(this).build();
+		//service = new Client.Builder(this).build();
+		service = new Client.Builder(appKey,appSecret,this).build();
     }
 
     public Client getKinveyService() {

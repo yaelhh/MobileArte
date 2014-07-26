@@ -8,6 +8,13 @@
     tools:ignore="MergeRootFrame"
     android:background="@drawable/telon" >
     
+    <ImageButton
+         android:id="@+id/btnEscribirComentario"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="10dp"
+         android:contentDescription="@string/button_escribirComentario"/>
+    
     <ScrollView
            android:id="@+id/ScrollViewComunidad"
            android:layout_width="wrap_content"

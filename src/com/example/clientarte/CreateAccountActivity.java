@@ -46,9 +46,7 @@ public class CreateAccountActivity extends ActionBarActivity {
 	private int month; 
 	private int day; 
 	static final int DATE_DIALOG_ID = 0;
-	
 	//public static final String TAG = LoginActivity.class.getSimpleName();
-
 	private Client kinveyClient;
 	private EditText mEditFirstName;
 	private EditText mEditLastName;
@@ -73,22 +71,27 @@ public class CreateAccountActivity extends ActionBarActivity {
 //					.add(R.id.activity_create_account, new PlaceholderFragment()).commit();
 		
 		super.onCreate(savedInstanceState);
-		pickDate.setOnClickListener(new View.OnClickListener() { public void onClick(View v) { showDialog(DATE_DIALOG_ID); } });
-		final Calendar c = Calendar.getInstance(); 
+		//pickDate.setOnClickListener(new View.OnClickListener() { public void onClick(View v) { showDialog(DATE_DIALOG_ID); } });
+		//final Calendar c = Calendar.getInstance(); 
 //		year = c.get(Calendar.YEAR); 
 //		month = c.get(Calendar.MONTH); 
 //		day = c.get(Calendar.DAY_OF_MONTH);
-		setContentView(R.layout.activity_create_account);
+		
+		/*
+		 * ALTA DE USUARIO VIEJO
+		 * 
+		 * setContentView(R.layout.activity_create_account);
+		 * */
+		setContentView(R.layout.activity_register);
 
-		dateDisplay = (TextView) findViewById(R.id.dateDisplay); 
-		pickDate = (Button) findViewById(R.id.pickDate); 
+//		dateDisplay = (TextView) findViewById(R.id.dateDisplay); 
+//		pickDate = (Button) findViewById(R.id.pickDate); 
 		
 //		pickDate.setOnClickListener(new View.OnClickListener() { public void onClick(View v) { showDialog(DATE_DIALOG_ID); } });
 //		updateDate() ;
 		
 		conectarBackend();
 		confirmarUsuario();
-		
 		
 		/*pickDate.setOnClickListener(new View.OnClickListener() { public void onClick(View v) { showDialog(DATE_DIALOG_ID); } });
 		final Calendar c = Calendar.getInstance(); 
@@ -102,7 +105,6 @@ public class CreateAccountActivity extends ActionBarActivity {
 		
 		pickDate.setOnClickListener(new View.OnClickListener() { public void onClick(View v) { showDialog(DATE_DIALOG_ID); } });
 		 updateDate() ;*/
-		
 	}
 	
 	public void confirmarUsuario(){
@@ -110,7 +112,8 @@ public class CreateAccountActivity extends ActionBarActivity {
 		mRegisterAccount.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				registrarUsuario();
+				
+				//registrarUsuario();
 				processSignup(v);
 				limpiarCampos();
 			}
@@ -181,7 +184,7 @@ public class CreateAccountActivity extends ActionBarActivity {
 				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
 			}
 		});
-		//mKinveyClient.user().login("nlema", "nlema", new KinveyUserCallback() {
+		
 		if (!kinveyClient.user().isUserLoggedIn()) {
 			kinveyClient.user().login(new KinveyUserCallback() {
 				public void onFailure(Throwable error) {
@@ -214,8 +217,8 @@ public class CreateAccountActivity extends ActionBarActivity {
 		//kinveyClient = ((UserLogin) getApplication()).getKinveyService();
 		//UsuarioBackend entity = new UsuarioBackend (mEditFirstName.getText().toString());
 		UsuarioBackend entity = new UsuarioBackend ("Usuario");
-		usuarioExiste(mEditNombreUsuario);
-		if (!resultado){
+		//usuarioExiste(mEditNombreUsuario);
+		//if (!resultado){
 
 
 			entity.put("nombre", mEditFirstName.getText().toString());
@@ -224,7 +227,8 @@ public class CreateAccountActivity extends ActionBarActivity {
 			entity.put("fechaNacimiento",mEditFirstName.getText().toString());
 			entity.put("mascaras","50");
 			entity.put("nombreUsuario",mEditNombreUsuario.getText().toString());
-			entity.put("fechaNacimiento",cal.getDate());
+			entity.put("fechaNacimiento", "fecha");
+			//entity.put("fechaNacimiento",cal.getDate());
 
 			kinveyClient.appData("Usuario", UsuarioBackend.class).save(entity, new KinveyClientCallback<UsuarioBackend>() {
 				@Override
@@ -240,9 +244,9 @@ public class CreateAccountActivity extends ActionBarActivity {
 					Toast.makeText(CreateAccountActivity.this, "Save All error: " + error.getMessage(), Toast.LENGTH_LONG).show();
 				}
 			});
-		}else{
-			Toast.makeText(CreateAccountActivity.this, "Revise los campos: " + Toast.LENGTH_LONG, 0).show();
-		}
+//		}else{
+//			Toast.makeText(CreateAccountActivity.this, "Revise los campos: " + Toast.LENGTH_LONG, 0).show();
+//		}
 
 	}
 	
@@ -313,6 +317,7 @@ public class CreateAccountActivity extends ActionBarActivity {
 		}
 		
 		public void processSignup(View view) {
+			registrarUsuario();
 			Toast.makeText(this, "Registrando usuario...", Toast.LENGTH_SHORT).show();
 		    kinveyClient.user().create(mEditEmailAddress.getText().toString(), mEditPassword.getText().toString(), new KinveyUserCallback() {
 	            public void onFailure(Throwable t) {
@@ -329,7 +334,7 @@ public class CreateAccountActivity extends ActionBarActivity {
 //	                u.put("lastname", mEditLastName.getText().toString());
 	                
 	                Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-	                CreateAccountActivity.this.startActivity(new Intent(CreateAccountActivity.this, LoginActivity_OLD.class));
+	                CreateAccountActivity.this.startActivity(new Intent(CreateAccountActivity.this, LoginActivity_OLD_DOS.class));
 	                CreateAccountActivity.this.finish();
 
 	            }
