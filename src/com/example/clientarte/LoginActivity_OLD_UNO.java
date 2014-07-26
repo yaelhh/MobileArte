@@ -1,7 +1,5 @@
 package com.example.clientarte;
 
-import loginBackend.UserLogin;
-import com.example.clientarte.*;
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorActivity;
 import android.accounts.AccountManager;
@@ -21,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
+import backend.UserLogin;
 
 /**
  * 
@@ -30,9 +29,9 @@ import android.view.View;
  * The activity extends the Android AccountAuthenticatorActivity and prompts the user for a login (Email Address)
  * and password.  User also has the option to instead authenticate via Facebook or Twitter.  
  */
-public class LoginActivity extends AccountAuthenticatorActivity {
+public class LoginActivity_OLD_UNO extends AccountAuthenticatorActivity {
 
-	public static final String TAG = LoginActivity.class.getSimpleName();
+	public static final String TAG = LoginActivity_OLD_UNO.class.getSimpleName();
 	
 	/**
 	 * Configuration parameters for Android's AbstractAuthenticator
@@ -40,11 +39,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 	public static final String PARAM_CONFIRM_CREDENTIALS = "confirmCredentials";
 	public static final String PARAM_USERNAME = "username";
 	public static final String PARAM_AUTHTOKENTYPE="authtokenType";
-	//public static final String TAG = "ArteBackend";
-	private String appKey="kid_VT8_It3ePE";
-	private String appSecret="1b0fa51481984d2da5910f78a9d26ccc";
-	private String mensaje;
-	private Client kinveyClient;
 	
 	/**
 	 * Configuration parameters for Android's AbstractAuthenticator
@@ -60,19 +54,20 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 	
 	public static final int MIN_USERNAME_LENGTH = 8;
 	public static final int MIN_PASSWORD_LENGTH = 4;
+	
 	private Boolean mConfirmCredentials = false;
 	
 	/**
 	 * KinveyClient
 	 */
-	//protected Client kinveyClient;
+	protected Client kinveyClient;
 	
-	private Button mButtonLogin;
-	private EditText mEditUserEmail;
-	private EditText mEditPassword;
-	private TextView mErrorMessage;
-	private String mUserEmail;
-	private String mPassword;
+	protected Button mButtonLogin;
+	protected EditText mEditUserEmail;
+	protected EditText mEditPassword;
+	protected TextView mErrorMessage;
+	protected String mUserEmail;
+	protected String mPassword;
 	
 	protected Boolean mRequestNewAccount = false;
 	
@@ -80,22 +75,82 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		setContentView(R.layout.activity_login_old);
+//		mAccountManager = AccountManager.get(this);
+//		final Intent intent = getIntent();
+//		mUserEmail = intent.getStringExtra(PARAM_USERNAME);
+//		
+//		mRequestNewAccount = (mUserEmail == null);
+//		mConfirmCredentials = intent.getBooleanExtra(PARAM_CONFIRM_CREDENTIALS,false);
+//		kinveyClient = ((UserLogin) getApplication()).getKinveyService();
+
+		
+		
+		//mErrorMessage = (TextView) findViewById(R.id.tvErrorMessage);
+//		mEditUserEmail = (EditText) findViewById(R.id.txtMailLogin);
+//		mEditPassword = (EditText) findViewById(R.id.txtPassLogin);
+//	        	
+//    	mButtonLogin = (Button) findViewById(R.id.buttonLogin);
+//        mEditUserEmail = (EditText) findViewById(R.id.txtMailLogin);
+//        mEditPassword = (EditText) findViewById(R.id.txtPassLogin);
+        
+	}
+	
+	public void signupOLD(View view) {
+		mEditUserEmail = (EditText) findViewById(R.id.txtMailLogin);
+		mEditPassword = (EditText) findViewById(R.id.txtPassLogin);
+	        	
+    	mButtonLogin = (Button) findViewById(R.id.buttonLogin);
+    	String p = mEditUserEmail.getText().toString();
+    	String p2 = mEditPassword.getText().toString();
+	    kinveyClient.user().create(p, p2, new KinveyUserCallback() {
+	        public void onFailure(Throwable t) {
+	            CharSequence text = "Could not sign up.";
+	            Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+	        }
+	        public void onSuccess(User u) {
+	            CharSequence text = u.getUsername() + ", your account has been created.";
+	            Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+//	            LoginActivity.this.startActivity(new Intent(LoginActivity.this, 
+//	                    SessionsActivity.class));
+	            LoginActivity_OLD_UNO.this.finish();
+	        }
+	    });
+	}
+	
+	
+	public void submit(View view) {
 		mAccountManager = AccountManager.get(this);
 		final Intent intent = getIntent();
 		mUserEmail = intent.getStringExtra(PARAM_USERNAME);
 		
 		mRequestNewAccount = (mUserEmail == null);
 		mConfirmCredentials = intent.getBooleanExtra(PARAM_CONFIRM_CREDENTIALS,false);
-		//se parte
+		
 		kinveyClient = ((UserLogin) getApplication()).getKinveyService();
-		
-		mEditPassword = (EditText)findViewById(R.id.txtPasswordLogin);
-		mEditUserEmail = (EditText)findViewById(R.id.txtEmailLogin);
-		
-		mButtonLogin = (Button) findViewById(R.id.buttonLogin);
-		
-		mUserEmail = findViewById(R.id.txtEmailLogin).toString();
-		mPassword = findViewById(R.id.txtPasswordLogin).toString();
+		mEditUserEmail = (EditText) findViewById(R.id.txtMailLogin);
+		mEditPassword = (EditText) findViewById(R.id.txtPassLogin);
+	        	
+    	mButtonLogin = (Button) findViewById(R.id.buttonLogin);
+//        mEditUserEmail = (EditText) findViewById(R.id.txtMailLogin);
+//        mEditPassword = (EditText) findViewById(R.id.txtPassLogin);
+    	String p = mEditUserEmail.getText().toString();
+    	String p2 = mEditPassword.getText().toString();
+    	//kinveyClient = ((UserLogin) getApplication()).getKinveyService();
+	    //kinveyClient.user().login(mEditUserEmail.getText().toString(), mEditPassword.getText().toString(), new KinveyUserCallback() {
+    	kinveyClient.user().login(p, p2, new KinveyUserCallback() {  
+    	public void onFailure(Throwable t) {
+	            CharSequence text = "Wrong username or password.";
+	            Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+	        }
+	        public void onSuccess(User u) {
+	            CharSequence text = "Welcome back," + u.getUsername() + ".";
+	            Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+	            LoginActivity_OLD_UNO.this.startActivity(new Intent(LoginActivity_OLD_UNO.this, 
+	                    CompraActivity.class));
+	            LoginActivity_OLD_UNO.this.finish();
+	        }
+	    });
 	}
 	
 	@Override
@@ -124,26 +179,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 		}
 	}
 	
-//	public void launchTwitterLogin(View view) {
-//		LoginActivity.this.startActivity(new Intent(LoginActivity.this, TwitterLoginActivity.class));
-//        LoginActivity.this.finish();
-//	}
-//	
-//	public void launchFacebookLogin(View view) {
-//		LoginActivity.this.startActivity(new Intent(LoginActivity.this, FacebookLoginActivity.class));
-//        LoginActivity.this.finish();
-//	}
-
-//    public void launchGoogleLogin(View v){
-//        LoginActivity.this.startActivity(new Intent(LoginActivity.this, GoogleLoginActivity.class));
-//        LoginActivity.this.finish();
-//    }
-//
-//    public void launchLinkedInLogin(View v){
-//        LoginActivity.this.startActivity(new Intent(LoginActivity.this, LinkedinLoginActivity.class));
-//        LoginActivity.this.finish();
-//    }
-
 	public void registerAccount(View v) {
 		Intent intent = new Intent(this, CreateAccountActivity.class);
         startActivity(intent);
@@ -200,9 +235,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 			}
 		} else {
 			if (mRequestNewAccount) {
-				mErrorMessage.setText("Por favor ingrese nombre de usuario y contrasena correctos");
+				mErrorMessage.setText("Please enter a valid username or password");
 			} else {
-				mErrorMessage.setText("Por favor ingrese una contrasena correcta");
+				mErrorMessage.setText("Please enter a valid password");
 			}
 			
 		}
@@ -240,8 +275,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 CharSequence text = "Logged in.";
                 Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
                 onAuthenticationResult(u.getId());
-                LoginActivity.this.startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                LoginActivity.this.finish();
+                LoginActivity_OLD_UNO.this.startActivity(new Intent(LoginActivity_OLD_UNO.this, MainActivity.class));
+                LoginActivity_OLD_UNO.this.finish();
             }
 
         });

@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-public class LoginActivity_OLD extends ActionBarActivity {
+public class LoginActivity_OLD_DOS extends ActionBarActivity {
 	
 	public static final String TAG = "ArteBackend";
 	private String appKey="kid_VT8_It3ePE";
@@ -30,7 +30,7 @@ public class LoginActivity_OLD extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
+		setContentView(R.layout.activity_login_old);
 		conectarBackend();
 //		if (savedInstanceState == null) {
 //			getSupportFragmentManager().beginTransaction()

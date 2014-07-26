@@ -6,6 +6,10 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/ylurynski/Documents/Yael/Proyecto/Ejemplos/zxing-2.0/core/core.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/Agustina/Downloads/com.questoid.sqlitebrowser_1.2.0.jar"/>
+>>>>>>> 538c0ba... Commit con los siguientes puntos implementados:
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

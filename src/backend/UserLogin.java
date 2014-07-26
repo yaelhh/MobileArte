@@ -12,8 +12,8 @@ public class UserLogin extends Application {
     private Client service;
 
     // Application Constants
-    public static final String AUTHTOKEN_TYPE = "com.example.clientarte";
-    public static final String ACCOUNT_TYPE = "com.example.clientarte";
+    public static final String AUTHTOKEN_TYPE = ".clientarte";
+    public static final String ACCOUNT_TYPE = ".clientarte";
     public static final String LOGIN_TYPE_KEY = "loginType";
     public static final String TAG = "ArteBackend";
 	private String appKey="kid_VT8_It3ePE";
@@ -28,10 +28,12 @@ public class UserLogin extends Application {
 
     private void initialize() {
 		// Enter your app credentials here
-		service = new Client.Builder(this).build();
+		//service = new Client.Builder(this).build();
+    	service = new Client.Builder(appKey,appSecret,this).build();
     }
 
     public Client getKinveyService() {
+    	service = new Client.Builder(appKey,appSecret,this).build();
         return service;
     }
 }
