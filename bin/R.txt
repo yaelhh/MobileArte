@@ -280,9 +280,9 @@ int color WhiteSmoke 0x7f08004e
 int color Yellow 0x7f08002b
 int color YellowGreen 0x7f080078
 int color abc_search_url_text_holo 0x7f0800b8
-int color abc_search_url_text_normal 0x7f080016
-int color abc_search_url_text_pressed 0x7f080018
-int color abc_search_url_text_selected 0x7f080017
+int color abc_search_url_text_normal 0x7f080017
+int color abc_search_url_text_pressed 0x7f080019
+int color abc_search_url_text_selected 0x7f080018
 int color aqua 0x7f080022
 int color black 0x7f080028
 int color blue 0x7f080026
@@ -290,9 +290,9 @@ int color contents_text 0x7f080000
 int color ebony 0x7f0800b7
 int color encode_view 0x7f080001
 int color form_highlight 0x7f0800b4
-int color fuchsia 0x7f08001b
+int color fuchsia 0x7f08001c
 int color ghost_white 0x7f0800b6
-int color gray 0x7f08001e
+int color gray 0x7f080016
 int color green 0x7f080025
 int color help_button_view 0x7f080002
 int color help_view 0x7f080003
@@ -303,7 +303,7 @@ int color navy 0x7f080027
 int color olive 0x7f08001f
 int color possible_result_points 0x7f080004
 int color purple 0x7f080020
-int color red 0x7f08001c
+int color red 0x7f08001d
 int color result_image_border 0x7f080005
 int color result_minor_text 0x7f080006
 int color result_points 0x7f080007
@@ -316,15 +316,15 @@ int color sbc_list_item 0x7f08000c
 int color sbc_page_number_text 0x7f08000e
 int color sbc_snippet_text 0x7f08000f
 int color share_text 0x7f080010
-int color silver 0x7f08001d
+int color silver 0x7f08001e
 int color status_text 0x7f080011
 int color teal 0x7f080024
 int color transparent 0x7f080012
 int color viewfinder_frame 0x7f080013
 int color viewfinder_laser 0x7f080014
 int color viewfinder_mask 0x7f080015
-int color white 0x7f080019
-int color yellow 0x7f08001a
+int color white 0x7f08001a
+int color yellow 0x7f08001b
 int dimen abc_action_bar_default_height 0x7f0b0003
 int dimen abc_action_bar_icon_vertical_padding 0x7f0b0004
 int dimen abc_action_bar_progress_bar_size 0x7f0b000b
@@ -520,17 +520,31 @@ int drawable usuario 0x7f02009e
 int id BtnObrasVistas 0x7f09009d
 int id Escenario 0x7f090062
 int id GridOpciones 0x7f090070
+<<<<<<< HEAD
 int id ImageComunidad 0x7f0900a2
 int id ImageLogo 0x7f0900e7
 int id ImageNosotros 0x7f0900a4
 int id ImageNovedades 0x7f0900a6
+=======
+int id ImageComunidad 0x7f0900a4
+int id ImageLogo 0x7f0900eb
+int id ImageNosotros 0x7f0900a6
+int id ImageNovedades 0x7f0900a8
+>>>>>>> origin/develop
 int id ListView_listado 0x7f090074
 int id ScrollView01 0x7f09008f
 int id ScrollViewComunidad 0x7f090067
+<<<<<<< HEAD
 int id TextComunidad 0x7f0900a3
 int id TextNosotros 0x7f0900a5
 int id Textnovedades 0x7f0900a7
 int id TxtDetalle 0x7f0900e0
+=======
+int id TextComunidad 0x7f0900a5
+int id TextNosotros 0x7f0900a7
+int id Textnovedades 0x7f0900a9
+int id TxtDetalle 0x7f0900e4
+>>>>>>> origin/develop
 int id action_bar 0x7f090037
 int id action_bar_activity_content 0x7f090030
 int id action_bar_container 0x7f090036
@@ -539,6 +553,7 @@ int id action_bar_root 0x7f090035
 int id action_bar_subtitle 0x7f09003e
 int id action_bar_title 0x7f09003d
 int id action_context_bar 0x7f090038
+<<<<<<< HEAD
 int id action_example 0x7f090105
 int id action_menu_divider 0x7f090031
 int id action_menu_presenter 0x7f090032
@@ -562,10 +577,36 @@ int id auto_focus 0x7f090000
 int id back_button 0x7f0900e3
 int id backgrd 0x7f0900e1
 int id barcode_image_view 0x7f0900c6
+=======
+int id action_example 0x7f090109
+int id action_menu_divider 0x7f090031
+int id action_menu_presenter 0x7f090032
+int id action_mode_close_button 0x7f09003f
+int id action_notification 0x7f09010b
+int id action_search 0x7f090107
+int id action_settings 0x7f09010a
+int id activity_chooser_view_content 0x7f090040
+int id activity_create_account 0x7f090068
+int id activity_login 0x7f090075
+int id activity_obra 0x7f090088
+int id activity_pricipal 0x7f0900a1
+int id activity_prueba_obra 0x7f0900ac
+int id addClient 0x7f09010c
+int id alignBounds 0x7f09000c
+int id alignMargins 0x7f09000d
+int id always 0x7f090027
+int id apellidos 0x7f0900f2
+int id apellidosLabel 0x7f0900d8
+int id auto_focus 0x7f090000
+int id back_button 0x7f0900e7
+int id backgrd 0x7f0900e5
+int id barcode_image_view 0x7f0900c8
+>>>>>>> origin/develop
 int id beginning 0x7f09002d
 int id bookmark_title 0x7f0900c1
 int id bookmark_url 0x7f0900c2
 int id bottom 0x7f09000f
+<<<<<<< HEAD
 int id btnCancelar 0x7f0900b4
 int id btnCanjear 0x7f09009a
 int id btnCuenta 0x7f090099
@@ -577,6 +618,20 @@ int id btn_leer_sala 0x7f0900dc
 int id btn_leer_salas 0x7f0900dd
 int id bttnComprar 0x7f090095
 int id bttnOk 0x7f0900bd
+=======
+int id btnCancelar 0x7f0900b6
+int id btnCanjear 0x7f09009c
+int id btnCompartir 0x7f0900df
+int id btnCuenta 0x7f09009b
+int id btnMascaras 0x7f09009d
+int id btnNuevaNota 0x7f0900ad
+int id btnPrxObras 0x7f09009e
+int id btnRegister 0x7f0900b8
+int id btn_leer_sala 0x7f0900e0
+int id btn_leer_salas 0x7f0900e1
+int id bttnComprar 0x7f090097
+int id bttnOk 0x7f0900bf
+>>>>>>> origin/develop
 int id button1 0x7f09007c
 int id button2 0x7f09007d
 int id buttonLogin 0x7f09007b
@@ -584,9 +639,15 @@ int id buttonRecuperarPass 0x7f090079
 int id buttonRegistrarse 0x7f09006b
 int id buttonRegistrarseLogin 0x7f09007a
 int id button_comprar 0x7f090065
+<<<<<<< HEAD
 int id calendarView1 0x7f0900a9
 int id calendarViewCreateAccount 0x7f0900b5
 int id carrier 0x7f0900fc
+=======
+int id calendarView1 0x7f0900ab
+int id calendarViewCreateAccount 0x7f0900b7
+int id carrier 0x7f090100
+>>>>>>> origin/develop
 int id center 0x7f090016
 int id center_horizontal 0x7f090014
 int id center_vertical 0x7f090012
@@ -609,6 +670,7 @@ int id default_activity_button 0x7f090043
 int id descObra 0x7f090090
 int id dialog 0x7f09002a
 int id disableHome 0x7f090024
+<<<<<<< HEAD
 int id done_button 0x7f0900e4
 int id drawer_layout 0x7f09007e
 int id drawer_layout_principal 0x7f09009e
@@ -616,6 +678,15 @@ int id dropdown 0x7f09002b
 int id edad 0x7f0900eb
 int id edadLabel 0x7f0900d8
 int id editText1 0x7f0900bf
+=======
+int id done_button 0x7f0900e8
+int id drawer_layout 0x7f090080
+int id drawer_layout_principal 0x7f0900a0
+int id dropdown 0x7f09002b
+int id edad 0x7f0900ef
+int id edadLabel 0x7f0900da
+int id editText1 0x7f0900c1
+>>>>>>> origin/develop
 int id edit_query 0x7f09004b
 int id encode_view 0x7f0900da
 int id end 0x7f09001b
@@ -630,6 +701,7 @@ int id favorito 0x7f090094
 int id fill 0x7f090017
 int id fill_horizontal 0x7f090015
 int id fill_vertical 0x7f090013
+<<<<<<< HEAD
 int id format_text_view 0x7f0900c8
 int id format_text_view_label 0x7f0900c7
 int id fragment1 0x7f0900df
@@ -641,6 +713,19 @@ int id header_button_1 0x7f0900fb
 int id help_contents 0x7f0900e2
 int id history_detail 0x7f0900e6
 int id history_title 0x7f0900e5
+=======
+int id format_text_view 0x7f0900ca
+int id format_text_view_label 0x7f0900c9
+int id fragment1 0x7f0900e3
+int id gallery 0x7f090084
+int id galleryObra 0x7f090089
+int id grdSectorA 0x7f0900c0
+int id gridview 0x7f0900af
+int id header_button_1 0x7f0900ff
+int id help_contents 0x7f0900e6
+int id history_detail 0x7f0900ea
+int id history_title 0x7f0900e9
+>>>>>>> origin/develop
 int id home 0x7f09002f
 int id homeAsUp 0x7f090021
 int id horizontal 0x7f09000a
@@ -664,12 +749,18 @@ int id imageView1 0x7f090098
 int id imageView2 0x7f0900b7
 int id imageView3 0x7f0900b9
 int id imageView_imagen 0x7f090071
+<<<<<<< HEAD
 int id image_view 0x7f0900db
 int id labelFunciones 0x7f09008c
+=======
+int id image_view 0x7f0900de
+int id labelFunciones 0x7f09008e
+>>>>>>> origin/develop
 int id labelHorario 0x7f090058
 int id labelSala 0x7f09005a
 int id launch_product_query 0x7f090004
 int id left 0x7f090010
+<<<<<<< HEAD
 int id linearLayout1 0x7f0900ea
 int id linearLayout2 0x7f0900ec
 int id linear_Comodidades 0x7f090088
@@ -682,9 +773,24 @@ int id lvNotas 0x7f0900ac
 int id menu_settings 0x7f090104
 int id meta_text_view 0x7f0900ce
 int id meta_text_view_label 0x7f0900cd
+=======
+int id linearLayout1 0x7f0900ee
+int id linearLayout2 0x7f0900f0
+int id linear_Comodidades 0x7f09008a
+int id listMode 0x7f09001d
+int id list_item 0x7f090044
+int id lista 0x7f090082
+int id listfechas 0x7f09008f
+int id loadingtext 0x7f090106
+int id lvNotas 0x7f0900ae
+int id menu_settings 0x7f090108
+int id meta_text_view 0x7f0900d0
+int id meta_text_view_label 0x7f0900cf
+>>>>>>> origin/develop
 int id middle 0x7f09002e
 int id n 0x7f090097
 int id never 0x7f090025
+<<<<<<< HEAD
 int id nomUsuario 0x7f0900b3
 int id nombre 0x7f0900ed
 int id nombreLabel 0x7f0900d4
@@ -713,6 +819,36 @@ int id result_view 0x7f0900c5
 int id return_scan_result 0x7f090007
 int id right 0x7f090011
 int id row 0x7f0900e9
+=======
+int id nomUsuario 0x7f0900b5
+int id nombre 0x7f0900f1
+int id nombreLabel 0x7f0900d6
+int id none 0x7f09002c
+int id normal 0x7f09001c
+int id nuevoapellidos 0x7f0900d9
+int id nuevoedad 0x7f0900db
+int id nuevonombre 0x7f0900d7
+int id num_desc 0x7f090101
+int id page_number_view 0x7f0900f6
+int id pickDate 0x7f09006f
+int id preview_view 0x7f0900c5
+int id profile 0x7f090103
+int id progress_circular 0x7f090033
+int id progress_horizontal 0x7f090034
+int id progressbar 0x7f090105
+int id query_button 0x7f0900f4
+int id query_text_view 0x7f0900f3
+int id quit 0x7f090005
+int id radio 0x7f09004a
+int id refresh_progress 0x7f0900e2
+int id restart_preview 0x7f090006
+int id result_button_view 0x7f0900d3
+int id result_list_view 0x7f0900f5
+int id result_view 0x7f0900c7
+int id return_scan_result 0x7f090007
+int id right 0x7f090011
+int id row 0x7f0900ed
+>>>>>>> origin/develop
 int id sala 0x7f09005b
 int id search_badge 0x7f09004d
 int id search_bar 0x7f09004c
@@ -729,6 +865,7 @@ int id search_voice_btn 0x7f090056
 int id sectorA 0x7f090060
 int id sectorB 0x7f090061
 int id sectorC 0x7f090064
+<<<<<<< HEAD
 int id seleccionada 0x7f090085
 int id share_app_button 0x7f0900f4
 int id share_bookmark_button 0x7f0900f5
@@ -736,16 +873,34 @@ int id share_clipboard_button 0x7f0900f7
 int id share_contact_button 0x7f0900f6
 int id share_text_view 0x7f0900f8
 int id shopper_button 0x7f0900d2
+=======
+int id seleccionada 0x7f090087
+int id share_app_button 0x7f0900f8
+int id share_bookmark_button 0x7f0900f9
+int id share_clipboard_button 0x7f0900fb
+int id share_contact_button 0x7f0900fa
+int id share_text_view 0x7f0900fc
+int id shopper_button 0x7f0900d4
+>>>>>>> origin/develop
 int id shortcut 0x7f090049
 int id showCustom 0x7f090023
 int id showHome 0x7f090020
 int id showTitle 0x7f090022
+<<<<<<< HEAD
 int id snippet_view 0x7f0900f3
+=======
+int id snippet_view 0x7f0900f7
+>>>>>>> origin/develop
 int id spinner_horario 0x7f090059
 int id splash_screen 0x7f0900c0
 int id split_action_bar 0x7f090039
 int id start 0x7f09001a
+<<<<<<< HEAD
 int id status_view 0x7f0900d3
+=======
+int id status_view 0x7f0900d5
+int id string_text_view 0x7f0900dd
+>>>>>>> origin/develop
 int id submit_area 0x7f090054
 int id tabMode 0x7f09001e
 int id textArte 0x7f090069
@@ -755,6 +910,7 @@ int id textView1 0x7f090063
 int id textView2 0x7f090084
 int id textView_inferior 0x7f090073
 int id textView_superior 0x7f090072
+<<<<<<< HEAD
 int id thebutton 0x7f090100
 int id time_text_view 0x7f0900cc
 int id time_text_view_label 0x7f0900cb
@@ -762,6 +918,15 @@ int id title 0x7f090046
 int id title_bar 0x7f0900fa
 int id title_item 0x7f0900e8
 int id titulo 0x7f09008e
+=======
+int id thebutton 0x7f090104
+int id time_text_view 0x7f0900ce
+int id time_text_view_label 0x7f0900cd
+int id title 0x7f090046
+int id title_bar 0x7f0900fe
+int id title_item 0x7f0900ec
+int id titulo 0x7f090090
+>>>>>>> origin/develop
 int id top 0x7f09000e
 int id top_action_bar 0x7f09003b
 int id twEntradas 0x7f0900bc
@@ -777,11 +942,19 @@ int id type_text_view 0x7f0900ca
 int id type_text_view_label 0x7f0900c9
 int id up 0x7f09003c
 int id useLogo 0x7f09001f
+<<<<<<< HEAD
 int id usrname 0x7f0900fe
+=======
+int id usrname 0x7f090102
+>>>>>>> origin/develop
 int id vertical 0x7f09000b
 int id viewfinder_view 0x7f0900c4
 int id withText 0x7f090028
+<<<<<<< HEAD
 int id wlll 0x7f0900f9
+=======
+int id wlll 0x7f0900fd
+>>>>>>> origin/develop
 int integer abc_max_action_buttons 0x7f0d0000
 int layout abc_action_bar_decor 0x7f030000
 int layout abc_action_bar_decor_include 0x7f030001
@@ -893,41 +1066,41 @@ int menu pruebaasientos 0x7f0f0016
 int menu sectora 0x7f0f0017
 int menu splash_screen 0x7f0f0018
 int raw beep 0x7f060000
-int string Arte 0x7f0a00c0
-int string Canjear 0x7f0a00a1
-int string Comunidad 0x7f0a008a
-int string Cuenta 0x7f0a009d
-int string HistoriaSodre 0x7f0a00de
-int string HorarioSodre 0x7f0a00df
-int string Mascaras 0x7f0a00a0
-int string Nosotros 0x7f0a0089
-int string Novedades 0x7f0a008b
-int string Obras_vistas 0x7f0a009f
-int string Programacion 0x7f0a0088
-int string Prox_obras 0x7f0a009e
-int string abc_action_bar_home_description 0x7f0a0079
-int string abc_action_bar_up_description 0x7f0a007a
-int string abc_action_menu_overflow_description 0x7f0a007b
-int string abc_action_mode_done 0x7f0a0078
-int string abc_activity_chooser_view_see_all 0x7f0a0082
-int string abc_activitychooserview_choose_application 0x7f0a0081
-int string abc_searchview_description_clear 0x7f0a007e
-int string abc_searchview_description_query 0x7f0a007d
-int string abc_searchview_description_search 0x7f0a007c
-int string abc_searchview_description_submit 0x7f0a007f
-int string abc_searchview_description_voice 0x7f0a0080
-int string abc_shareactionprovider_share_with 0x7f0a0084
-int string abc_shareactionprovider_share_with_application 0x7f0a0083
-int string action_bar_notification 0x7f0a009b
-int string action_example 0x7f0a0096
-int string action_settings 0x7f0a0086
-int string addCliente 0x7f0a00e7
+int string Arte 0x7f0a00c1
+int string Canjear 0x7f0a00a2
+int string Comunidad 0x7f0a008b
+int string Cuenta 0x7f0a009e
+int string HistoriaSodre 0x7f0a00df
+int string HorarioSodre 0x7f0a00e0
+int string Mascaras 0x7f0a00a1
+int string Nosotros 0x7f0a008a
+int string Novedades 0x7f0a008c
+int string Obras_vistas 0x7f0a00a0
+int string Programacion 0x7f0a0089
+int string Prox_obras 0x7f0a009f
+int string abc_action_bar_home_description 0x7f0a007a
+int string abc_action_bar_up_description 0x7f0a007b
+int string abc_action_menu_overflow_description 0x7f0a007c
+int string abc_action_mode_done 0x7f0a0079
+int string abc_activity_chooser_view_see_all 0x7f0a0083
+int string abc_activitychooserview_choose_application 0x7f0a0082
+int string abc_searchview_description_clear 0x7f0a007f
+int string abc_searchview_description_query 0x7f0a007e
+int string abc_searchview_description_search 0x7f0a007d
+int string abc_searchview_description_submit 0x7f0a0080
+int string abc_searchview_description_voice 0x7f0a0081
+int string abc_shareactionprovider_share_with 0x7f0a0085
+int string abc_shareactionprovider_share_with_application 0x7f0a0084
+int string action_bar_notification 0x7f0a009c
+int string action_example 0x7f0a0097
+int string action_settings 0x7f0a0087
+int string addCliente 0x7f0a00e8
 int string app_name 0x7f0a0000
 int string app_picker_name 0x7f0a0001
-int string back 0x7f0a009c
+int string back 0x7f0a009d
 int string bookmark_picker_name 0x7f0a0002
-int string btnComprar 0x7f0a00d9
-int string butacas 0x7f0a00a2
+int string btnComprar 0x7f0a00da
+int string butacas 0x7f0a00a3
 int string button_add_calendar 0x7f0a0003
 int string button_add_contact 0x7f0a0004
 int string button_back 0x7f0a0005
@@ -938,19 +1111,19 @@ int string button_custom_product_search 0x7f0a0009
 int string button_dial 0x7f0a000a
 int string button_done 0x7f0a000b
 int string button_email 0x7f0a000c
-int string button_escribirComentario 0x7f0a00aa
+int string button_escribirComentario 0x7f0a00ab
 int string button_get_directions 0x7f0a000d
 int string button_google_shopper 0x7f0a000e
-int string button_iconCompra 0x7f0a00bb
-int string button_iconFire 0x7f0a00bc
-int string button_iconWifi 0x7f0a00bd
-int string button_login 0x7f0a00c3
+int string button_iconCompra 0x7f0a00bc
+int string button_iconFire 0x7f0a00bd
+int string button_iconWifi 0x7f0a00be
+int string button_login 0x7f0a00c4
 int string button_mms 0x7f0a000f
 int string button_ok 0x7f0a0010
 int string button_open_browser 0x7f0a0011
 int string button_product_search 0x7f0a0012
-int string button_recuperarPass 0x7f0a00c4
-int string button_registrarse 0x7f0a00c5
+int string button_recuperarPass 0x7f0a00c5
+int string button_registrarse 0x7f0a00c6
 int string button_search_book_contents 0x7f0a0013
 int string button_share_app 0x7f0a0014
 int string button_share_bookmark 0x7f0a0015
@@ -962,24 +1135,24 @@ int string button_show_map 0x7f0a001a
 int string button_sms 0x7f0a001b
 int string button_web_search 0x7f0a001c
 int string button_wifi 0x7f0a001d
-int string cancelar 0x7f0a008c
-int string confirm_password 0x7f0a00ad
-int string containerProgramacion 0x7f0a00a3
+int string cancelar 0x7f0a008d
+int string confirm_password 0x7f0a00ae
+int string containerProgramacion 0x7f0a00a4
 int string contents_contact 0x7f0a001e
 int string contents_email 0x7f0a001f
 int string contents_location 0x7f0a0020
 int string contents_phone 0x7f0a0021
 int string contents_sms 0x7f0a0022
 int string contents_text 0x7f0a0023
-int string descripcionObra 0x7f0a00cb
-int string enter_email 0x7f0a00ab
-int string enter_first_name 0x7f0a00ae
-int string enter_last_name 0x7f0a00af
-int string enter_password 0x7f0a00ac
-int string escenario 0x7f0a00a7
-int string facebook_app_id 0x7f0a00b7
-int string fragment1 0x7f0a0098
-int string hello_world 0x7f0a0085
+int string descripcionObra 0x7f0a00cc
+int string enter_email 0x7f0a00ac
+int string enter_first_name 0x7f0a00af
+int string enter_last_name 0x7f0a00b0
+int string enter_password 0x7f0a00ad
+int string escenario 0x7f0a00a8
+int string facebook_app_id 0x7f0a00b8
+int string fragment1 0x7f0a0099
+int string hello_world 0x7f0a0086
 int string history_clear_one_history_text 0x7f0a0025
 int string history_clear_text 0x7f0a0024
 int string history_email_title 0x7f0a0026
@@ -987,33 +1160,34 @@ int string history_empty 0x7f0a0027
 int string history_empty_detail 0x7f0a0028
 int string history_send 0x7f0a0029
 int string history_title 0x7f0a002a
-int string horario 0x7f0a00e1
-int string idCantEntradas 0x7f0a00e2
-int string idCantidadEn 0x7f0a00d6
-int string idComprar 0x7f0a00d8
-int string idFunciones 0x7f0a00ba
-int string idObra 0x7f0a00b9
-int string idPrecio 0x7f0a00d7
-int string id_Notificaciones 0x7f0a00cf
-int string id_contrasena 0x7f0a00d0
-int string id_email 0x7f0a00d1
-int string id_perfil 0x7f0a00ce
-int string id_sesion 0x7f0a00d2
-int string labelEscenario 0x7f0a00e4
-int string labelSalas 0x7f0a00e3
-int string label_date 0x7f0a00c8
-int string login 0x7f0a00b1
-int string login_facebook 0x7f0a00b4
-int string login_google 0x7f0a00b5
-int string login_linkedin 0x7f0a00b6
-int string login_twitter 0x7f0a00b3
+int string horario 0x7f0a00e2
+int string idCantEntradas 0x7f0a00e3
+int string idCantidadEn 0x7f0a00d7
+int string idComprar 0x7f0a00d9
+int string idFunciones 0x7f0a00bb
+int string idObra 0x7f0a00ba
+int string idPrecio 0x7f0a00d8
+int string id_Notificaciones 0x7f0a00d0
+int string id_contrasena 0x7f0a00d1
+int string id_email 0x7f0a00d2
+int string id_perfil 0x7f0a00cf
+int string id_sesion 0x7f0a00d3
+int string labelEscenario 0x7f0a00e5
+int string labelQR 0x7f0a0078
+int string labelSalas 0x7f0a00e4
+int string label_date 0x7f0a00c9
+int string login 0x7f0a00b2
+int string login_facebook 0x7f0a00b5
+int string login_google 0x7f0a00b6
+int string login_linkedin 0x7f0a00b7
+int string login_twitter 0x7f0a00b4
 int string menu_about 0x7f0a002b
-int string menu_close 0x7f0a009a
+int string menu_close 0x7f0a009b
 int string menu_encode_mecard 0x7f0a002c
 int string menu_encode_vcard 0x7f0a002d
 int string menu_help 0x7f0a002e
 int string menu_history 0x7f0a002f
-int string menu_open 0x7f0a0099
+int string menu_open 0x7f0a009a
 int string menu_settings 0x7f0a0030
 int string menu_share 0x7f0a0031
 int string msg_about 0x7f0a0032
@@ -1044,10 +1218,10 @@ int string msg_share_subject_line 0x7f0a004a
 int string msg_share_text 0x7f0a004b
 int string msg_sure 0x7f0a004c
 int string msg_unmount_usb 0x7f0a004d
-int string navigation_drawer_close 0x7f0a0095
-int string navigation_drawer_open 0x7f0a0094
-int string nomUsuario 0x7f0a00b0
-int string nombreUsuarioCuenta 0x7f0a00a9
+int string navigation_drawer_close 0x7f0a0096
+int string navigation_drawer_open 0x7f0a0095
+int string nomUsuario 0x7f0a00b1
+int string nombreUsuarioCuenta 0x7f0a00aa
 int string preferences_actions_title 0x7f0a004e
 int string preferences_bulk_mode_summary 0x7f0a004f
 int string preferences_bulk_mode_title 0x7f0a0050
@@ -1072,8 +1246,8 @@ int string preferences_search_country 0x7f0a0062
 int string preferences_supplemental_summary 0x7f0a0063
 int string preferences_supplemental_title 0x7f0a0064
 int string preferences_vibrate_title 0x7f0a0065
-int string pulsado 0x7f0a00da
-int string register 0x7f0a00b2
+int string pulsado 0x7f0a00db
+int string register 0x7f0a00b3
 int string result_address_book 0x7f0a0066
 int string result_calendar 0x7f0a0067
 int string result_email_address 0x7f0a0068
@@ -1086,42 +1260,42 @@ int string result_text 0x7f0a006e
 int string result_uri 0x7f0a006f
 int string result_wifi 0x7f0a0070
 int string sbc_name 0x7f0a0071
-int string sectorA 0x7f0a00a4
-int string sectorB 0x7f0a00a5
-int string sectorC 0x7f0a00a6
-int string seleccionada 0x7f0a0087
+int string sectorA 0x7f0a00a5
+int string sectorB 0x7f0a00a6
+int string sectorC 0x7f0a00a7
+int string seleccionada 0x7f0a0088
 int string share_name 0x7f0a0072
-int string sp_horario 0x7f0a00d4
-int string sp_sala 0x7f0a00d5
-int string textExpand 0x7f0a00ca
+int string sp_horario 0x7f0a00d5
+int string sp_sala 0x7f0a00d6
+int string textExpand 0x7f0a00cb
 int string title_about 0x7f0a0073
-int string title_activity_busqueda 0x7f0a008f
-int string title_activity_compra 0x7f0a00d3
-int string title_activity_compra_realizada 0x7f0a00e8
-int string title_activity_comunidad 0x7f0a00e0
-int string title_activity_create_account 0x7f0a00c6
-int string title_activity_ejemplo1 0x7f0a00dc
-int string title_activity_login 0x7f0a00bf
-int string title_activity_nosotros 0x7f0a00dd
-int string title_activity_novedades_main 0x7f0a00be
-int string title_activity_obra 0x7f0a0090
-int string title_activity_perfil 0x7f0a0097
-int string title_activity_pref 0x7f0a00cc
-int string title_activity_preferences 0x7f0a00c9
-int string title_activity_preferencias 0x7f0a00cd
-int string title_activity_principal 0x7f0a008d
-int string title_activity_programacion 0x7f0a008e
-int string title_activity_prueba_obra 0x7f0a00e6
-int string title_activity_pruebaasientos 0x7f0a00db
-int string title_activity_sectora 0x7f0a00e5
-int string title_activity_splash_screen 0x7f0a00b8
-int string title_section1 0x7f0a0091
-int string title_section2 0x7f0a0092
-int string title_section3 0x7f0a0093
-int string tituloObra 0x7f0a00a8
-int string txtEmail 0x7f0a00c1
-int string txtPassword 0x7f0a00c2
-int string txtUserName 0x7f0a00c7
+int string title_activity_busqueda 0x7f0a0090
+int string title_activity_compra 0x7f0a00d4
+int string title_activity_compra_realizada 0x7f0a00e9
+int string title_activity_comunidad 0x7f0a00e1
+int string title_activity_create_account 0x7f0a00c7
+int string title_activity_ejemplo1 0x7f0a00dd
+int string title_activity_login 0x7f0a00c0
+int string title_activity_nosotros 0x7f0a00de
+int string title_activity_novedades_main 0x7f0a00bf
+int string title_activity_obra 0x7f0a0091
+int string title_activity_perfil 0x7f0a0098
+int string title_activity_pref 0x7f0a00cd
+int string title_activity_preferences 0x7f0a00ca
+int string title_activity_preferencias 0x7f0a00ce
+int string title_activity_principal 0x7f0a008e
+int string title_activity_programacion 0x7f0a008f
+int string title_activity_prueba_obra 0x7f0a00e7
+int string title_activity_pruebaasientos 0x7f0a00dc
+int string title_activity_sectora 0x7f0a00e6
+int string title_activity_splash_screen 0x7f0a00b9
+int string title_section1 0x7f0a0092
+int string title_section2 0x7f0a0093
+int string title_section3 0x7f0a0094
+int string tituloObra 0x7f0a00a9
+int string txtEmail 0x7f0a00c2
+int string txtPassword 0x7f0a00c3
+int string txtUserName 0x7f0a00c8
 int string wifi_changing_network 0x7f0a0074
 int string wifi_ssid_label 0x7f0a0075
 int string wifi_type_label 0x7f0a0076
