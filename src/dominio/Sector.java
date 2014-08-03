@@ -13,7 +13,7 @@ public class Sector implements Parcelable {
 	private int idSector;
 	private int totalButacas;
 	private int linea;
-	private ArrayList<Butaca> listaButacas;
+	private ArrayList<Butaca> listaButacas=new ArrayList<Butaca>();
 	private int precioSector;
 
 	
@@ -38,6 +38,15 @@ public class Sector implements Parcelable {
 	public Sector() {
 		// TODO Auto-generated constructor stub
 		listaButacas = new ArrayList<Butaca>();
+	}
+	
+
+	public Sector(int idSector, int totalButacas, int linea, int precioSector) {
+		super();
+		this.idSector = idSector;
+		this.totalButacas = totalButacas;
+		this.linea = linea;
+		this.precioSector = precioSector;
 	}
 
 	// Constructor para crear el objeto a partir de un parcelable

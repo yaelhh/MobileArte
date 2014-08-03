@@ -10,6 +10,8 @@ public class SalaBackend extends GenericJson {
 	private String idSala;
 	@Key
 	private String SalaNombre;
+	@Key
+	private int capacidad;
 	 
 	
 	public SalaBackend() {}
@@ -30,4 +32,14 @@ public class SalaBackend extends GenericJson {
 	public void setNombreSala(String nombreSala) {
 		this.SalaNombre = nombreSala;
 	}
+
+	public int getCapacidad() {
+		return capacidad;
+	}
+
+	public void setCapacidad(int capacidad) {
+		this.capacidad = capacidad;
+	}
+	
+	
 }

@@ -15,7 +15,7 @@ import android.os.Parcelable;
 
 public class Obra implements Parcelable{
 
-	private Integer idObra;
+	private int idObra;
 
 	private String nombre;
 
@@ -41,7 +41,7 @@ public class Obra implements Parcelable{
 		return idObra;
 	}
 
-	public void setIdObra(Integer idObra) {
+	public void setIdObra(int idObra) {
 		this.idObra = idObra;
 	}
 	public String getNombre() {
@@ -88,12 +88,12 @@ public class Obra implements Parcelable{
 
 	}
 	
-	public Obra(String nombre, String descripcion) {
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		listaFunciones= new ArrayList<Funcion>();
-		listaImagenes = new int[3];
-	}
+//	public Obra(String nombre, String descripcion) {
+//		this.nombre = nombre;
+//		this.descripcion = descripcion;
+//		listaFunciones= new ArrayList<Funcion>();
+//		listaImagenes = new int[3];
+//	}
 
 	public Obra(String nombre) {
 		super();

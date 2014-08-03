@@ -97,9 +97,9 @@ public class Objetos {
 		hashComodidades.put("accesibilidad", false);
 		hashComodidades.put("Contra incendio", true);
 		listaSectores=getListSector();
-		sala1 = new Sala(1, "Eduardo Fabini",listaSectores,hashComodidades, 2000);
+		sala1 = new Sala("1", "Eduardo Fabini",200);
 		sala1.setListaSectores(listaSectores);
-		sala2 = new Sala(2, "Hugo Balzo",listaSectores,hashComodidades, 280);
+		sala2 = new Sala("2", "Hugo Balzo",300);
 		listaSalas.add(sala1);
 		listaSalas.add(sala2);
 		return listaSalas;
@@ -139,28 +139,28 @@ public class Objetos {
 		for (int i = 0; i < sector1.getTotalButacas(); i ++) {
 			miButaca = new Butaca();
 			miButaca.setIdButaca(i);
-			miButaca.setEstadoButaca(true);
+			miButaca.setEstadoButaca(0);
 			listabutacas.add(miButaca);
 			//Log.d("Creación de la lista de butacas", "ID Butaca: " + int.toString(butaca.getIdButaca()));
 		}
 		for (int i = 0; i < sector2.getTotalButacas(); i ++) {
 			miButaca = new Butaca();
 			miButaca.setIdButaca(i);
-			miButaca.setEstadoButaca(true);
+			miButaca.setEstadoButaca(0);
 			listabutacas2.add(miButaca);
 			//Log.d("Creación de la lista de butacas", "ID Butaca: " + int.toString(butaca.getIdButaca()));
 		}
 		for (int i = 0; i < sector3.getTotalButacas(); i ++) {
 			miButaca = new Butaca();
 			miButaca.setIdButaca(i);
-			miButaca.setEstadoButaca(true);
+			miButaca.setEstadoButaca(0);
 			listabutacas3.add(miButaca);
 			//Log.d("Creación de la lista de butacas", "ID Butaca: " + int.toString(butaca.getIdButaca()));
 		}
 		for (int i = 0; i < sector4.getTotalButacas(); i ++) {
 			miButaca = new Butaca();
 			miButaca.setIdButaca(i);
-			miButaca.setEstadoButaca(true);
+			miButaca.setEstadoButaca(0);
 			listabutacas4.add(miButaca);
 			//Log.d("Creación de la lista de butacas", "ID Butaca: " + int.toString(butaca.getIdButaca()));
 		}

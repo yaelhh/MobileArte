@@ -2,11 +2,15 @@ package com.example.clientarte;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
+import android.R.layout;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -17,6 +21,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.Intents;
+import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +34,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +49,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import dominio.Butaca;
+import dominio.Compra;
 import dominio.Funcion;
 import dominio.Obra;
 import dominio.Sala;
@@ -72,7 +80,7 @@ public class CompraActivity extends Activity {
 	private HashMap<String, Boolean> hashComodidades = new HashMap <String, Boolean> ();	
 	private Sala sala;
 	private Butaca miButaca;
-	private Objetos obj;
+//	private Objetos obj;
 	private Obra obra;
 	private Sector sectorA;
 	private Sector sectorB;
@@ -86,14 +94,13 @@ public class CompraActivity extends Activity {
 	ArrayList<Butaca> butacasSeleccionadas= new ArrayList<Butaca>();
 	Funcion funcionSeleccionada;
 	Spinner sprHorario;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_compra);
-		sala=new Sala();
-		obj= new Objetos();
-		sala= obj.getListSalas().get(0);
+		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
 		obra= new Obra();
 		obra= getIntent().getParcelableExtra("obra");
 		TextView titulo= (TextView)findViewById(R.id.idTitulo);
@@ -104,8 +111,9 @@ public class CompraActivity extends Activity {
 		ArrayAdapter<Funcion> spinner_adapter = new ArrayAdapter<Funcion>(this,android.R.layout.simple_spinner_item, lista);
 		sprHorario.setAdapter(spinner_adapter);
 		funcionSeleccionada= (Funcion) sprHorario.getOnItemSelectedListener();
-		Log.e("funcion seleccionada",""+ funcionSeleccionada);
+
 		TextView txtSala= (TextView)findViewById(R.id.sala);
+		sala= obtenerSala(obj);
 		txtSala.setText(sala.getNombreSala());
 		cantEntradas=(EditText)findViewById(R.id.idCantidadEntradas);
 		//        cant=cantEntradas.getText().toString();
@@ -117,25 +125,15 @@ public class CompraActivity extends Activity {
 		bttnSectorC=(Button)findViewById(R.id.sectorC);
 		btnComprar=(Button)findViewById(R.id.button_comprar);
 		//		btnComprar.setClickable(false);
-		sectorA= new Sector();
-		sectorA=sala.getListaSectores().get(0);
-		sectorB= new Sector();
-		sectorB=sala.getListaSectores().get(1);
-		sectorC= new Sector();
-		sectorC=sala.getListaSectores().get(2);
-		bttnSectorA.setText("Precio "+ sectorA.getPrecioSector());
-		bttnSectorB.setText("Precio "+ sectorB.getPrecioSector());
-		bttnSectorC.setText("Precio "+ sectorC.getPrecioSector());
+		realizarCompra(obj);
 
-		//		bttnSectorA.setOnClickListener((OnClickListener) entrarSector());		
-
-		//		crearObjetos();
-		//		addListenerOnButton();
+		
 		sprHorario.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> a, View v,int position, long id) {
 				funcionSeleccionada=(Funcion) a.getItemAtPosition(position);
-				Log.e("funcion seleccionada",""+ funcionSeleccionada);
+				crearSectores(funcionSeleccionada);
+
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
@@ -144,7 +142,7 @@ public class CompraActivity extends Activity {
 
 		});
 
-
+		
 
 	}
 
@@ -163,7 +161,8 @@ public class CompraActivity extends Activity {
 			if ( resultCode == Activity.RESULT_OK ){
 
 				yaSeleccionada= data.getExtras().getBoolean("yaSeleccionadas");
-
+				precioTotal= data.getExtras().getInt("precioTotal");
+				butacasSeleccionadas=data.getExtras().getParcelableArrayList("lstButaca");
 
 
 				Log.e("yaSeleciconada", "" + yaSeleccionada);
@@ -172,34 +171,52 @@ public class CompraActivity extends Activity {
 
 	}
 
-	//	yaSeleccionada= data.getBooleanExtra("yaSeleccionada",false);
-	//	Log.e("yaSeleciconada", "" + yaSeleccionada);
+	
+	
+	public Sala obtenerSala(ObjetosBackend obj){
+		Sala sala= new Sala();
+		ArrayList<Sala> listSalas= new ArrayList<Sala>();
+		listSalas= obj.getListSalas();
+		for(int x=0;x<listSalas.size();x++){
+			Sala salaActual= listSalas.get(x);
+			for(int y=0;y<salaActual.getListaObras().size();y++){
+				Obra obraActual= salaActual.getListaObras().get(y);
+				if(obra.getIdObra()==obraActual.getIdObra()){
+					return listSalas.get(x);
+				}
+			}
+		}
+		 return sala;
+	}
+	
+	public void crearSectores(Funcion funcion){
+		LinearLayout contendedor=(LinearLayout)findViewById(R.id.contenedorSectores);
+		for(int x=0;x<funcion.getListaSetores().size();x++){
+			sectorA= new Sector();
+			sectorA=funcion.getListaSetores().get(0);
+			sectorB= new Sector();
+			sectorB=funcion.getListaSetores().get(1);
+			sectorC= new Sector();
+			sectorC=funcion.getListaSetores().get(2);
+			bttnSectorA.setText("Precio "+ sectorA.getPrecioSector());
+			bttnSectorB.setText("Precio "+ sectorB.getPrecioSector());
+			bttnSectorC.setText("Precio "+ sectorC.getPrecioSector());
+//			Button bttnSector=new Button(this);
+//			bttnSector.setId(x);
+//			bttnSector.setWidth(sector.getLinea()*100);
+//			bttnSector.setHeight(sector.getLinea()*50);
+//			bttnSector.setBackgroundColor(new Random().nextInt());
+//			bttnSector.setText("Precio "+ sector.getPrecioSector());
+//			contendedor.addView(bttnSector);
+			Toast.makeText(this,funcion.getIdFuncion()+"" , Toast.LENGTH_SHORT).show();
 
-	//  	private void crearObjetos() {
-	//  		//Crear sector
-	//  		sector = new Sector();
-	//		sector.setIdSector(1); 
-	//		sector.setTotalButacas(24);
-	//		
-	//		//Crear las butacas del sector 
-	//		listabutacas = new ArrayList<Butaca>();
-	//		for (int i = 0; i < sector.getTotalButacas(); i ++) {
-	//			miButaca = new Butaca();
-	//			miButaca.setIdButaca(i);
-	//			miButaca.setEstadoButaca(true);
-	//			listabutacas.add(miButaca);
-	//			//Log.d("Creación de la lista de butacas", "ID Butaca: " + Integer.toString(butaca.getIdButaca()));
-	//		}
-	//		//Agrego la lista de butacas al sector
-	//		sector.setListaButacas(listabutacas);
-	//		
-	//
-	//		miSala= new Sala(1, "Nombre Sala",listSectores,hashComodidades, 200);
-	//		listSectores.add(miSector);
-	//		miSala.setListaSectores(listSectores);
-	////		Log.e("Mi sala 1",Integer.toString(miSala.getIdSala()));		
-	//	}
-
+		}
+		
+		
+		
+		
+	}
+	
 	public void entrarSector(View v){
 		cantEntradas=(EditText)findViewById(R.id.idCantidadEntradas);
 		String s=cantEntradas.getText().toString();
@@ -207,7 +224,7 @@ public class CompraActivity extends Activity {
 			cant= Integer.parseInt(cantEntradas.getText().toString());
 			Intent intent = new Intent(CompraActivity.this, SectorAActivity.class);
 			intent.putExtra("cantEntrada", cant);
-			Log.e("v.getId "+ v.getId(), " A "+R.id.sectorA +" B "+R.id.sectorB +" C "+R.id.sectorC );
+//			Log.e("v.getId "+ v.getId(), " A "+R.id.sectorA +" B "+R.id.sectorB +" C "+R.id.sectorC );
 			switch (v.getId()){
 			case R.id.sectorA:
 				intent.putExtra("sector",sectorA );
@@ -230,75 +247,65 @@ public class CompraActivity extends Activity {
 	}
 
 
-	public void realizarCompra(View v)  {
+	public void realizarCompra(ObjetosBackend obj)  {
+		final ObjetosBackend o=obj;
+//		Log.e("funcion seleccionada",""+ funcionSeleccionada);
+		btnComprar.setOnClickListener(new OnClickListener() {  
+			@Override
+			public void onClick(View v) {
+				if(yaSeleccionada){
+					if(usuario!= null){
+						Calendar c = Calendar.getInstance();
+						SimpleDateFormat df1 = new SimpleDateFormat("dd-MMM-yyyy");
+						String fechaActual = df1.format(c.getTime());
+						Log.e("datos","precio "+ precioTotal+" fecha "+ fechaActual);
+//						 "+ butacas "+ butacasSeleccionadas.size()+ " funcion "+ CompraActivity.this.funcionSeleccionada
+						Compra compra= new Compra(fechaActual,obra,false,usuario,precioTotal,CompraActivity.this.funcionSeleccionada,butacasSeleccionadas );
+						o.guardarCompra(compra);
+						String s= "El nombre de la obra es: "+obra.getNombre() + " la funcion elegida es  "+obra.getListaFunciones().get(0)+" y la cantidad de entradas elegidas es "+cantEntradas.getText().toString();
+						Funcion funcionElegida=obra.getListaFunciones().get(0);
+						String fecha= funcionElegida.getFechaObra();
+						String hora= funcionElegida.getHoraComienzo();
+						String duracion= Double.toString(funcionElegida.getDuracion());
+						Intent intent = new Intent("com.google.zxing.client.android.ENCODE");
+					    intent.putExtra("ENCODE_TYPE", "TEXT_TYPE");
+					    intent.putExtra("ENCODE_DATA", s);
+					    intent.putExtra("fecha", fecha);
+					    intent.putExtra("hora", hora);
+					    intent.putExtra("duracion", duracion);
+					    intent.putExtra("tituloObra", obra.getNombre());
+					    startActivity(intent);					
+					}else{
+						AlertDialog.Builder dialogo1 = new AlertDialog.Builder(CompraActivity.this);  
+						dialogo1.setTitle("Importante");  
+						dialogo1.setMessage("Para continuar la compra necesita estar logueado,¿Desea loguearse?");            
+						dialogo1.setCancelable(false);  
+						dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {  
+							public void onClick(DialogInterface dialogo1, int id) {  
+								Intent intent = new Intent(CompraActivity.this, LoginActivity.class);
+								startActivity(intent);
 
-		Log.e("funcion seleccionada",""+ funcionSeleccionada);
-
-		if(yaSeleccionada){
-			if(usuario!= null){
-				//			Date dt = new Date();
-				//			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-				//			String formatteDate = df.format(dt.getDate());
-				//			Compra compra= new Compra(formatteDate,obra,false,usuario,precioTotal,funcionSeleccionada,butacasSeleccionadas);
-
-//						Intent intent = new Intent(CompraActivity.this, CompraRealizadaActivity.class);
-				//			intent.putExtra("Compra", compra);
-//						startActivity(intent);
-				//			Intent intent = new Intent("com.google.zxing.client.android.ENCODE");
-				//			intent.putExtra("ENCODE_TYPE", "TEXT_TYPE");
-				//			intent.putExtra("ENCODE_DATA", "Hola ZOMWI!!!");
-				//			startActivity(intent);
-//				Intent emailIntent = new Intent(Intent.ACTION_SEND);
-//		        emailIntent.setData(Uri.parse("mailto:"));
-//				emailIntent.putExtra(Intent.EXTRA_EMAIL, "yaelhh@gmail.com");
-//		       
-//		        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Su compra ha sido realizada");
-//		        emailIntent.putExtra(Intent.EXTRA_TEXT, "Felicidades por su compra");
-//		        emailIntent.setType("message/rfc822");
-//			    startActivity(Intent.createChooser(emailIntent, "Email "+intent));
-	        
-				String s= "El nombre de la obra es: "+obra.getNombre() + " la funcion elegida es  "+obra.getListaFunciones().get(0)+" y la cantidad de entradas elegidas es "+cantEntradas.getText().toString();
-				Funcion funcionElegida=obra.getListaFunciones().get(0);
-				String fecha= funcionElegida.getFechaObra();
-				String hora= funcionElegida.getHoraComienzo();
-				String duracion= Double.toString(funcionElegida.getDuracion());
-				Intent intent = new Intent("com.google.zxing.client.android.ENCODE");
-			    intent.putExtra("ENCODE_TYPE", "TEXT_TYPE");
-			    intent.putExtra("ENCODE_DATA", s);
-			    intent.putExtra("fecha", fecha);
-			    intent.putExtra("hora", hora);
-			    intent.putExtra("duracion", duracion);
-			    intent.putExtra("tituloObra", obra.getNombre());
-
-			    startActivity(intent);
-				
-
-				
-			}else{
-				AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);  
-				dialogo1.setTitle("Importante");  
-				dialogo1.setMessage("Para continuar la compra necesita estar logueado,¿Desea loguearse?");            
-				dialogo1.setCancelable(false);  
-				dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {  
-					public void onClick(DialogInterface dialogo1, int id) {  
-						Intent intent = new Intent(CompraActivity.this, LoginActivity.class);
-						startActivity(intent);
-
-					}  
-				});  
-				dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {  
-					public void onClick(DialogInterface dialogo1, int id) {  
-						cancelar();
-					}  
-				});            
-				dialogo1.show();        
+							}  
+						});  
+						dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {  
+							public void onClick(DialogInterface dialogo1, int id) {  
+								cancelar();
+							}  
+						});            
+						dialogo1.show();        
 
 
+					}
+				}else{
+					Toast.makeText(CompraActivity.this,"Debe seleccionar las butacas antes de continuar" , Toast.LENGTH_SHORT).show();
+
+				}
 			}
-		}else{
-			Toast.makeText(this,"Debe seleccionar las butacas antes de continuar" , Toast.LENGTH_SHORT).show();
 
-		}
+		});
+
+
+		
 	}
 
 	public void aceptar() {
