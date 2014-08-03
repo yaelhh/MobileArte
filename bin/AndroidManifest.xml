@@ -19,25 +19,16 @@
         android:targetSdkVersion="19" />
 
     <application
-<<<<<<< 1159e519627fa0e18b0ccae881339f4b25eb641f
-=======
         android:name="com.example.clientarte.ObjetosBackend"
->>>>>>> 5e3e3b4d7c19abc2716edda3e194596bd71405a3
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
-<<<<<<< 1159e519627fa0e18b0ccae881339f4b25eb641f
        
         <activity
             android:name="com.example.clientarte.SplashScreenActivity"
             android:label="@string/app_name"
-=======
-        <activity
-            android:name="com.example.clientarte.SplashScreenActivity"
-		    android:label="@string/app_name"
->>>>>>> 5e3e3b4d7c19abc2716edda3e194596bd71405a3
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
             <intent-filter>
@@ -51,16 +42,9 @@
             android:label="@string/title_activity_principal"
             android:screenOrientation="portrait" >
         </activity>
-<<<<<<< 1159e519627fa0e18b0ccae881339f4b25eb641f
 
       
          <activity
-=======
-        
-
-         <activity
-        
->>>>>>> 5e3e3b4d7c19abc2716edda3e194596bd71405a3
             android:name="com.example.clientarte.PrincipalActivity"
             android:label="@string/title_activity_principal"
             android:screenOrientation="portrait" >
@@ -102,12 +86,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> -->
-<<<<<<< 1159e519627fa0e18b0ccae881339f4b25eb641f
         
                <activity
-=======
-        <activity
->>>>>>> 5e3e3b4d7c19abc2716edda3e194596bd71405a3
             android:name="com.example.clientarte.CreateAccountActivity"
             android:label="@string/title_activity_create_account"
             android:screenOrientation="portrait" >
@@ -188,12 +168,7 @@
             android:windowSoftInputMode="stateAlwaysHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-<<<<<<< 1159e519627fa0e18b0ccae881339f4b25eb641f
 				<category android:name="android.intent.category.LAUNCHER" />
-=======
-
-                <category android:name="android.intent.category.LAUNCHER" />
->>>>>>> 5e3e3b4d7c19abc2716edda3e194596bd71405a3
             </intent-filter>
             
         </activity>
