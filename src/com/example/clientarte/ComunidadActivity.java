@@ -86,11 +86,9 @@ public class ComunidadActivity extends ActionBarActivity {
 		//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
 				conectarBackend();
 				cargarDatos();
-<<<<<<< HEAD
-				
-=======
+
 //				agregarComentarios();
->>>>>>> develop
+
 //		mostrarImagen();
 
 

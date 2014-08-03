@@ -70,27 +70,27 @@ public class DBAdapter extends Service {
 
 //	public ArrayList<Obra> getAllObras() {
 //		ArrayList<Obra> obras = new ArrayList<Obra>();
-<<<<<<< HEAD
+
 //		Cursor result = db.query(UsuarioTable.TABLE_NAME, UsuarioTable.COLS,
-=======
+
 //		Cursor result = db.query(ObrasTable.TABLE_NAME, ObrasTable.COLS,
->>>>>>> develop
+
 //				null, null, null, null, BaseColumns._ID);
 //		if (result.moveToFirst())
 //			do {
 //				obras.add(new Obra(result.getInt(result
-<<<<<<< HEAD
+
 //						.getString(result
 //								.getColumnIndex(UsuarioColumns.nombreUsuario)),
 //						result.getString(result
 //								.getColumnIndex(UsuarioColumns.descripcionObra));
-=======
+
 //						.getColumnIndex(BaseColumns._ID)), result
 //						.getString(result
 //								.getColumnIndex(ObrasColumns.nombreObra)),
 //						result.getString(result
 //								.getColumnIndex(ObrasColumns.descripcionObra))));
->>>>>>> develop
+
 //			} while (result.moveToNext());
 //		return obras;
 //	}

@@ -204,11 +204,10 @@ public class SQLiteActivity extends ListActivity {
 
 	protected void deleteClient(int ID) {
 		dbAdapter.deleteCliente(ID);
-<<<<<<< HEAD
 		//loadClientes();
-=======
+
 //		loadClientes();
->>>>>>> develop
+
 	}
 
 	/*protected void editClient(int iD, String nombre, String apellidos,
@@ -218,13 +217,12 @@ public class SQLiteActivity extends ListActivity {
 	}*/
 	
 	protected void editClient(int iD, String nombre, String apellidos) {
-<<<<<<< HEAD
 		//dbAdapter.updateCliente(iD, nombre, apellidos);
 		//loadClientes();
-=======
-		dbAdapter.updateCliente(iD, nombre, apellidos);
+
+		//dbAdapter.updateCliente(iD, nombre, apellidos);
 //		loadClientes();
->>>>>>> develop
+
 	}
 
 	/*private void addClient(String nombre, String apellidos, String edad) {
@@ -232,10 +230,7 @@ public class SQLiteActivity extends ListActivity {
 		loadClientes();
 	}*/
 
-<<<<<<< HEAD
-=======
 //	Lo comento porque me da error getAllObras, ya que lo comente en la clase dbAdapter
->>>>>>> develop
 //	private void loadClientes() {
 //		ArrayList<Obra> obras = dbAdapter.getAllObras();
 //
