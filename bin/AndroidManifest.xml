@@ -37,21 +37,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.example.clientarte.LoginActivity"
-            android:label="@string/title_activity_principal"
-            android:screenOrientation="portrait" >
-        </activity>
-
-      
-         <activity
-            android:name="com.example.clientarte.PrincipalActivity"
-            android:label="@string/title_activity_principal"
-            android:screenOrientation="portrait" >
-        </activity>
-
           <activity
             android:name="com.example.clientarte.ProgramacionActivity"
+            android:label="@string/title_activity_principal"
+            android:screenOrientation="portrait" >
+        </activity>
+
+		  <activity
+            android:name="com.example.clientarte.PrincipalActivity"
             android:label="@string/title_activity_programacion"
             android:screenOrientation="portrait" >
         </activity>
@@ -76,17 +69,6 @@
             android:label="@string/title_activity_novedades_main"
             android:screenOrientation="portrait" >
         </activity>
-        <!-- <activity
-            android:name="com.example.clientarte.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity> -->
-        
                <activity
             android:name="com.example.clientarte.CreateAccountActivity"
             android:label="@string/title_activity_create_account"
@@ -178,9 +160,8 @@
                 <action android:name="android.accounts.AccountAuthenticator" >
                 </action>
             </intent-filter>
-
-            
-        </service>
+			</service>
+			
     </application>
 
 </manifest>

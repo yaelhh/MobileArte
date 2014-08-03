@@ -69,32 +69,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 		
 		//Registro usuario
 		public void registroUsuario (View view) {
-//			emailUsuario = (EditText) findViewById(R.id.etNombreUsuario);
-//			password = (EditText) findViewById(R.id.etPassUsuario);
-			final String usuario = emailUsuario.getText().toString();
-			String password = passUsuario.getText().toString();
-			//Crear nuevo usuario
-			//if (emailValidator(usuario)){
-			mKinveyClient.user().create(usuario, password, new KinveyUserCallback() {
-				public void onFailure(Throwable error) {
-					//onFailura se ejecuta si el usuario existe
-					//Se avisa al usuario por pantalla del error
-					mensaje = "El usuario: " + usuario + ", ya se encuentra registrado";
-					Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
-					//Se graba registro en el log de errores
-					Log.e("Realizando registro de usuario en Kinvey", mensaje, error);
-				}
-				@Override
-				public void onSuccess(User u) {
-					mensaje = "Se ha realizado el alta del usuario: " + u.getUsername() + ".";
-					Log.d("Realizando registro de usuario en Kinvey", mensaje);
-				}
-			});
-//			}else{
-//				mensaje = "El email ingresado no es correcto, revise formato";
-//				Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
-//			}
+			LoginActivity.this.startActivity(new Intent(LoginActivity.this, CreateAccountActivity.class));
+            LoginActivity.this.finish();
 		}
+		
 	
 		//Login
 		public void login (View view) {

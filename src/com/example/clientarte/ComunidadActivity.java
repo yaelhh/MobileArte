@@ -5,17 +5,25 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -33,6 +41,7 @@ import com.kinvey.java.User;
 import com.kinvey.java.core.DownloaderProgressListener;
 import com.kinvey.java.core.KinveyClientCallback;
 import com.kinvey.java.core.MediaHttpDownloader;
+import com.kinvey.java.core.MediaHttpUploader;
 import com.kinvey.java.model.FileMetaData;
 
 public class ComunidadActivity extends ActionBarActivity {
@@ -46,10 +55,14 @@ public class ComunidadActivity extends ActionBarActivity {
 	private ViewGroup layout;
 	private ScrollView scroll;
 	private ListView lista;
-
+    private static final int DLG_EXAMPLE1 = 0;
+    private static final int TEXT_ID = 0;
+    private static final int REQUEST_TEXT = 4;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//setContentView(R.layout.activity_listado);
 		setContentView(R.layout.activity_listado);
 		//layout= (ViewGroup)findViewById(R.id.containerComunidad);
 		//scroll = (ScrollView)findViewById(R.id.ScrollViewComunidad);
@@ -61,19 +74,21 @@ public class ComunidadActivity extends ActionBarActivity {
 		//		}
 
 		//Conexión de la APP a Kinvey
-		mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-		mKinveyClient.ping(new KinveyPingCallback() {
-			public void onFailure(Throwable t) {
-				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
-			}
-			public void onSuccess(Boolean b) {
-				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
-			}
-		});
+//		mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
+//		mKinveyClient.ping(new KinveyPingCallback() {
+//			public void onFailure(Throwable t) {
+//				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
+//			}
+//			public void onSuccess(Boolean b) {
+//				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
+//			}
+//		});
 		//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
 				conectarBackend();
 				cargarDatos();
+
 //				agregarComentarios();
+
 //		mostrarImagen();
 
 
@@ -306,52 +321,141 @@ public class ComunidadActivity extends ActionBarActivity {
 
 	}
 	
-	public void cargarDatos_old(){
-		Query myQuery = mKinveyClient.query();
-		mKinveyClient.appData("Comunidad", ComunidadBackend.class).get(myQuery, new KinveyListCallback<ComunidadBackend>() {
-       	 
-        	@Override
-            public void onSuccess(ComunidadBackend[] resultadoconsulta) {
-                //for (Sala sala : result) {
-       		// int[] to = new int[] { R.id.TextView01 };
-            	for (int i = 0; i < resultadoconsulta.length; i++) {
-            		mensaje = "Comunidad id: " + resultadoconsulta[i].getIdComunidad() + ", Descripcion: " + resultadoconsulta[i].getDescripcionComunidad();
-            		tvBd1 = new TextView(ComunidadActivity.this);
-            		tvBd1.setId(i);
-            		tvBd1.setText(mensaje);
-            		tvBd1.setPadding(10, 10, 10, 10);
-            		tvBd1.setWidth(470);
-            		tvBd1.setHeight(140);
-            		//scroll.addView(layout);
-            		layout.addView(tvBd1);
-            	 }
-            }
-            @Override
-            public void onFailure(Throwable error) {
-                Log.e(TAG, "AppData.get by Query Failure", error);
-            }
-	    }); 
-        
+	
+	
+	public void ingresarComentario(View view) {
+		mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
+		if (!mKinveyClient.user().isUserLoggedIn()) {
+			mostrarDialog();
+//			PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
+//                    LoginActivity.class));
+//			PerfilActivity.this.finish();
+		}else{
+//			if (mKinveyClient.user().isUserLoggedIn()) {
+//			mensajeConfirmacionDesloguear();
+			//desloguearUsuario();
+			Toast t=Toast.makeText(this,"Presiono Cancelar", Toast.LENGTH_SHORT);
+			t.show();
+		}
+		
+
 	}
 	
-	private void agregarComentarios() {
+	
+//	public void mostrarDialog(){
+//		showDialog(DLG_EXAMPLE1);
+//	}
+	
+	public void mostrarDialog(){
+		
+			mensajeConfirmacion();
+//			PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
+//                    LoginActivity.class));
+//			PerfilActivity.this.finish();
+		
+//			if (mKinveyClient.user().isUserLoggedIn()) {
+//			mensajeConfirmacionDesloguear();
+			//desloguearUsuario();
+		
+	}
+	
+	protected Dialog onCreateDialog(int id) {
+		 
+        switch (id) {
+            case DLG_EXAMPLE1:
+                return createExampleDialog();
+            default:
+                return null;
+        }
+    }
+	
+	private Dialog createExampleDialog() {
+		 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Compartir:");
+        builder.setMessage("Ingrese su comentario:");
+        builder.setIcon(R.drawable.butaca_roja);
+ 
+         // Use an EditText view to get user input.
+         final EditText input = new EditText(this);
+         input.setId(TEXT_ID);
+         builder.setView(input);
+ 
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+ 
+            @Override
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String value = input.getText().toString();
+                Log.d(TAG, "Usuario: " + value);
+                guardarDatosComentarios(value);
+                return;
+            }
+        });
+ 
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+ 
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        });
+        
+        return builder.create();
+    }
+	
+	public void guardarDatosComentarios(String valor){
 		ComunidadBackend event = new ComunidadBackend();
-		event.setDescripcionComunidad("Launch Party");
+		event.setDescripcionComunidad(valor);
 		//event.setAddress("Kinvey HQ");
 		AsyncAppData<ComunidadBackend> myevents = mKinveyClient.appData("Comunidad",ComunidadBackend.class);
 		myevents.save(event, new KinveyClientCallback<ComunidadBackend>() {
-		  @Override
-		  public void onFailure(Throwable e) {
-		      Log.e(TAG, "failed to save event data", e);
-		  }
-		@Override
-		public void onSuccess(ComunidadBackend arg0) {
-			 
-			
-		}
+
+			@Override
+			public void onFailure(Throwable e) {
+				Log.e(TAG, "failed to save event data", e);
+			}
+			@Override
+			public void onSuccess(ComunidadBackend arg0) {
+
+
+			}
 		});
-		
 	}
+	
+	public void mensajeConfirmacion(){
+		AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this); 
+		dialogo1.setTitle("Importante"); 
+		dialogo1.setMessage("No esta logueado,¿Desea loguearse?"); 
+		dialogo1.setCancelable(false); 
+		dialogo1.setPositiveButton("Si", new DialogInterface.OnClickListener() { 
+			public void onClick(DialogInterface dialogo1, int id) { 
+				Intent intent = new Intent(ComunidadActivity.this, LoginActivity.class); 
+				//startActivity(intent);
+				ComunidadActivity.this.startActivityForResult(intent, REQUEST_TEXT);
+
+			} 
+		}); 
+		dialogo1.setNegativeButton("No", new DialogInterface.OnClickListener() { 
+			public void onClick(DialogInterface dialogo1, int id) { 
+				cancelar(); 
+			} 
+		}); 
+		dialogo1.show(); 
+
+
+	}
+	
+	public void cancelar() {
+		//finish();
+		Toast t=Toast.makeText(this,"Presiono cancelar", Toast.LENGTH_SHORT);
+		t.show();
+	}
+	
+	
+			
+	}
+
+	
 
 
 //	private void mostrarImagen() throws FileNotFoundException {
@@ -376,34 +480,9 @@ public class ComunidadActivity extends ActionBarActivity {
 //	}
 		
 
-}		
+		
     	
     	
-    	 /*
-    	 Query myQuery = kinveyClient.query();
-         kinveyClient.appData("Comunidad", ComunidadBackend.class).get(myQuery, new KinveyListCallback<ComunidadBackend>() {
-        	 @Override
-             public void onSuccess(ComunidadBackend[] resultadoconsulta) {
-                 //for (Sala sala : result) {
-        		// int[] to = new int[] { R.id.TextView01 };
-             	for (int i = 0; i < resultadoconsulta.length; i++) {
-             		mensaje = "Comunidad id: " + resultadoconsulta[i].getIdComunidad() + ", Descripcion: " + resultadoconsulta[i].getDescripcionComunidad();
-             		tvBd1 = new TextView(ComunidadActivity.this);
-             		tvBd1.setId(i);
-             		tvBd1.setText(mensaje);
-             		tvBd1.setPadding(10, 10, 10, 10);
-             		tvBd1.setWidth(470);
-             		tvBd1.setHeight(140);
-             		scroll.addView(layout);
-             		layout.addView(tvBd1);
-             	 }
-             }
-             @Override
-             public void onFailure(Throwable error) {
-                 Log.e(TAG, "AppData.get by Query Failure", error);
-             }
- 	    }); */
-         
-    
+    	
 
 

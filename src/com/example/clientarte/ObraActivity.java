@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
+
 import android.app.ActionBar.LayoutParams;
 import android.app.ProgressDialog;
 import android.content.Intent;
+
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyPingCallback;
@@ -14,6 +16,7 @@ import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.Query;
 import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -56,7 +59,7 @@ public class ObraActivity extends ActionBarActivity {
 	private String appSecret="1b0fa51481984d2da5910f78a9d26ccc";
 	private String mensaje;
 	private Client kinveyClient;
-
+	private static final int REQUEST_TEXT = 3;
 	//	private int requestCode = 1;
 	//	private ListView lvObras;
 	//	private DB_Obra dataSource;// = new DB_Obra(this);
@@ -108,6 +111,11 @@ public class ObraActivity extends ActionBarActivity {
 		//	
 		//		
 	}		
+	
+	public void referenciarIngresarComentario (View view){
+		Intent intent = new Intent(ObraActivity.this, ComunidadActivity.class); 
+		ObraActivity.this.startActivityForResult(intent, REQUEST_TEXT);
+	}
 
 	//Funcion donde se crea el activity en funcion a la obra que se obtenga
 	public void crearActivity(){

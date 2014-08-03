@@ -9,7 +9,7 @@
     <string name="Nosotros">Nosotros</string>
     <string name="Comunidad">Comunidad</string>
     <string name="Novedades">Novedades</string>
-    <string name="cancelar">Cancelar</string>
+    <string name="cancelar">Volver</string>
     <string name="title_activity_principal">Principal</string>
     <string name="title_activity_programacion">Programacion</string>
     <string name="title_activity_busqueda">BusquedaActivity</string>
@@ -26,7 +26,9 @@
     <string name="menu_close">menu_close</string>
     <string name="action_bar_notification">Notificaciones</string>
     <string name="back">volver</string>
-    <string name="Cuenta">Cuenta</string>
+    <string name="Cuenta">Datos del usuario</string>
+    <string name="EstadoUsuario">Ingresar/Salir</string>
+    <string name="RegistroUsuario">Registrar</string>
     <string name="Prox_obras">Próximas obras</string>
     <string name="Obras_vistas">Obras vistas</string>
     <string name="Mascaras">Mascaras</string>
@@ -38,6 +40,9 @@
     <string name="sectorC">Sector C</string>
     <string name="escenario">Escenario</string>
     <string name="tituloObra">LA MADRASTRA</string>
+    <string name="dialogo_linea_1">Prueba 1</string>
+    <string name="dialogo_linea_2">Prueba 1</string>
+    
 
     <string name="nombreUsuarioCuenta">Sebastian</string>
     <string name="button_escribirComentario">Escribir comentario</string>

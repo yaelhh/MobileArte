@@ -19,7 +19,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.SimpleAdapter;
 import backend.DBAdapter;
-import backend.Obras.ObrasColumns;
+import backend.Obras.UsuarioColumns;
 import dominio.Obra;
 
 
@@ -29,7 +29,7 @@ public class SQLiteActivity extends ListActivity {
 	private Boolean mBound;
 	
 	//final String[] from = { ClientesColumns.NOMBRE, ClientesColumns.APELLIDOS, ClientesColumns.EDAD };
-	final String[] from = { ObrasColumns.idObra, ObrasColumns.nombreObra, ObrasColumns.descripcionObra };	
+	final String[] from = { UsuarioColumns.nombreUsuario, UsuarioColumns.passwordUsuario, UsuarioColumns.estaLogueadoUsuario };	
 	final int[] to = new int[] { R.id.nombre, R.id.apellidos, R.id.edad };
 
 	/** Called when the activity is first created. */
@@ -51,8 +51,9 @@ public class SQLiteActivity extends ListActivity {
 			HashMap<String, String> item = (HashMap<String, String>) this
 					.getListAdapter().getItem(info.position);
 
-			menu.setHeaderTitle(item.get(ObrasColumns.nombreObra) + " "
-					+ item.get(ObrasColumns.descripcionObra));
+			menu.setHeaderTitle(item.get(UsuarioColumns.nombreUsuario) + " "
+					+ item.get(UsuarioColumns.passwordUsuario) + " "
+					+ item.get(UsuarioColumns.estaLogueadoUsuario));
 			String[] menuItems = getResources()
 					.getStringArray(R.array.listmenu);
 			for (int i = 0; i < menuItems.length; i++) {
@@ -72,9 +73,10 @@ public class SQLiteActivity extends ListActivity {
 		switch (menuItemIndex) {
 		case 0:
 			showEditClientDialog(
-					Integer.parseInt(itm.get(ObrasColumns._ID)),
-					itm.get(ObrasColumns.nombreObra),
-					itm.get(ObrasColumns.descripcionObra));
+					//Integer.parseInt(itm.get(UsuarioColumns._ID)),
+					itm.get(UsuarioColumns.nombreUsuario),
+					itm.get(UsuarioColumns.passwordUsuario),
+					itm.get(UsuarioColumns.estaLogueadoUsuario));
 			return true;
 		case 1:
 			showConfirmDialog(info.position);
@@ -130,8 +132,8 @@ public class SQLiteActivity extends ListActivity {
 
 	}
 
-	private void showEditClientDialog(final int ID, String name,
-			String surname) {
+	private void showEditClientDialog(String name,
+			String surname, String state) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
 		LayoutInflater factory = LayoutInflater.from(this);
@@ -156,8 +158,7 @@ public class SQLiteActivity extends ListActivity {
 										.findViewById(R.id.nuevoapellidos);
 								EditText age = (EditText) textEntryView
 										.findViewById(R.id.nuevoedad);
-								editClient(ID, name.getText().toString(),
-										surname.getText().toString());
+								
 							}
 
 						})
@@ -180,8 +181,8 @@ public class SQLiteActivity extends ListActivity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(
 				"¿Estás seguro de querer BORRAR a "
-						+ itm.get(ObrasColumns.nombreObra) + " "
-						+ itm.get(ObrasColumns.descripcionObra) + "?")
+						+ itm.get(UsuarioColumns.nombreUsuario) + " "
+						+ itm.get(UsuarioColumns.passwordUsuario) + "?")
 				.setCancelable(false)
 				.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
 					@Override
@@ -203,7 +204,10 @@ public class SQLiteActivity extends ListActivity {
 
 	protected void deleteClient(int ID) {
 		dbAdapter.deleteCliente(ID);
+		//loadClientes();
+
 //		loadClientes();
+
 	}
 
 	/*protected void editClient(int iD, String nombre, String apellidos,
@@ -213,8 +217,12 @@ public class SQLiteActivity extends ListActivity {
 	}*/
 	
 	protected void editClient(int iD, String nombre, String apellidos) {
-		dbAdapter.updateCliente(iD, nombre, apellidos);
+		//dbAdapter.updateCliente(iD, nombre, apellidos);
+		//loadClientes();
+
+		//dbAdapter.updateCliente(iD, nombre, apellidos);
 //		loadClientes();
+
 	}
 
 	/*private void addClient(String nombre, String apellidos, String edad) {

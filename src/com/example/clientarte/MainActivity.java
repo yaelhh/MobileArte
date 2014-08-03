@@ -3,6 +3,7 @@ package com.example.clientarte;
 
 import java.util.ArrayList;
 
+import dominio.Usuario;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
@@ -39,8 +40,10 @@ private CharSequence mDrawerTitle;
 private CharSequence mTitle;
 private NavigationAdapter NavAdapter;
 private SearchView mSearchView;
-private static final int REQUEST_TEXT = 3;
 
+
+private static final int REQUEST_TEXT = 5;
+private Usuario usuarioLogueado;
 
 
 
@@ -153,8 +156,6 @@ public void MostrarFragment(int position) {
         break;  
     case 6:
         fragment = new PerfilFragment();
-//        Intent intent = new Intent(MainActivity.this, PerfilActivity.class); 
-//    	MainActivity.this.startActivityForResult(intent, REQUEST_TEXT);
         break;          
     /*case 7:
         fragment = new AjustesFragment();
@@ -233,6 +234,27 @@ public boolean onCreateOptionsMenu(Menu menu) {
     mSearchView.setOnQueryTextListener((OnQueryTextListener) this);
 
     return true;
+}
+
+@Override 
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	View view = null;
+	if (requestCode == 5) { 
+		if (resultCode == RESULT_OK) { 
+			//BUSCO USUARIO SEGUN NOMBRE DE USUARIO KINVEY LOGUEADO
+			String userNameLogueado = data.getStringExtra("username");
+			Toast t=Toast.makeText(this,"Me traigo datos" + userNameLogueado, Toast.LENGTH_SHORT);
+			t.show();
+			//mKinveyClient.user().setUsername(userNameLogueado);
+			usuarioLogueado.setEstaLogueado(1);
+			usuarioLogueado.setMiNombreUsuario(userNameLogueado);
+			
+			Toast t2=Toast.makeText(this,"Usuario Logueado" + usuarioLogueado.getMiNombreUsuario().toString(), Toast.LENGTH_SHORT);
+			t2.show();
+			
+		} else if (resultCode == RESULT_CANCELED) {  
+		} 
+	}
 }
 
 

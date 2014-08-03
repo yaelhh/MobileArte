@@ -19,12 +19,15 @@ public class Usuario implements Parcelable{
 	private int mascaras;
 	private ArrayList<Obra> misObrasVistas;
 	private ArrayList<Obra> misProximasObras;
-	private boolean estaLogueado;
+	private int estaLogueado;
+	private String imagenUsuario;
+	private String password;
+	
 	
 //Constructor
 	public Usuario(int idUsuario, String miNombre, String miApellido,
 			String miNombreUsuario, String fechaNacimiento, int mascaras,
-			ArrayList<Obra> misObrasVistas, ArrayList<Obra> misProximasObras, boolean estaLogueado) {
+			ArrayList<Obra> misObrasVistas, ArrayList<Obra> misProximasObras, int estaLogueado, String miImagen, String miPass) {
 		super();
 		this.idUsuario = idUsuario;
 		this.miNombre = miNombre;
@@ -35,10 +38,20 @@ public class Usuario implements Parcelable{
 		this.misObrasVistas = misObrasVistas;
 		this.misProximasObras = misProximasObras;
 		this.estaLogueado = estaLogueado;
+		this.imagenUsuario = miImagen;
+		this.password = miPass;
 	}
-public Usuario() {
-		
+	public Usuario() {
+
 	}
+
+	public Usuario(String nomUsuario, String miPassword, int logueado) {
+		this.miNombreUsuario = nomUsuario;
+		this.password = miPassword;
+		this.estaLogueado = logueado;
+
+	}
+
 public Usuario(Parcel in){
 	readFromParcel(in);
 }
@@ -92,14 +105,31 @@ public Usuario(Parcel in){
 	public void setMisProximasObras(ArrayList<Obra> misProximasObras) {
 		this.misProximasObras = misProximasObras;
 	}
-	public boolean getLogueado() {
+	public int getLogueado() {
 		return estaLogueado;
 	}
-	public void setEstaLogueado(boolean estaLogueado) {
+	public void setEstaLogueado(int estaLogueado) {
 		this.estaLogueado = estaLogueado;
 	}
 	
+	public String getImagenUsuario() {
+		return imagenUsuario;
+	}
+	public void setImagenUsuario(String imagenUsuario) {
+		this.imagenUsuario = imagenUsuario;
+	}
+	public int isEstaLogueado() {
+		return estaLogueado;
+	}
 	
+	
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	@Override
 	public int describeContents() {
 		// TODO Auto-generated method stub
@@ -115,7 +145,10 @@ public Usuario(Parcel in){
 		dest.writeInt(this.mascaras);
 		dest.writeTypedList(this.misObrasVistas);
 		dest.writeTypedList(this.misProximasObras);
-		dest.writeBooleanArray(new boolean[] {this.estaLogueado});
+		dest.writeInt(this.estaLogueado);
+		dest.writeString(this.imagenUsuario);
+		dest.writeString(this.password);
+		
 	}	
 	private void readFromParcel(Parcel in) {
 		this.idUsuario = in.readInt();
@@ -126,9 +159,9 @@ public Usuario(Parcel in){
 		this.mascaras = in.readInt();
 		in.readTypedList(misObrasVistas,Obra.CREATOR);
 		in.readTypedList(misProximasObras,Obra.CREATOR);
-		boolean[] temp = new boolean[1];
-		in.readBooleanArray(temp);
-		estaLogueado = temp[0];
+		this.estaLogueado = in.readInt();
+		this.imagenUsuario = in.readString();
+		this.password = in.readString();
 			
    }
 	public static final Parcelable.Creator<Usuario> CREATOR

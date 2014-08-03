@@ -13,13 +13,16 @@ public class ComunidadBackend extends LinkedGenericJson{
 	private String descripcion;
 	@Key
 	private String usuario;
-	@Key
+	@Key("imagenComentario")
 	private String idImagen;
 	@Key
 	private String idObra;
 	 
 	
-	public ComunidadBackend() {}
+	public ComunidadBackend() {
+		//"attachment" is the JSON element used to maintain a Linked File.
+        putFile("attachment");
+	}
 	
 	public ComunidadBackend (String desc) {
 		super();

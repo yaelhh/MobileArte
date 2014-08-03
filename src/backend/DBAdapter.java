@@ -11,8 +11,8 @@ import android.database.sqlite.SQLiteException;
 import android.os.Binder;
 import android.os.IBinder;
 import android.provider.BaseColumns;
-import backend.Obras.ObrasColumns;
-import backend.Obras.ObrasTable;
+import backend.Obras.UsuarioColumns;
+import backend.Obras.UsuarioTable;
 import dominio.Obra;
 
 public class DBAdapter extends Service {
@@ -64,22 +64,33 @@ public class DBAdapter extends Service {
 	 * Obtiene un cursor con todos los clientes de la base de datos
 	 */
 	public Cursor getCursorClientes() {
-		return db.query(ObrasTable.TABLE_NAME, ObrasTable.COLS, null,
+		return db.query(UsuarioTable.TABLE_NAME, UsuarioTable.COLS, null,
 				null, null, null, BaseColumns._ID);
 	}
 
 //	public ArrayList<Obra> getAllObras() {
 //		ArrayList<Obra> obras = new ArrayList<Obra>();
+
+//		Cursor result = db.query(UsuarioTable.TABLE_NAME, UsuarioTable.COLS,
+
 //		Cursor result = db.query(ObrasTable.TABLE_NAME, ObrasTable.COLS,
+
 //				null, null, null, null, BaseColumns._ID);
 //		if (result.moveToFirst())
 //			do {
 //				obras.add(new Obra(result.getInt(result
+
+//						.getString(result
+//								.getColumnIndex(UsuarioColumns.nombreUsuario)),
+//						result.getString(result
+//								.getColumnIndex(UsuarioColumns.descripcionObra));
+
 //						.getColumnIndex(BaseColumns._ID)), result
 //						.getString(result
 //								.getColumnIndex(ObrasColumns.nombreObra)),
 //						result.getString(result
 //								.getColumnIndex(ObrasColumns.descripcionObra))));
+
 //			} while (result.moveToNext());
 //		return obras;
 //	}
@@ -99,20 +110,21 @@ public class DBAdapter extends Service {
 	 * BORRAR CLIENTE CON _id = _rowIndex
 	 * */
 	public boolean deleteCliente(int _rowIndex) {
-		return db.delete(ObrasTable.TABLE_NAME, BaseColumns._ID + "="
+		return db.delete(UsuarioTable.TABLE_NAME, BaseColumns._ID + "="
 				+ _rowIndex, null) > 0;
 	}
 
 	/**
 	 * ACTUALIZAR CIENTE _id = _rowIndex
 	 * */
-	public boolean updateCliente(Integer _rowIndex, String nombre,
-			String descripcion) {
+	public boolean updateCliente(Integer _rowIndex, String nombreUsuario,
+			String password, String estado) {
 		ContentValues newValues = new ContentValues();
-		newValues.put(ObrasColumns.nombreObra, nombre);
-		newValues.put(ObrasColumns.descripcionObra, descripcion);
+		newValues.put(UsuarioColumns.nombreUsuario, nombreUsuario);
+		newValues.put(UsuarioColumns.passwordUsuario, password);
+		newValues.put(UsuarioColumns.estaLogueadoUsuario, estado);
 		//newValues.put(ObrasColumns.EDAD, edad);
-		return db.update(ObrasTable.TABLE_NAME, newValues, BaseColumns._ID
+		return db.update(UsuarioTable.TABLE_NAME, newValues, BaseColumns._ID
 				+ "=" + _rowIndex, null) > 0;
 	}
 
