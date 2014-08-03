@@ -31,6 +31,8 @@ public class SectorAActivity extends Activity {
 	int cantEntradas=1;
 	int cantSeleccionadas=0;
 	Button btnOk;
+	int PrecioTotal;
+	ArrayList<Butaca> lstButaca=new ArrayList<Butaca>();
 
 	// Sector miSector= new Sector(1, 25);
 
@@ -42,6 +44,7 @@ public class SectorAActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
 		cantEntradas= extras.getInt("cantEntrada");
 		SectorA = getIntent().getParcelableExtra("sector");
+		PrecioTotal= cantEntradas*SectorA.getPrecioSector();
 		gv.setNumColumns(SectorA.getLinea());
 		btnOk=(Button)findViewById(R.id.bttnOk);
 		btnOk.setClickable(false);
@@ -74,7 +77,7 @@ public class SectorAActivity extends Activity {
 		// cargaremos los objetos
 		for (int i = 0; i < listButacas.size(); i++) {
 			// Log.e("Butaca"+i,"IdButaca "+ listButacas.get(i).getIdButaca());
-			if (listButacas.get(i).getEstadoButaca() == false) {
+			if (listButacas.get(i).getEstadoButaca()==1) {
 				butacaXSector[i] = R.drawable.butaca_roja;
 				contOcupada++;
 
@@ -95,20 +98,25 @@ public class SectorAActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, android.view.View v,
 					int position, long id) {
 
-
-				if (listButacas.get(position).getEstadoButaca() == true) {
+				switch (listButacas.get(position).getEstadoButaca()){
+				case 0:
 					if (cantEntradas==0 || cantSeleccionadas < cantEntradas) {
-						butacaXSector[position] = R.drawable.butaca_roja;
-						listButacas.get(position).setEstadoButaca(false);
+						butacaXSector[position] = R.drawable.butaca_amarilla;
+						listButacas.get(position).setEstadoButaca(2);
 						cantSeleccionadas++;
+						lstButaca.add(listButacas.get(position));
+						
 					} else {
-						Toast.makeText(SectorAActivity.this,"Ya seleccionó todas ls entradas elegidas" , Toast.LENGTH_SHORT).show();
+						Toast.makeText(SectorAActivity.this,"Ya seleccionó todas las entradas elegidas" , Toast.LENGTH_SHORT).show();
 
 					}
-
-				} else {
+					break;
+				case 1:
+					break;
+				case 2:	
 					butacaXSector[position] = R.drawable.butaca_verde;
-					listButacas.get(position).setEstadoButaca(true);
+					listButacas.get(position).setEstadoButaca(0);
+					lstButaca.remove(listButacas.get(position));
 					cantSeleccionadas--;
 				}
 
@@ -126,6 +134,8 @@ public class SectorAActivity extends Activity {
 		Intent intent = new Intent();
 //		intent.putExtra("sectorElegido",SectorA );
 		intent.putExtra("yaSeleccionadas", true);
+		intent.putExtra("precioTotal", PrecioTotal);
+		intent.putExtra("ButacasSeleccionadas", lstButaca);
         setResult( Activity.RESULT_OK, intent );
         SectorAActivity.this.finish();
 //		finish();

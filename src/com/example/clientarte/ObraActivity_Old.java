@@ -54,14 +54,14 @@ public class ObraActivity_Old extends ActionBarActivity {
 
 		}
 		
-		Obra miObra = new Obra ("Redemption", "Jason Statham");
-		Obra miObra2 = new Obra ("La Madrastra", "Victoria Ruffo");
-		Obra miObra3 = new Obra ("The Wolf of Wall Street", "Leonardo DiCaprio");
-		Obra miObra4 = new Obra ("X-Men", "Hugh Jackman");
-		myDbHelper.createObra(miObra);
-		myDbHelper.createObra(miObra2);
-		myDbHelper.createObra(miObra3);
-		myDbHelper.createObra(miObra4);
+//		Obra miObra = new Obra ("Redemption", "Jason Statham");
+//		Obra miObra2 = new Obra ("La Madrastra", "Victoria Ruffo");
+//		Obra miObra3 = new Obra ("The Wolf of Wall Street", "Leonardo DiCaprio");
+//		Obra miObra4 = new Obra ("X-Men", "Hugh Jackman");
+//		myDbHelper.createObra(miObra);
+//		myDbHelper.createObra(miObra2);
+//		myDbHelper.createObra(miObra3);
+//		myDbHelper.createObra(miObra4);
 	
 		
 	}		

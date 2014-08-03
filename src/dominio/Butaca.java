@@ -7,7 +7,7 @@ import android.os.Parcelable;
 public class Butaca implements Parcelable{
 
 	private int idButaca;
-	private Boolean estadoButaca;
+	private int estadoButaca;
 	
 	public Butaca() {
 		
@@ -20,12 +20,16 @@ public class Butaca implements Parcelable{
 		readFromParcel(in);
 	}
 	
+	public Butaca(int idButaca,int estado){
+		this.idButaca=idButaca;
+		this.estadoButaca=estado;
+	}
 	// Set & Get	
 	public void setIdButaca (int id) {
 		this.idButaca = id;
 	}
 	
-	public void setEstadoButaca (boolean estado) {
+	public void setEstadoButaca (int estado) {
 		this.estadoButaca = estado;
 	}
 	
@@ -33,7 +37,7 @@ public class Butaca implements Parcelable{
 		return this.idButaca;
 	}
 	
-	public boolean getEstadoButaca() {
+	public int getEstadoButaca() {
 		return this.estadoButaca;
 	}
 		
@@ -49,15 +53,13 @@ public class Butaca implements Parcelable{
 	public void writeToParcel(Parcel arg0, int arg1) {
 		// TODO Auto-generated method stub
 		arg0.writeInt(idButaca);
-		arg0.writeBooleanArray(new boolean[] {estadoButaca});
+		arg0.writeInt(estadoButaca);
 	}
 
 	//Clase para recuperar los datos, IMPORTANTE leerlos en el mismo orden en que se escribieron 
 	private void readFromParcel(Parcel in) {
 		idButaca = in.readInt();
-		boolean[] temp = new boolean[1];
-		in.readBooleanArray(temp);
-		estadoButaca = temp[0];
+		estadoButaca = in.readInt();
 	}
 
 	//Necesario para usar la clase en Arrays

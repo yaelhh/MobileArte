@@ -112,7 +112,8 @@ public class ComunidadFragment extends Fragment {
 				lista = (ListView) rootView.findViewById(R.id.ListView_listado);
 				ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();  
 				for (int i = 0; i < resultadoconsulta.length; i++) {
-					datos.add(new Lista_entrada(R.drawable.user_icon,resultadoconsulta[i].getIdComunidad(),resultadoconsulta[i].getDescripcionComunidad()));
+					datos.add(new Lista_entrada(R.drawable.user_icon,resultadoconsulta[i].getUsuario(),resultadoconsulta[i].getDescripcionComunidad()));
+
 				}
 				lista.setAdapter(new Lista_adaptador(getActivity(), R.layout.activity_entradalv,datos) {
 

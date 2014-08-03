@@ -37,8 +37,14 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/n"
             android:layout_marginTop="38dp"
+<<<<<<< 1159e519627fa0e18b0ccae881339f4b25eb641f
             android:onClick="validarUsuarioOpcion"
             android:text="@string/Cuenta" />
+=======
+            android:text="@string/Cuenta"
+            
+            />
+>>>>>>> 5e3e3b4d7c19abc2716edda3e194596bd71405a3
 
         <Button
             android:id="@+id/btnCanjear"

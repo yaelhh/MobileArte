@@ -203,7 +203,7 @@ public class SQLiteActivity extends ListActivity {
 
 	protected void deleteClient(int ID) {
 		dbAdapter.deleteCliente(ID);
-		loadClientes();
+//		loadClientes();
 	}
 
 	/*protected void editClient(int iD, String nombre, String apellidos,
@@ -214,7 +214,7 @@ public class SQLiteActivity extends ListActivity {
 	
 	protected void editClient(int iD, String nombre, String apellidos) {
 		dbAdapter.updateCliente(iD, nombre, apellidos);
-		loadClientes();
+//		loadClientes();
 	}
 
 	/*private void addClient(String nombre, String apellidos, String edad) {
@@ -222,27 +222,28 @@ public class SQLiteActivity extends ListActivity {
 		loadClientes();
 	}*/
 
-	private void loadClientes() {
-		ArrayList<Obra> obras = dbAdapter.getAllObras();
-
-		// Fill List with DATA
-		ArrayList<HashMap<String, String>> HClientes = new ArrayList<HashMap<String, String>>();
-		for (Obra obra : obras) {
-
-			HashMap<String, String> clientData = new HashMap<String, String>();
-
-			clientData
-					.put(ObrasColumns._ID, String.valueOf(obra.getIdObra()));
-			clientData.put(from[0], obra.getNombre());
-			clientData.put(from[1], obra.getDescripcion());
-
-			HClientes.add(clientData);
-		}
-
-		SimpleAdapter ListAdapter = new SimpleAdapter(this, HClientes,
-				R.layout.row, from, to);
-		setListAdapter(ListAdapter);
-	}
+//	Lo comento porque me da error getAllObras, ya que lo comente en la clase dbAdapter
+//	private void loadClientes() {
+//		ArrayList<Obra> obras = dbAdapter.getAllObras();
+//
+//		// Fill List with DATA
+//		ArrayList<HashMap<String, String>> HClientes = new ArrayList<HashMap<String, String>>();
+//		for (Obra obra : obras) {
+//
+//			HashMap<String, String> clientData = new HashMap<String, String>();
+//
+//			clientData
+//					.put(ObrasColumns._ID, String.valueOf(obra.getIdObra()));
+//			clientData.put(from[0], obra.getNombre());
+//			clientData.put(from[1], obra.getDescripcion());
+//
+//			HClientes.add(clientData);
+//		}
+//
+//		SimpleAdapter ListAdapter = new SimpleAdapter(this, HClientes,
+//				R.layout.row, from, to);
+//		setListAdapter(ListAdapter);
+//	}
 /*
 	@Override
 	protected void onStart() {

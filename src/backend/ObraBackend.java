@@ -7,11 +7,11 @@ import com.google.api.client.util.Key;
 public class ObraBackend extends GenericJson {
 
 	@Key("_id") // nombre del campo definido en el backend
-	private String idObras;
+	private int idObras;
+	@Key
+	private String descripcionObras;
 	@Key
 	private String nombreObras;
-	@Key
-	private String descripcipnObras;
 	 
 	
 	public ObraBackend() {}
@@ -20,8 +20,14 @@ public class ObraBackend extends GenericJson {
 		super();
 		this.nombreObras = nombreObra;
 	}
+	public ObraBackend (String nombreObra,String descripcion) {
+		super();
+		this.nombreObras = nombreObra;
+		this.descripcionObras= descripcion;
+	}
 	
-	public String getIdObra() {
+	
+	public int getIdObra() {
 		return this.idObras;
 	}
 		
@@ -34,10 +40,10 @@ public class ObraBackend extends GenericJson {
 	}
 	
 	public String getDescripcipnObras() {
-		return this.descripcipnObras;
+		return this.descripcionObras;
 	}
 
 	public void setDescripcipnObras(String descripcionObra) {
-		this.descripcipnObras = descripcionObra;
+		this.descripcionObras = descripcionObra;
 	}
 }

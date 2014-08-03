@@ -9,25 +9,23 @@ import android.os.Parcelable;
 
 public class Sala implements Parcelable{
 //Variables
-	private Integer idSala;
+	private String idSala;
 	private String nombreSala;
-	private ArrayList<Obra> listaObras;
+	private ArrayList<Obra> listaObras= new ArrayList<Obra>();
 	private ArrayList<Sector> listaSectores;
 	private HashMap<String, Boolean> listaComodidades;
 	private int capacidad;
 	
 	//Constructor	
-	public Sala(Integer idSala, String nombreSala,
-			ArrayList<Sector> listaSectores,
-			HashMap<String, Boolean> listaComodidades, int capacidad) {
+	public Sala(String idSala, String nombreSala, int capacidad) {
 		this.idSala = idSala;
 		this.nombreSala = nombreSala;
-		this.listaSectores = listaSectores;
-		this.listaComodidades = listaComodidades;
-		this.capacidad = capacidad;
+		this.capacidad= capacidad;
+		ArrayList<Obra> listaObras= new ArrayList<Obra>();
 	}
 	public Sala(){
-		
+		ArrayList<Obra> listaObras= new ArrayList<Obra>();
+
 	}
 	public Sala(Parcel in) {
 //		super();
@@ -39,11 +37,11 @@ public class Sala implements Parcelable{
 		readFromParcel(in);
 	}
 	//Get and Set 
-	public Integer getIdSala() {
+	public String getIdSala() {
 		return idSala;
 	}
 
-	public void setIdSala(Integer idSala) {
+	public void setIdSala(String idSala) {
 		this.idSala = idSala;
 	}
 
@@ -93,14 +91,14 @@ public class Sala implements Parcelable{
 	}
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeInt(this.idSala);
+		dest.writeString(this.idSala);
 //		dest.writeDouble(this.miPrecio);
 		dest.writeString(this.nombreSala);
 		dest.writeList(this.listaSectores);
 		dest.writeInt(this.capacidad);
 	}	
 	private void readFromParcel(Parcel in) {
-		this.idSala = in.readInt();
+		this.idSala = in.readString();
 		this.nombreSala = in.readString();
 		in.readTypedList(this.listaSectores, Sector.CREATOR);
 //		in.readTypedList(this.listaComodidades, Comodidad.CREATOR);

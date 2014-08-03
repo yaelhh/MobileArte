@@ -73,7 +73,7 @@ public class ComunidadActivity extends ActionBarActivity {
 		//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
 				conectarBackend();
 				cargarDatos();
-				agregarComentarios();
+//				agregarComentarios();
 //		mostrarImagen();
 
 
@@ -245,7 +245,7 @@ public class ComunidadActivity extends ActionBarActivity {
 				lista = (ListView) findViewById(R.id.ListView_listado);
 				ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();  
 				for (int i = 0; i < resultadoconsulta.length; i++) {
-					datos.add(new Lista_entrada(R.drawable.user_icon,resultadoconsulta[i].getIdComunidad(),resultadoconsulta[i].getDescripcionComunidad()));
+					datos.add(new Lista_entrada(R.drawable.user_icon,resultadoconsulta[i].getUsuario(),resultadoconsulta[i].getDescripcionComunidad()));
 				}
 				lista.setAdapter(new Lista_adaptador(ComunidadActivity.this, R.layout.activity_entradalv,datos) {
 

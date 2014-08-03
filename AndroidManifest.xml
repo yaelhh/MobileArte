@@ -19,6 +19,7 @@
         android:targetSdkVersion="19" />
 
     <application
+        android:name="com.example.clientarte.ObjetosBackend"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"

@@ -58,12 +58,12 @@ public class DB_Obra {
 				null);*/
 	}
 
-	private Obra cursorToObra(Cursor cursor) {
-		Obra obra = new Obra();
-		//obra.setIdObra(cursor.getInt(cursor)(0));
-		//nota.setId(cursor.getLong(0));
-		obra.setIdObra(cursor.getInt(0));
-		obra.setNombre(cursor.getString(1));
-		return obra;
-	}	
+//	private Obra cursorToObra(Cursor cursor) {
+//		Obra obra = new Obra();
+//		//obra.setIdObra(cursor.getInt(cursor)(0));
+//		//nota.setId(cursor.getLong(0));
+//		obra.setIdObra(cursor.getInt(0));
+//		obra.setNombre(cursor.getString(1));
+//		return obra;
+//	}	
 }

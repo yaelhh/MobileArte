@@ -2,6 +2,8 @@ package com.example.clientarte;
 
 import java.util.ArrayList;
 
+import com.kinvey.android.Client;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,17 +34,21 @@ public class ProgramacionActivity extends Activity implements OnQueryTextListene
 	private ArrayList<Obra>listObras= new ArrayList<Obra>();
 	private ArrayList<Funcion> listFunciones= new ArrayList<Funcion>();
 	private ViewGroup layout;
-	private Objetos obj;
+//	static ObjetosBackend obj;
 	private ImageButton imageObra;
 	private Obra miObra;
 	private  Obra obraSeleccionada= new Obra();
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_programacion);
 		cal = (CalendarView) findViewById(R.id.calendarView1);
 		layout= (ViewGroup)findViewById(R.id.containerProgramacion);
-		crearProgramacion();
+		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
+		
+		
+		crearProgramacion(obj);
 
 
 		//       addListenerOnButton(); 
@@ -63,10 +69,10 @@ public class ProgramacionActivity extends Activity implements OnQueryTextListene
 
 	}
 	//Funcion para crear activity en funcion de la lista de obras obtenidas
-	public void crearProgramacion(){ 
-		obj=new Objetos();
+	public void crearProgramacion(ObjetosBackend obj){ 
+//		obj=new ObjetosBackend(mKinveyClient);
 
-		listObras=obj.getListObra();
+		listObras=obj.getListObras();
 		ArrayList<View> listView= new ArrayList<View>();
 		//    recorro la lista de obras existentes y agrego un imagenbutton por cada obra
 		for(int x=0; x<listObras.size();x++){
@@ -91,9 +97,10 @@ public class ProgramacionActivity extends Activity implements OnQueryTextListene
 				@Override
 				public void onClick(View v) {
 					int i= v.getId(); 
-					Log.d("ProgramacionActivity - ingresoObra", Integer.toString(i));
+					Log.e("ProgramacionActivity - ingresoObra", Integer.toString(i));
 
 					obraSeleccionada= (Obra) listObras.get(i);
+					
 
 					Intent intent = new Intent(ProgramacionActivity.this, ObraActivity.class);
 					intent.putExtra("obra",obraSeleccionada); 

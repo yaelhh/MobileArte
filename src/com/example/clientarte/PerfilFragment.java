@@ -20,7 +20,10 @@ import android.widget.Toast;
 
 /*  Fragment para seccion perfil */ 
 public class PerfilFragment extends Fragment {
+<<<<<<< 1159e519627fa0e18b0ccae881339f4b25eb641f
 	
+=======
+>>>>>>> 5e3e3b4d7c19abc2716edda3e194596bd71405a3
 	private Button btnCuenta;
 	private Button btnProxObras;
 	private Button btnObrasVistas;
@@ -31,7 +34,11 @@ public class PerfilFragment extends Fragment {
 	private Client mKinveyClient;
 	private ProgressDialog mProgressDialog = null;
 	private static final int REQUEST_TEXT = 2;
+<<<<<<< 1159e519627fa0e18b0ccae881339f4b25eb641f
 	
+=======
+     
+>>>>>>> 5e3e3b4d7c19abc2716edda3e194596bd71405a3
     public PerfilFragment(){}
      
     @Override
@@ -48,6 +55,7 @@ public class PerfilFragment extends Fragment {
       				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
       			}
       		});
+<<<<<<< 1159e519627fa0e18b0ccae881339f4b25eb641f
         return rootView;
     }
     
@@ -68,6 +76,50 @@ public class PerfilFragment extends Fragment {
     }
     
     public void desloguearUsuario () {
+=======
+      		btnCuenta=(Button)rootView.findViewById(R.id.btnCuenta);
+      		btnCuenta.setOnClickListener(new OnClickListener() {
+      			 
+    			@Override
+    			public void onClick(View v) {
+    				mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
+    				//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
+    				if (!mKinveyClient.user().isUserLoggedIn()) {
+    					mensajeConfirmacion();
+//    					PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
+//    		                    LoginActivity.class));
+//    					PerfilActivity.this.finish();
+    				}else{
+    					if (mKinveyClient.user().isUserLoggedIn()) {
+    					mensajeConfirmacionDesloguear();
+    					//desloguearUsuario();
+    				}
+    				}
+
+  			}
+
+    		});
+        return rootView;
+    }
+    
+//    public void validarUsuarioOpcion(View view){
+//		mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
+//		//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
+//		if (!mKinveyClient.user().isUserLoggedIn()) {
+//			mensajeConfirmacion();
+////			PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
+////                    LoginActivity.class));
+////			PerfilActivity.this.finish();
+//		}else{
+//			if (mKinveyClient.user().isUserLoggedIn()) {
+//			mensajeConfirmacionDesloguear();
+//			//desloguearUsuario();
+//		}
+//		}
+//	}
+	
+	public void desloguearUsuario () {
+>>>>>>> 5e3e3b4d7c19abc2716edda3e194596bd71405a3
 		super.onDestroy();
 		mKinveyClient.user().logout().execute();
 		onCreateDialog();
@@ -143,6 +195,7 @@ public class PerfilFragment extends Fragment {
 
     
     
+<<<<<<< 1159e519627fa0e18b0ccae881339f4b25eb641f
 //    public void addListenerOnButton() {
 //		 
 //    	btnCuenta.setOnClickListener(new OnClickListener() {
@@ -170,6 +223,36 @@ public class PerfilFragment extends Fragment {
     
     @Override 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+=======
+    public void addListenerOnButton() {
+		 
+    	btnCuenta.setOnClickListener(new OnClickListener() {
+    		
+ 
+			@Override
+			public void onClick(View v) {
+							
+				}
+
+		});
+    	
+    	btnProxObras.setOnClickListener(new OnClickListener() {
+    		 
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), ProgramacionActivity.class);
+				startActivity(intent);
+			}
+
+		});
+    	
+		
+    }
+    
+    @Override 
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	View view = null;
+>>>>>>> 5e3e3b4d7c19abc2716edda3e194596bd71405a3
 		if (requestCode == 2) { 
 			if (resultCode == getActivity().RESULT_OK) { 
 				//BUSCO USUARIO SEGUN NOMBRE DE USUARIO KINVEY LOGUEADO
@@ -184,6 +267,9 @@ public class PerfilFragment extends Fragment {
 			} 
 		}
 	}
+<<<<<<< 1159e519627fa0e18b0ccae881339f4b25eb641f
    
 
+=======
+>>>>>>> 5e3e3b4d7c19abc2716edda3e194596bd71405a3
 }

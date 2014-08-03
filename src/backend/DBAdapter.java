@@ -68,21 +68,21 @@ public class DBAdapter extends Service {
 				null, null, null, BaseColumns._ID);
 	}
 
-	public ArrayList<Obra> getAllObras() {
-		ArrayList<Obra> obras = new ArrayList<Obra>();
-		Cursor result = db.query(ObrasTable.TABLE_NAME, ObrasTable.COLS,
-				null, null, null, null, BaseColumns._ID);
-		if (result.moveToFirst())
-			do {
-				obras.add(new Obra(result.getInt(result
-						.getColumnIndex(BaseColumns._ID)), result
-						.getString(result
-								.getColumnIndex(ObrasColumns.nombreObra)),
-						result.getString(result
-								.getColumnIndex(ObrasColumns.descripcionObra))));
-			} while (result.moveToNext());
-		return obras;
-	}
+//	public ArrayList<Obra> getAllObras() {
+//		ArrayList<Obra> obras = new ArrayList<Obra>();
+//		Cursor result = db.query(ObrasTable.TABLE_NAME, ObrasTable.COLS,
+//				null, null, null, null, BaseColumns._ID);
+//		if (result.moveToFirst())
+//			do {
+//				obras.add(new Obra(result.getInt(result
+//						.getColumnIndex(BaseColumns._ID)), result
+//						.getString(result
+//								.getColumnIndex(ObrasColumns.nombreObra)),
+//						result.getString(result
+//								.getColumnIndex(ObrasColumns.descripcionObra))));
+//			} while (result.moveToNext());
+//		return obras;
+//	}
 
 	/**
 	 * INSERTAR NUEVO CLIENTE

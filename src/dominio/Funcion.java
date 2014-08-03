@@ -1,5 +1,6 @@
 package dominio;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.kinvey.java.LinkedResources.LinkedGenericJson;
@@ -14,23 +15,35 @@ public class Funcion implements Parcelable{
 	private Double duracion;
 	private String horaComienzo;
 	private String fechaObra;
+	private ArrayList<Sector> listaSectores= new ArrayList<Sector>();
 	//Constructor
 	
-	public Funcion(int idFuncion, Double duracion,String fechaObra,String horaComienzo) {
+	
 
+	public Funcion(int idFuncion, Double duracion,String fechaObra,String horaComienzo) {
 		super();
 		this.idFuncion = idFuncion;
 		this.duracion = duracion;
 		this.fechaObra = fechaObra;
 		this.horaComienzo= horaComienzo;
+		ArrayList<Sector> listaSectores= new ArrayList<Sector>();
 	}
 
 	public Funcion (Parcel in) {
-//		listaButacas = new ArrayList<Butaca>();
+		listaSectores = new ArrayList<Sector>();
 		readFromParcel(in);
 	}
 	
 	//get and set
+	
+	public ArrayList<Sector> getListaSetores() {
+		return listaSectores;
+	}
+
+	public void setListaSectores(ArrayList<Sector> listaSectores) {
+		this.listaSectores = listaSectores;
+	}
+	
 	public int getIdFuncion() {
 
 		return idFuncion;
@@ -76,6 +89,7 @@ public class Funcion implements Parcelable{
 		dest.writeDouble(duracion);
 		dest.writeString(fechaObra);
 		dest.writeString(horaComienzo);
+		dest.writeTypedList(listaSectores);
 		
 	}
 	private void readFromParcel(Parcel in) {
@@ -83,6 +97,7 @@ public class Funcion implements Parcelable{
 		duracion= in.readDouble();
 		fechaObra= in.readString();
 		horaComienzo= in.readString();
+		in.readTypedList(listaSectores, Sector.CREATOR);
 
 	
 		
