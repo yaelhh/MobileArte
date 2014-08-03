@@ -37,45 +37,65 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/n"
             android:layout_marginTop="38dp"
-            android:onClick="validarUsuarioOpcion"
             android:text="@string/Cuenta" />
-
-        <Button
-            android:id="@+id/btnCanjear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:text="@string/Canjear" />
-
-        <Button
-            android:id="@+id/btnMascaras"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/btnCanjear"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:text="@string/Mascaras" />
 
         <Button
             android:id="@+id/btnPrxObras"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_alignBaseline="@+id/BtnObrasVistas"
+            android:layout_alignBottom="@+id/BtnObrasVistas"
+            android:layout_alignLeft="@+id/btnCanjear"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/BtnObrasVistas"
             android:text="@string/Prox_obras" />
+
+        <Button
+            android:id="@+id/btnCanjear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/btnMascaras"
+            android:layout_alignBottom="@+id/btnMascaras"
+            android:layout_alignParentRight="true"
+            android:text="@string/Canjear" />
 
         <Button
             android:id="@+id/BtnObrasVistas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
             android:layout_below="@+id/btnCuenta"
-            android:layout_marginTop="16dp"
+            android:layout_toLeftOf="@+id/btnPrxObras"
             android:text="@string/Obras_vistas" />
+
+        <Button
+            android:id="@+id/LoguearDesloguear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:onClick="validarUsuarioOpcion"
+            android:text="@string/EstadoUsuario" />
+
+        <Button
+            android:id="@+id/registrarUsuarioPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/LoguearDesloguear"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:onClick="registrarUsuarioPrueba"
+            android:text="@string/RegistroUsuario" />
+
+        <Button
+            android:id="@+id/btnMascaras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/BtnObrasVistas"
+            android:layout_below="@+id/BtnObrasVistas"
+            android:text="@string/Mascaras" />
+
     </RelativeLayout>
 
 </LinearLayout>

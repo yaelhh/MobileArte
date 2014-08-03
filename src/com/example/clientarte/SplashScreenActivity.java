@@ -3,7 +3,6 @@ package com.example.clientarte;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import backend.DB_Obra;
 
 import com.example.clientarte.R;
 import android.app.Activity;

@@ -27,7 +27,7 @@ import android.widget.Toast;
 
 public class PerfilActivity extends Activity {
 	
-	//private Button btnCuenta;
+	private Button btnCuenta;
 	private Button btnProxObras;
 	private Button btnObrasVistas;
 	private Button btnMascaras;
@@ -53,19 +53,13 @@ public class PerfilActivity extends Activity {
 				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
 			}
 		});
+		
+		 //final UsuarioBackend obj= (UsuarioBackend)getApplicationContext();
 
-//		btnCuenta= (Button)findViewById(R.id.btnCuenta);
-//		btnProxObras= (Button)findViewById(R.id.btnPrxObras);
-//		btnObrasVistas= (Button)findViewById(R.id.BtnObrasVistas);
-//		btnMascaras= (Button)findViewById(R.id.btnMascaras);
-//		btnCanjeMasc= (Button)findViewById(R.id.btnCanjear);
-//
-//		addListenerOnButton();
 	}
 	
 	public void validarUsuarioOpcion(View view){
 		mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-		//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
 		if (!mKinveyClient.user().isUserLoggedIn()) {
 			mensajeConfirmacion();
 //			PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
@@ -155,33 +149,34 @@ public class PerfilActivity extends Activity {
 
     
     
-//	public void addListenerOnButton() {
-//
-//		btnCuenta.setOnClickListener(new OnClickListener() {
-//
-//
-//			@Override
-//			public void onClick(View v) {
-//
-//			}
-//
-//		});
-//
-//		btnProxObras.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(PerfilActivity.this, ProgramacionActivity.class);
-//				startActivity(intent);
-//			}
-//
-//		});
-//
-//
-//	}
+    public void addListenerOnButton() {
+		 
+    	btnCuenta.setOnClickListener(new OnClickListener() {
+    		
+ 
+			@Override
+			public void onClick(View v) {
+							
+				}
+
+		});
+    	
+    	btnProxObras.setOnClickListener(new OnClickListener() {
+    		 
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(PerfilActivity.this, ProgramacionActivity.class);
+				startActivity(intent);
+			}
+
+		});
+    	
+		
+    }
     
     @Override 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	View view = null;
 		if (requestCode == 2) { 
 			if (resultCode == RESULT_OK) { 
 				//BUSCO USUARIO SEGUN NOMBRE DE USUARIO KINVEY LOGUEADO
@@ -196,5 +191,10 @@ public class PerfilActivity extends Activity {
 			} 
 		}
 	}
-   
+
+    
+    public void registrarUsuarioPrueba (View view){
+    	Toast t3=Toast.makeText(this,"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
+		t3.show();
+    }
 }

@@ -7,10 +7,14 @@ package com.example.clientarte;
 //import android.app.ActionBar;
 //import android.app.Activity;
 //import android.content.Context;
+import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyPingCallback;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 //import android.support.v4.app.ActionBarDrawerToggle;
 //import android.support.v4.widget.DrawerLayout;
 //import android.text.Layout;
@@ -30,6 +34,8 @@ import android.widget.Toast;
 
 public class PrincipalActivity extends Activity implements OnQueryTextListener{
 
+	private Client mKinveyClient;
+private static final int REQUEST_TEXT = 5;
 private ImageButton botonprogramacion, botonComunidad, botonNosotros, botonNovedades;
 private SearchView mSearchView;
 Fragment fragment = null;
@@ -39,6 +45,19 @@ Fragment fragment = null;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_pricipal);
+		
+		//Conexión de la APP a Kinvey
+				mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
+				mKinveyClient.ping(new KinveyPingCallback() {
+					public void onFailure(Throwable t) {
+						Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
+					}
+					public void onSuccess(Boolean b) {
+						Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
+					}
+				});
+		
+		
 		
   
 		botonprogramacion = (ImageButton) findViewById(R.id.imageProgramacion);
@@ -122,5 +141,22 @@ Fragment fragment = null;
         
         return true;
     }
+	
+	 @Override 
+		protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+			if (requestCode == 2) { 
+				if (resultCode == RESULT_OK) { 
+					//BUSCO USUARIO SEGUN NOMBRE DE USUARIO KINVEY LOGUEADO
+					String userNameLogueado = data.getStringExtra("username");
+					Toast t=Toast.makeText(this,"Me traigo datos" + userNameLogueado, Toast.LENGTH_SHORT);
+					t.show();
+					mKinveyClient.user().setUsername(userNameLogueado);
+					Toast t2=Toast.makeText(this,"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
+					t2.show();
+					
+				} else if (resultCode == RESULT_CANCELED) {  
+				} 
+			}
+		}
 	
 }

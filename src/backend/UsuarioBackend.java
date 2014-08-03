@@ -4,9 +4,10 @@ import android.text.Editable;
 
 import com.google.api.client.json.GenericJson;
 import com.google.api.client.util.Key;
+import com.kinvey.java.LinkedResources.LinkedGenericJson;
 
 
-public class UsuarioBackend extends GenericJson {
+public class UsuarioBackend extends LinkedGenericJson {
 
 	@Key("_id") // nombre del campo definido en el backend
 	private String idUsuario;
@@ -29,15 +30,24 @@ public class UsuarioBackend extends GenericJson {
 	@Key
 	private String estaLogueado;
 	@Key
-	private String email;
+	private String imagenAdjunta;
 	 
 	
-	public UsuarioBackend() {}
+	public UsuarioBackend() {
+		//"attachment" is the JSON element used to maintain a Linked File.
+      //  putFile("attachment");
+	}
 	
 	public UsuarioBackend (String miNombre, String miApellido) {
 		super();
 		this.nombre = miNombre;
 		this.apellido = miApellido;
+	}
+	
+	public UsuarioBackend (String miNombre, String miApellido, String estaLog) {
+		this.nombre = miNombre;
+		this.apellido = miApellido;
+		this.estaLogueado  = estaLog;
 	}
 	
 	public UsuarioBackend (String nu) {
@@ -109,13 +119,17 @@ public class UsuarioBackend extends GenericJson {
 		this.estaLogueado = estaLogueado;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getImagenAdjunta() {
+		return imagenAdjunta;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setImagenAdjunta(String imagenAdjunta) {
+		this.imagenAdjunta = imagenAdjunta;
 	}
+	
+    
+
+	
 	
 	
 	

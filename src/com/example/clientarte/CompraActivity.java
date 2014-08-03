@@ -388,7 +388,7 @@ public class CompraActivity extends Activity {
 		btnComprar.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(usuario.getLogueado()){
+				if(usuario.getLogueado()==1){
 					Intent intent = new Intent(CompraActivity.this, SectorAActivity.class);
 					intent.putExtra("usuario",usuario);			
 					startActivity(intent);
