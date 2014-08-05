@@ -3,6 +3,7 @@ package com.example.clientarte;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import android.app.Activity;
@@ -18,12 +19,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import backend.*;
 
 import com.example.clientarte.R.drawable;
+import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyPingCallback;
 import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.Query;
 import com.kinvey.java.User;
+import com.kinvey.java.core.KinveyClientCallback;
 
 import dominio.*;
 
@@ -42,6 +45,7 @@ public class ObjetosBackend extends Application{
 	ArrayList<Butaca>listabutacas2;
 	ArrayList<Butaca> listabutacas3;
 	ArrayList<Butaca> listabutacas4;
+	HashMap<Obra, Funcion> obraSegunFuncion= new HashMap<Obra, Funcion>();
 
 	private Funcion funcionA;
 	private Funcion funcionB;
@@ -147,7 +151,9 @@ public class ObjetosBackend extends Application{
 	public ArrayList<Sala> getListSalas(){
 		return  this.listaSalas;
 	}
-
+	//	public HashMap<Obra, Funcion> getobraSegunFuncion(){
+	//		return this.obraSegunFuncion;
+	//	}
 
 	//Funcion para obtener obras
 	public void crearListObra(){
@@ -160,10 +166,10 @@ public class ObjetosBackend extends Application{
 			public void onSuccess(ObraBackend[] resultadoconsulta) {
 				for (int i = 0; i < resultadoconsulta.length; i++) {
 					Obra obra= new Obra(resultadoconsulta[i].getIdObra(),resultadoconsulta[i].getNombreObras(),resultadoconsulta[i].getDescripcipnObras());
+					obra.getListaImagenes()[0]=R.drawable.carmen_1;
 					listaObra.add(obra);
 				}
 			}
-
 			@Override
 			public void onFailure(Throwable arg0) {
 				// TODO Auto-generated method stub
@@ -187,10 +193,13 @@ public class ObjetosBackend extends Application{
 							//						if(resultadoconsulta[i].getIdObra().equalsIgnoreCase(listaObra.get(x).getIdObra())){
 							//							Log.e("resultado "+ i+" " +resultadoconsulta[i].getIdObra(), "lista  "+x+" "+listaObra.get(x).getIdObra());
 							listaObra.get(x).getListaFunciones().add(funcion);
+							Collections.sort(listaObra.get(x).getListaFunciones()); 
+							//							obraSegunFuncion.put(listaObra.get(x), funcion);
 							break;
 						}
 
 					}
+
 
 				}
 
@@ -357,11 +366,42 @@ public class ObjetosBackend extends Application{
 		});
 
 	}
-	
-public void guardarCompra(Compra compra){
-	
-}
+
+	public void guardarCompra(Compra com){
+		final Compra compra=com;
+		CompraBackend compraBknd = new CompraBackend();
+		compraBknd.setFechaRealizada(compra.getFechaRealizada());
+		compraBknd.setFechaVigencia(compra.getFechaVigencia());
+		compraBknd.setIdFuncion(compra.getFuncionSeleccionada().getIdFuncion());
+		compraBknd.setIdUsuario(compra.getMiUsuario().getIdUsuario());
+		compraBknd.setIdObra(compra.getMiObra().getIdObra());
+		compraBknd.setPago(false);
+		compraBknd.setPrecioTotal(compra.getPrecioTotal());
+
+		AsyncAppData<CompraBackend> myevents = mKinveyClient.appData("Compra",CompraBackend.class);
+		myevents.save(compraBknd, new KinveyClientCallback<CompraBackend>() {
+
+			@Override
+			public void onFailure(Throwable e) {
+				Log.e(TAG, "failed to save event data", e);
+			}
+			@Override
+			public void onSuccess(CompraBackend arg0) {
+				Log.e("idCompra",arg0.getId());
+				for(int x=0;x<compra.getButacasSeleccionadas().size();x++){
+					CompraButacasBackend comButBknd = new CompraButacasBackend();
+					comButBknd.setIdCompra(arg0.getId());
+					comButBknd.setIdButaca(compra.getButacasSeleccionadas().get(x).getIdButaca());
+
+					ButacaSectorBackend bsb= new ButacaSectorBackend();
+					bsb.setIdButaca(compra.getButacasSeleccionadas().get(x).getIdButaca());
+					bsb.setEstadoButaca(1);
+					
+				}
 
 
 
+			}
+		});
+	}
 }

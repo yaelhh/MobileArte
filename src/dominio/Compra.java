@@ -8,7 +8,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Compra implements Parcelable{
-	private int idCompra;
+	private String idCompra;
 	private String fechaRealizada;
 	private String fechaVigencia;
 	private Obra miObra;
@@ -37,11 +37,11 @@ public class Compra implements Parcelable{
 		
 	}
 
-	public int getIdCompra() {
+	public String getIdCompra() {
 		return idCompra;
 	}
 
-	public void setIdCompra(int idCompra) {
+	public void setIdCompra(String idCompra) {
 		this.idCompra = idCompra;
 	}
 
@@ -125,7 +125,7 @@ public class Compra implements Parcelable{
 	}
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeInt(idCompra);
+		dest.writeString(idCompra);
 		dest.writeString(fechaRealizada);
 		dest.writeString(fechaVigencia);
 		dest.writeParcelable(miObra,flags);
@@ -139,7 +139,7 @@ public class Compra implements Parcelable{
 	}
 	//Clase para recuperar los datos, IMPORTANTE leerlos en el mismo orden en que se escribieron 
 		private void readFromParcel(Parcel in) {
-			idCompra= in.readInt();
+			idCompra= in.readString();
 			fechaRealizada=in.readString();
 			fechaVigencia=in.readString();
 			miObra=in.readParcelable(Obra.class.getClassLoader());

@@ -118,6 +118,7 @@ public class CompraActivity extends Activity {
 		cantEntradas=(EditText)findViewById(R.id.idCantidadEntradas);
 		//        cant=cantEntradas.getText().toString();
 		usuario= new Usuario();
+		usuario.setIdUsuario(1);
 
 		//El cantButaca va a ser de acuerdo al sector que estemos creando, aca lo inicializamos asi
 		bttnSectorA=(Button)findViewById(R.id.sectorA);
@@ -162,10 +163,10 @@ public class CompraActivity extends Activity {
 
 				yaSeleccionada= data.getExtras().getBoolean("yaSeleccionadas");
 				precioTotal= data.getExtras().getInt("precioTotal");
-				butacasSeleccionadas=data.getExtras().getParcelableArrayList("lstButaca");
+				butacasSeleccionadas=data.getExtras().getParcelableArrayList("ButacasSeleccionadas");
 
 
-				Log.e("yaSeleciconada", "" + yaSeleccionada);
+				Log.e("butacasSeleccionadas", "" + butacasSeleccionadas.get(0));
 			}
 		}
 
@@ -208,7 +209,7 @@ public class CompraActivity extends Activity {
 //			bttnSector.setBackgroundColor(new Random().nextInt());
 //			bttnSector.setText("Precio "+ sector.getPrecioSector());
 //			contendedor.addView(bttnSector);
-			Toast.makeText(this,funcion.getIdFuncion()+"" , Toast.LENGTH_SHORT).show();
+			Toast.makeText(this,funcion.getIdFuncion()+" " , Toast.LENGTH_SHORT).show();
 
 		}
 		
@@ -258,8 +259,8 @@ public class CompraActivity extends Activity {
 						Calendar c = Calendar.getInstance();
 						SimpleDateFormat df1 = new SimpleDateFormat("dd-MMM-yyyy");
 						String fechaActual = df1.format(c.getTime());
-						Log.e("datos","precio "+ precioTotal+" fecha "+ fechaActual);
-//						 "+ butacas "+ butacasSeleccionadas.size()+ " funcion "+ CompraActivity.this.funcionSeleccionada
+						Log.e("datos","precio "+ precioTotal+" fecha "+ fechaActual+ " butacas "+ butacasSeleccionadas.size());
+//						 + " funcion "+ CompraActivity.this.funcionSeleccionada
 						Compra compra= new Compra(fechaActual,obra,false,usuario,precioTotal,CompraActivity.this.funcionSeleccionada,butacasSeleccionadas );
 						o.guardarCompra(compra);
 						String s= "El nombre de la obra es: "+obra.getNombre() + " la funcion elegida es  "+obra.getListaFunciones().get(0)+" y la cantidad de entradas elegidas es "+cantEntradas.getText().toString();

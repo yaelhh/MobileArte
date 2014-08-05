@@ -1,6 +1,8 @@
 package com.example.clientarte;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import com.kinvey.android.Client;
 
@@ -38,6 +40,7 @@ public class ProgramacionActivity extends Activity implements OnQueryTextListene
 	private ImageButton imageObra;
 	private Obra miObra;
 	private  Obra obraSeleccionada= new Obra();
+	private HashMap<Obra, Funcion> obraSegunFuncion;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +49,7 @@ public class ProgramacionActivity extends Activity implements OnQueryTextListene
 		cal = (CalendarView) findViewById(R.id.calendarView1);
 		layout= (ViewGroup)findViewById(R.id.containerProgramacion);
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
-		
+//		obraSegunFuncion=obj.getobraSegunFuncion();
 		
 		crearProgramacion(obj);
 
@@ -59,7 +62,8 @@ public class ProgramacionActivity extends Activity implements OnQueryTextListene
 			public void onSelectedDayChange(CalendarView view, int year, int month,
 					int dayOfMonth) {
 
-
+				
+				
 				Toast.makeText(getBaseContext(),"Selected Date is\n\n"
 						+dayOfMonth+" : "+month+" : "+year , 
 						Toast.LENGTH_LONG).show();
