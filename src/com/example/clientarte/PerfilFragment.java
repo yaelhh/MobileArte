@@ -25,6 +25,9 @@ public class PerfilFragment extends Fragment {
 	private Button btnObrasVistas;
 	private Button btnMascaras;
 	private Button btnCanjeMasc;
+	private Button btnRegistrar;
+	private Button btnLoguear;
+
 	
 	private String mensaje;
 	private Client mKinveyClient;
@@ -46,75 +49,18 @@ public class PerfilFragment extends Fragment {
       				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
       			}
       		});
-
+      		btnCuenta= (Button)rootView.findViewById(R.id.btnCuenta);
+    		btnRegistrar= (Button)rootView.findViewById(R.id.registrarUsuarioPerfil);
+    		btnLoguear= (Button)rootView.findViewById(R.id.LoguearDesloguear);
+    		btnProxObras = (Button)rootView.findViewById(R.id.btnPrxObras);
+    		addListenerOnButton();
         return rootView;
     }
-    
-    public void validarUsuarioOpcion(View view){
-    	mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
-    	//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-    	if (!mKinveyClient.user().isUserLoggedIn()) {
-    		mensajeConfirmacion();
-    		//			PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
-    		//                    LoginActivity.class));
-    		//			PerfilActivity.this.finish();
-    	}else{
-    		if (mKinveyClient.user().isUserLoggedIn()) {
-    			mensajeConfirmacionDesloguear();
-    			//desloguearUsuario();
-    		}
-    	}
-    }
-    
-//    public void desloguearUsuario () {
-//
-//      		btnCuenta=(Button)rootView.findViewById(R.id.btnCuenta);
-//      		btnCuenta.setOnClickListener(new OnClickListener() {
-//      			 
-//    			@Override
-//    			public void onClick(View v) {
-//    				mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
-//    				//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-//    				if (!mKinveyClient.user().isUserLoggedIn()) {
-//    					mensajeConfirmacion();
-////    					PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
-////    		                    LoginActivity.class));
-////    					PerfilActivity.this.finish();
-//    				}else{
-//    					if (mKinveyClient.user().isUserLoggedIn()) {
-//    					mensajeConfirmacionDesloguear();
-//    					//desloguearUsuario();
-//    				}
-//    				}
-//
-//  			}
-//
-//    		});
-//        return rootView;
-//    }
-    
-//    public void validarUsuarioOpcion(View view){
-//		mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
-//		//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-//		if (!mKinveyClient.user().isUserLoggedIn()) {
-//			mensajeConfirmacion();
-////			PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
-////                    LoginActivity.class));
-////			PerfilActivity.this.finish();
-//		}else{
-//			if (mKinveyClient.user().isUserLoggedIn()) {
-//			mensajeConfirmacionDesloguear();
-//			//desloguearUsuario();
-//		}
-//		}
-//	}
 	
 	public void desloguearUsuario () {
 		super.onDestroy();
 		mKinveyClient.user().logout().execute();
 		onCreateDialog();
-		//mensaje = "Cerrando Sesion";
-		//Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
 	}
 	
 	protected Dialog onCreateDialog() {
@@ -229,4 +175,63 @@ public class PerfilFragment extends Fragment {
 			} 
 		}
 	}
+    
+    
+    public void addListenerOnButton() {
+
+		btnProxObras.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), ProgramacionActivity.class);
+				startActivity(intent);
+			}
+
+		});
+		btnRegistrar.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Toast t3=Toast.makeText(getActivity(),"Usuario Logueado< de prueba" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
+				t3.show();
+			}
+
+		});
+		
+		btnCuenta.setOnClickListener(new OnClickListener() {	 
+			@Override
+			public void onClick(View v) {
+				mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
+				if (!mKinveyClient.user().isUserLoggedIn()) {
+					mensajeConfirmacion();
+					//			PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
+					//                    LoginActivity.class));
+					//			PerfilActivity.this.finish();
+				}else{
+					if (mKinveyClient.user().isUserLoggedIn()) {
+						mensajeConfirmacionDesloguear();
+						//desloguearUsuario();
+					}
+				}
+			}
+		});
+
+		btnLoguear.setOnClickListener(new OnClickListener() {	 
+			@Override
+			public void onClick(View v) {
+				mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
+				//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
+				if (!mKinveyClient.user().isUserLoggedIn()) {
+					mensajeConfirmacion();
+					
+				}else{
+					if (mKinveyClient.user().isUserLoggedIn()) {
+						mensajeConfirmacionDesloguear();
+					}
+				}
+			}
+		});
+
+		
+	}
+
 }

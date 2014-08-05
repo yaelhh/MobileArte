@@ -26,53 +26,35 @@ import android.widget.Toast;
 
 
 public class PerfilActivity extends Activity {
-	
+
 	private Button btnCuenta;
 	private Button btnProxObras;
 	private Button btnObrasVistas;
 	private Button btnMascaras;
 	private Button btnCanjeMasc;
-	
+	private Button btnRegistrar;
+	private Button btnLoguear;
+
 	private String mensaje;
 	private Client mKinveyClient;
 	private ProgressDialog mProgressDialog = null;
 	private static final int REQUEST_TEXT = 2;
+	//ObjetosBackend obj;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_perfil);
-
-		//Conexión de la APP a Kinvey
-		mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-		mKinveyClient.ping(new KinveyPingCallback() {
-			public void onFailure(Throwable t) {
-				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
-			}
-			public void onSuccess(Boolean b) {
-				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
-			}
-		});
 		
-		 //final UsuarioBackend obj= (UsuarioBackend)getApplicationContext();
+		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
+		btnCuenta= (Button)findViewById(R.id.btnCuenta);
+		btnRegistrar= (Button)findViewById(R.id.registrarUsuarioPerfil);
+		btnLoguear= (Button)findViewById(R.id.LoguearDesloguear);
+		addListenerOnButton(obj);
+	}
 
-	}
 	
-	public void validarUsuarioOpcion(View view){
-		mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-		if (!mKinveyClient.user().isUserLoggedIn()) {
-			mensajeConfirmacion();
-//			PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
-//                    LoginActivity.class));
-//			PerfilActivity.this.finish();
-		}else{
-			if (mKinveyClient.user().isUserLoggedIn()) {
-			mensajeConfirmacionDesloguear();
-			//desloguearUsuario();
-		}
-		}
-	}
-	
+
 	public void desloguearUsuario () {
 		super.onDestroy();
 		mKinveyClient.user().logout().execute();
@@ -80,16 +62,16 @@ public class PerfilActivity extends Activity {
 		//mensaje = "Cerrando Sesion";
 		//Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
 	}
-	
+
 	protected Dialog onCreateDialog() {
 		final ProgressDialog dialog = new ProgressDialog(this);
 		dialog.setMessage("Cerrando sesion");
 		dialog.setIndeterminate(true);
-		
+
 		mProgressDialog = dialog;
 		return dialog;		
 	}
-	
+
 	public void mensajeConfirmacion(){
 		AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this); 
 		dialogo1.setTitle("Importante"); 
@@ -112,7 +94,7 @@ public class PerfilActivity extends Activity {
 
 
 	}
-	
+
 	public void mensajeConfirmacionDesloguear(){
 		AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this); 
 		dialogo1.setTitle("Importante"); 
@@ -120,8 +102,8 @@ public class PerfilActivity extends Activity {
 		dialogo1.setCancelable(false); 
 		dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() { 
 			public void onClick(DialogInterface dialogo1, int id) { 
-//				Intent intent = new Intent(PerfilActivity.this, LoginActivity.class); 
-//				startActivity(intent); 
+				//				Intent intent = new Intent(PerfilActivity.this, LoginActivity.class); 
+				//				startActivity(intent); 
 				desloguearUsuario ();
 
 			} 
@@ -135,7 +117,7 @@ public class PerfilActivity extends Activity {
 
 
 	}
-	
+
 	public void aceptar() { 
 		Toast t=Toast.makeText(this,"Bienvenido a probar el programa.", Toast.LENGTH_SHORT);
 		t.show();
@@ -147,22 +129,19 @@ public class PerfilActivity extends Activity {
 		t.show();
 	}
 
-    
-    
-    public void addListenerOnButton() {
-		 
-    	btnCuenta.setOnClickListener(new OnClickListener() {
-    		
- 
+
+
+	public void addListenerOnButton( ObjetosBackend obj) {
+
+		btnCuenta.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-							
-				}
+
+			}
 
 		});
-    	
-    	btnProxObras.setOnClickListener(new OnClickListener() {
-    		 
+
+		btnProxObras.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(PerfilActivity.this, ProgramacionActivity.class);
@@ -170,13 +149,56 @@ public class PerfilActivity extends Activity {
 			}
 
 		});
-    	
+		btnRegistrar.setOnClickListener(new OnClickListener() {
+
+			
+			public void onClick(View v) {
+				//Toast t3=Toast.makeText(PerfilActivity.this,"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
+				//Toast t3=Toast.makeText(PerfilActivity.this,"Usuario Logueado" + obj.getmKinveyClient().user().getUsername().toString(), Toast.LENGTH_SHORT);
+				//t3.show();
+			}
+
+		});
 		
-    }
-    
-    @Override 
+		btnCuenta.setOnClickListener(new OnClickListener() {	 
+			@Override
+			public void onClick(View v) {
+				mKinveyClient = new Client.Builder(PerfilActivity.this.getApplicationContext()).build();
+				if (!mKinveyClient.user().isUserLoggedIn()) {
+					mensajeConfirmacion();
+					//			PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
+					//                    LoginActivity.class));
+					//			PerfilActivity.this.finish();
+				}else{
+					if (mKinveyClient.user().isUserLoggedIn()) {
+						mensajeConfirmacionDesloguear();
+						//desloguearUsuario();
+					}
+				}
+			}
+		});
+
+		btnLoguear.setOnClickListener(new OnClickListener() {	 
+			@Override
+			public void onClick(View v) {
+				mKinveyClient = new Client.Builder(PerfilActivity.this.getApplicationContext()).build();
+				//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
+				if (!mKinveyClient.user().isUserLoggedIn()) {
+					mensajeConfirmacion();
+					
+				}else{
+					if (mKinveyClient.user().isUserLoggedIn()) {
+						mensajeConfirmacionDesloguear();
+					}
+				}
+			}
+		});
+
+		
+	}
+	@Override 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    	View view = null;
+		View view = null;
 		if (requestCode == 2) { 
 			if (resultCode == RESULT_OK) { 
 				//BUSCO USUARIO SEGUN NOMBRE DE USUARIO KINVEY LOGUEADO
@@ -186,15 +208,15 @@ public class PerfilActivity extends Activity {
 				mKinveyClient.user().setUsername(userNameLogueado);
 				Toast t2=Toast.makeText(this,"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
 				t2.show();
-				
+
 			} else if (resultCode == RESULT_CANCELED) {  
 			} 
 		}
 	}
 
-    
-    public void registrarUsuarioPrueba (View view){
-    	Toast t3=Toast.makeText(this,"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
-		t3.show();
-    }
+
+//	public void registrarUsuarioPrueba (View view){
+//		Toast t3=Toast.makeText(this,"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
+//		t3.show();
+//	}
 }

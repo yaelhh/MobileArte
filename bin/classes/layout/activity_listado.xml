@@ -10,8 +10,7 @@
     android:id="@+id/btnAgregarComentario"
     android:layout_width="40dp"
     android:layout_height="40dp"
-    android:onClick="ingresarComentario"
-    android:src="@android:drawable/sym_action_chat" />
+    android:src="@android:drawable/edit_text" />
 
 <ListView 
     android:id="@+id/ListView_listado"
