@@ -3,6 +3,7 @@ package com.example.clientarte;
 import java.util.ArrayList;
 
 import backend.ComunidadBackend;
+import backend.DatabaseHelper;
 
 import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
@@ -13,14 +14,18 @@ import com.kinvey.java.Query;
 import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
 
+import dominio.Usuario;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.sax.RootElement;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -30,26 +35,28 @@ import android.widget.AdapterView.OnItemClickListener;
 
 /*  Fragment para seccion Nosotros */ 
 public class ComunidadFragment extends Fragment {
+	
 	public static final String TAG = "ArteBackend";
-	private String appKey="kid_VT8_It3ePE";
-	private String appSecret="1b0fa51481984d2da5910f78a9d26ccc";
 	private String mensaje;
 	private Client mKinveyClient;
 	private TextView tvBd1;
 	private ViewGroup layout;
 	private ScrollView scroll;
 	private ListView lista;
-	 View rootView;
+	private Button btnAgregarComentario;
+
+	View rootView;
+	DatabaseHelper dh;
 	
     public ComunidadFragment(){}
      
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-  
-        rootView = inflater.inflate(R.layout.activity_listado, container, false);
-        
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    	rootView = inflater.inflate(R.layout.activity_listado, container, false);
+        dh = new DatabaseHelper(getActivity().getApplicationContext());
+      
       //Conexión de la APP a Kinvey
+        	final ObjetosBackend obj= (ObjetosBackend) getActivity().getApplicationContext();
       		mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
       		mKinveyClient.ping(new KinveyPingCallback() {
       			public void onFailure(Throwable t) {
@@ -59,51 +66,35 @@ public class ComunidadFragment extends Fragment {
       				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
       			}
       		});
-      		//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-      				conectarBackend();
-      				cargarDatos();
-      				agregarComentarios();
-      		//mostrarImagen();
+      		
+      		//btnAgregarComentario = (Button)rootView.findViewById(R.id.btnAgregarComentario);
+      		btnAgregarComentario= (Button)rootView.findViewById(R.id.btnAgregarComentario);
+    		addListenerOnButton(obj);
+      		cargarDatos();
+      				
           
         return rootView;
     }
     
-    /*
-	 * PARTE DEL BACKEND
-	 *
-	 * 
-	 * 
-	 * 
-	 * */
-	public void conectarBackend (){
-		mKinveyClient = new Client.Builder(appKey, appSecret, getActivity()).build();
-		mKinveyClient.ping(new KinveyPingCallback() {
-			public void onFailure(Throwable t) {
-				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
-			}
-			public void onSuccess(Boolean b) {
-				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
-			}
-		});
-		//mKinveyClient.user().login("nlema", "nlema", new KinveyUserCallback() {
-		if (!mKinveyClient.user().isUserLoggedIn()) {
-			mKinveyClient.user().login(new KinveyUserCallback() {
-				public void onFailure(Throwable error) {
-					mensaje = "Error al realizar el login.";
-					Log.e("Realizando Kinvey Login", mensaje, error);
+    public void addListenerOnButton(ObjetosBackend obj) {
+    	mKinveyClient = obj.getmKinveyClient();
+    	btnAgregarComentario.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+//				Intent intent = new Intent(getActivity(), ProgramacionActivity.class);
+//				startActivity(intent);
+				if (buscarUsuarioLogueado()){
+					agregarComentarios();
+				}else{
+					mensaje = "Bienvenido usuario: " + mKinveyClient.user().getUsername() + ".";
+					Toast.makeText(getActivity().getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
 				}
-				@Override
-				public void onSuccess(User u) {
-					mensaje = "Bienvenido usuario: " + u.getId() + ".";
-					Log.d("Realizando Kinvey Login", mensaje);
-				}
-			});
-		} else {
-			mensaje = "Utilizando usuario implícito cacheado: " + mKinveyClient.user().getId() + ".";
-			Log.d("Realizando Kinvey Login", mensaje);
-		}
+				
+			}
 
-	}	
+		});
+    }
+    
 	public void cargarDatos(){
 		Query myQuery = mKinveyClient.query();
 		mKinveyClient.appData("Comunidad", ComunidadBackend.class).get(myQuery, new KinveyListCallback<ComunidadBackend>() {
@@ -178,6 +169,19 @@ public class ComunidadFragment extends Fragment {
 		}
 		});
 		
+	}
+	
+	public boolean buscarUsuarioLogueado (){
+		String nombreUsuario = mKinveyClient.user().getUsername().toString();
+		Usuario u = dh.getTodo(nombreUsuario);
+		boolean resultado = false;
+		if (u.getMiNombreUsuario()!= "" && u.getLogueado() == 1){
+			resultado = true;
+			
+		}else{
+			 resultado = false;
+		}
+		return resultado;
 	}
 	
 }

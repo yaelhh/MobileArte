@@ -37,7 +37,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/n"
             android:layout_marginTop="38dp"
-            android:onClick="validarUsuarioOpcion"
+            
             android:text="@string/Cuenta" />
             
             <Button
@@ -75,7 +75,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:onClick="validarUsuarioOpcion"
+           
             android:text="@string/EstadoUsuario" />
 
         <Button
@@ -85,7 +85,6 @@
             android:layout_above="@+id/LoguearDesloguear"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:onClick="registrarUsuarioPrueba"
             android:text="@string/RegistroUsuario" />
 
         <Button

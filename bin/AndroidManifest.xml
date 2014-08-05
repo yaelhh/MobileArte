@@ -80,6 +80,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.example.clientarte.LoginActivity"
+            android:label="@string/action_settings"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.example.clientarte.SettingsActivity"
             android:label="@string/action_settings"
             android:screenOrientation="portrait" >
