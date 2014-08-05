@@ -366,6 +366,7 @@ public class ObjetosBackend extends Application{
 		});
 
 	}
+<<<<<<< HEAD
 
 	public void guardarCompra(Compra com){
 		final Compra compra=com;
@@ -398,10 +399,59 @@ public class ObjetosBackend extends Application{
 					bsb.setEstadoButaca(1);
 					
 				}
+=======
+>>>>>>> develop
+
+	public void guardarCompra(Compra compra){
+
+	}
 
 
-
+<<<<<<< HEAD
 			}
 		});
 	}
 }
+=======
+	public void crearUsuarioLogueado (UsuarioBackend entity){
+		mKinveyClient.appData("Usuario", UsuarioBackend.class).save(entity, new KinveyClientCallback<UsuarioBackend>() {
+			@Override
+			public void onSuccess(UsuarioBackend result) {
+				
+//				Toast.makeText(CreateAccountActivity.this,"Entity Saved\nTitle: " + result.getNombreUsuario()
+//						+ "\nDescription: " + result.get("Description"), Toast.LENGTH_LONG).show();
+				
+			}
+			@Override
+			public void onFailure(Throwable error) {
+				Log.e(TAG, "AppData.save Failure", error);
+//				Toast.makeText(CreateAccountActivity.this, "Save All error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+			}
+		});
+		
+	}
+	
+//	public Client getUsuKinvey (){
+//		this.mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
+//		this.mKinveyClient.ping(new KinveyPingCallback() {
+//		    public void onFailure(Throwable t) {
+//		        Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
+//		    }
+//		    public void onSuccess(Boolean b) {
+//		        Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
+//		    }
+//		});
+//		return this.mKinveyClient;
+//	}
+
+	public Client getmKinveyClient() {
+		return mKinveyClient;
+	}
+
+	public void setmKinveyClient(Client mKinveyClient) {
+		this.mKinveyClient = mKinveyClient;
+	}
+	
+	
+}
+>>>>>>> develop

@@ -1,6 +1,7 @@
 package com.example.clientarte;
 
 import java.util.List;
+
 import backend.DatabaseHelper;
 import backend.UpdateEntity;
 import backend.UsuarioBackend;
@@ -56,7 +57,7 @@ public class CreateAccountActivity extends ActionBarActivity {
 	private boolean resultado;
 	private CalendarView cal;
 	//private static final int REQUEST_TEXT = 5;
-	
+
 	private Bitmap image;
 	public String path = null;
 	private Uri mImageCaptureUri;
@@ -64,238 +65,272 @@ public class CreateAccountActivity extends ActionBarActivity {
 	private List<UpdateEntity> shareList;
 	//MySQLiteOpenHelper MSQL;
 	DatabaseHelper dh;
-	
-	
+	private Button btnCrearUsuario;
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-//		super.onCreate(savedInstanceState);
-//		if (savedInstanceState == null) {
-//			getSupportFragmentManager().beginTransaction()
-//					.add(R.id.activity_create_account, new PlaceholderFragment()).commit();
-		
+	
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
-		
+
 		//MSQL = new MySQLiteOpenHelper(getApplicationContext());
 		dh = new DatabaseHelper(getApplicationContext());
 		
+		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
+		//kinveyClient = obj.getUsuKinvey();
 		kinveyClient = new Client.Builder(this.getApplicationContext()).build();
 		kinveyClient.ping(new KinveyPingCallback() {
-			public void onFailure(Throwable t) {
-				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
-			}
-			public void onSuccess(Boolean b) {
-				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
-			}
+		    public void onFailure(Throwable t) {
+		        Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
+		    }
+		    public void onSuccess(Boolean b) {
+		        Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
+		    }
 		});
 		
-		conectarBackend();
-		//confirmarUsuario();
-	}
-	
-	public void confirmarUsuario(){
-		mRegisterAccount = (Button) findViewById(R.id.btnRegister);
-		mRegisterAccount.setOnClickListener(new OnClickListener() {
+		btnCrearUsuario= (Button)findViewById(R.id.btnRegister);
+		btnCrearUsuario.setOnClickListener(new OnClickListener() {  
 			@Override
 			public void onClick(View v) {
-				
-				//registrarUsuario();
-				//processSignup(v);
-				limpiarCampos();
+				if (validatePasswordMatch()) {
+					//processSignup(view);
+					registroUsuario(v, obj);
+					limpiarCampos();
+
+
+				} else {
+					Toast.makeText(CreateAccountActivity.this, "No coinciden las contrasenas", Toast.LENGTH_SHORT).show();
+				} 
 			}
+		});
+
+
+
+	}
+
+
+public void confirmarUsuario(){
+	mRegisterAccount = (Button) findViewById(R.id.btnRegister);
+	mRegisterAccount.setOnClickListener(new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+
+			//registrarUsuario();
+			//processSignup(v);
+			limpiarCampos();
+		}
+
+
+	});
+
+}
+
+
+private void registroUsuario(View view, final ObjetosBackend obj) {
+	mEditFirstName = (EditText) findViewById(R.id.etFirstName);
+	mEditLastName = (EditText) findViewById(R.id.etLastName);
+	mEditEmailAddress = (EditText) findViewById(R.id.etEmailAddress);
+	mEditPassword = (EditText) findViewById(R.id.etPassword);
+	mEditPasswordConfirm = (EditText) findViewById(R.id.etPasswordConfirm);
+
+	final UsuarioBackend entity = new UsuarioBackend ();
+	//usuarioExiste(mEditNombreUsuario);
+	//if (!resultado){
+	String nombrePila = mEditFirstName.getText().toString();
+	String apellido = mEditLastName.getText().toString();
+	final String nomUsuario = mEditEmailAddress.getText().toString();
+	final String pass = mEditPassword.getText().toString();
+
+	entity.put("nombre", nombrePila);
+	entity.put("apellido", apellido);
+	entity.put("username",nomUsuario);
+	entity.put("password", pass);
+	entity.put("fechaNacimiento",pass);
+	entity.put("estaLogueado","0");
+	entity.put("mascaras","50");
+
+	kinveyClient.user().create(entity.getNombreUsuario(), entity.getPassword(), new KinveyUserCallback() {
+		@Override
+		public void onSuccess(User result) {
+
+			Toast.makeText(CreateAccountActivity.this,"Entity Saved\nTitle: " + result.getUsername()
+					+ "\nDescription: " + result.get("Description"), Toast.LENGTH_LONG).show();
+
+			saveUsuaro (entity);
+			loginUsuario(nomUsuario,pass);
+			crearUsuarioBase(nomUsuario, pass, 1);
+			obj.setmKinveyClient(kinveyClient);
+		}
+
+		@Override
+		public void onFailure(Throwable error) {
+			Log.e(TAG, "AppData.save Failure", error);
+			Toast.makeText(CreateAccountActivity.this, "Save All error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+		}
+	});
+	//});
+	}
+
+public void saveUsuaro (UsuarioBackend entity){
+	kinveyClient.appData("Usuario", UsuarioBackend.class).save(entity, new KinveyClientCallback<UsuarioBackend>() {
+		
+		
+		@Override
+		public void onSuccess(UsuarioBackend result) {
+
+			Toast.makeText(CreateAccountActivity.this,"Revoluciones: " + result.getNombreUsuario()
+					+ "\nDescription: " , Toast.LENGTH_LONG).show();
+
 			
+		}
 
-		});
-		
-	}
-
-	
-	public void conectarBackend (){
-		kinveyClient = new Client.Builder(appKey, appSecret, this).build();
-		kinveyClient.ping(new KinveyPingCallback() {
-			public void onFailure(Throwable t) {
-				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
-			}
-			public void onSuccess(Boolean b) {
-				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
-			}
-		});
-		
-		/*if (!kinveyClient.user().isUserLoggedIn()) {
-			kinveyClient.user().login(new KinveyUserCallback() {
-				public void onFailure(Throwable error) {
-					mensaje = "Error al realizar el login.";
-					Log.e("Realizando Kinvey Login", mensaje, error);
-				}
-				@Override
-				public void onSuccess(User u) {
-					mensaje = "Bienvenido usuario: " + u.getId() + ".";
-					Log.d("Realizando Kinvey Login", mensaje);
-				}
-			});
-		} else {
-			mensaje = "Utilizando usuario implícito cacheado: " + kinveyClient.user().getId() + ".";
-			Log.d("Realizando Kinvey Login", mensaje);
-		}*/
-
-	}
-
-	
-	private void registroUsuario(View view) {
-		mEditFirstName = (EditText) findViewById(R.id.etFirstName);
-		mEditLastName = (EditText) findViewById(R.id.etLastName);
-		mEditEmailAddress = (EditText) findViewById(R.id.etEmailAddress);
-		mEditPassword = (EditText) findViewById(R.id.etPassword);
-		mEditPasswordConfirm = (EditText) findViewById(R.id.etPasswordConfirm);
-
-		UsuarioBackend entity = new UsuarioBackend ();
-		//usuarioExiste(mEditNombreUsuario);
-		//if (!resultado){
-		String nombrePila = mEditFirstName.getText().toString();
-		String apellido = mEditLastName.getText().toString();
-		final String nomUsuario = mEditEmailAddress.getText().toString();
-		final String pass = mEditPassword.getText().toString();
-
-		entity.put("nombre", nombrePila);
-		entity.put("apellido", apellido);
-		entity.put("username",nomUsuario);
-		entity.put("password", pass);
-		entity.put("fechaNacimiento",pass);
-		entity.put("estaLogueado","0");
-		entity.put("mascaras","50");
-
-
-		//entity.put("fechaNacimiento",cal.getDate());
-
-		kinveyClient.appData("Usuario", UsuarioBackend.class).save(entity, new KinveyClientCallback<UsuarioBackend>() {
-			@Override
-			public void onSuccess(UsuarioBackend result) {
-
-				Toast.makeText(CreateAccountActivity.this,"Entity Saved\nTitle: " + result.getNombreUsuario()
-						+ "\nDescription: " + result.get("Description"), Toast.LENGTH_LONG).show();
-				crearUsuarioBase(nomUsuario, pass, 1);
-				loginUsuario(nomUsuario,pass);
-			}
-
-			@Override
-			public void onFailure(Throwable error) {
-				Log.e(TAG, "AppData.save Failure", error);
-				Toast.makeText(CreateAccountActivity.this, "Save All error: " + error.getMessage(), Toast.LENGTH_LONG).show();
-			}
-		});
-		//		}else{
-		//			Toast.makeText(CreateAccountActivity.this, "Revise los campos: " + Toast.LENGTH_LONG, 0).show();
-		//		}
-
-	}
+		@Override
+		public void onFailure(Throwable error) {
+			Log.e(TAG, "AppData.save Failure", error);
+			Toast.makeText(CreateAccountActivity.this, "Save All error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+		}
+	});
+	//});
 	
 	
-	
-	public void crearUsuarioBase(String nomUsuario, String pass, int i){
-		Usuario todo = new Usuario (nomUsuario,pass, 1 );
-		dh.createUsuario(todo);   
-	}
-	
-	private void usuarioExiste(final EditText mEditNombreUsuario) {
-		Query myQuery = kinveyClient.query();
-		kinveyClient.appData("Usuario", UsuarioBackend.class).get(myQuery, new KinveyListCallback<UsuarioBackend>() {
-			
-			@Override
-			public void onSuccess(UsuarioBackend[] resultadoconsulta) {
-				String nu = "";
-				for (int i = 0; i < resultadoconsulta.length; i++) {
-					Log.d(TAG + "- recuperarUsuario", mensaje);
-					nu = resultadoconsulta[i].getNombreUsuario();
-				}
-				if (mEditNombreUsuario.getText().toString().equals(nu)){
-					resultado = false;
-				}else{
-					resultado = true;
-				}
+}
 
-			}
-			@Override
-			public void onFailure(Throwable error) {
-				Log.e(TAG, "AppData.get by Query Failure", error);
-			}
-		});
-		
-		
-	}
-	
-
-	public void registerAccount(View view) {
-		//if (validateFields()) {
-			if (validatePasswordMatch()) {
-				//processSignup(view);
-				registroUsuario(view);
-				limpiarCampos();
-				
-				
-			} else {
-				Toast.makeText(this, "No coinciden las contrasenas", Toast.LENGTH_SHORT).show();
-			} 
-//		} else {
-//			Toast.makeText(this, "Ingrese todos los datos", Toast.LENGTH_SHORT).show();
-//		}
-		
-	}
-	
-	private void loginUsuario(String nombreUsuario, String pass) {
-		final String nombreUsuarioUno = nombreUsuario;
-		final String passUno = pass;
-		
-		kinveyClient.user().login(nombreUsuarioUno, passUno, new KinveyUserCallback() {
+public void loginBaseUsuario (String nombre, String pass){
+	kinveyClient = new Client.Builder(nombre, pass, this).build();
+	if (!kinveyClient.user().isUserLoggedIn()) {
+		kinveyClient.user().login(new KinveyUserCallback() {
 			public void onFailure(Throwable error) {
 				mensaje = "Error al realizar el login.";
 				Log.e("Realizando Kinvey Login", mensaje, error);
 			}
 			@Override
 			public void onSuccess(User u) {
-				mensaje = "Bienvenido usuario: " + u.getUsername() + ".";
-				Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
+				mensaje = "Bienvenido usuario: " + u.getId() + ".";
 				Log.d("Realizando Kinvey Login", mensaje);
-				Usuario usuLogueado = new Usuario (nombreUsuarioUno, passUno, 1);
-				Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
-				intent.putExtra("username",usuLogueado);
-				startActivity(new Intent(CreateAccountActivity.this, MainActivity.class));
 			}
 		});
-		
+	} else {
+		mensaje = "Utilizando usuario implícito cacheado: " + kinveyClient.user().getId() + ".";
+		Log.d("Realizando Kinvey Login", mensaje);
 	}
 
-	public void cancelarAccount(View view) {
-		//cancelarAccount(view);
-		Intent intent = new Intent(this, PrincipalActivity.class);
-        startActivity(intent);
+}
+
+
+
+public void crearUsuarioBase(String nomUsuario, String pass, int i){
+	Usuario todo = new Usuario (nomUsuario,pass, 1 );
+	dh.createUsuario(todo);   
+}
+
+private void usuarioExiste(final EditText mEditNombreUsuario) {
+	Query myQuery = kinveyClient.query();
+	kinveyClient.appData("Usuario", UsuarioBackend.class).get(myQuery, new KinveyListCallback<UsuarioBackend>() {
+
+		@Override
+		public void onSuccess(UsuarioBackend[] resultadoconsulta) {
+			String nu = "";
+			for (int i = 0; i < resultadoconsulta.length; i++) {
+				Log.d(TAG + "- recuperarUsuario", mensaje);
+				nu = resultadoconsulta[i].getNombreUsuario();
+			}
+			if (mEditNombreUsuario.getText().toString().equals(nu)){
+				resultado = false;
+			}else{
+				resultado = true;
+			}
+
+		}
+		@Override
+		public void onFailure(Throwable error) {
+			Log.e(TAG, "AppData.get by Query Failure", error);
+		}
+	});
+
+
+}
+
+
+//public void registerAccount(View view) {
+//	//if (validateFields()) {
+//	if (validatePasswordMatch()) {
+//		//processSignup(view);
+//		registroUsuario(view);
+//		limpiarCampos();
+//
+//
+//	} else {
+//		Toast.makeText(this, "No coinciden las contrasenas", Toast.LENGTH_SHORT).show();
+//	} 
+	//		} else {
+	//			Toast.makeText(this, "Ingrese todos los datos", Toast.LENGTH_SHORT).show();
+	//		}
+
+
+
+	private void loginUsuario(String nombreUsuario, String pass) {
+	final String nombreUsuarioUno = nombreUsuario;
+	final String passUno = pass;	
+	if (!kinveyClient.user().isUserLoggedIn()) {
+		//Si no está "logeado" se realiza el login
+		kinveyClient.user().login(nombreUsuarioUno, passUno, new KinveyUserCallback() {
+				public void onFailure(Throwable error) {
+					mensaje = "Error al realizar el login.";
+					Log.e("Realizando Kinvey Login", mensaje, error);
+				}
+				@Override
+				public void onSuccess(User u) {
+					//Se muestra mensaje de bienvenida por pantalla
+					mensaje = "Bienvenido usuario: " + u.getUsername() + ".";
+					Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
+					//Se graba registro en el log
+					Log.d("Realizando Kinvey Login", mensaje);
+					Usuario usuLogueado = new Usuario (nombreUsuarioUno, passUno, 1);
+					Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
+					intent.putExtra("username",usuLogueado);
+					startActivity(new Intent(CreateAccountActivity.this, MainActivity.class));
+				}
+			});
+		} else {
+			mensaje = "Utilizando usuario cacheado: " + kinveyClient.user().getUsername() + ".";
+			Log.d("Realizando Kinvey Login", mensaje);
+		}
+
+}
+
+public void cancelarAccount(View view) {
+	//cancelarAccount(view);
+	Intent intent = new Intent(this, PrincipalActivity.class);
+	startActivity(intent);
+}
+
+// TODO:  Implement Text Listeners to handle this
+private boolean validateFields() {
+	if (mEditFirstName.getText().length()>0 && mEditLastName.getText().length()>0 
+			&& mEditEmailAddress.length()>0 && mEditPassword.getText().length()>0 
+			&& mEditPasswordConfirm.getText().length()>0) {
+		return true;
+	} else {
+		return false;
 	}
-	
-	// TODO:  Implement Text Listeners to handle this
-		private boolean validateFields() {
-			if (mEditFirstName.getText().length()>0 && mEditLastName.getText().length()>0 
-					&& mEditEmailAddress.length()>0 && mEditPassword.getText().length()>0 
-					&& mEditPasswordConfirm.getText().length()>0) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-		
-		private boolean validatePasswordMatch() {
-			mEditFirstName = (EditText) findViewById(R.id.etFirstName);
-			mEditLastName = (EditText) findViewById(R.id.etLastName);
-			mEditEmailAddress = (EditText) findViewById(R.id.etEmailAddress);
-			mEditPassword = (EditText) findViewById(R.id.etPassword);
-			mEditPasswordConfirm = (EditText) findViewById(R.id.etPasswordConfirm);
-			String pass = mEditPassword.getText().toString();
-			String confirPass = mEditPasswordConfirm.getText().toString();
-			if (pass.equals(confirPass)) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-		
+}
+
+private boolean validatePasswordMatch() {
+	mEditFirstName = (EditText) findViewById(R.id.etFirstName);
+	mEditLastName = (EditText) findViewById(R.id.etLastName);
+	mEditEmailAddress = (EditText) findViewById(R.id.etEmailAddress);
+	mEditPassword = (EditText) findViewById(R.id.etPassword);
+	mEditPasswordConfirm = (EditText) findViewById(R.id.etPasswordConfirm);
+	String pass = mEditPassword.getText().toString();
+	String confirPass = mEditPasswordConfirm.getText().toString();
+	if (pass.equals(confirPass)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 //		public void processSignup(View view) {
 //			//registrarUsuario();
 //			Toast.makeText(this, "Registrando usuario...", Toast.LENGTH_SHORT).show();
@@ -320,58 +355,58 @@ public class CreateAccountActivity extends ActionBarActivity {
 //	            }
 //	        });
 //		}
-		
-		public void  limpiarCampos(){
-			mEditFirstName.setText("");
-			mEditLastName.setText("");
-			mEditEmailAddress.setText("");
-			mEditPassword.setText("");
-			mEditPasswordConfirm.setText("");
-			//mEditNombreUsuario.setText("");
-		}
-		
-		
-		
+
+public void  limpiarCampos(){
+	mEditFirstName.setText("");
+	mEditLastName.setText("");
+	mEditEmailAddress.setText("");
+	mEditPassword.setText("");
+	mEditPasswordConfirm.setText("");
+	//mEditNombreUsuario.setText("");
+}
 
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
 
-		public PlaceholderFragment() {
-		}
 
-		
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_create_account,
-					container, false);
-			return rootView;
-		}
+
+/**
+ * A placeholder fragment containing a simple view.
+ */
+public static class PlaceholderFragment extends Fragment {
+
+	public PlaceholderFragment() {
 	}
-	
-	public static int calculateInSampleSize(
-            BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        // Raw height and width of image
-        final int height = options.outHeight;
-        final int width = options.outWidth;
 
-        int stretch_width = Math.round((float) width / (float) reqWidth);
-        int stretch_height = Math.round((float) height / (float) reqHeight);
 
-        if (stretch_width <= stretch_height) return stretch_height;
-        else return stretch_width;
-    }
-	
-	public List<UpdateEntity> getShareList() {
-        return shareList;
-    }
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.fragment_create_account,
+				container, false);
+		return rootView;
+	}
+}
 
-    public void setShareList(List<UpdateEntity> shareList) {
-        this.shareList = shareList;
-    }
-	
-	
+public static int calculateInSampleSize(
+		BitmapFactory.Options options, int reqWidth, int reqHeight) {
+	// Raw height and width of image
+	final int height = options.outHeight;
+	final int width = options.outWidth;
+
+	int stretch_width = Math.round((float) width / (float) reqWidth);
+	int stretch_height = Math.round((float) height / (float) reqHeight);
+
+	if (stretch_width <= stretch_height) return stretch_height;
+	else return stretch_width;
+}
+
+public List<UpdateEntity> getShareList() {
+	return shareList;
+}
+
+public void setShareList(List<UpdateEntity> shareList) {
+	this.shareList = shareList;
+}
+
+
 
 }

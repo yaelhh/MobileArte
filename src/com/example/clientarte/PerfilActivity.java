@@ -39,11 +39,17 @@ public class PerfilActivity extends Activity {
 	private Client mKinveyClient;
 	private ProgressDialog mProgressDialog = null;
 	private static final int REQUEST_TEXT = 2;
+<<<<<<< HEAD
 
+=======
+	//ObjetosBackend obj;
+	
+>>>>>>> develop
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_perfil);
+<<<<<<< HEAD
 		btnCuenta= (Button)findViewById(R.id.btnCuenta);
 		btnRegistrar= (Button)findViewById(R.id.registrarUsuarioPerfil);
 		btnLoguear= (Button)findViewById(R.id.LoguearDesloguear);
@@ -61,6 +67,14 @@ public class PerfilActivity extends Activity {
 
 		//final UsuarioBackend obj= (UsuarioBackend)getApplicationContext();
 
+=======
+		
+		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
+		btnCuenta= (Button)findViewById(R.id.btnCuenta);
+		btnRegistrar= (Button)findViewById(R.id.registrarUsuarioPerfil);
+		btnLoguear= (Button)findViewById(R.id.LoguearDesloguear);
+		addListenerOnButton(obj);
+>>>>>>> develop
 	}
 
 	
@@ -141,7 +155,11 @@ public class PerfilActivity extends Activity {
 
 
 
+<<<<<<< HEAD
 	public void addListenerOnButton() {
+=======
+	public void addListenerOnButton( ObjetosBackend obj) {
+>>>>>>> develop
 
 		btnCuenta.setOnClickListener(new OnClickListener() {
 			@Override
@@ -161,11 +179,20 @@ public class PerfilActivity extends Activity {
 		});
 		btnRegistrar.setOnClickListener(new OnClickListener() {
 
+<<<<<<< HEAD
 			@Override
 			public void onClick(View v) {
 		Toast t3=Toast.makeText(PerfilActivity.this,"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
 		t3.show();
 	}
+=======
+			
+			public void onClick(View v) {
+				//Toast t3=Toast.makeText(PerfilActivity.this,"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
+				//Toast t3=Toast.makeText(PerfilActivity.this,"Usuario Logueado" + obj.getmKinveyClient().user().getUsername().toString(), Toast.LENGTH_SHORT);
+				//t3.show();
+			}
+>>>>>>> develop
 
 		});
 		
@@ -228,4 +255,8 @@ public class PerfilActivity extends Activity {
 //		Toast t3=Toast.makeText(this,"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
 //		t3.show();
 //	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> develop
