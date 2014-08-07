@@ -29,15 +29,14 @@
         android:layout_height="160dp"
         
         android:layout_margin="2dp"
-       />	 
+       />
 
- <!--     <ImageButton
-        android:id="@+id/ImagenObra"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="122dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/calendarView1"
-        android:layout_margin="2dp" --> 
+        android:layout_height="match_parent"
+        android:orientation="vertical" 
+        android:id="@+id/contenedorDeObras">
+    </LinearLayout>
        
         />
 

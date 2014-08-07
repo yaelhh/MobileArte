@@ -7,8 +7,13 @@ package com.example.clientarte;
 //import android.app.ActionBar;
 //import android.app.Activity;
 //import android.content.Context;
+import backend.ObraBackend;
+
+import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyPingCallback;
+import com.kinvey.java.Query;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -22,6 +27,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
@@ -138,6 +144,21 @@ Fragment fragment = null;
         mSearchView = (SearchView) searchItem.getActionView();
         mSearchView.setQueryHint("Search…");
         mSearchView.setOnQueryTextListener(this);
+        EditText searchBar = (EditText) findViewById(R.id.search_bar);
+        Query query = new Query();
+        query.regEx("name", searchBar.getText().toString());
+        AsyncAppData<ObraBackend> searchedEvents = mKinveyClient.appData("events", ObraBackend.class);
+        searchedEvents.get(query, new KinveyListCallback<ObraBackend>() {
+          @Override
+          public void onSuccess(ObraBackend[] event) { 
+          }
+
+		@Override
+		public void onFailure(Throwable arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+        });
         
         return true;
     }

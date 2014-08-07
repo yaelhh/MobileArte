@@ -27,6 +27,7 @@ import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.Query;
 import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
+import com.kinvey.java.query.AbstractQuery.SortOrder;
 
 import dominio.*;
 
@@ -157,11 +158,13 @@ public class ObjetosBackend extends Application{
 
 	//Funcion para obtener obras
 	public void crearListObra(){
-		//		Query myQuery = mKinveyClient.query();
+				Query query = mKinveyClient.query();
 		/**
 		 Cargo las obras de la tabla
 		 */
-		mKinveyClient.appData("Obras", ObraBackend.class).get(myQuery, new KinveyListCallback<ObraBackend>() {
+		query.addSort("IdObras", SortOrder.DESC);
+		
+		mKinveyClient.appData("Obras", ObraBackend.class).get(query, new KinveyListCallback<ObraBackend>() {
 			@Override
 			public void onSuccess(ObraBackend[] resultadoconsulta) {
 				for (int i = 0; i < resultadoconsulta.length; i++) {
@@ -172,7 +175,8 @@ public class ObjetosBackend extends Application{
 			}
 			@Override
 			public void onFailure(Throwable arg0) {
-				// TODO Auto-generated method stub
+				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
+
 
 			}
 		});
@@ -181,7 +185,8 @@ public class ObjetosBackend extends Application{
 		 Cargo las funciones de la tabla
 	 */
 	public void crearListFunciones(){
-		//			Query myQuery = mKinveyClient.query();
+		Query myQuery = mKinveyClient.query();
+		myQuery.addSort("FechaObra", SortOrder.ASC);
 		mKinveyClient.appData("Funciones", FuncionBackend.class).get(myQuery, new KinveyListCallback<FuncionBackend>() {
 			@Override
 			public void onSuccess(FuncionBackend[] resultadoconsulta) {
@@ -207,7 +212,7 @@ public class ObjetosBackend extends Application{
 
 			@Override
 			public void onFailure(Throwable arg0) {
-				// TODO Auto-generated method stub
+//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
 
 			}
 		});
@@ -233,7 +238,7 @@ public class ObjetosBackend extends Application{
 
 			@Override
 			public void onFailure(Throwable arg0) {
-				// TODO Auto-generated method stub
+//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
 
 			}
 		});
@@ -264,7 +269,7 @@ public class ObjetosBackend extends Application{
 
 			@Override
 			public void onFailure(Throwable arg0) {
-				// TODO Auto-generated method stub
+//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
 
 			}
 		});
@@ -287,7 +292,7 @@ public class ObjetosBackend extends Application{
 
 			@Override
 			public void onFailure(Throwable arg0) {
-				// TODO Auto-generated method stub
+//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
 
 			}
 		});
@@ -331,7 +336,7 @@ public class ObjetosBackend extends Application{
 
 			@Override
 			public void onFailure(Throwable arg0) {
-				// TODO Auto-generated method stub
+//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
 
 			}
 		});
@@ -364,9 +369,7 @@ public class ObjetosBackend extends Application{
 
 			}
 		});
-
 	}
-<<<<<<< HEAD
 
 	public void guardarCompra(Compra com){
 		final Compra compra=com;
@@ -384,6 +387,7 @@ public class ObjetosBackend extends Application{
 
 			@Override
 			public void onFailure(Throwable e) {
+				Toast.makeText(getApplicationContext(), "Ups.. no fue posible guardar su compra, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
 				Log.e(TAG, "failed to save event data", e);
 			}
 			@Override
@@ -399,21 +403,13 @@ public class ObjetosBackend extends Application{
 					bsb.setEstadoButaca(1);
 					
 				}
-=======
->>>>>>> develop
 
-	public void guardarCompra(Compra compra){
-
-	}
-
-
-<<<<<<< HEAD
-			}
+				}
 		});
 	}
-}
-=======
-	public void crearUsuarioLogueado (UsuarioBackend entity){
+
+
+public void crearUsuarioLogueado (UsuarioBackend entity){
 		mKinveyClient.appData("Usuario", UsuarioBackend.class).save(entity, new KinveyClientCallback<UsuarioBackend>() {
 			@Override
 			public void onSuccess(UsuarioBackend result) {
@@ -454,4 +450,4 @@ public class ObjetosBackend extends Application{
 	
 	
 }
->>>>>>> develop
+

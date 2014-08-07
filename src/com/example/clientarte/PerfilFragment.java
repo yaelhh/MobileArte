@@ -52,8 +52,9 @@ public class PerfilFragment extends Fragment {
       		btnCuenta= (Button)rootView.findViewById(R.id.btnCuenta);
     		btnRegistrar= (Button)rootView.findViewById(R.id.registrarUsuarioPerfil);
     		btnLoguear= (Button)rootView.findViewById(R.id.LoguearDesloguear);
-<<<<<<< HEAD
+    		btnProxObras = (Button)rootView.findViewById(R.id.btnPrxObras);
     		addListenerOnButton();
+        
         return rootView;
     }
     
@@ -115,13 +116,10 @@ public class PerfilFragment extends Fragment {
 //		}
 //		}
 //	}
-=======
-    		btnProxObras = (Button)rootView.findViewById(R.id.btnPrxObras);
-    		addListenerOnButton();
-        return rootView;
-    }
->>>>>>> develop
-	
+
+    		
+    
+
 	public void desloguearUsuario () {
 		super.onDestroy();
 		mKinveyClient.user().logout().execute();
@@ -256,15 +254,11 @@ public class PerfilFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-<<<<<<< HEAD
+
 		Toast t3=Toast.makeText(getActivity(),"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
 		t3.show();
 	}
-=======
-				Toast t3=Toast.makeText(getActivity(),"Usuario Logueado< de prueba" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
-				t3.show();
-			}
->>>>>>> develop
+
 
 		});
 		
