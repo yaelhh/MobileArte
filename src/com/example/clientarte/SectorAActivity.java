@@ -44,13 +44,13 @@ public class SectorAActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
 		cantEntradas= extras.getInt("cantEntrada");
 		SectorA = getIntent().getParcelableExtra("sector");
-		PrecioTotal= cantEntradas*SectorA.getPrecioSector();
+//		PrecioTotal= cantEntradas*SectorA.getPrecioSector();
 		gv.setNumColumns(SectorA.getLinea());
 		btnOk=(Button)findViewById(R.id.bttnOk);
 		btnOk.setClickable(false);
 
 		// Mostrar id de butacas en el log
-		for (int i = 0; i < SectorA.getTotalButacas(); i++) {
+		for (int i = 0; i < SectorA.getTotalButacas()-1; i++) {
 			butaca = SectorA.getListaButacas().get(i);
 		}
 		listButacas = SectorA.getListaButacas();
@@ -77,15 +77,15 @@ public class SectorAActivity extends Activity {
 		// cargaremos los objetos
 		for (int i = 0; i < listButacas.size(); i++) {
 			// Log.e("Butaca"+i,"IdButaca "+ listButacas.get(i).getIdButaca());
-			if (listButacas.get(i).getEstadoButaca()==1) {
-				butacaXSector[i] = R.drawable.butaca_roja;
-				contOcupada++;
-
-				// Log.e("Butaca true" +i,butacaXSector[i].toString());
-			} else {
-				// Log.e("Butaca false "+i,"Butaca"+i);
+			switch (listButacas.get(i).getEstadoButaca()){
+			case 0:
 				butacaXSector[i] = R.drawable.butaca_verde;
+				contOcupada++;
+			case 1:	
+				butacaXSector[i] = R.drawable.butaca_roja;
 				contLibre++;
+			case 2:
+				butacaXSector[i] = R.drawable.butaca_amarilla;
 			}
 		}
 		IA.setmThumbIds(butacaXSector);
@@ -103,6 +103,7 @@ public class SectorAActivity extends Activity {
 					if (cantEntradas==0 || cantSeleccionadas < cantEntradas) {
 						butacaXSector[position] = R.drawable.butaca_amarilla;
 						listButacas.get(position).setEstadoButaca(2);
+						PrecioTotal+=SectorA.getPrecioSector();
 						cantSeleccionadas++;
 						lstButaca.add(listButacas.get(position));
 						
@@ -117,6 +118,7 @@ public class SectorAActivity extends Activity {
 					butacaXSector[position] = R.drawable.butaca_verde;
 					listButacas.get(position).setEstadoButaca(0);
 					lstButaca.remove(listButacas.get(position));
+					PrecioTotal+=SectorA.getPrecioSector();
 					cantSeleccionadas--;
 				}
 

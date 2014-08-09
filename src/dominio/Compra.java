@@ -168,7 +168,9 @@ public class Compra implements Parcelable{
 
 	
 
-	
+		public String toString (){
+			return  "Compra: "+idCompra +"Obra: "+ miObra.getNombre()+ "Funcion "+ funcionSeleccionada.toString()+ "";
+		}
 	
 	
 	

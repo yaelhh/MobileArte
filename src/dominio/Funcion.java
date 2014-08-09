@@ -33,7 +33,7 @@ public class Funcion implements Parcelable, Comparable <Funcion>{
 		listaSectores = new ArrayList<Sector>();
 		readFromParcel(in);
 	}
-
+	public Funcion(){}
 	//get and set
 
 	public ArrayList<Sector> getListaSetores() {

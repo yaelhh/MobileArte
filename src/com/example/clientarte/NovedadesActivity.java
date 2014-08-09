@@ -56,12 +56,17 @@ public class NovedadesActivity extends ActionBarActivity implements SwipeRefresh
 				android.R.color.holo_orange_light,
 				android.R.color.holo_red_light);
 		//Obtenemos una referencia a nuestra lista.
-		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
-		listaObras= obj.getListObras();
+		//		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
 		miLista = (ListView) findViewById(R.id.mi_lista);
-
+		Bundle extras = getIntent().getExtras();
+		if(extras!=null){
+			listaObras= extras.getParcelableArrayList("listObras");
+		}else{
+			final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
+			listaObras= obj.getListObras();
+		}
 		cargarDatos(listaObras);
-			}
+	}
 
 	public void cargarDatos( ArrayList<Obra> lo){
 		final ArrayList<Obra> listObras=lo;
@@ -76,7 +81,6 @@ public class NovedadesActivity extends ActionBarActivity implements SwipeRefresh
 
 				TextView tituloObra = (TextView) view.findViewById(R.id.textTituloNovObras); 
 				tituloObra.setText(((ListaEntradaObra) entrada).getTituloObra()); 
-
 				ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageNovedadesObras); 
 				imagen_entrada.setBackgroundResource(((ListaEntradaObra) entrada).getImagenObra());
 			}
@@ -126,9 +130,11 @@ public class NovedadesActivity extends ActionBarActivity implements SwipeRefresh
 		//Antes de ejecutarlo, indicamos al swipe layout que muestre la barra indeterminada de progreso.
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
 		obj.traerDatos();
+		//		ArrayList<Obra> lista=obj.getListObras();
+
 		listaObras.clear();
 		listaObras= obj.getListObras();
-		Toast.makeText(this,"Refresco", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this,"Cargando...", Toast.LENGTH_SHORT).show();
 
 		swipeLayout.setRefreshing(true);
 		//Vamos a simular un refresco con un handle.
@@ -147,45 +153,45 @@ public class NovedadesActivity extends ActionBarActivity implements SwipeRefresh
 
 
 
-//	//Funcion para crear activity en funcion de la lista de obras obtenidas
-//	public void crearProgramacion(ObjetosBackend obj){ 
-//
-//		listObras=obj.getListObras();
-//
-//		ArrayList<View> listView= new ArrayList<View>();
-//		//    recorro la lista de obras existentes y agrego un imagenbutton por cada obra
-//		for(int x=0; x<listObras.size();x++){
-//			Log.e("En crearProgramacion",listObras.get(x).getNombre());
-//			miObra= (Obra) listObras.get(x);
-//			imageObra= new ImageButton(this);
-//			imageObra.setId(x);
-//			imageObra.setContentDescription(miObra.getNombre());
-//			Integer imagen= miObra.getListaImagenes()[0];
-//			imageObra.setBackgroundResource(imagen);
-//			imageObra.setPadding(10, 30, 10, 10);
-//			ingresoObra(imageObra); 
-//			//Le agrego al layout el imageButton creado
-//			layout.addView(imageObra, 470, 140);
-//		}   
-//	}
-//
-//	//Funcion que al seleccionar una obra envie los datos a ObraActivity
-//	public void ingresoObra(ImageButton imageObra){
-//		imageObra.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//
-//				int i= v.getId(); 
-//				Log.e("ProgramacionActivity - ingresoObra", Integer.toString(i));
-//				obraSeleccionada= (Obra) listObras.get(i);
-//				Intent intent = new Intent(NovedadesActivity.this, ObraActivity.class);
-//				intent.putExtra("obra",obraSeleccionada); 
-//				startActivity(intent);
-//			}
-//
-//		});
-//	}		
+	//	//Funcion para crear activity en funcion de la lista de obras obtenidas
+	//	public void crearProgramacion(ObjetosBackend obj){ 
+	//
+	//		listObras=obj.getListObras();
+	//
+	//		ArrayList<View> listView= new ArrayList<View>();
+	//		//    recorro la lista de obras existentes y agrego un imagenbutton por cada obra
+	//		for(int x=0; x<listObras.size();x++){
+	//			Log.e("En crearProgramacion",listObras.get(x).getNombre());
+	//			miObra= (Obra) listObras.get(x);
+	//			imageObra= new ImageButton(this);
+	//			imageObra.setId(x);
+	//			imageObra.setContentDescription(miObra.getNombre());
+	//			Integer imagen= miObra.getListaImagenes()[0];
+	//			imageObra.setBackgroundResource(imagen);
+	//			imageObra.setPadding(10, 30, 10, 10);
+	//			ingresoObra(imageObra); 
+	//			//Le agrego al layout el imageButton creado
+	//			layout.addView(imageObra, 470, 140);
+	//		}   
+	//	}
+	//
+	//	//Funcion que al seleccionar una obra envie los datos a ObraActivity
+	//	public void ingresoObra(ImageButton imageObra){
+	//		imageObra.setOnClickListener(new OnClickListener() {
+	//
+	//			@Override
+	//			public void onClick(View v) {
+	//
+	//				int i= v.getId(); 
+	//				Log.e("ProgramacionActivity - ingresoObra", Integer.toString(i));
+	//				obraSeleccionada= (Obra) listObras.get(i);
+	//				Intent intent = new Intent(NovedadesActivity.this, ObraActivity.class);
+	//				intent.putExtra("obra",obraSeleccionada); 
+	//				startActivity(intent);
+	//			}
+	//
+	//		});
+	//	}		
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 

@@ -138,10 +138,9 @@ public class ObjetosBackend extends Application{
 	public void traerDatos(){
 		crearListObra();
 		crearListFunciones();
+		crearListSectores();
+//		AgregarSectorAFuncion();
 		crearListSalas();
-		crearSectores();
-		AgregarButacaSector();
-		AgregarSectorAFuncion();	
 		AgregarObrasaSalas();
 	}
 
@@ -158,12 +157,12 @@ public class ObjetosBackend extends Application{
 
 	//Funcion para obtener obras
 	public void crearListObra(){
-				Query query = mKinveyClient.query();
+		Query query = mKinveyClient.query();
 		/**
 		 Cargo las obras de la tabla
 		 */
-		query.addSort("IdObras", SortOrder.DESC);
-		
+		query.addSort("_id", SortOrder.DESC);
+
 		mKinveyClient.appData("Obras", ObraBackend.class).get(query, new KinveyListCallback<ObraBackend>() {
 			@Override
 			public void onSuccess(ObraBackend[] resultadoconsulta) {
@@ -195,73 +194,12 @@ public class ObjetosBackend extends Application{
 					Funcion funcion= new Funcion(resultadoconsulta[i].getIdFuncion(),Double.parseDouble(resultadoconsulta[i].getDuracion()),resultadoconsulta[i].getFechaObra(),resultadoconsulta[i].getHoraComienzo());
 					for(int x=0;x<listaObra.size()-1;x++){
 						if(resultadoconsulta[i].getIdObra()==listaObra.get(x).getIdObra()){
-							//						if(resultadoconsulta[i].getIdObra().equalsIgnoreCase(listaObra.get(x).getIdObra())){
-							//							Log.e("resultado "+ i+" " +resultadoconsulta[i].getIdObra(), "lista  "+x+" "+listaObra.get(x).getIdObra());
+							//													if(resultadoconsulta[i].getIdObra().equalsIgnoreCase(listaObra.get(x).getIdObra())){
+							Log.e("resultado "+ i+" " +resultadoconsulta[i].getIdObra(), "lista  "+x+" "+listaObra.get(x).getIdObra());
 							listaObra.get(x).getListaFunciones().add(funcion);
-							Collections.sort(listaObra.get(x).getListaFunciones()); 
-							//							obraSegunFuncion.put(listaObra.get(x), funcion);
-							break;
-						}
+							//							Collections.sort(listaObra.get(x).getListaFunciones()); 
+							//								obraSegunFuncion.put(listaObra.get(x), funcion);
 
-					}
-
-
-				}
-
-			}
-
-			@Override
-			public void onFailure(Throwable arg0) {
-//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
-
-			}
-		});
-
-
-
-	}
-
-	//Funcion para obtener salas
-	public void crearListSalas(){
-		//			Query myQuery = mKinveyClient.query();
-		/**
-			 Cargo las sala de la tabla
-		 */
-		mKinveyClient.appData("Sala", SalaBackend.class).get(myQuery, new KinveyListCallback<SalaBackend>() {
-			@Override
-			public void onSuccess(SalaBackend[] resultadoconsulta) {
-				for (int i = 0; i < resultadoconsulta.length; i++) {
-					Sala sala= new Sala(resultadoconsulta[i].getIdSala(),resultadoconsulta[i].getNombreSala(),resultadoconsulta[i].getCapacidad());
-					listaSalas.add(sala);
-				}
-			}
-
-			@Override
-			public void onFailure(Throwable arg0) {
-//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
-
-			}
-		});
-	}
-
-	public void AgregarObrasaSalas(){
-		/**
-			 Cargo la tabla salaObras
-		 */
-		mKinveyClient.appData("ObrasSalas", ObrasSalasBackend.class).get(myQuery, new KinveyListCallback<ObrasSalasBackend>() {
-			@Override
-			public void onSuccess(ObrasSalasBackend[] resultadoconsulta) {
-				for (int i = 0; i < resultadoconsulta.length; i++) {
-					for (int x = 0; x < listaObra.size(); x++) {
-						Obra obraActual= listaObra.get(x);
-						if(resultadoconsulta[i].getIdObras()==obraActual.getIdObra()){
-							for (int y = 0; y < listaSalas.size(); y++) {
-								Sala salaActual=listaSalas.get(y);
-								if(resultadoconsulta[i].getIdSalas().equalsIgnoreCase(salaActual.getIdSala())){
-									listaSalas.get(y).getListaObras().add(obraActual);
-									Log.e(salaActual.getIdSala(),obraActual.getIdObra()+"");
-								}	
-							}
 						}
 					}
 				}
@@ -269,15 +207,20 @@ public class ObjetosBackend extends Application{
 
 			@Override
 			public void onFailure(Throwable arg0) {
-//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
+				//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
 
 			}
 		});
+
+
+
 	}
 
+	
 
 
-	public void crearSectores(){	
+
+	public void crearListSectores(){	
 		/**
 			 Creo Sectores
 		 */
@@ -288,15 +231,17 @@ public class ObjetosBackend extends Application{
 					Sector sector= new Sector(resultadoconsulta[i].getIdSector(),resultadoconsulta[i].getTotalButacas(),resultadoconsulta[i].getLinea(),resultadoconsulta[i].getPrecioSector());
 					listaSectores.add(sector);
 				}
+				AgregarSectorAFuncion();
 			}
 
 			@Override
 			public void onFailure(Throwable arg0) {
-//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
+				//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
 
 			}
 		});
 	}
+
 
 	/**
 		 Traigo tabla FuncionSector
@@ -305,71 +250,181 @@ public class ObjetosBackend extends Application{
 		/**
 			 Traigo datos funcionSector y cargo la lista de sectores en la funcion
 		 */
-		mKinveyClient.appData("FuncionSector", FuncionSectorBackend.class).get(myQuery, new KinveyListCallback<FuncionSectorBackend>() {
+
+		funcionA= new Funcion();
+		ArrayList<Funcion> lfuncion=new ArrayList<Funcion>();
+		for (int x = 0; x < listaObra.size(); x++) {
+			ArrayList<Funcion> lista=new ArrayList<Funcion>();
+			//			final Obra obraActual= new Obra();
+			lfuncion= listaObra.get(x).getListaFunciones();
+			for(int j=0;j<lfuncion.size();j++){
+				Funcion fu=new Funcion();
+				funcionA= lfuncion.get(j);	
+				//			lSector= new ArrayList<Sector>();
+				//String idF = String.valueOf(funcionA.getIdFuncion());
+				fu=cargarButacaSector(funcionA);	
+				lista.add(fu);
+				
+			}
+			listaObra.get(x).setListaFunciones(lista);
+		}
+	}
+
+
+	public Funcion cargarButacaSector(Funcion f){
+		final Funcion funcionA=f;
+		String idF=String.valueOf(funcionA.getIdFuncion());
+		Query nquery = mKinveyClient.query ();
+		nquery.equals("idFuncion", idF);
+		nquery.addSort("idSector", SortOrder.DESC);
+		AsyncAppData<ButacaFuncionSectorBackend> searchedEvents = mKinveyClient.appData("ButacaFuncionSector", ButacaFuncionSectorBackend.class);
+		searchedEvents.get(nquery, new KinveyListCallback<ButacaFuncionSectorBackend>() {
 			@Override
-			public void onSuccess(FuncionSectorBackend[] resultadoconsulta) {
+			public void onSuccess(ButacaFuncionSectorBackend[] resultadoconsulta) { 
+				ArrayList<Sector>lSector= new ArrayList<Sector>();
 				int rIdF,fidF,rIdS,sIds;
-
-				Log.e("Entre","entre");
 				for (int i = 0; i < resultadoconsulta.length; i++) {
-					for (int x = 0; x < listaObra.size(); x++) {
-						listaFunciones= listaObra.get(x).getListaFunciones();
-						for(int j=0;j<listaFunciones.size();j++){
-							Funcion funcion= listaFunciones.get(j);	
-							if(resultadoconsulta[i].getIdFuncion()==(funcion.getIdFuncion()) ){
-								for (int y = 0; y < listaSectores.size(); y++) {
-									rIdF=resultadoconsulta[i].getIdFuncion();
-									fidF=funcion.getIdFuncion();
-									rIdS=resultadoconsulta[i].getIdSector();
-									sIds=listaSectores.get(y).getIdSector();
-									if(resultadoconsulta[i].getIdSector()== listaSectores.get(y).getIdSector()){
-										Log.e("idFuncion",resultadoconsulta[i].getIdFuncion()+"-"+funcion.getIdFuncion()+" "+resultadoconsulta[i].getIdSector()+" - "+listaSectores.get(y).getIdSector());
-										listaObra.get(x).getListaFunciones().get(j).getListaSetores().add(listaSectores.get(y));
-									}
-								}
-							}
-						}	
-					}
-				}
+					Sector sector= new Sector();
+					ArrayList<Butaca> lButaca=new ArrayList<Butaca>();
+					int idSector=resultadoconsulta[i].getIdSector();
 
+					while(i < resultadoconsulta.length && idSector==resultadoconsulta[i].getIdSector()){
+						Butaca b= new Butaca(resultadoconsulta[i].getIdButaca(),resultadoconsulta[i].getEstadoButaca());
+						lButaca.add(b);
+						i++;
+					}
+					sector=cargarButaca(idSector,lButaca);
+
+					Log.e("butaca.size"," "+sector.getListaButacas(). size());
+
+					lSector.add(sector);
+
+				}
+				Log.e("lsectore.size"," "+lSector. size());
+				funcionA.setListaSectores(lSector);
+				Log.e("funciones",funcionA.getIdFuncion()+" "+lSector. size());
+//				lSector.clear();
+				
 			}
 
 			@Override
 			public void onFailure(Throwable arg0) {
-//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
 
 			}
 		});
+		return funcionA;
 
 	}
+	public Sector cargarButaca(int idSector, ArrayList<Butaca> lButaca){
+		Sector sector= new Sector();
+		for (int y = 0; y < listaSectores.size(); y++) {
+			if(idSector== listaSectores.get(y).getIdSector()){
+				sector=listaSectores.get(y);
+				sector.setListaButacas(lButaca);;
+
+			}
+		}
+		return sector;
+
+	}
+	
+	//Funcion para obtener salas
+		public void crearListSalas(){
+			//			Query myQuery = mKinveyClient.query();
+			/**
+				 Cargo las sala de la tabla
+			 */
+			mKinveyClient.appData("Sala", SalaBackend.class).get(myQuery, new KinveyListCallback<SalaBackend>() {
+				@Override
+				public void onSuccess(SalaBackend[] resultadoconsulta) {
+					for (int i = 0; i < resultadoconsulta.length; i++) {
+						Sala sala= new Sala(resultadoconsulta[i].getIdSala(),resultadoconsulta[i].getNombreSala(),resultadoconsulta[i].getCapacidad());
+						listaSalas.add(sala);
+					}
+				}
+
+				@Override
+				public void onFailure(Throwable arg0) {
+					//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
+
+				}
+			});
+		}
+
+		public void AgregarObrasaSalas(){
+			/**
+				 Cargo la tabla salaObras
+			 */
+			mKinveyClient.appData("ObrasSalas", ObrasSalasBackend.class).get(myQuery, new KinveyListCallback<ObrasSalasBackend>() {
+				@Override
+				public void onSuccess(ObrasSalasBackend[] resultadoconsulta) {
+					for (int i = 0; i < resultadoconsulta.length; i++) {
+						for (int x = 0; x < listaObra.size(); x++) {
+							Obra obraActual= listaObra.get(x);
+							if(resultadoconsulta[i].getIdObras()==obraActual.getIdObra()){
+								for (int y = 0; y < listaSalas.size(); y++) {
+									Sala salaActual=listaSalas.get(y);
+									if(resultadoconsulta[i].getIdSalas().equalsIgnoreCase(salaActual.getIdSala())){
+										listaSalas.get(y).getListaObras().add(obraActual);
+										Log.e(salaActual.getIdSala(),obraActual.getIdObra()+"");
+									}	
+								}
+							}
+						}
+					}
+				}
+
+				@Override
+				public void onFailure(Throwable arg0) {
+					//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
+
+				}
+			});
+		}
+	
+//	public void cargarSector(int idFuncion,ArrayList<Sector> lSector){
+//		Funcion f= new Funcion();
+//		ArrayList<Funcion> lfuncion=new ArrayList<Funcion>();
+//		for (int x = 0; x < listaObra.size(); x++) {
+//			lfuncion= listaObra.get(x).getListaFunciones();
+//			for(int j=0;j<lfuncion.size();j++){
+//				f= lfuncion.get(j);						
+//				if(idFuncion==(f.getIdFuncion()) ){
+//					f.setListaSectores(lSector);
+//				}
+//			}
+//		}
+//
+//	}
 
 	/**
 	 Traigo tabla ButacaSector
 	 */
-	public void AgregarButacaSector(){	
-		/**
-		 Traigo datos ButacaSector y cargo la lista de butacas al sector
-		 */
-		mKinveyClient.appData("ButacaSector", ButacaSectorBackend.class).get(myQuery, new KinveyListCallback<ButacaSectorBackend>() {
-			@Override
-			public void onSuccess(ButacaSectorBackend[] resultadoconsulta) {
-				for (int i = 0; i < resultadoconsulta.length; i++) {
-					Butaca butaca= new Butaca(resultadoconsulta[i].getIdButaca(),resultadoconsulta[i].getEstadoButaca());
-					for(int x=0;x<listaSectores.size();x++){
-						if(resultadoconsulta[i].getIdSector()==listaSectores.get(x).getIdSector()){
-							listaSectores.get(x).getListaButacas().add(butaca);
-						}
-					}
-				}
-			}
-
-			@Override
-			public void onFailure(Throwable arg0) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-	}
+//	public void AgregarButacaSector(){	
+//		/**
+//		 Traigo datos ButacaSector y cargo la lista de butacas al sector
+//		 */
+//		mKinveyClient.appData("ButacaSector", ButacaSectorBackend.class).get(myQuery, new KinveyListCallback<ButacaSectorBackend>() {
+//			@Override
+//			public void onSuccess(ButacaSectorBackend[] resultadoconsulta) {
+//				for (int i = 0; i < resultadoconsulta.length; i++) {
+//					Butaca butaca= new Butaca(resultadoconsulta[i].getIdButaca(),resultadoconsulta[i].getEstadoButaca());
+//					for(int x=0;x<listaSectores.size();x++){
+//						if(resultadoconsulta[i].getIdSector()==listaSectores.get(x).getIdSector()){
+//							listaSectores.get(x).getListaButacas().add(butaca);
+//						}
+//					}
+//				}
+//			}
+//
+//			@Override
+//			public void onFailure(Throwable arg0) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//		});
+//	}
 
 	public void guardarCompra(Compra com){
 		final Compra compra=com;
@@ -401,44 +456,44 @@ public class ObjetosBackend extends Application{
 					ButacaSectorBackend bsb= new ButacaSectorBackend();
 					bsb.setIdButaca(compra.getButacasSeleccionadas().get(x).getIdButaca());
 					bsb.setEstadoButaca(1);
-					
-				}
 
 				}
+
+			}
 		});
 	}
 
-
-public void crearUsuarioLogueado (UsuarioBackend entity){
+	
+	public void crearUsuarioLogueado (UsuarioBackend entity){
 		mKinveyClient.appData("Usuario", UsuarioBackend.class).save(entity, new KinveyClientCallback<UsuarioBackend>() {
 			@Override
 			public void onSuccess(UsuarioBackend result) {
-				
-//				Toast.makeText(CreateAccountActivity.this,"Entity Saved\nTitle: " + result.getNombreUsuario()
-//						+ "\nDescription: " + result.get("Description"), Toast.LENGTH_LONG).show();
-				
+
+				//				Toast.makeText(CreateAccountActivity.this,"Entity Saved\nTitle: " + result.getNombreUsuario()
+				//						+ "\nDescription: " + result.get("Description"), Toast.LENGTH_LONG).show();
+
 			}
 			@Override
 			public void onFailure(Throwable error) {
 				Log.e(TAG, "AppData.save Failure", error);
-//				Toast.makeText(CreateAccountActivity.this, "Save All error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+				//				Toast.makeText(CreateAccountActivity.this, "Save All error: " + error.getMessage(), Toast.LENGTH_LONG).show();
 			}
 		});
-		
+
 	}
-	
-//	public Client getUsuKinvey (){
-//		this.mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-//		this.mKinveyClient.ping(new KinveyPingCallback() {
-//		    public void onFailure(Throwable t) {
-//		        Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
-//		    }
-//		    public void onSuccess(Boolean b) {
-//		        Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
-//		    }
-//		});
-//		return this.mKinveyClient;
-//	}
+
+	//	public Client getUsuKinvey (){
+	//		this.mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
+	//		this.mKinveyClient.ping(new KinveyPingCallback() {
+	//		    public void onFailure(Throwable t) {
+	//		        Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
+	//		    }
+	//		    public void onSuccess(Boolean b) {
+	//		        Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
+	//		    }
+	//		});
+	//		return this.mKinveyClient;
+	//	}
 
 	public Client getmKinveyClient() {
 		return mKinveyClient;
@@ -447,7 +502,8 @@ public void crearUsuarioLogueado (UsuarioBackend entity){
 	public void setmKinveyClient(Client mKinveyClient) {
 		this.mKinveyClient = mKinveyClient;
 	}
+
 	
-	
+
 }
 

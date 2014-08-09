@@ -3,6 +3,7 @@ package com.example.clientarte;
 
 import java.util.ArrayList;
 
+import dominio.Obra;
 import dominio.Usuario;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
@@ -40,6 +41,7 @@ private CharSequence mDrawerTitle;
 private CharSequence mTitle;
 private NavigationAdapter NavAdapter;
 private SearchView mSearchView;
+private ArrayList<Obra>listaObras=new ArrayList<Obra>();
 
 
 private static final int REQUEST_TEXT = 5;
@@ -51,7 +53,8 @@ private Usuario usuarioLogueado;
 protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_main);	
-		
+		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
+		listaObras= obj.getListObras();
 		
 
 		//Drawer Layout
@@ -217,8 +220,19 @@ public boolean onQueryTextChange(String newText) {
 }
 //@Override
 public boolean onQueryTextSubmit(String text) {
-
-    Toast.makeText(this, "Searching for " + text, Toast.LENGTH_LONG).show();
+	ArrayList<Obra> listObraBuscadas= new ArrayList<Obra>();
+	for(int x=0;x<listaObras.size();x++){
+		if(listaObras.get(x).getNombre().toLowerCase().contains(text.toLowerCase())){
+			listObraBuscadas.add(listaObras.get(x));
+		}
+	}
+	if(listObraBuscadas.size()>0){
+	Intent intent = new Intent(MainActivity.this, NovedadesActivity.class);
+	intent.putExtra("listObras",listObraBuscadas);
+	startActivity(intent);
+	}else{
+    Toast.makeText(this, "No se han encontrado obras con ese nombre", Toast.LENGTH_LONG).show();
+	}
     return false;
 }
 
@@ -230,7 +244,7 @@ public boolean onCreateOptionsMenu(Menu menu) {
 
     MenuItem searchItem = menu.findItem(R.id.action_search);
     mSearchView = (SearchView) searchItem.getActionView();
-    mSearchView.setQueryHint("Search...");
+    mSearchView.setQueryHint("Busque su obra...");
     mSearchView.setOnQueryTextListener((OnQueryTextListener) this);
 
     return true;

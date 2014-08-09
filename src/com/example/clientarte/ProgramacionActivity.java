@@ -76,7 +76,7 @@ public class ProgramacionActivity extends Activity implements OnQueryTextListene
 				Obra o= listObras.get(x);
 				for(int y=0;y<o.getListaFunciones().size();y++){
 					String fechaActual=o.getListaFunciones().get(y).getFechaObra();
-					String[] fecha = fechaActual.split("-");
+					String[] fecha = fechaActual.split("/");
 //					Log.e("Fuera if",listObras.get(x).getNombre());
 					Log.e("fecha",fechaActual);
 					if(dia.equalsIgnoreCase(fecha[0]) && mes.equalsIgnoreCase(fecha[1]) && anio.equalsIgnoreCase(fecha[2]) ){
