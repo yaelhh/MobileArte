@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -43,7 +44,7 @@ public class ComunidadFragment extends Fragment {
 	private ViewGroup layout;
 	private ScrollView scroll;
 	private ListView lista;
-	private Button btnAgregarComentario;
+	private ImageButton btnAgregarComentario;
 
 	View rootView;
 	DatabaseHelper dh;
@@ -52,6 +53,7 @@ public class ComunidadFragment extends Fragment {
      
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    	btnAgregarComentario= (ImageButton)rootView.findViewById(R.id.btnAgregarComentario);
     	rootView = inflater.inflate(R.layout.activity_listado, container, false);
         dh = new DatabaseHelper(getActivity().getApplicationContext());
       
@@ -68,7 +70,6 @@ public class ComunidadFragment extends Fragment {
       		});
       		
       		//btnAgregarComentario = (Button)rootView.findViewById(R.id.btnAgregarComentario);
-      		btnAgregarComentario= (Button)rootView.findViewById(R.id.btnAgregarComentario);
     		addListenerOnButton(obj);
       		cargarDatos();
       				

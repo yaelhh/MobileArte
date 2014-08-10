@@ -22,12 +22,13 @@ public class Compra implements Parcelable{
 	public Compra(){
 		
 	}
-	public Compra(String fechaRealizada, 
+	public Compra(String idCompra,String fechaRealizada, String fechaVigencia,
 			Obra miObra, boolean pago, Usuario miUsuario, int precioTotal,
 			Funcion funcionSeleccionada,ArrayList<Butaca> butacasSeleccionadas ) {
 		super();
 		this.idCompra = idCompra;
 		this.fechaRealizada = fechaRealizada;
+		this.fechaVigencia=fechaVigencia;
 		this.miObra = miObra;
 		this.pago = pago;
 		this.miUsuario = miUsuario;
@@ -166,10 +167,11 @@ public class Compra implements Parcelable{
 			}
 		};
 
-	
+		
+
 
 		public String toString (){
-			return  "Compra: "+idCompra +"Obra: "+ miObra.getNombre()+ "Funcion "+ funcionSeleccionada.toString()+ "";
+			return  "Compra: "+idCompra +" Obra: "+ miObra.getNombre()+ " Funcion "+ funcionSeleccionada.toString()+ " Precio total "+ precioTotal;
 		}
 	
 	

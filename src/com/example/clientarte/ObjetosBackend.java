@@ -67,7 +67,7 @@ public class ObjetosBackend extends Application{
 	private String mensaje;
 	private Client mKinveyClient;
 	Query myQuery;
-
+	private Compra compra = null;
 
 
 	//	@Override
@@ -171,6 +171,7 @@ public class ObjetosBackend extends Application{
 					obra.getListaImagenes()[0]=R.drawable.carmen_1;
 					listaObra.add(obra);
 				}
+				Log.e("Obras","Listas de obras cargadas");
 			}
 			@Override
 			public void onFailure(Throwable arg0) {
@@ -203,7 +204,7 @@ public class ObjetosBackend extends Application{
 						}
 					}
 				}
-			}
+				Log.e("Funciones","Listas de funciones cargadas");			}
 
 			@Override
 			public void onFailure(Throwable arg0) {
@@ -231,6 +232,7 @@ public class ObjetosBackend extends Application{
 					Sector sector= new Sector(resultadoconsulta[i].getIdSector(),resultadoconsulta[i].getTotalButacas(),resultadoconsulta[i].getLinea(),resultadoconsulta[i].getPrecioSector());
 					listaSectores.add(sector);
 				}
+				Log.e("Sectores","Listas de sectores cargados");
 				AgregarSectorAFuncion();
 			}
 
@@ -304,7 +306,8 @@ public class ObjetosBackend extends Application{
 				funcionA.setListaSectores(lSector);
 				Log.e("funciones",funcionA.getIdFuncion()+" "+lSector. size());
 //				lSector.clear();
-				
+				Log.e("Butacas","Listas de Butacas cargadas");
+
 			}
 
 			@Override
@@ -426,43 +429,120 @@ public class ObjetosBackend extends Application{
 //		});
 //	}
 
-	public void guardarCompra(Compra com){
-		final Compra compra=com;
+	public Compra guardarCompra(String fActual, String fVigencia,Funcion fSeleccionada, Usuario u, Obra obraSeleccionada, int precio, ArrayList<Butaca> butSelec){
+		final String fechaActual=fActual;
+		final String fechaVigencia=fVigencia;
+		final Obra obra=obraSeleccionada;
+		final Usuario usuario=u;
+		final int precioTotal=precio;
+		final Funcion funcionSeleccionada=fSeleccionada;
+		final ArrayList<Butaca> butacasSeleccionadas=butSelec;
+				
 		CompraBackend compraBknd = new CompraBackend();
-		compraBknd.setFechaRealizada(compra.getFechaRealizada());
-		compraBknd.setFechaVigencia(compra.getFechaVigencia());
-		compraBknd.setIdFuncion(compra.getFuncionSeleccionada().getIdFuncion());
-		compraBknd.setIdUsuario(compra.getMiUsuario().getIdUsuario());
-		compraBknd.setIdObra(compra.getMiObra().getIdObra());
+		compraBknd.setFechaRealizada(fechaActual);
+		compraBknd.setFechaVigencia(fechaVigencia);
+		compraBknd.setIdFuncion(fSeleccionada.getIdFuncion());
+		compraBknd.setIdUsuario(usuario.getIdUsuario());
+		compraBknd.setIdObra(obraSeleccionada.getIdObra());
 		compraBknd.setPago(false);
-		compraBknd.setPrecioTotal(compra.getPrecioTotal());
+		compraBknd.setPrecioTotal(precioTotal);
 
 		AsyncAppData<CompraBackend> myevents = mKinveyClient.appData("Compra",CompraBackend.class);
 		myevents.save(compraBknd, new KinveyClientCallback<CompraBackend>() {
 
+			
+			@Override
+			public void onSuccess(CompraBackend arg0) {
+				Log.e("idCompra",arg0.getId());
+				compra=new Compra(arg0.getId(),fechaActual,fechaVigencia,obra,false,usuario,precioTotal,funcionSeleccionada,butacasSeleccionadas );
+				for(int x=0;x<butacasSeleccionadas.size();x++){
+					
+					guardarButacasCompra(compra,butacasSeleccionadas.get(x));
+					guadarButacasFuncionSector(compra,butacasSeleccionadas.get(x));
+					Log.e("Guardar Compra","Compra guardada");
+				}
+				
+			}
 			@Override
 			public void onFailure(Throwable e) {
 				Toast.makeText(getApplicationContext(), "Ups.. no fue posible guardar su compra, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
 				Log.e(TAG, "failed to save event data", e);
 			}
-			@Override
-			public void onSuccess(CompraBackend arg0) {
-				Log.e("idCompra",arg0.getId());
-				for(int x=0;x<compra.getButacasSeleccionadas().size();x++){
-					CompraButacasBackend comButBknd = new CompraButacasBackend();
-					comButBknd.setIdCompra(arg0.getId());
-					comButBknd.setIdButaca(compra.getButacasSeleccionadas().get(x).getIdButaca());
-
-					ButacaSectorBackend bsb= new ButacaSectorBackend();
-					bsb.setIdButaca(compra.getButacasSeleccionadas().get(x).getIdButaca());
-					bsb.setEstadoButaca(1);
-
-				}
-
-			}
 		});
+		if(compra!=null){
+		return compra;
+		}else{
+			Compra c= new Compra();
+			c.setIdCompra("12345");
+			return c;
+		}
 	}
 
+	
+	public void guardarButacasCompra(Compra compra,Butaca butaca){
+		CompraButacasBackend comButBknd = new CompraButacasBackend();
+		comButBknd.setIdCompra(compra.getIdCompra());
+		comButBknd.setIdButaca(butaca.getIdButaca());
+		
+		AsyncAppData<CompraButacasBackend> myevents = mKinveyClient.appData("ButacasCompra",CompraButacasBackend.class);
+		myevents.save(comButBknd, new KinveyClientCallback<CompraButacasBackend>() {
+
+			@Override
+			public void onSuccess(CompraButacasBackend arg0) {
+				Log.e("Guardar ButacasCompra","Butacas guardadas en compraButaca");				
+			}
+			@Override
+			public void onFailure(Throwable arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+	}
+	
+	public void guadarButacasFuncionSector(Compra compra,Butaca butaca){
+		Query nquery = mKinveyClient.query ();
+		nquery.equals("idButaca", butaca.getIdButaca());
+		nquery.equals("idFuncion", compra.getFuncionSeleccionada().getIdFuncion());
+		AsyncAppData<ButacaFuncionSectorBackend> searchedEvents = mKinveyClient.appData("ButacaFuncionSector", ButacaFuncionSectorBackend.class);
+		searchedEvents.get(nquery, new KinveyListCallback<ButacaFuncionSectorBackend>() {
+
+			@Override
+			public void onFailure(Throwable arg0) {
+				Log.e("Guardar ButacaFuncionSectorBackend","No fue encontrar las butacas seleccionadas");				
+				
+			}
+
+			@Override
+			public void onSuccess(ButacaFuncionSectorBackend[] resultado) {
+//				ButacaFuncionSectorBackend bfsb= new ButacaFuncionSectorBackend();
+				for(int x=0;x<resultado.length;x++){				
+					resultado[x].setEstadoButaca(1);
+				AsyncAppData<ButacaFuncionSectorBackend> myevents = mKinveyClient.appData("ButacaFuncionSector",ButacaFuncionSectorBackend.class);
+				myevents.save(resultado[x], new KinveyClientCallback<ButacaFuncionSectorBackend>() {
+
+					@Override
+					public void onSuccess(ButacaFuncionSectorBackend arg0) {
+						Log.e("Guardar ButacaFuncionSectorBackend","Butacas seteadas en 1 en ButacaFuncionSectorBackend");				
+
+						
+					}
+					@Override
+					public void onFailure(Throwable arg0) {
+						Log.e("Guardar ButacaFuncionSectorBackend","No fue posible seteadas las butacas");				
+						
+					}
+					
+				});
+				
+			}
+			}
+			
+		});
+
+
+	}
 	
 	public void crearUsuarioLogueado (UsuarioBackend entity){
 		mKinveyClient.appData("Usuario", UsuarioBackend.class).save(entity, new KinveyClientCallback<UsuarioBackend>() {

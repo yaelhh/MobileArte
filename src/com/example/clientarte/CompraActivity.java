@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -95,6 +96,8 @@ public class CompraActivity extends Activity {
 	Funcion funcionSeleccionada;
 	Spinner sprHorario;
 	private TextView textPrecioTotal;
+	private int cantSeleccionadas;
+
 
 
 	@Override
@@ -136,7 +139,9 @@ public class CompraActivity extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> a, View v,int position, long id) {
 				funcionSeleccionada=(Funcion) a.getItemAtPosition(position);
+				precioTotal=0;
 				crearSectores(funcionSeleccionada);
+
 
 			}
 			@Override
@@ -154,9 +159,9 @@ public class CompraActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 0) {
 			if (resultCode == RESULT_OK) {
-				String contents = data.getStringExtra("SCAN_RESULT");
-				String format = data.getStringExtra("SCAN_RESULT_FORMAT");
 				Intent intent = new Intent(CompraActivity.this, MainActivity.class);
+				Toast.makeText(this,"Su compra ha sido realizada, para saber los detalles dirijase a ver compras realizadas" , Toast.LENGTH_SHORT).show();
+
 				startActivity(intent);
 				// Handle successful scan
 			} else if (resultCode == RESULT_CANCELED) {
@@ -165,13 +170,31 @@ public class CompraActivity extends Activity {
 		} 
 		if ( requestCode == REQUEST_TEXT ){
 			if ( resultCode == Activity.RESULT_OK ){
-
+				Sector s = new Sector();
+				s=data.getExtras().getParcelable("sectorElegido");
+				for(int x=0;x<funcionSeleccionada.getListaSetores().size();x++){
+					if(s.getIdSector()==funcionSeleccionada.getListaSetores().get(x).getIdSector()){
+						switch (x){
+						case 0:
+							sectorA=s;
+							break;
+						case 1:
+							sectorB=s;
+							break;
+						case 2:
+							sectorC=s;
+							break;				
+						}
+					}
+				}
+				cantSeleccionadas-= data.getExtras().getInt("cantSeleccionadas");
+				//				cant-=cantSeleccionadas;
 				yaSeleccionada= data.getExtras().getBoolean("yaSeleccionadas");
-				precioTotal= data.getExtras().getInt("precioTotal");
-				butacasSeleccionadas=data.getExtras().getParcelableArrayList("ButacasSeleccionadas");
+				precioTotal+= data.getExtras().getInt("precioTotal");
+				//				butacasSeleccionadas=data.getExtras().getParcelableArrayList("ButacasSeleccionadas");
 				textPrecioTotal.setText(String.valueOf(precioTotal));
 
-				Log.e("butacasSeleccionadas", "" + butacasSeleccionadas.get(0));
+				//				Log.e("butacasSeleccionadas", "" + butacasSeleccionadas.get(0));
 			}
 		}
 
@@ -228,9 +251,12 @@ public class CompraActivity extends Activity {
 		String s=cantEntradas.getText().toString();
 		if(!s.equals("")){
 			cant= Integer.parseInt(cantEntradas.getText().toString());
-			if(cant>0){
+			if(!yaSeleccionada){
+				cantSeleccionadas=cant;
+			}
+			if(cant>0 ){
 				Intent intent = new Intent(CompraActivity.this, SectorAActivity.class);
-				intent.putExtra("cantEntrada", cant);
+				intent.putExtra("cantEntrada", cantSeleccionadas);
 				//			Log.e("v.getId "+ v.getId(), " A "+R.id.sectorA +" B "+R.id.sectorB +" C "+R.id.sectorC );
 				switch (v.getId()){
 				case R.id.sectorA:
@@ -249,179 +275,231 @@ public class CompraActivity extends Activity {
 				Toast.makeText(this,"Debe ingresar un número mayor a 0" , Toast.LENGTH_SHORT).show();
 
 			}
-			}else{
-				Toast.makeText(this,"Debe seleccionar la cantidad de entradas a seleccionar" , Toast.LENGTH_SHORT).show();
-			}
-
-
+		}else{
+			Toast.makeText(this,"Debe seleccionar la cantidad de entradas a seleccionar" , Toast.LENGTH_SHORT).show();
 		}
 
 
-		public void realizarCompra(ObjetosBackend obj)  {
-			final ObjetosBackend o=obj;
-			//		Log.e("funcion seleccionada",""+ funcionSeleccionada);
-			btnComprar.setOnClickListener(new OnClickListener() {  
-				@Override
-				public void onClick(View v) {
-					if(cant>0 && cant==butacasSeleccionadas.size()){
-						if(usuario!= null){
-							Calendar c = Calendar.getInstance();
-							SimpleDateFormat df1 = new SimpleDateFormat("dd-MMM-yyyy");
-							String fechaActual = df1.format(c.getTime());
-							Log.e("datos","precio "+ precioTotal+" fecha "+ fechaActual+ " butacas "+ butacasSeleccionadas.size());
-							//						 + " funcion "+ CompraActivity.this.funcionSeleccionada
-							Compra compra= new Compra(fechaActual,obra,false,usuario,precioTotal,CompraActivity.this.funcionSeleccionada,butacasSeleccionadas );
-							o.guardarCompra(compra);
-							String s= "El nombre de la obra es: "+obra.getNombre() + " la funcion elegida es  "+funcionSeleccionada+" y la cantidad de entradas elegidas es "+cantEntradas.getText().toString();
-							Funcion funcionElegida=funcionSeleccionada;
-							String fecha= funcionElegida.getFechaObra();
-							String hora= funcionElegida.getHoraComienzo();
-							String duracion= Double.toString(funcionElegida.getDuracion());
-							Intent intent = new Intent("com.google.zxing.client.android.ENCODE");
-							intent.putExtra("ENCODE_TYPE", "TEXT_TYPE");
-							intent.putExtra("ENCODE_DATA", s);
-							intent.putExtra("fecha", fecha);
-							intent.putExtra("hora", hora);
-							intent.putExtra("duracion", duracion);
-							intent.putExtra("tituloObra", obra.getNombre());
-							startActivity(intent);
-						}else{
-							AlertDialog.Builder dialogo1 = new AlertDialog.Builder(CompraActivity.this);  
-							dialogo1.setTitle("Importante");  
-							dialogo1.setMessage("Para continuar la compra necesita estar logueado,¿Desea loguearse?");            
-							dialogo1.setCancelable(false);  
-							dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {  
-								public void onClick(DialogInterface dialogo1, int id) {  
-									Intent intent = new Intent(CompraActivity.this, LoginActivity.class);
-									startActivity(intent);
-
-								}  
-							});  
-							dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {  
-								public void onClick(DialogInterface dialogo1, int id) {  
-									cancelar();
-								}  
-							});            
-							dialogo1.show();        
+	}
 
 
-						}
+	public void realizarCompra(ObjetosBackend obj)  {
+		final ObjetosBackend o=obj;
+		//		Log.e("funcion seleccionada",""+ funcionSeleccionada);
+		btnComprar.setOnClickListener(new OnClickListener() {  
+			@Override
+			public void onClick(View v) {
+				if(cant>0 && cantSeleccionadas==0){
+					if(usuario!= null){
+						obtenerButacasSeleccionadas();
+//						crearObjetoCompra();
+//						Compra compra= crearObjetoCompra();
+						//Obtenemos fecha actual
+						Calendar c = Calendar.getInstance();
+						SimpleDateFormat df1 = new SimpleDateFormat("dd-MMM-yyyy");
+						String fechaActual = df1.format(c.getTime());
+						//Obtenemos fecha de vigencia
+						String fechaVigencia = df1.format(sumarDiasFecha());
+						Log.e("datos","precio "+ precioTotal+" fecha "+ fechaActual+ " butacas "+ butacasSeleccionadas.size());
+						//						 + " funcion "+ CompraActivity.this.funcionSeleccionada
+//						Compra compra= new Compra(fechaActual,fechaVigencia,obra,false,usuario,precioTotal,CompraActivity.this.funcionSeleccionada,butacasSeleccionadas );
+
+						Compra compra= o.guardarCompra(fechaActual,fechaVigencia,funcionSeleccionada,usuario,obra,precioTotal,butacasSeleccionadas);
+						String s= "Compra: "+compra.getIdCompra() +" Obra: "+ obra.getNombre()+ " Funcion "+ funcionSeleccionada.toString()+ " Precio total "+ precioTotal;
+						Funcion funcionElegida=funcionSeleccionada;
+						String fecha= funcionElegida.getFechaObra();
+						String hora= funcionElegida.getHoraComienzo();
+						String duracion= Double.toString(funcionElegida.getDuracion());
+						Intent intent = new Intent("com.google.zxing.client.android.ENCODE");
+						intent.putExtra("ENCODE_TYPE", "TEXT_TYPE");
+						intent.putExtra("ENCODE_DATA", s);
+						intent.putExtra("fecha", fecha);
+						intent.putExtra("hora", hora);
+						intent.putExtra("duracion", duracion);
+						intent.putExtra("tituloObra", obra.getNombre());
+//						intent.putExtra("compra", compra.toString());
+						CompraActivity.this.startActivityForResult(intent, 0);
 					}else{
-						Toast.makeText(CompraActivity.this,"Debe seleccionar todas las butacas antes de continuar" , Toast.LENGTH_SHORT).show();
+						AlertDialog.Builder dialogo1 = new AlertDialog.Builder(CompraActivity.this);  
+						dialogo1.setTitle("Importante");  
+						dialogo1.setMessage("Para continuar la compra necesita estar logueado,¿Desea loguearse?");            
+						dialogo1.setCancelable(false);  
+						dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {  
+							public void onClick(DialogInterface dialogo1, int id) {  
+								Intent intent = new Intent(CompraActivity.this, LoginActivity.class);
+								startActivity(intent);
+
+							}  
+						});  
+						dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {  
+							public void onClick(DialogInterface dialogo1, int id) {  
+								cancelar();
+							}  
+						});            
+						dialogo1.show();        
+
 
 					}
+				}else{
+					Toast.makeText(CompraActivity.this,"Debe seleccionar todas las butacas antes de continuar" , Toast.LENGTH_SHORT).show();
 
 				}
 
-			});
+			}
+
+		});
 
 
 
+	}
+	//Funcion para obtener la fecha de vigencia
+	public Date sumarDiasFecha(){
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DAY_OF_YEAR, 2);  // numero de días a añadir, o restar en caso de días<0
+		return calendar.getTime(); // Devuelve el objeto Date con los nuevos días añadidos
+	}
+	//Funcion para obtener las butacas que se seleccionaron
+	public void obtenerButacasSeleccionadas(){
+		for(int x=0;x<sectorA.getListaButacas().size();x++){
+			if(sectorA.getListaButacas().get(x).getEstadoButaca()==2){
+				butacasSeleccionadas.add(sectorA.getListaButacas().get(x));
+				sectorA.getListaButacas().get(x).setEstadoButaca(1);
+			}	
 		}
 
-		public void aceptar() {
-			Toast t=Toast.makeText(this,"Bienvenido a probar el programa.", Toast.LENGTH_SHORT);
-			t.show();
+		for(int x=0;x<sectorB.getListaButacas().size();x++){
+			if(sectorB.getListaButacas().get(x).getEstadoButaca()==2){
+				butacasSeleccionadas.add(sectorB.getListaButacas().get(x));
+				sectorB.getListaButacas().get(x).setEstadoButaca(1);
+			}
 		}
-
-		public void cancelar() {
-			finish();
+		for(int x=0;x<sectorC.getListaButacas().size();x++){
+			if(sectorC.getListaButacas().get(x).getEstadoButaca()==2){
+				butacasSeleccionadas.add(sectorC.getListaButacas().get(x));
+				sectorC.getListaButacas().get(x).setEstadoButaca(1);
+			}
 		}
+	}
+	
+//	public Compra crearObjetoCompra(){
+//		
+//		//Obtenemos fecha actual
+//		Calendar c = Calendar.getInstance();
+//		SimpleDateFormat df1 = new SimpleDateFormat("dd-MMM-yyyy");
+//		String fechaActual = df1.format(c.getTime());
+//		//Obtenemos fecha de vigencia
+//
+//		// Configuramos la fecha que se recibe
+//		String fechaVigencia = df1.format(sumarDiasFecha());
+//		Log.e("datos","precio "+ precioTotal+" fecha "+ fechaActual+ " butacas "+ butacasSeleccionadas.size());
+//		//						 + " funcion "+ CompraActivity.this.funcionSeleccionada
+//		Compra compra= new Compra(fechaActual,fechaVigencia,obra,false,usuario,precioTotal,CompraActivity.this.funcionSeleccionada,butacasSeleccionadas );
+//		return compra;
+//	}
+	
+	public void aceptar() {
+		Toast t=Toast.makeText(this,"Bienvenido a probar el programa.", Toast.LENGTH_SHORT);
+		t.show();
+	}
 
-		//	private void enviar(String[] to, String[] cc, String asunto, String mensaje) {
-		//	        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-		//	        emailIntent.setData(Uri.parse("mailto:"));
-		//	        //String[] to = direccionesEmail;
-		//	        //String[] cc = copias;
-		//	        emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
-		//	        emailIntent.putExtra(Intent.EXTRA_CC, cc);
-		//	        emailIntent.putExtra(Intent.EXTRA_SUBJECT, asunto);
-		//	        emailIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
-		//	        emailIntent.setType("message/rfc822");
-		//	        startActivity(Intent.createChooser(emailIntent, "Email "));
-		//	    }
+	public void cancelar() {
+		finish();
+	}
+
+	//	private void enviar(String[] to, String[] cc, String asunto, String mensaje) {
+	//	        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+	//	        emailIntent.setData(Uri.parse("mailto:"));
+	//	        //String[] to = direccionesEmail;
+	//	        //String[] cc = copias;
+	//	        emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
+	//	        emailIntent.putExtra(Intent.EXTRA_CC, cc);
+	//	        emailIntent.putExtra(Intent.EXTRA_SUBJECT, asunto);
+	//	        emailIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
+	//	        emailIntent.setType("message/rfc822");
+	//	        startActivity(Intent.createChooser(emailIntent, "Email "));
+	//	    }
 
 
-		@Override
-		public boolean onCreateOptionsMenu(Menu menu) {
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
 
-			// Inflate the menu; this adds items to the action bar if it is present.
-			getMenuInflater().inflate(R.menu.compra, menu);
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.compra, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
 			return true;
 		}
-
-		@Override
-		public boolean onOptionsItemSelected(MenuItem item) {
-			// Handle action bar item clicks here. The action bar will
-			// automatically handle clicks on the Home/Up button, so long
-			// as you specify a parent activity in AndroidManifest.xml.
-			int id = item.getItemId();
-			if (id == R.id.action_settings) {
-				return true;
-			}
-			return super.onOptionsItemSelected(item);
-		}
-
-		//	public void addListenerOnButton() {
-		//		//		 final boolean bol = false;
-		//
-		//
-		//		bttnSectorA.setOnClickListener(new OnClickListener() {
-		//			@Override
-		//			public void onClick(View v) {
-		//				Intent intent = new Intent(CompraActivity.this, SectorAActivity.class);
-		//				cantEntradas=(EditText)findViewById(R.id.idCantidadEntradas);
-		//				//				cant= cantEntradas.getText().toString();
-		//				intent.putExtra("cantEntrada",cant );
-		//				intent.putExtra("sector",sectorA ); 
-		//				CompraActivity.this.startActivityForResult(intent, REQUEST_TEXT);
-		//				//				startActivity(intent);				    
-		//			}
-		//
-		//		});
-		//		bttnSectorB.setOnClickListener(new OnClickListener() {
-		//			@Override
-		//			public void onClick(View v) {
-		//				Intent intent = new Intent(CompraActivity.this, SectorAActivity.class);
-		//				intent.putExtra("cantEntrada", cantEntradas.getText().toString());
-		//				intent.putExtra("sector", sectorB); 
-		//				CompraActivity.this.startActivityForResult(intent, REQUEST_TEXT);
-		//
-		//				//				startActivity(intent);				    
-		//			}
-		//
-		//		});
-		//		bttnSectorC.setOnClickListener(new OnClickListener() {
-		//			@Override
-		//			public void onClick(View v) {
-		//				Intent intent = new Intent(CompraActivity.this, SectorAActivity.class);
-		//				intent.putExtra("cantEntrada", cantEntradas.getText().toString());
-		//				intent.putExtra("sector",sectorC); 
-		//				CompraActivity.this.startActivityForResult(intent, REQUEST_TEXT);
-		//
-		//				//				startActivity(intent);				    
-		//			}
-		//
-		//		});
-		//		btnComprar.setOnClickListener(new OnClickListener() {
-		//			@Override
-		//			public void onClick(View v) {
-		//				
-		//				if(usuario.getLogueado()==1){
-		//					Intent intent = new Intent(CompraActivity.this, SectorAActivity.class);
-		//					intent.putExtra("usuario",usuario);			
-		//					startActivity(intent);
-		//				}else{
-		//					Intent intent = new Intent(CompraActivity.this, LoginActivity.class);
-		//
-		//					startActivity(intent);
-		//
-		//				}		
-		//
-		//
-		//			}
-		//
-		//		});
-
-		//	}
+		return super.onOptionsItemSelected(item);
 	}
+
+	//	public void addListenerOnButton() {
+	//		//		 final boolean bol = false;
+	//
+	//
+	//		bttnSectorA.setOnClickListener(new OnClickListener() {
+	//			@Override
+	//			public void onClick(View v) {
+	//				Intent intent = new Intent(CompraActivity.this, SectorAActivity.class);
+	//				cantEntradas=(EditText)findViewById(R.id.idCantidadEntradas);
+	//				//				cant= cantEntradas.getText().toString();
+	//				intent.putExtra("cantEntrada",cant );
+	//				intent.putExtra("sector",sectorA ); 
+	//				CompraActivity.this.startActivityForResult(intent, REQUEST_TEXT);
+	//				//				startActivity(intent);				    
+	//			}
+	//
+	//		});
+	//		bttnSectorB.setOnClickListener(new OnClickListener() {
+	//			@Override
+	//			public void onClick(View v) {
+	//				Intent intent = new Intent(CompraActivity.this, SectorAActivity.class);
+	//				intent.putExtra("cantEntrada", cantEntradas.getText().toString());
+	//				intent.putExtra("sector", sectorB); 
+	//				CompraActivity.this.startActivityForResult(intent, REQUEST_TEXT);
+	//
+	//				//				startActivity(intent);				    
+	//			}
+	//
+	//		});
+	//		bttnSectorC.setOnClickListener(new OnClickListener() {
+	//			@Override
+	//			public void onClick(View v) {
+	//				Intent intent = new Intent(CompraActivity.this, SectorAActivity.class);
+	//				intent.putExtra("cantEntrada", cantEntradas.getText().toString());
+	//				intent.putExtra("sector",sectorC); 
+	//				CompraActivity.this.startActivityForResult(intent, REQUEST_TEXT);
+	//
+	//				//				startActivity(intent);				    
+	//			}
+	//
+	//		});
+	//		btnComprar.setOnClickListener(new OnClickListener() {
+	//			@Override
+	//			public void onClick(View v) {
+	//				
+	//				if(usuario.getLogueado()==1){
+	//					Intent intent = new Intent(CompraActivity.this, SectorAActivity.class);
+	//					intent.putExtra("usuario",usuario);			
+	//					startActivity(intent);
+	//				}else{
+	//					Intent intent = new Intent(CompraActivity.this, LoginActivity.class);
+	//
+	//					startActivity(intent);
+	//
+	//				}		
+	//
+	//
+	//			}
+	//
+	//		});
+
+	//	}
+}
