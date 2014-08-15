@@ -1,6 +1,8 @@
 package com.example.clientarte;
 
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,13 +20,16 @@ import android.widget.AdapterView.OnItemClickListener;
 import backend.*;
 
 import com.example.clientarte.R.drawable;
+import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyPingCallback;
 import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.Query;
 import com.kinvey.java.User;
+import com.kinvey.java.core.DownloaderProgressListener;
 import com.kinvey.java.core.KinveyClientCallback;
+import com.kinvey.java.core.MediaHttpDownloader;
 
 import dominio.*;
 
@@ -44,6 +49,7 @@ public class ObjetosBackend extends Application{
 	ArrayList<Butaca> listabutacas3;
 	ArrayList<Butaca> listabutacas4;
 
+	private UsuarioBackend usuBackend;
 	private Funcion funcionA;
 	private Funcion funcionB;
 	private Obra obra1;
@@ -62,9 +68,10 @@ public class ObjetosBackend extends Application{
 	private String appSecret="1b0fa51481984d2da5910f78a9d26ccc";
 	private String mensaje;
 	private Client mKinveyClient;
+	private UsuarioBackend usuarioLogueado;
 	Query myQuery;
 
-
+	private ArrayList<NotificacionesBackend> listaNotificaciones= new ArrayList<NotificacionesBackend>();
 
 	//	@Override
 	//	public void onCreate() {
@@ -88,7 +95,7 @@ public class ObjetosBackend extends Application{
 		ArrayList<Butaca> listabutacas= new ArrayList<Butaca>();
 		ArrayList<Butaca>listabutacas2 = new ArrayList<Butaca>();
 		ArrayList<Butaca> listabutacas3 = new ArrayList<Butaca>();
-
+		ArrayList<NotificacionesBackend> listaNotificaciones= new ArrayList<NotificacionesBackend>();
 
 		//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
 		//		conectarBackend();			
@@ -96,7 +103,7 @@ public class ObjetosBackend extends Application{
 	}
 
 	public ObjetosBackend(Client KinveyClient){
-		mKinveyClient=KinveyClient;
+		//mKinveyClient=KinveyClient;
 		myQuery = mKinveyClient.query();
 		ArrayList listaImagenes= new ArrayList();
 		ArrayList<Funcion> listaFunciones= new ArrayList<Funcion>();
@@ -108,6 +115,7 @@ public class ObjetosBackend extends Application{
 		ArrayList<Butaca>listabutacas2 = new ArrayList<Butaca>();
 		ArrayList<Butaca> listabutacas3 = new ArrayList<Butaca>();
 		//		crearListObra();
+		ArrayList<NotificacionesBackend> listaNotificaciones= new ArrayList<NotificacionesBackend>();
 
 	}
 
@@ -127,6 +135,7 @@ public class ObjetosBackend extends Application{
 		ArrayList<Butaca> listabutacas3 = new ArrayList<Butaca>();
 		//		crearListObra();
 		//		crearListFunciones();
+		ArrayList<NotificacionesBackend> listaNotificaciones= new ArrayList<NotificacionesBackend>();
 
 	}
 
@@ -139,6 +148,7 @@ public class ObjetosBackend extends Application{
 		AgregarButacaSector();
 		AgregarSectorAFuncion();	
 		AgregarObrasaSalas();
+		//traerNotificaciones(idUsuario);
 	}
 
 	public ArrayList<Obra> getListObras(){
@@ -148,7 +158,15 @@ public class ObjetosBackend extends Application{
 	public ArrayList<Sala> getListSalas(){
 		return  this.listaSalas;
 	}
+	
+	public ArrayList<NotificacionesBackend> getListaNotificaciones() {
+		return listaNotificaciones;
+	}
 
+	public void setListaNotificaciones(
+			ArrayList<NotificacionesBackend> listaNotificaciones) {
+		this.listaNotificaciones = listaNotificaciones;
+	}
 
 	//Funcion para obtener obras
 	public void crearListObra(){
@@ -403,5 +421,93 @@ public class ObjetosBackend extends Application{
 		this.mKinveyClient = mKinveyClient;
 	}
 	
+	public void cargarUsuarioLogueado (String nombre){
+		 this.mKinveyClient.user().setUsername(nombre);
+	}
 	
+	public Client captarUsuarioLogueado (){
+		return this.mKinveyClient;
+	}
+	
+	
+	
+	public UsuarioBackend getUsuBackend() {
+		return usuBackend;
+	}
+
+	public void setUsuBackend(UsuarioBackend usuBackend) {
+		this.usuBackend = usuBackend;
+	}
+
+	//Funcion para obtener NOTIFICACIONES
+	public void traerNotificaciones(int idUsuario){
+//		mKinveyClient.appData("NotificacionesUsuario", NotificacionesBackend.class).get(myQuery, new KinveyListCallback<NotificacionesBackend>() {
+//			@Override
+//			public void onSuccess(NotificacionesBackend[] resultadoconsulta) {
+//				for (int i = 0; i < resultadoconsulta.length; i++) {
+//					NotificacionesBackend nb= new NotificacionesBackend(resultadoconsulta[i].getIdUsuario(),resultadoconsulta[i].getTipo(),resultadoconsulta[i].getTitulo(),resultadoconsulta[i].getTexto());
+//					listaNotificaciones.add(nb);
+//				}
+//			}
+//			@Override
+//			public void onFailure(Throwable arg0) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//		});
+			String idO = idUsuario + "";
+			Query query = mKinveyClient.query ();
+			query.equals("idNotificacion", idO);
+			AsyncAppData<NotificacionesBackend> searchedEvents = mKinveyClient.appData("NotificacionesUsuario", NotificacionesBackend.class);
+			searchedEvents.get(query, new KinveyListCallback<NotificacionesBackend>() {
+				@Override
+				public void onSuccess(NotificacionesBackend[] resultadoconsulta) { 
+					for (int i = 0; i < resultadoconsulta.length; i++) {
+						NotificacionesBackend nb= new NotificacionesBackend(resultadoconsulta[i].getIdUsuario(),resultadoconsulta[i].getTipo(),resultadoconsulta[i].getTitulo(),resultadoconsulta[i].getTexto());
+						listaNotificaciones.add(nb);
+					}
+				}
+
+					
+
+				@Override
+				public void onFailure(Throwable arg0) {
+					// TODO Auto-generated method stub
+
+				}
+			});
+		}
+	
+	public UsuarioBackend obtenerNacimientoUsuario (String nombreUsuario){
+		
+		Query query = mKinveyClient.query ();
+		query.equals("username", nombreUsuario);
+		AsyncAppData<UsuarioBackend> searchedEvents = mKinveyClient.appData("Usuario", UsuarioBackend.class);
+		searchedEvents.get(query, new KinveyListCallback<UsuarioBackend>() {
+			@Override
+			public void onSuccess(UsuarioBackend[] resultadoconsulta) { 
+				for (int i = 0; i < resultadoconsulta.length; i++) {
+					usuBackend = new UsuarioBackend(resultadoconsulta[i].getNombreUsuario(),resultadoconsulta[i].getFechaNacimiento(),resultadoconsulta[i].getMascaras());
+					Log.d("Entre usuario obtenido: " + usuBackend.getNombreUsuario().toString(), "a ver");
+				}
+			}
+				
+
+			@Override
+			public void onFailure(Throwable arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		return usuBackend;
+	}
+	
+	
+		
 }
+	
+	
+			
+				
+				
+

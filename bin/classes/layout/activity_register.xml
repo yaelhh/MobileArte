@@ -2,10 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.clientarte.CreateAccountActivity" 
-    android:background="@color/ghost_white">
-    
-   <!--  <EditText
+    android:background="@drawable/fondo"
+    tools:context="com.example.clientarte.CreateAccountActivity" >
+
+    <!--
+         <EditText
         android:id="@+id/nomUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,100 +16,127 @@
         android:inputType="textPersonName" 
         android:hint="@string/nomUsuario"
         android:textColor="@color/ebony"
-        android:textColorHint="@color/hint_color"/> -->
+        android:textColorHint="@color/hint_color"/>
+    -->
 
-     <Button
-         android:id="@+id/btnCancelar"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/btnRegister"
-         android:layout_alignBottom="@+id/btnRegister"
-         android:layout_marginLeft="16dp"
-         android:layout_toRightOf="@+id/btnRegister"
-         android:minWidth="@dimen/button_min_width"
-         android:onClick="cancelarAccount"
-         android:text="@string/cancelar"
-         android:textColor="@color/ghost_white" />
+    <EditText
+        android:id="@+id/etFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="42dp"
+        android:ems="10"
+        android:hint="@string/enter_first_name"
+        android:inputType="textPersonName"
+        android:textColor="@color/ebony"
+        android:textColorHint="@color/hint_color" />
 
-     <Button
-         android:id="@+id/btnRegister"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentBottom="true"
-         android:layout_alignParentLeft="true"
-         android:layout_marginBottom="44dp"
-         android:layout_marginLeft="42dp"
-         android:minWidth="@dimen/button_min_width"
-         android:onClick="registerAccount"
-         android:text="@string/register"
-         android:textColor="@color/ghost_white" />
+    <EditText
+        android:id="@+id/etLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/etFirstName"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:hint="@string/enter_last_name"
+        android:inputType="textPersonName"
+        android:textColor="@color/ebony"
+        android:textColorHint="@color/hint_color" />
 
-     <EditText
-         android:id="@+id/etFirstName"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_alignParentTop="true"
-         android:layout_marginTop="42dp"
-         android:ems="10"
-         android:hint="@string/enter_first_name"
-         android:inputType="textPersonName"
-         android:textColor="@color/ebony"
-         android:textColorHint="@color/hint_color" />
+    <EditText
+        android:id="@+id/etEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/etLastName"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/enter_email"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/ebony"
+        android:textColorHint="@color/hint_color" />
 
-     <EditText
-         android:id="@+id/etLastName"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/etFirstName"
-         android:layout_marginTop="14dp"
-         android:ems="10"
-         android:hint="@string/enter_last_name"
-         android:inputType="textPersonName"
-         android:textColor="@color/ebony"
-         android:textColorHint="@color/hint_color" />
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/etEmailAddress"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:hint="@string/enter_password"
+        android:inputType="textPassword"
+        android:textColor="@color/ebony"
+        android:textColorHint="@color/hint_color" />
 
-     <EditText
-         android:id="@+id/etEmailAddress"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/etLastName"
-         android:layout_marginTop="16dp"
-         android:ems="10"
-         android:hint="@string/enter_email"
-         android:inputType="textEmailAddress"
-         android:textColor="@color/ebony"
-         android:textColorHint="@color/hint_color" />
+    <EditText
+        android:id="@+id/etPasswordConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/etPassword"
+        android:layout_marginTop="17dp"
+        android:ems="10"
+        android:hint="@string/confirm_password"
+        android:inputType="textPassword"
+        android:textColor="@color/ebony"
+        android:textColorHint="@color/hint_color" >
 
-     <EditText
-         android:id="@+id/etPassword"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/etEmailAddress"
-         android:layout_marginTop="14dp"
-         android:ems="10"
-         android:hint="@string/enter_password"
-         android:inputType="textPassword"
-         android:textColor="@color/ebony"
-         android:textColorHint="@color/hint_color" />
+        <requestFocus />
+    </EditText>
 
-     <EditText
-         android:id="@+id/etPasswordConfirm"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/etPassword"
-         android:layout_marginTop="17dp"
-         android:ems="10"
-         android:hint="@string/confirm_password"
-         android:inputType="textPassword"
-         android:textColor="@color/ebony"
-         android:textColorHint="@color/hint_color" >
+    <Button
+        android:id="@+id/btnCancelarRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="38dp"
+        android:layout_marginRight="82dp"
+        android:minWidth="@dimen/button_min_width"
+        android:text="@string/cancelar"
+        android:textColor="@color/ghost_white" />
 
-         <requestFocus />
-     </EditText>
+<!-- <Button
+    android:id="@+id/pickDate"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/etPasswordConfirm"
+    android:layout_marginTop="19dp"
+    android:text="@string/fechaNacimiento" />-->
+
+<TextView
+    android:id="@+id/textViewCumpleanos"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/etPasswordConfirm"
+    android:layout_marginTop="27dp"
+    android:text="@string/fechaNacimiento" />
+
+<TextView
+    android:id="@+id/dateDisplay"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/textViewCumpleanos"
+    android:layout_alignBottom="@+id/textViewCumpleanos"
+    android:layout_marginLeft="33dp"
+    android:layout_toRightOf="@+id/textViewCumpleanos"
+    android:text="" />
+
+<Button
+    android:id="@+id/btnRegister"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/btnCancelarRegistro"
+    android:layout_alignBottom="@+id/btnCancelarRegistro"
+    android:layout_toLeftOf="@+id/btnCancelarRegistro"
+    android:minWidth="@dimen/button_min_width"
+    android:onClick="registerAccount"
+    android:text="@string/register"
+    android:textColor="@color/ghost_white" />
 
 </RelativeLayout>

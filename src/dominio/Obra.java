@@ -88,6 +88,8 @@ public class Obra implements Parcelable{
 
 	}
 	
+	
+	
 //	public Obra(String nombre, String descripcion) {
 //		this.nombre = nombre;
 //		this.descripcion = descripcion;

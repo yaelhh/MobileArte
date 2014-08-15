@@ -1,7 +1,11 @@
 package com.example.clientarte;
 
+import backend.DatabaseHelper;
+
+import com.kinvey.android.AsyncUser;
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyPingCallback;
+import com.kinvey.java.User;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -34,13 +38,16 @@ public class PerfilFragment extends Fragment {
 	private ProgressDialog mProgressDialog = null;
 	private static final int REQUEST_TEXT = 2;
     public PerfilFragment(){}
+	DatabaseHelper dh;
      
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
   
         View rootView = inflater.inflate(R.layout.activity_perfil, container, false);
+        dh = new DatabaseHelper(getActivity().getApplicationContext());
+		final ObjetosBackend obj= (ObjetosBackend) getActivity().getApplicationContext();
       //Conexión de la APP a Kinvey
-      		mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
+        	mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
       		mKinveyClient.ping(new KinveyPingCallback() {
       			public void onFailure(Throwable t) {
       				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
@@ -53,15 +60,26 @@ public class PerfilFragment extends Fragment {
     		btnRegistrar= (Button)rootView.findViewById(R.id.registrarUsuarioPerfil);
     		btnLoguear= (Button)rootView.findViewById(R.id.LoguearDesloguear);
     		btnProxObras = (Button)rootView.findViewById(R.id.btnPrxObras);
-    		addListenerOnButton();
+    		mKinveyClient = obj.captarUsuarioLogueado();
+    		addListenerOnButton(obj);
         return rootView;
     }
 	
 	public void desloguearUsuario () {
-		super.onDestroy();
-		mKinveyClient.user().logout().execute();
+		//super.onDestroy();
+		String usuarioLog = mKinveyClient.user().getUsername().toString();
+		modificarEstadoDeslogueado(usuarioLog);
 		onCreateDialog();
+		mKinveyClient.user().logout().execute();
 	}
+	
+	public void modificarEstadoDeslogueado (String nombreUsuario){
+		//int i = dh.actualizarUsuarioLogueadoDeslogueado(nombreUsuario);
+		dh.actualizarUsuarioLogueadoDeslogueado(nombreUsuario);
+//		String men = i + "";
+//		Log.d("Los campos afectados fueron" + men, men );
+	}
+	
 	
 	protected Dialog onCreateDialog() {
 		final ProgressDialog dialog = new ProgressDialog(getActivity());
@@ -130,34 +148,6 @@ public class PerfilFragment extends Fragment {
 	}
 
     
-    
-
-//    public void addListenerOnButton() {
-//		 
-//    	btnCuenta.setOnClickListener(new OnClickListener() {
-//    		
-// 
-//			@Override
-//			public void onClick(View v) {
-//							
-//				}
-//
-//		});
-//    	
-//    	btnProxObras.setOnClickListener(new OnClickListener() {
-//    		 
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(getActivity(), ProgramacionActivity.class);
-//				startActivity(intent);
-//			}
-//
-//		});
-//    	
-//		
-//    } 
-	
-    
     @Override 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
     	View view = null;
@@ -177,7 +167,7 @@ public class PerfilFragment extends Fragment {
 	}
     
     
-    public void addListenerOnButton() {
+    public void addListenerOnButton(final ObjetosBackend obj) {
 
 		btnProxObras.setOnClickListener(new OnClickListener() {
 			@Override
@@ -191,7 +181,7 @@ public class PerfilFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-				Toast t3=Toast.makeText(getActivity(),"Usuario Logueado< de prueba" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
+				Toast t3=Toast.makeText(getActivity(),"Usuario logueado AHORA" + obj.captarUsuarioLogueado().user().getUsername(), Toast.LENGTH_SHORT);
 				t3.show();
 			}
 
@@ -203,10 +193,8 @@ public class PerfilFragment extends Fragment {
 				mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
 				if (!mKinveyClient.user().isUserLoggedIn()) {
 					mensajeConfirmacion();
-					//			PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
-					//                    LoginActivity.class));
-					//			PerfilActivity.this.finish();
 				}else{
+					
 					if (mKinveyClient.user().isUserLoggedIn()) {
 						mensajeConfirmacionDesloguear();
 						//desloguearUsuario();
@@ -218,13 +206,16 @@ public class PerfilFragment extends Fragment {
 		btnLoguear.setOnClickListener(new OnClickListener() {	 
 			@Override
 			public void onClick(View v) {
-				mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
+				//AsyncUser<User> usu = obj.captarUsuarioLogueado().user();
+				//mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
 				//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-				if (!mKinveyClient.user().isUserLoggedIn()) {
+				//if (!mKinveyClient.user().isUserLoggedIn()) {
+				if (!obj.captarUsuarioLogueado().user().isUserLoggedIn()){	
 					mensajeConfirmacion();
-					
+
 				}else{
-					if (mKinveyClient.user().isUserLoggedIn()) {
+					//if (mKinveyClient.user().isUserLoggedIn()) {
+					if (obj.captarUsuarioLogueado().user().isUserLoggedIn()) {
 						mensajeConfirmacionDesloguear();
 					}
 				}

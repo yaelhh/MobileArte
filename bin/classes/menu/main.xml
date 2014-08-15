@@ -19,11 +19,14 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/abc_action_bar_home_description"/>
-    <item 
+     
+      <item 
         android:id="@+id/action_notification"
-       android:icon="@android:drawable/ic_dialog_email"
+        android:icon="@drawable/ic_stat_ic_dialog_email"
         android:showAsAction="always"
         android:title="@string/action_bar_notification"/>
+        
+        
     
 
 </menu>
