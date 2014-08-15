@@ -1309,9 +1309,15 @@ containing a value of this type.
         public static final int Yellow=0x7f08002b;
         public static final int YellowGreen=0x7f080078;
         public static final int abc_search_url_text_holo=0x7f0800b8;
+<<<<<<< 672ea11f791c2093b3dbdf6fe046c1b0d64a6e4c
         public static final int abc_search_url_text_normal=0x7f080017;
         public static final int abc_search_url_text_pressed=0x7f080019;
         public static final int abc_search_url_text_selected=0x7f080018;
+=======
+        public static final int abc_search_url_text_normal=0x7f080016;
+        public static final int abc_search_url_text_pressed=0x7f080018;
+        public static final int abc_search_url_text_selected=0x7f080017;
+>>>>>>> b0f545921f005ad870f027f135c17a71c82d21c0
         public static final int aqua=0x7f080022;
         public static final int black=0x7f080028;
         public static final int blue=0x7f080026;
@@ -1321,9 +1327,15 @@ containing a value of this type.
         /**  Valores opciones registro de usuarios 
          */
         public static final int form_highlight=0x7f0800b4;
+<<<<<<< 672ea11f791c2093b3dbdf6fe046c1b0d64a6e4c
         public static final int fuchsia=0x7f08001c;
         public static final int ghost_white=0x7f0800b6;
         public static final int gray=0x7f080016;
+=======
+        public static final int fuchsia=0x7f08001b;
+        public static final int ghost_white=0x7f0800b6;
+        public static final int gray=0x7f08001e;
+>>>>>>> b0f545921f005ad870f027f135c17a71c82d21c0
         public static final int green=0x7f080025;
         public static final int help_button_view=0x7f080002;
         public static final int help_view=0x7f080003;
@@ -1334,7 +1346,11 @@ containing a value of this type.
         public static final int olive=0x7f08001f;
         public static final int possible_result_points=0x7f080004;
         public static final int purple=0x7f080020;
+<<<<<<< 672ea11f791c2093b3dbdf6fe046c1b0d64a6e4c
         public static final int red=0x7f08001d;
+=======
+        public static final int red=0x7f08001c;
+>>>>>>> b0f545921f005ad870f027f135c17a71c82d21c0
         public static final int result_image_border=0x7f080005;
         public static final int result_minor_text=0x7f080006;
         public static final int result_points=0x7f080007;
@@ -1347,15 +1363,24 @@ containing a value of this type.
         public static final int sbc_page_number_text=0x7f08000e;
         public static final int sbc_snippet_text=0x7f08000f;
         public static final int share_text=0x7f080010;
+<<<<<<< 672ea11f791c2093b3dbdf6fe046c1b0d64a6e4c
         public static final int silver=0x7f08001e;
+=======
+        public static final int silver=0x7f08001d;
+>>>>>>> b0f545921f005ad870f027f135c17a71c82d21c0
         public static final int status_text=0x7f080011;
         public static final int teal=0x7f080024;
         public static final int transparent=0x7f080012;
         public static final int viewfinder_frame=0x7f080013;
         public static final int viewfinder_laser=0x7f080014;
         public static final int viewfinder_mask=0x7f080015;
+<<<<<<< 672ea11f791c2093b3dbdf6fe046c1b0d64a6e4c
         public static final int white=0x7f08001a;
         public static final int yellow=0x7f08001b;
+=======
+        public static final int white=0x7f080019;
+        public static final int yellow=0x7f08001a;
+>>>>>>> b0f545921f005ad870f027f135c17a71c82d21c0
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -1954,7 +1979,11 @@ containing a value of this type.
         public static final int vertical=0x7f09000b;
         public static final int viewfinder_view=0x7f0900d3;
         public static final int withText=0x7f090028;
+<<<<<<< 672ea11f791c2093b3dbdf6fe046c1b0d64a6e4c
         public static final int wlll=0x7f090113;
+=======
+        public static final int wlll=0x7f09010a;
+>>>>>>> b0f545921f005ad870f027f135c17a71c82d21c0
     }
     public static final class integer {
         /**  The maximum number of action buttons that should be permitted within
@@ -2104,6 +2133,7 @@ containing a value of this type.
         public static final int beep=0x7f060000;
     }
     public static final class string {
+<<<<<<< 672ea11f791c2093b3dbdf6fe046c1b0d64a6e4c
         public static final int Arte=0x7f0a00c7;
         public static final int Canjear=0x7f0a00a4;
         public static final int Comunidad=0x7f0a008b;
@@ -2162,6 +2192,66 @@ containing a value of this type.
         public static final int action_example=0x7f0a0097;
         public static final int action_settings=0x7f0a0087;
         public static final int addCliente=0x7f0a00ee;
+=======
+        public static final int Arte=0x7f0a00c6;
+        public static final int Canjear=0x7f0a00a3;
+        public static final int Comunidad=0x7f0a008a;
+        public static final int Cuenta=0x7f0a009d;
+        public static final int EstadoUsuario=0x7f0a009e;
+        public static final int HistoriaSodre=0x7f0a00e4;
+        public static final int HorarioSodre=0x7f0a00e5;
+        public static final int Mascaras=0x7f0a00a2;
+        public static final int Nosotros=0x7f0a0089;
+        public static final int Novedades=0x7f0a008b;
+        public static final int Obras_vistas=0x7f0a00a1;
+        public static final int Programacion=0x7f0a0088;
+        public static final int Prox_obras=0x7f0a00a0;
+        public static final int RegistroUsuario=0x7f0a009f;
+        /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
+         */
+        public static final int abc_action_bar_home_description=0x7f0a0079;
+        /**  Content description for the action bar "up" affordance. [CHAR LIMIT=NONE] 
+         */
+        public static final int abc_action_bar_up_description=0x7f0a007a;
+        /**  Content description for the action menu overflow button. [CHAR LIMIT=NONE] 
+         */
+        public static final int abc_action_menu_overflow_description=0x7f0a007b;
+        /**  Label for the "Done" button on the far left of action mode toolbars. 
+         */
+        public static final int abc_action_mode_done=0x7f0a0078;
+        /**  Title for a button to expand the list of activities in ActivityChooserView [CHAR LIMIT=25] 
+         */
+        public static final int abc_activity_chooser_view_see_all=0x7f0a0082;
+        /**  ActivityChooserView - accessibility support 
+ Description of the shwoing of a popup window with activities to choose from. [CHAR LIMIT=NONE] 
+         */
+        public static final int abc_activitychooserview_choose_application=0x7f0a0081;
+        /**  SearchView accessibility description for clear button [CHAR LIMIT=NONE] 
+         */
+        public static final int abc_searchview_description_clear=0x7f0a007e;
+        /**  SearchView accessibility description for search text field [CHAR LIMIT=NONE] 
+         */
+        public static final int abc_searchview_description_query=0x7f0a007d;
+        /**  SearchView accessibility description for search button [CHAR LIMIT=NONE] 
+         */
+        public static final int abc_searchview_description_search=0x7f0a007c;
+        /**  SearchView accessibility description for submit button [CHAR LIMIT=NONE] 
+         */
+        public static final int abc_searchview_description_submit=0x7f0a007f;
+        /**  SearchView accessibility description for voice button [CHAR LIMIT=NONE] 
+         */
+        public static final int abc_searchview_description_voice=0x7f0a0080;
+        /**  Description of the choose target button in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
+         */
+        public static final int abc_shareactionprovider_share_with=0x7f0a0084;
+        /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
+         */
+        public static final int abc_shareactionprovider_share_with_application=0x7f0a0083;
+        public static final int action_bar_notification=0x7f0a009b;
+        public static final int action_example=0x7f0a0096;
+        public static final int action_settings=0x7f0a0086;
+        public static final int addCliente=0x7f0a00ed;
+>>>>>>> b0f545921f005ad870f027f135c17a71c82d21c0
         public static final int app_name=0x7f0a0000;
         public static final int app_picker_name=0x7f0a0001;
         public static final int back=0x7f0a009d;
