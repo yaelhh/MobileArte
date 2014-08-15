@@ -44,13 +44,13 @@ public class SectorAActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
 		cantEntradas= extras.getInt("cantEntrada");
 		SectorA = getIntent().getParcelableExtra("sector");
-		PrecioTotal= cantEntradas*SectorA.getPrecioSector();
+//		PrecioTotal= cantEntradas*SectorA.getPrecioSector();
 		gv.setNumColumns(SectorA.getLinea());
 		btnOk=(Button)findViewById(R.id.bttnOk);
-		btnOk.setClickable(false);
+//		btnOk.setClickable(false);
 
 		// Mostrar id de butacas en el log
-		for (int i = 0; i < SectorA.getTotalButacas(); i++) {
+		for (int i = 0; i < SectorA.getTotalButacas()-1; i++) {
 			butaca = SectorA.getListaButacas().get(i);
 		}
 		listButacas = SectorA.getListaButacas();
@@ -62,7 +62,7 @@ public class SectorAActivity extends Activity {
 		twCantButacaOcupada = (TextView) findViewById(R.id.twOcupada);
 		twCantButacaOcupada.setText("  " + contOcupada);
 		twEntradas= (TextView)findViewById(R.id.twEntradas);
-		twEntradas.setText("Eligió comprar "+ cantEntradas + " entradas");
+		twEntradas.setText("Le quedan por elegir "+ cantEntradas + " butacas");
 		
 
 		seleccionarButaca();
@@ -77,15 +77,19 @@ public class SectorAActivity extends Activity {
 		// cargaremos los objetos
 		for (int i = 0; i < listButacas.size(); i++) {
 			// Log.e("Butaca"+i,"IdButaca "+ listButacas.get(i).getIdButaca());
-			if (listButacas.get(i).getEstadoButaca()==1) {
-				butacaXSector[i] = R.drawable.butaca_roja;
-				contOcupada++;
-
-				// Log.e("Butaca true" +i,butacaXSector[i].toString());
-			} else {
-				// Log.e("Butaca false "+i,"Butaca"+i);
+			switch (listButacas.get(i).getEstadoButaca()){
+			case 0:
 				butacaXSector[i] = R.drawable.butaca_verde;
 				contLibre++;
+				break;
+			case 1:	
+				butacaXSector[i] = R.drawable.butaca_roja;
+				contOcupada++;
+				break;
+			case 2:
+				butacaXSector[i] = R.drawable.butaca_amarilla;
+				cantSeleccionadas++;
+				break;
 			}
 		}
 		IA.setmThumbIds(butacaXSector);
@@ -100,9 +104,10 @@ public class SectorAActivity extends Activity {
 
 				switch (listButacas.get(position).getEstadoButaca()){
 				case 0:
-					if (cantEntradas==0 || cantSeleccionadas < cantEntradas) {
+					if (cantEntradas>0 || cantSeleccionadas < cantEntradas) {
 						butacaXSector[position] = R.drawable.butaca_amarilla;
 						listButacas.get(position).setEstadoButaca(2);
+						PrecioTotal+=SectorA.getPrecioSector();
 						cantSeleccionadas++;
 						lstButaca.add(listButacas.get(position));
 						
@@ -117,25 +122,28 @@ public class SectorAActivity extends Activity {
 					butacaXSector[position] = R.drawable.butaca_verde;
 					listButacas.get(position).setEstadoButaca(0);
 					lstButaca.remove(listButacas.get(position));
+					PrecioTotal-=SectorA.getPrecioSector();
 					cantSeleccionadas--;
 				}
 
 				IA.setmThumbIds(butacaXSector);
 				gv.setAdapter(IA);
-				if(cantSeleccionadas==cantEntradas){
-					btnOk.setClickable(true);
-				}
+//				if(cantSeleccionadas==cantEntradas){
+//					btnOk.setClickable(true);
+//				}
 
 			}
 
 		});
 	}
 	public void butacasElegidas(View v){
+		SectorA.setListaButacas(listButacas);
 		Intent intent = new Intent();
-//		intent.putExtra("sectorElegido",SectorA );
+		intent.putExtra("sectorElegido",SectorA );
 		intent.putExtra("yaSeleccionadas", true);
 		intent.putExtra("precioTotal", PrecioTotal);
 		intent.putExtra("ButacasSeleccionadas", lstButaca);
+		intent.putExtra("cantSeleccionadas", cantSeleccionadas);
         setResult( Activity.RESULT_OK, intent );
         SectorAActivity.this.finish();
 //		finish();

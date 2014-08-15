@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
+import android.widget.ProgressBar;
 
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyPingCallback;
@@ -25,13 +27,17 @@ import com.kinvey.java.model.FileMetaData;
 public class SplashScreenActivity extends Activity {
 
 	// Set the duration of the splash screen
-	private static final long SPLASH_SCREEN_DELAY = 15000;
+	private static final long SPLASH_SCREEN_DELAY = 25000;
 	public static final String TAG = "kid_VT8_It3ePE";
 	private String appKey="1b0fa51481984d2da5910f78a9d26ccc";
 	private String appSecret="ad60af2bc83d4899aef2f1dffc6529e1";
 	private String mensaje;
 	private Client mKinveyClient;
+
 	static final String FILENAME = "usuario_1.jpg";
+
+	 private ProgressBar mProgressBar;
+
 
 
 	@Override
@@ -46,6 +52,8 @@ public class SplashScreenActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		setContentView(R.layout.activity_splash_screen);
+        mProgressBar = (ProgressBar) findViewById (R.id.progress_bar);
+
 
 		TimerTask task = new TimerTask() {
 			@Override

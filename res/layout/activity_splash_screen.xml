@@ -10,4 +10,24 @@
         android:layout_height="fill_parent"
         android:background="@drawable/splash_screen" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarPadding"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="99dp"
+        android:max="100"
+         />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/progress_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp"
+        android:text="Cargando..." />
+
 </RelativeLayout>

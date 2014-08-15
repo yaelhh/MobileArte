@@ -42,7 +42,7 @@ public class ProgramacionFragment extends Fragment {
             Bundle savedInstanceState) {
   
        rootView = inflater.inflate(R.layout.activity_programacion, container, false);
-       layout= (ViewGroup)rootView.findViewById(R.id.containerProgramacion);
+//       layout= (ViewGroup)rootView.findViewById(R.id.containerProgramacion);
         
         cal = (CalendarView)rootView.findViewById(R.id.calendarView1);
         
