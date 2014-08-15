@@ -8,7 +8,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Compra implements Parcelable{
-	private int idCompra;
+	private String idCompra;
 	private String fechaRealizada;
 	private String fechaVigencia;
 	private Obra miObra;
@@ -22,12 +22,29 @@ public class Compra implements Parcelable{
 	public Compra(){
 		
 	}
-	public Compra(String fechaRealizada, 
+	public Compra(String idCompra,String fechaRealizada, String fechaVigencia,
 			Obra miObra, boolean pago, Usuario miUsuario, int precioTotal,
 			Funcion funcionSeleccionada,ArrayList<Butaca> butacasSeleccionadas ) {
 		super();
 		this.idCompra = idCompra;
 		this.fechaRealizada = fechaRealizada;
+		this.fechaVigencia=fechaVigencia;
+		this.miObra = miObra;
+		this.pago = pago;
+		this.miUsuario = miUsuario;
+		this.precioTotal = precioTotal;
+		this.funcionSeleccionada=funcionSeleccionada;
+		this.butacasSeleccionadas=butacasSeleccionadas;
+		
+	}
+	
+	public Compra(String fechaRealizada, String fechaVigencia,
+			Obra miObra, boolean pago, Usuario miUsuario, int precioTotal,
+			Funcion funcionSeleccionada,ArrayList<Butaca> butacasSeleccionadas ) {
+		super();
+		
+		this.fechaRealizada = fechaRealizada;
+		this.fechaVigencia=fechaVigencia;
 		this.miObra = miObra;
 		this.pago = pago;
 		this.miUsuario = miUsuario;
@@ -37,11 +54,11 @@ public class Compra implements Parcelable{
 		
 	}
 
-	public int getIdCompra() {
+	public String getIdCompra() {
 		return idCompra;
 	}
 
-	public void setIdCompra(int idCompra) {
+	public void setIdCompra(String idCompra) {
 		this.idCompra = idCompra;
 	}
 
@@ -125,7 +142,7 @@ public class Compra implements Parcelable{
 	}
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeInt(idCompra);
+		dest.writeString(idCompra);
 		dest.writeString(fechaRealizada);
 		dest.writeString(fechaVigencia);
 		dest.writeParcelable(miObra,flags);
@@ -139,7 +156,7 @@ public class Compra implements Parcelable{
 	}
 	//Clase para recuperar los datos, IMPORTANTE leerlos en el mismo orden en que se escribieron 
 		private void readFromParcel(Parcel in) {
-			idCompra= in.readInt();
+			idCompra= in.readString();
 			fechaRealizada=in.readString();
 			fechaVigencia=in.readString();
 			miObra=in.readParcelable(Obra.class.getClassLoader());
@@ -166,9 +183,12 @@ public class Compra implements Parcelable{
 			}
 		};
 
-	
+		
 
-	
+
+		public String toString (){
+			return  "Compra: "+idCompra +" Obra: "+ miObra.getNombre()+ " Funcion "+ funcionSeleccionada.toString()+ " Precio total "+ precioTotal;
+		}
 	
 	
 	

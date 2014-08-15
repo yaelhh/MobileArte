@@ -177,6 +177,7 @@
             <service android:name="com.kinvey.sample.signin.KinveyAuthenticationService" >
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" >
+                    
                 </action>
             </intent-filter>
 			</service>

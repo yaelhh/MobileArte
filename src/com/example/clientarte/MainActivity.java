@@ -17,6 +17,7 @@ import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
 
+import dominio.Obra;
 import dominio.Usuario;
 import android.R.menu;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -52,6 +53,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements OnQueryTextListener {
 
 
+<<<<<<< HEAD
 	private String[] titulos;
 	private DrawerLayout NavDrawerLayout;
 	private ListView NavList;
@@ -87,6 +89,35 @@ public class MainActivity extends Activity implements OnQueryTextListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_main);	
 		dh = new DatabaseHelper(getApplicationContext());
+=======
+private String[] titulos;
+private DrawerLayout NavDrawerLayout;
+private ListView NavList;
+private ArrayList<Item_objct> NavItms;
+private TypedArray NavIcons;
+private ActionBarDrawerToggle mDrawerToggle;
+@SuppressWarnings("unused")
+private CharSequence mDrawerTitle;
+@SuppressWarnings("unused")
+private CharSequence mTitle;
+private NavigationAdapter NavAdapter;
+private SearchView mSearchView;
+private ArrayList<Obra>listaObras=new ArrayList<Obra>();
+
+
+private static final int REQUEST_TEXT = 5;
+private Usuario usuarioLogueado;
+
+
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.fragment_main);	
+		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
+		listaObras= obj.getListObras();
+		
+>>>>>>> feature/finalizarCompra
 
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
 		mKinvey = obj.getmKinveyClient();
@@ -198,6 +229,7 @@ public class MainActivity extends Activity implements OnQueryTextListener {
 			/*case 7:
         fragment = new AjustesFragment();
         break;*/    
+<<<<<<< HEAD
 		default:
 			//si no esta la opcion mostrara un toast y nos mandara a Home
 			Toast.makeText(getApplicationContext(),"Opcion "+titulos[position-1]+"no disponible!", Toast.LENGTH_SHORT).show();
@@ -253,6 +285,109 @@ public class MainActivity extends Activity implements OnQueryTextListener {
 			return true;
 		default:
 
+=======
+    default:
+    	//si no esta la opcion mostrara un toast y nos mandara a Home
+    	Toast.makeText(getApplicationContext(),"Opcion "+titulos[position-1]+"no disponible!", Toast.LENGTH_SHORT).show();
+        fragment = new HomeFragment();
+        position=1;
+        break;
+    }
+    //Validamos si el fragment no es nulo
+    if (fragment != null) {
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
+        // Actualizamos el contenido segun la opcion elegida
+        NavList.setItemChecked(position, true);
+        NavList.setSelection(position);
+        //Cambiamos el titulo en donde decia "
+        setTitle(titulos[position-1]);
+        //Cerramos el menu deslizable
+        NavDrawerLayout.closeDrawer(NavList);
+    } else
+		//Si el fragment es nulo mostramos un mensaje de error.
+        Log.e("Error  ", "MostrarFragment"+position);
+}
+
+
+
+@Override
+protected void onPostCreate(Bundle savedInstanceState) {
+    super.onPostCreate(savedInstanceState);
+    // Sync the toggle state after onRestoreInstanceState has occurred.
+    mDrawerToggle.syncState();
+}
+@Override
+public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    mDrawerToggle.onConfigurationChanged(newConfig);
+}
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    // Pass the event to ActionBarDrawerToggle, if it returns
+    // true, then it has handled the app icon touch event
+    if (mDrawerToggle.onOptionsItemSelected(item)) {
+        Log.e("mDrawerToggle pushed", "x");
+      return true;
+    }
+    // Handle your other action bar items...
+    return super.onOptionsItemSelected(item);
+}  
+//@Override
+public boolean onQueryTextChange(String newText) {
+
+    Toast.makeText(this, newText, Toast.LENGTH_SHORT).show();
+
+    return false;
+}
+//@Override
+public boolean onQueryTextSubmit(String text) {
+	ArrayList<Obra> listObraBuscadas= new ArrayList<Obra>();
+	for(int x=0;x<listaObras.size();x++){
+		if(listaObras.get(x).getNombre().toLowerCase().contains(text.toLowerCase())){
+			listObraBuscadas.add(listaObras.get(x));
+		}
+	}
+	if(listObraBuscadas.size()>0){
+	Intent intent = new Intent(MainActivity.this, NovedadesActivity.class);
+	intent.putExtra("listObras",listObraBuscadas);
+	startActivity(intent);
+	}else{
+    Toast.makeText(this, "No se han encontrado obras con ese nombre", Toast.LENGTH_LONG).show();
+	}
+    return false;
+}
+
+
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    // Inflate the menu; this adds items to the action bar if it is present.
+    getMenuInflater().inflate(R.menu.main, menu);
+
+    MenuItem searchItem = menu.findItem(R.id.action_search);
+    mSearchView = (SearchView) searchItem.getActionView();
+    mSearchView.setQueryHint("Busque su obra...");
+    mSearchView.setOnQueryTextListener((OnQueryTextListener) this);
+    
+    MenuItem notification = menu.findItem(R.id.action_notification);
+    
+    return true;
+}
+
+@Override 
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	View view = null;
+	if (requestCode == 5) { 
+		if (resultCode == RESULT_OK) { 
+			//BUSCO USUARIO SEGUN NOMBRE DE USUARIO KINVEY LOGUEADO
+			String userNameLogueado = data.getStringExtra("username");
+			Toast t=Toast.makeText(this,"Me traigo datos" + userNameLogueado, Toast.LENGTH_SHORT);
+			t.show();
+			//mKinveyClient.user().setUsername(userNameLogueado);
+			usuarioLogueado.setEstaLogueado(1);
+			usuarioLogueado.setMiNombreUsuario(userNameLogueado);
+>>>>>>> feature/finalizarCompra
 			
 		}  
 		return super.onOptionsItemSelected(item);

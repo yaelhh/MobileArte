@@ -9,7 +9,7 @@ import android.R.integer;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Funcion implements Parcelable{
+public class Funcion implements Parcelable, Comparable <Funcion>{
 	//Variables
 	private int idFuncion;
 	private Double duracion;
@@ -17,8 +17,8 @@ public class Funcion implements Parcelable{
 	private String fechaObra;
 	private ArrayList<Sector> listaSectores= new ArrayList<Sector>();
 	//Constructor
-	
-	
+
+
 
 	public Funcion(int idFuncion, Double duracion,String fechaObra,String horaComienzo) {
 		super();
@@ -33,9 +33,9 @@ public class Funcion implements Parcelable{
 		listaSectores = new ArrayList<Sector>();
 		readFromParcel(in);
 	}
-	
+	public Funcion(){}
 	//get and set
-	
+
 	public ArrayList<Sector> getListaSetores() {
 		return listaSectores;
 	}
@@ -43,7 +43,7 @@ public class Funcion implements Parcelable{
 	public void setListaSectores(ArrayList<Sector> listaSectores) {
 		this.listaSectores = listaSectores;
 	}
-	
+
 	public int getIdFuncion() {
 
 		return idFuncion;
@@ -75,7 +75,7 @@ public class Funcion implements Parcelable{
 	public void setFechaObra(String fechaObra) {
 		this.fechaObra = fechaObra;
 	}
-	
+
 
 	@Override
 	public int describeContents() {
@@ -90,7 +90,7 @@ public class Funcion implements Parcelable{
 		dest.writeString(fechaObra);
 		dest.writeString(horaComienzo);
 		dest.writeTypedList(listaSectores);
-		
+
 	}
 	private void readFromParcel(Parcel in) {
 		idFuncion= in.readInt();
@@ -99,19 +99,19 @@ public class Funcion implements Parcelable{
 		horaComienzo= in.readString();
 		in.readTypedList(listaSectores, Sector.CREATOR);
 
-	
-		
+
+
 	}
 	//Necesario para usar la clase en Arrays
-			public static final Parcelable.Creator<Funcion> CREATOR = new Parcelable.Creator<Funcion>() {
-				public Funcion createFromParcel(Parcel in) {
-					return new Funcion (in);
-				}
+	public static final Parcelable.Creator<Funcion> CREATOR = new Parcelable.Creator<Funcion>() {
+		public Funcion createFromParcel(Parcel in) {
+			return new Funcion (in);
+		}
 
-				public Funcion [] newArray(int size) {
-					return new Funcion[size];
-				}
-			};
+		public Funcion [] newArray(int size) {
+			return new Funcion[size];
+		}
+	};
 
 
 	public String toString (){
@@ -119,5 +119,12 @@ public class Funcion implements Parcelable{
 	}
 
 	
+	@Override
+	public int compareTo(Funcion o) {
+		return this.fechaObra.compareTo(o.fechaObra);
+		
+	} 
+} 
 
-}
+
+

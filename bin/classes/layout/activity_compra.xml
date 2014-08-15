@@ -113,7 +113,9 @@
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-
+	<RelativeLayout 
+	     android:layout_width="match_parent"
+                android:layout_height="104dp">
  		<Button
                 android:id="@+id/sectorB"
                 android:layout_width="match_parent"
@@ -122,6 +124,25 @@
                 android:contentDescription="@string/sectorB"
                 android:onClick="entrarSector"
                 android:textSize="10dp" />
+
+ 		<ProgressBar
+ 		    android:id="@+id/progressBarCompra"
+ 		    style="?android:attr/progressBarStyleLarge"
+ 		    android:layout_width="wrap_content"
+ 		    android:layout_height="wrap_content"
+ 		    android:layout_alignParentTop="true"
+ 		    android:layout_centerHorizontal="true" />
+
+ 		<!--  <TextView
+ 		    android:id="@+id/txtCargandoCompra"
+ 		    android:layout_width="wrap_content"
+ 		    android:layout_height="wrap_content"
+ 		    android:layout_below="@+id/progressBar1"
+ 		    android:layout_centerHorizontal="true"
+ 		    android:text="Cargando..."
+ 		    android:textAppearance="?android:attr/textAppearanceMedium" /> -->
+ 		
+ 		</RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -164,5 +185,7 @@
         android:text="Comprar" 
         android:onClick="realizarCompra"
         />
+    
+    
 
 </LinearLayout>

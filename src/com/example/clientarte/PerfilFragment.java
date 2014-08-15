@@ -60,11 +60,78 @@ public class PerfilFragment extends Fragment {
     		btnRegistrar= (Button)rootView.findViewById(R.id.registrarUsuarioPerfil);
     		btnLoguear= (Button)rootView.findViewById(R.id.LoguearDesloguear);
     		btnProxObras = (Button)rootView.findViewById(R.id.btnPrxObras);
+<<<<<<< HEAD
     		mKinveyClient = obj.captarUsuarioLogueado();
     		addListenerOnButton(obj);
+=======
+    		addListenerOnButton();
+        
+>>>>>>> feature/finalizarCompra
         return rootView;
     }
-	
+    
+//    public void validarUsuarioOpcion(View view){
+//    	mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
+//    	//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
+//    	if (!mKinveyClient.user().isUserLoggedIn()) {
+//    		mensajeConfirmacion();
+//    		//			PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
+//    		//                    LoginActivity.class));
+//    		//			PerfilActivity.this.finish();
+//    	}else{
+//    		if (mKinveyClient.user().isUserLoggedIn()) {
+//    			mensajeConfirmacionDesloguear();
+//    			//desloguearUsuario();
+//    		}
+//    	}
+//    }
+    
+//    public void desloguearUsuario () {
+//
+//      		btnCuenta=(Button)rootView.findViewById(R.id.btnCuenta);
+//      		btnCuenta.setOnClickListener(new OnClickListener() {
+//      			 
+//    			@Override
+//    			public void onClick(View v) {
+//    				mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
+//    				//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
+//    				if (!mKinveyClient.user().isUserLoggedIn()) {
+//    					mensajeConfirmacion();
+////    					PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
+////    		                    LoginActivity.class));
+////    					PerfilActivity.this.finish();
+//    				}else{
+//    					if (mKinveyClient.user().isUserLoggedIn()) {
+//    					mensajeConfirmacionDesloguear();
+//    					//desloguearUsuario();
+//    				}
+//    				}
+//
+//  			}
+//
+//    		});
+//        return rootView;
+//    }
+    
+//    public void validarUsuarioOpcion(View view){
+//		mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
+//		//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
+//		if (!mKinveyClient.user().isUserLoggedIn()) {
+//			mensajeConfirmacion();
+////			PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
+////                    LoginActivity.class));
+////			PerfilActivity.this.finish();
+//		}else{
+//			if (mKinveyClient.user().isUserLoggedIn()) {
+//			mensajeConfirmacionDesloguear();
+//			//desloguearUsuario();
+//		}
+//		}
+//	}
+
+    		
+    
+
 	public void desloguearUsuario () {
 		//super.onDestroy();
 		String usuarioLog = mKinveyClient.user().getUsername().toString();
@@ -181,9 +248,17 @@ public class PerfilFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
+<<<<<<< HEAD
 				Toast t3=Toast.makeText(getActivity(),"Usuario logueado AHORA" + obj.captarUsuarioLogueado().user().getUsername(), Toast.LENGTH_SHORT);
 				t3.show();
 			}
+=======
+
+		Toast t3=Toast.makeText(getActivity(),"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
+		t3.show();
+	}
+
+>>>>>>> feature/finalizarCompra
 
 		});
 		

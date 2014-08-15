@@ -112,36 +112,36 @@ public class ObjetosBackend extends Application{
 
 	}
 
-	public void inicialize(Client KinveyClient){
-		mKinveyClient=KinveyClient;
-		myQuery = mKinveyClient.query();
-		ArrayList listaImagenes= new ArrayList();
-		ArrayList<Funcion> listaFunciones= new ArrayList<Funcion>();
-
-
-		ArrayList<Sala> listaSalas= new ArrayList<Sala>();
-		//ArrayList<SectorBackend> listaSectores= new ArrayList<SectorBackend>();
-		//	private ArrayList<Comodidad> listaComodidades;
-		ArrayList<Obra> listaObra= new ArrayList<Obra>();
-		ArrayList<Butaca> listabutacas= new ArrayList<Butaca>();
-		ArrayList<Butaca>listabutacas2 = new ArrayList<Butaca>();
-		ArrayList<Butaca> listabutacas3 = new ArrayList<Butaca>();
-		//		crearListObra();
-		//		crearListFunciones();
-
-	}
-
-
-	public void traerDatos(){
-		crearListObra();
-		crearUsuario ();
-//		crearListFunciones();
-//		crearListSalas();
-//		crearSectores();
-//		AgregarButacaSector();
-//		AgregarSectorAFuncion();	
-//		AgregarObrasaSalas();
-	}
+//	public void inicialize(Client KinveyClient){
+//		mKinveyClient=KinveyClient;
+//		myQuery = mKinveyClient.query();
+//		ArrayList listaImagenes= new ArrayList();
+//		ArrayList<Funcion> listaFunciones= new ArrayList<Funcion>();
+//
+//
+//		ArrayList<Sala> listaSalas= new ArrayList<Sala>();
+//		//ArrayList<SectorBackend> listaSectores= new ArrayList<SectorBackend>();
+//		//	private ArrayList<Comodidad> listaComodidades;
+//		ArrayList<Obra> listaObra= new ArrayList<Obra>();
+//		ArrayList<Butaca> listabutacas= new ArrayList<Butaca>();
+//		ArrayList<Butaca>listabutacas2 = new ArrayList<Butaca>();
+//		ArrayList<Butaca> listabutacas3 = new ArrayList<Butaca>();
+//		//		crearListObra();
+//		//		crearListFunciones();
+//
+//	}
+//
+//
+//	public void traerDatos(){
+//		crearListObra();
+//		crearUsuario ();
+////		crearListFunciones();
+////		crearListSalas();
+////		crearSectores();
+////		AgregarButacaSector();
+////		AgregarSectorAFuncion();	
+////		AgregarObrasaSalas();
+//	}
 
 	public ArrayList<Obra> getListObras(){
 		return this.listaObra;

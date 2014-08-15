@@ -5,10 +5,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,7 +32,11 @@ import com.kinvey.java.Query;
 import com.kinvey.java.User;
 import com.kinvey.java.core.DownloaderProgressListener;
 import com.kinvey.java.core.KinveyClientCallback;
+<<<<<<< HEAD
 import com.kinvey.java.core.MediaHttpDownloader;
+=======
+import com.kinvey.java.query.AbstractQuery.SortOrder;
+>>>>>>> feature/finalizarCompra
 
 import dominio.*;
 
@@ -45,9 +52,10 @@ public class ObjetosBackend extends Application{
 	private ArrayList<Obra> listaObra= new ArrayList<Obra>();
 	private ArrayList<Butaca> listabutacas= new ArrayList<Butaca>();
 	ArrayList<Funcion> listaFuncionesObra= new ArrayList<Funcion>();
-	ArrayList<Butaca>listabutacas2;
+	private ButacaFuncionSectorBackend[] listabutacasSeleccionadas;
 	ArrayList<Butaca> listabutacas3;
 	ArrayList<Butaca> listabutacas4;
+	HashMap<Obra, Funcion> obraSegunFuncion= new HashMap<Obra, Funcion>();
 
 	private UsuarioBackend usuBackend;
 	private Funcion funcionA;
@@ -70,8 +78,13 @@ public class ObjetosBackend extends Application{
 	private Client mKinveyClient;
 	private UsuarioBackend usuarioLogueado;
 	Query myQuery;
+<<<<<<< HEAD
 
 	private ArrayList<NotificacionesBackend> listaNotificaciones= new ArrayList<NotificacionesBackend>();
+=======
+	private Compra compra = null;
+	private ProgressDialog progressDialog;
+>>>>>>> feature/finalizarCompra
 
 	//	@Override
 	//	public void onCreate() {
@@ -143,10 +156,9 @@ public class ObjetosBackend extends Application{
 	public void traerDatos(){
 		crearListObra();
 		crearListFunciones();
+		crearListSectores();
+		//		AgregarSectorAFuncion();
 		crearListSalas();
-		crearSectores();
-		AgregarButacaSector();
-		AgregarSectorAFuncion();	
 		AgregarObrasaSalas();
 		//traerNotificaciones(idUsuario);
 	}
@@ -163,29 +175,39 @@ public class ObjetosBackend extends Application{
 		return listaNotificaciones;
 	}
 
+<<<<<<< HEAD
 	public void setListaNotificaciones(
 			ArrayList<NotificacionesBackend> listaNotificaciones) {
 		this.listaNotificaciones = listaNotificaciones;
 	}
+=======
+	//	public HashMap<Obra, Funcion> getobraSegunFuncion(){
+	//		return this.obraSegunFuncion;
+	//	}
+>>>>>>> feature/finalizarCompra
 
 	//Funcion para obtener obras
 	public void crearListObra(){
-		//		Query myQuery = mKinveyClient.query();
+		Query query = mKinveyClient.query();
 		/**
 		 Cargo las obras de la tabla
 		 */
-		mKinveyClient.appData("Obras", ObraBackend.class).get(myQuery, new KinveyListCallback<ObraBackend>() {
+		query.addSort("_id", SortOrder.DESC);
+
+		mKinveyClient.appData("Obras", ObraBackend.class).get(query, new KinveyListCallback<ObraBackend>() {
 			@Override
 			public void onSuccess(ObraBackend[] resultadoconsulta) {
 				for (int i = 0; i < resultadoconsulta.length; i++) {
 					Obra obra= new Obra(resultadoconsulta[i].getIdObra(),resultadoconsulta[i].getNombreObras(),resultadoconsulta[i].getDescripcipnObras());
+					obra.getListaImagenes()[0]=R.drawable.carmen_1;
 					listaObra.add(obra);
 				}
+				Log.e("Obras","Listas de obras cargadas");
 			}
-
 			@Override
 			public void onFailure(Throwable arg0) {
-				// TODO Auto-generated method stub
+				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
+
 
 			}
 		});
@@ -194,7 +216,8 @@ public class ObjetosBackend extends Application{
 		 Cargo las funciones de la tabla
 	 */
 	public void crearListFunciones(){
-		//			Query myQuery = mKinveyClient.query();
+		Query myQuery = mKinveyClient.query();
+		myQuery.addSort("FechaObra", SortOrder.ASC);
 		mKinveyClient.appData("Funciones", FuncionBackend.class).get(myQuery, new KinveyListCallback<FuncionBackend>() {
 			@Override
 			public void onSuccess(FuncionBackend[] resultadoconsulta) {
@@ -203,21 +226,20 @@ public class ObjetosBackend extends Application{
 					Funcion funcion= new Funcion(resultadoconsulta[i].getIdFuncion(),Double.parseDouble(resultadoconsulta[i].getDuracion()),resultadoconsulta[i].getFechaObra(),resultadoconsulta[i].getHoraComienzo());
 					for(int x=0;x<listaObra.size()-1;x++){
 						if(resultadoconsulta[i].getIdObra()==listaObra.get(x).getIdObra()){
-							//						if(resultadoconsulta[i].getIdObra().equalsIgnoreCase(listaObra.get(x).getIdObra())){
-							//							Log.e("resultado "+ i+" " +resultadoconsulta[i].getIdObra(), "lista  "+x+" "+listaObra.get(x).getIdObra());
+							//													if(resultadoconsulta[i].getIdObra().equalsIgnoreCase(listaObra.get(x).getIdObra())){
+							Log.e("resultado "+ i+" " +resultadoconsulta[i].getIdObra(), "lista  "+x+" "+listaObra.get(x).getIdObra());
 							listaObra.get(x).getListaFunciones().add(funcion);
-							break;
+							//							Collections.sort(listaObra.get(x).getListaFunciones()); 
+							//								obraSegunFuncion.put(listaObra.get(x), funcion);
+
 						}
-
 					}
-
 				}
-
-			}
+				Log.e("Funciones","Listas de funciones cargadas");			}
 
 			@Override
 			public void onFailure(Throwable arg0) {
-				// TODO Auto-generated method stub
+				//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
 
 			}
 		});
@@ -226,11 +248,127 @@ public class ObjetosBackend extends Application{
 
 	}
 
+
+
+
+
+	public void crearListSectores(){	
+		/**
+			 Creo Sectores
+		 */
+		mKinveyClient.appData("Sector", SectorBackend.class).get(myQuery, new KinveyListCallback<SectorBackend>() {
+			@Override
+			public void onSuccess(SectorBackend[] resultadoconsulta) {
+				for (int i = 0; i < resultadoconsulta.length; i++) {
+					Sector sector= new Sector(resultadoconsulta[i].getIdSector(),resultadoconsulta[i].getTotalButacas(),resultadoconsulta[i].getLinea(),resultadoconsulta[i].getPrecioSector());
+					listaSectores.add(sector);
+				}
+				Log.e("Sectores","Listas de sectores cargados");
+				AgregarSectorAFuncion();
+			}
+
+			@Override
+			public void onFailure(Throwable arg0) {
+				//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
+
+			}
+		});
+	}
+
+
+	/**
+		 Traigo tabla FuncionSector
+	 */
+	public void AgregarSectorAFuncion(){	
+		/**
+			 Traigo datos funcionSector y cargo la lista de sectores en la funcion
+		 */
+
+		funcionA= new Funcion();
+		ArrayList<Funcion> lfuncion=new ArrayList<Funcion>();
+		for (int x = 0; x < listaObra.size(); x++) {
+			ArrayList<Funcion> lista=new ArrayList<Funcion>();
+			//			final Obra obraActual= new Obra();
+			lfuncion= listaObra.get(x).getListaFunciones();
+			for(int j=0;j<lfuncion.size();j++){
+				Funcion fu=new Funcion();
+				funcionA= lfuncion.get(j);	
+				//			lSector= new ArrayList<Sector>();
+				//String idF = String.valueOf(funcionA.getIdFuncion());
+				fu=cargarButacaSector(funcionA);	
+				lista.add(fu);
+
+			}
+			listaObra.get(x).setListaFunciones(lista);
+		}
+	}
+
+
+	public Funcion cargarButacaSector(Funcion f){
+		final Funcion funcionA=f;
+		String idF=String.valueOf(funcionA.getIdFuncion());
+		Query nquery = mKinveyClient.query ();
+		nquery.equals("idFuncion", idF);
+		nquery.addSort("idSector", SortOrder.DESC);
+		AsyncAppData<ButacaFuncionSectorBackend> searchedEvents = mKinveyClient.appData("ButacaFuncionSector", ButacaFuncionSectorBackend.class);
+		searchedEvents.get(nquery, new KinveyListCallback<ButacaFuncionSectorBackend>() {
+			@Override
+			public void onSuccess(ButacaFuncionSectorBackend[] resultadoconsulta) { 
+				ArrayList<Sector>lSector= new ArrayList<Sector>();
+				int rIdF,fidF,rIdS,sIds;
+				for (int i = 0; i < resultadoconsulta.length; i++) {
+					Sector sector= new Sector();
+					ArrayList<Butaca> lButaca=new ArrayList<Butaca>();
+					String idSector=resultadoconsulta[i].getIdSector();
+
+					while(i < resultadoconsulta.length && idSector.equalsIgnoreCase(resultadoconsulta[i].getIdSector())){
+						Butaca b= new Butaca(Integer.parseInt(resultadoconsulta[i].getIdButaca()),Integer.parseInt(resultadoconsulta[i].getEstadoButaca()));
+						lButaca.add(b);
+						i++;
+					}
+					sector=cargarButaca(idSector,lButaca);
+
+					Log.e("butaca.size"," "+sector.getListaButacas(). size());
+
+					lSector.add(sector);
+
+				}
+				Log.e("lsectores.size"," "+lSector. size());
+				funcionA.setListaSectores(lSector);
+				Log.e("funciones",funcionA.getIdFuncion()+" "+lSector. size());
+				//				lSector.clear();
+				Log.e("Butacas","Listas de Butacas cargadas");
+				
+
+			}
+
+			@Override
+			public void onFailure(Throwable arg0) {
+				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
+
+			}
+		});
+		return funcionA;
+
+	}
+	public Sector cargarButaca(String idSector, ArrayList<Butaca> lButaca){
+		Sector sector= new Sector();
+		for (int y = 0; y < listaSectores.size(); y++) {
+			if(Integer.parseInt(idSector)== listaSectores.get(y).getIdSector()){
+				sector=listaSectores.get(y);
+				sector.setListaButacas(lButaca);;
+
+			}
+		}
+		return sector;
+
+	}
+
 	//Funcion para obtener salas
 	public void crearListSalas(){
 		//			Query myQuery = mKinveyClient.query();
 		/**
-			 Cargo las sala de la tabla
+				 Cargo las sala de la tabla
 		 */
 		mKinveyClient.appData("Sala", SalaBackend.class).get(myQuery, new KinveyListCallback<SalaBackend>() {
 			@Override
@@ -243,7 +381,7 @@ public class ObjetosBackend extends Application{
 
 			@Override
 			public void onFailure(Throwable arg0) {
-				// TODO Auto-generated method stub
+				//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
 
 			}
 		});
@@ -251,7 +389,7 @@ public class ObjetosBackend extends Application{
 
 	public void AgregarObrasaSalas(){
 		/**
-			 Cargo la tabla salaObras
+				 Cargo la tabla salaObras
 		 */
 		mKinveyClient.appData("ObrasSalas", ObrasSalasBackend.class).get(myQuery, new KinveyListCallback<ObrasSalasBackend>() {
 			@Override
@@ -274,144 +412,309 @@ public class ObjetosBackend extends Application{
 
 			@Override
 			public void onFailure(Throwable arg0) {
-				// TODO Auto-generated method stub
+				//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
 
 			}
 		});
 	}
 
-
-
-	public void crearSectores(){	
-		/**
-			 Creo Sectores
-		 */
-		mKinveyClient.appData("Sector", SectorBackend.class).get(myQuery, new KinveyListCallback<SectorBackend>() {
-			@Override
-			public void onSuccess(SectorBackend[] resultadoconsulta) {
-				for (int i = 0; i < resultadoconsulta.length; i++) {
-					Sector sector= new Sector(resultadoconsulta[i].getIdSector(),resultadoconsulta[i].getTotalButacas(),resultadoconsulta[i].getLinea(),resultadoconsulta[i].getPrecioSector());
-					listaSectores.add(sector);
-				}
-			}
-
-			@Override
-			public void onFailure(Throwable arg0) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-	}
-
-	/**
-		 Traigo tabla FuncionSector
-	 */
-	public void AgregarSectorAFuncion(){	
-		/**
-			 Traigo datos funcionSector y cargo la lista de sectores en la funcion
-		 */
-		mKinveyClient.appData("FuncionSector", FuncionSectorBackend.class).get(myQuery, new KinveyListCallback<FuncionSectorBackend>() {
-			@Override
-			public void onSuccess(FuncionSectorBackend[] resultadoconsulta) {
-				int rIdF,fidF,rIdS,sIds;
-
-				Log.e("Entre","entre");
-				for (int i = 0; i < resultadoconsulta.length; i++) {
-					for (int x = 0; x < listaObra.size(); x++) {
-						listaFunciones= listaObra.get(x).getListaFunciones();
-						for(int j=0;j<listaFunciones.size();j++){
-							Funcion funcion= listaFunciones.get(j);	
-							if(resultadoconsulta[i].getIdFuncion()==(funcion.getIdFuncion()) ){
-								for (int y = 0; y < listaSectores.size(); y++) {
-									rIdF=resultadoconsulta[i].getIdFuncion();
-									fidF=funcion.getIdFuncion();
-									rIdS=resultadoconsulta[i].getIdSector();
-									sIds=listaSectores.get(y).getIdSector();
-									if(resultadoconsulta[i].getIdSector()== listaSectores.get(y).getIdSector()){
-										Log.e("idFuncion",resultadoconsulta[i].getIdFuncion()+"-"+funcion.getIdFuncion()+" "+resultadoconsulta[i].getIdSector()+" - "+listaSectores.get(y).getIdSector());
-										listaObra.get(x).getListaFunciones().get(j).getListaSetores().add(listaSectores.get(y));
-									}
-								}
-							}
-						}	
-					}
-				}
-
-			}
-
-			@Override
-			public void onFailure(Throwable arg0) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-
-	}
+	//	public void cargarSector(int idFuncion,ArrayList<Sector> lSector){
+	//		Funcion f= new Funcion();
+	//		ArrayList<Funcion> lfuncion=new ArrayList<Funcion>();
+	//		for (int x = 0; x < listaObra.size(); x++) {
+	//			lfuncion= listaObra.get(x).getListaFunciones();
+	//			for(int j=0;j<lfuncion.size();j++){
+	//				f= lfuncion.get(j);						
+	//				if(idFuncion==(f.getIdFuncion()) ){
+	//					f.setListaSectores(lSector);
+	//				}
+	//			}
+	//		}
+	//
+	//	}
 
 	/**
 	 Traigo tabla ButacaSector
 	 */
-	public void AgregarButacaSector(){	
-		/**
-		 Traigo datos ButacaSector y cargo la lista de butacas al sector
-		 */
-		mKinveyClient.appData("ButacaSector", ButacaSectorBackend.class).get(myQuery, new KinveyListCallback<ButacaSectorBackend>() {
-			@Override
-			public void onSuccess(ButacaSectorBackend[] resultadoconsulta) {
-				for (int i = 0; i < resultadoconsulta.length; i++) {
-					Butaca butaca= new Butaca(resultadoconsulta[i].getIdButaca(),resultadoconsulta[i].getEstadoButaca());
-					for(int x=0;x<listaSectores.size();x++){
-						if(resultadoconsulta[i].getIdSector()==listaSectores.get(x).getIdSector()){
-							listaSectores.get(x).getListaButacas().add(butaca);
-						}
-					}
-				}
-			}
+	//	public void AgregarButacaSector(){	
+	//		/**
+	//		 Traigo datos ButacaSector y cargo la lista de butacas al sector
+	//		 */
+	//		mKinveyClient.appData("ButacaSector", ButacaSectorBackend.class).get(myQuery, new KinveyListCallback<ButacaSectorBackend>() {
+	//			@Override
+	//			public void onSuccess(ButacaSectorBackend[] resultadoconsulta) {
+	//				for (int i = 0; i < resultadoconsulta.length; i++) {
+	//					Butaca butaca= new Butaca(resultadoconsulta[i].getIdButaca(),resultadoconsulta[i].getEstadoButaca());
+	//					for(int x=0;x<listaSectores.size();x++){
+	//						if(resultadoconsulta[i].getIdSector()==listaSectores.get(x).getIdSector()){
+	//							listaSectores.get(x).getListaButacas().add(butaca);
+	//						}
+	//					}
+	//				}
+	//			}
+	//
+	//			@Override
+	//			public void onFailure(Throwable arg0) {
+	//				// TODO Auto-generated method stub
+	//
+	//			}
+	//		});
+	//	}
 
+	//	public Compra guardarCompra(String fActual, String fVigencia,Funcion fSeleccionada, Usuario u, Obra obraSeleccionada, int precio, ArrayList<Butaca> butSelec){
+	//		final String fechaActual=fActual;
+	//		final String fechaVigencia=fVigencia;
+	//		final Obra obra=obraSeleccionada;
+	//		final Usuario usuario=u;
+	//		final int precioTotal=precio;
+	//		final Funcion funcionSeleccionada=fSeleccionada;
+	//		final ArrayList<Butaca> butacasSeleccionadas=butSelec;
+	//
+	//		CompraBackend compraBknd = new CompraBackend();
+	//		compraBknd.setFechaRealizada(fechaActual);
+	//		compraBknd.setFechaVigencia(fechaVigencia);
+	//		compraBknd.setIdFuncion(fSeleccionada.getIdFuncion());
+	//		compraBknd.setIdUsuario(usuario.getIdUsuario());
+	//		compraBknd.setIdObra(obraSeleccionada.getIdObra());
+	//		compraBknd.setPago(false);
+	//		compraBknd.setPrecioTotal(precioTotal);
+	//
+	//		AsyncAppData<CompraBackend> myevents = mKinveyClient.appData("Compra",CompraBackend.class);
+	//		myevents.save(compraBknd, new KinveyClientCallback<CompraBackend>() {
+	//
+	//
+	//			@Override
+	//			public void onSuccess(CompraBackend arg0) {
+	//				Log.e("idCompra",arg0.getId());
+	//				compra=new Compra(arg0.getId(),fechaActual,fechaVigencia,obra,false,usuario,precioTotal,funcionSeleccionada,butacasSeleccionadas );
+	//				for(int x=0;x<butacasSeleccionadas.size();x++){
+	//
+	//					guardarButacasCompra(compra,butacasSeleccionadas.get(x));
+	//					buscarButacasFuncionSector(compra,butacasSeleccionadas.get(x));
+	//					Log.e("Guardar Compra","Compra guardada");
+	//					
+	//				}
+	//				String s= " Obra: "+ obra.getNombre()+ " Funcion "+ funcionSeleccionada.toString()+ " Precio total "+ precioTotal;
+	//				Funcion funcionElegida=funcionSeleccionada;
+	//				String fecha= funcionElegida.getFechaObra();
+	//				String hora= funcionElegida.getHoraComienzo();
+	//				String duracion= Double.toString(funcionElegida.getDuracion());
+	//				Intent intent = new Intent("com.google.zxing.client.android.ENCODE");
+	//				intent.putExtra("ENCODE_TYPE", "TEXT_TYPE");
+	//				intent.putExtra("ENCODE_DATA", s);
+	//				intent.putExtra("fecha", fecha);
+	//				intent.putExtra("hora", hora);
+	//				intent.putExtra("duracion", duracion);
+	//				intent.putExtra("tituloObra", obra.getNombre());
+	////				intent.putExtra("compra", compra.toString());
+	//				CompraActivity.startActivityForResult(intent, 0);
+	//
+	//			}
+	//			@Override
+	//			public void onFailure(Throwable e) {
+	//				Toast.makeText(getApplicationContext(), "Ups.. no fue posible guardar su compra, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
+	//				Log.e(TAG, "failed to save event data", e);
+	//			}
+	//		});
+	//
+	//		return compra;
+	//
+	//	}
+	//
+
+	public void guardarButacasCompra(Compra compra,Butaca butaca){
+		CompraButacasBackend comButBknd = new CompraButacasBackend();
+		comButBknd.setIdCompra(compra.getIdCompra());
+		comButBknd.setIdButaca(butaca.getIdButaca());
+
+		AsyncAppData<CompraButacasBackend> myevents = mKinveyClient.appData("ButacasCompra",CompraButacasBackend.class);
+		myevents.save(comButBknd, new KinveyClientCallback<CompraButacasBackend>() {
+
+			@Override
+			public void onSuccess(CompraButacasBackend arg0) {
+				Log.e("Guardar ButacasCompra","Butacas guardadas en compraButaca");				
+			}
 			@Override
 			public void onFailure(Throwable arg0) {
 				// TODO Auto-generated method stub
 
 			}
+
 		});
 
 	}
 
-	public void guardarCompra(Compra compra){
+//	public void buscarButacasFuncionSector(Compra compra,Butaca butaca){
+//
+//		Query query1 = mKinveyClient.query ();
+//		Query query2 = mKinveyClient.query ();
+//		query1.equals("idButaca", String.valueOf(butaca.getIdButaca()));
+//		query2.equals("idFuncion", String.valueOf(compra.getFuncionSeleccionada().getIdFuncion()));
+//		AsyncAppData<ButacaFuncionSectorBackend> searchedEvents = mKinveyClient.appData("ButacaFuncionSector", ButacaFuncionSectorBackend.class);
+//		searchedEvents.get(query1.and(query2), new KinveyListCallback<ButacaFuncionSectorBackend>(){			
+//			@Override
+//			public void onSuccess(ButacaFuncionSectorBackend[] result) {
+//				//				ButacaFuncionSectorBackend entity= new ButacaFuncionSectorBackend();
+//				//				entity.setEstadoButaca(1);
+//				for(int x=0; x<result.length;x++){
+//					Log.e("Encontre ButacaFuncionSectorBackend ",result[x].getIdButaca()+"--"+result[x].getEstadoButaca());
+//					guardarButacasFuncionSector(result[x]);
+//				}				
+//
+//			}
+//
+//			@Override
+//			public void onFailure(Throwable error) {
+//				Log.e("Error ","no entra a ButacaFuncionSectorBackend");	
+//
+//			}
+//
+//
+//		});
+//
+//	}
+//
+//		public void guardarButacasFuncionSector(ButacaFuncionSectorBackend butaca){
+//		
+//		String i=butaca.getId();
+//		mKinveyClient.appData("ButacaFuncionSector",ButacaFuncionSectorBackend.class).getEntity(butaca.getId(), new KinveyClientCallback<ButacaFuncionSectorBackend>() {
+//
+//			@Override
+//			public void onSuccess(ButacaFuncionSectorBackend arg0) {
+//				arg0.put("estadoButaca", "1");
+//				Log.e("Guardar ButacasCompra","Butacas guardadas en compraButaca "+ arg0.getIdButaca()+"--" +arg0.getIdFuncion()+"--" +arg0.getEstadoButaca() );
+//				mKinveyClient.appData("ButacaFuncionSector", ButacaFuncionSectorBackend.class).save(arg0, new KinveyClientCallback<ButacaFuncionSectorBackend>() {
+//					@Override
+//					public void onSuccess(ButacaFuncionSectorBackend result) {
+//						Log.e("seteo ","Seteo las butacas como ocupadas");
+//						guardarCompra();
+//					}
+//
+//					@Override
+//					public void onFailure(Throwable error) {
+//						Log.e("Error ","Error"+ error);	
+//					}
+//				});
+//			}
+//
+//			@Override
+//			public void onFailure(Throwable arg0) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//
+//
+//		});
+//	}
+//	public ButacaFuncionSectorBackend[] verificarButacasDisponibles(Funcion funcion,ArrayList<Butaca>butacasSeleccionadas){
+//		Query query1 = mKinveyClient.query ();
+//		Query query2 = mKinveyClient.query ();
+//		for(int i=0;i<butacasSeleccionadas.size();i++){
+//			query1.equals("idButaca", String.valueOf(butacasSeleccionadas.get(i).getIdButaca()));
+//			query2.equals("idFuncion", String.valueOf(funcion.getIdFuncion()));
+//			AsyncAppData<ButacaFuncionSectorBackend> searchedEvents = mKinveyClient.appData("ButacaFuncionSector", ButacaFuncionSectorBackend.class);
+//			searchedEvents.get(query1.and(query2), new KinveyListCallback<ButacaFuncionSectorBackend>(){			
+//				@Override
+//				public void onSuccess(ButacaFuncionSectorBackend[] result) {
+//
+//					for(int x=0; x<result.length;x++){
+//						Log.e("Encontre ButacaFuncionSectorBackend ",result[x].getIdButaca()+"--"+result[x].getEstadoButaca());
+//						//						if(result[x].getEstadoButaca()==0){
+//						//							listabutacasSeleccionadas[x]=result[x];
+//						//						}
+//					}				
+//
+//				}
+//
+//				@Override
+//				public void onFailure(Throwable error) {
+//					Log.e("Error ","no entra a ButacaFuncionSectorBackend");	
+//
+//				}
+//
+//
+//			});
+//		}
+//		return listabutacasSeleccionadas;
+//	}
 
-	}
-
+//	public void guardarCompra(){
+//		CompraBackend compraBknd = new CompraBackend();
+//		compraBknd.setFechaRealizada(fechaActual);
+//		compraBknd.setFechaVigencia(fechaVigencia);
+//		compraBknd.setIdFuncion(fSeleccionada.getIdFuncion());
+//		compraBknd.setIdUsuario(usuario.getIdUsuario());
+//		compraBknd.setIdObra(obraSeleccionada.getIdObra());
+//		compraBknd.setPago(false);
+//		compraBknd.setPrecioTotal(precioTotal);
+//		AsyncAppData<CompraBackend> myevents = mKinveyClient.appData("Compra",CompraBackend.class);
+//		myevents.save(compraBknd, new KinveyClientCallback<CompraBackend>() {
+//			@Override
+//			public void onSuccess(CompraBackend arg0) {
+//				
+//				Log.e("idCompra",arg0.getId());
+//				Compra compra=new Compra(arg0.getId(),fechaActual,fechaVigencia,obra,false,usuario,precioTotal,funcionSeleccionada,butacasSeleccionadas );
+//				for(int x=0;x<butacasSeleccionadas.size();x++){
+//
+//					o.guardarButacasCompra(compra,butacasSeleccionadas.get(x));
+//					o.buscarButacasFuncionSector(compra,butacasSeleccionadas.get(x));
+//					Log.e("Guardar Compra","Compra guardada");
+//					
+//				}
+//				String s= " Obra: "+ obra.getNombre()+ " Funcion "+ funcionSeleccionada.toString()+ " Precio total "+ precioTotal;
+//				Funcion funcionElegida=funcionSeleccionada;
+//				String fecha= funcionElegida.getFechaObra();
+//				String hora= funcionElegida.getHoraComienzo();
+//				String duracion= Double.toString(funcionElegida.getDuracion());
+//				Intent intent = new Intent("com.google.zxing.client.android.ENCODE");
+//				intent.putExtra("ENCODE_TYPE", "TEXT_TYPE");
+//				intent.putExtra("ENCODE_DATA", s);
+//				intent.putExtra("fecha", fecha);
+//				intent.putExtra("hora", hora);
+//				intent.putExtra("duracion", duracion);
+//				intent.putExtra("tituloObra", obra.getNombre());
+////				intent.putExtra("compra", compra.toString());
+//				CompraActivity.this.startActivityForResult(intent, 0);
+//
+//			}
+//			@Override
+//			public void onFailure(Throwable e) {
+//				Toast.makeText(getApplicationContext(), "Ups.. no fue posible guardar su compra, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
+//			}
+//		});
+//
+//	}
 
 	public void crearUsuarioLogueado (UsuarioBackend entity){
 		mKinveyClient.appData("Usuario", UsuarioBackend.class).save(entity, new KinveyClientCallback<UsuarioBackend>() {
 			@Override
 			public void onSuccess(UsuarioBackend result) {
-				
-//				Toast.makeText(CreateAccountActivity.this,"Entity Saved\nTitle: " + result.getNombreUsuario()
-//						+ "\nDescription: " + result.get("Description"), Toast.LENGTH_LONG).show();
-				
+
+				//				Toast.makeText(CreateAccountActivity.this,"Entity Saved\nTitle: " + result.getNombreUsuario()
+				//						+ "\nDescription: " + result.get("Description"), Toast.LENGTH_LONG).show();
+
 			}
 			@Override
 			public void onFailure(Throwable error) {
 				Log.e(TAG, "AppData.save Failure", error);
-//				Toast.makeText(CreateAccountActivity.this, "Save All error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+				//				Toast.makeText(CreateAccountActivity.this, "Save All error: " + error.getMessage(), Toast.LENGTH_LONG).show();
 			}
 		});
-		
+
 	}
-	
-//	public Client getUsuKinvey (){
-//		this.mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-//		this.mKinveyClient.ping(new KinveyPingCallback() {
-//		    public void onFailure(Throwable t) {
-//		        Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
-//		    }
-//		    public void onSuccess(Boolean b) {
-//		        Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
-//		    }
-//		});
-//		return this.mKinveyClient;
-//	}
+
+	//	public Client getUsuKinvey (){
+	//		this.mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
+	//		this.mKinveyClient.ping(new KinveyPingCallback() {
+	//		    public void onFailure(Throwable t) {
+	//		        Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
+	//		    }
+	//		    public void onSuccess(Boolean b) {
+	//		        Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
+	//		    }
+	//		});
+	//		return this.mKinveyClient;
+	//	}
 
 	public Client getmKinveyClient() {
 		return mKinveyClient;
@@ -420,6 +723,7 @@ public class ObjetosBackend extends Application{
 	public void setmKinveyClient(Client mKinveyClient) {
 		this.mKinveyClient = mKinveyClient;
 	}
+<<<<<<< HEAD
 	
 	public void cargarUsuarioLogueado (String nombre){
 		 this.mKinveyClient.user().setUsername(nombre);
@@ -510,4 +814,10 @@ public class ObjetosBackend extends Application{
 			
 				
 				
+=======
+
+
+
+}
+>>>>>>> feature/finalizarCompra
 

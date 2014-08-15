@@ -1,30 +1,17 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal" 
-    android:background="@color/Gray">"
-    <!--  android:background="@drawable/telon"-->
 
-    
-    <Gallery
-    android:id="@+id/gallery"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:spacing="8dp"
-    android:background="@android:color/darker_gray"
-    android:paddingTop="4dp"/>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-   
- 
-<ImageView
-    android:id="@+id/seleccionada"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="30dp"
-    android:contentDescription="@string/seleccionada" />
-
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/swipe_container"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:ignore="MergeRootFrame" >
   
-     
-     
+<ListView
+android:id="@+id/mi_lista"
+android:layout_width="match_parent"
+android:layout_height="match_parent" />
+ </android.support.v4.widget.SwipeRefreshLayout>
 
-</RelativeLayout>
+ 
+

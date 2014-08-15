@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -43,10 +44,11 @@ public class ComunidadFragment extends Fragment {
 	private ViewGroup layout;
 	private ScrollView scroll;
 	private ListView lista;
-	private Button btnAgregarComentario;
+	private ImageButton btnAgregarComentario;
 
 	View rootView;
 	DatabaseHelper dh;
+<<<<<<< HEAD
 
 	public ComunidadFragment(){}
 
@@ -77,6 +79,40 @@ public class ComunidadFragment extends Fragment {
 	public void addListenerOnButton(ObjetosBackend obj) {
 		mKinveyClient = obj.getmKinveyClient();
 		btnAgregarComentario.setOnClickListener(new OnClickListener() {
+=======
+	
+    public ComunidadFragment(){}
+     
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    	btnAgregarComentario= (ImageButton)rootView.findViewById(R.id.btnAgregarComentario);
+    	rootView = inflater.inflate(R.layout.activity_listado, container, false);
+        dh = new DatabaseHelper(getActivity().getApplicationContext());
+      
+      //Conexión de la APP a Kinvey
+        	final ObjetosBackend obj= (ObjetosBackend) getActivity().getApplicationContext();
+      		mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
+      		mKinveyClient.ping(new KinveyPingCallback() {
+      			public void onFailure(Throwable t) {
+      				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
+      			}
+      			public void onSuccess(Boolean b) {
+      				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
+      			}
+      		});
+      		
+      		//btnAgregarComentario = (Button)rootView.findViewById(R.id.btnAgregarComentario);
+    		addListenerOnButton(obj);
+      		cargarDatos();
+      				
+          
+        return rootView;
+    }
+    
+    public void addListenerOnButton(ObjetosBackend obj) {
+    	mKinveyClient = obj.getmKinveyClient();
+    	btnAgregarComentario.setOnClickListener(new OnClickListener() {
+>>>>>>> feature/finalizarCompra
 			@Override
 			public void onClick(View v) {
 				//				Intent intent = new Intent(getActivity(), ProgramacionActivity.class);

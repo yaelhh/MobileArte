@@ -10,11 +10,14 @@ public class ButacaSectorBackend extends LinkedGenericJson {
 	@Key("_id")
 	private String id;
 	@Key
+	private int estadoButaca;
+	@Key
 	private int idButaca;
 	@Key
-	private int idSector;
+	private int idFuncion;
 	@Key
-	private int estadoButaca;
+	private int idSector;
+	
 	
 	public String getId() {
 		return id;
@@ -41,5 +44,12 @@ public class ButacaSectorBackend extends LinkedGenericJson {
 		this.estadoButaca = estadoButaca;
 	}
 	
+	
+	public int getIdFuncion() {
+		return idFuncion;
+	}
+	public void setIdFuncion(int idFuncion) {
+		this.idFuncion = idFuncion;
+	}
 	public ButacaSectorBackend(){}
 }
