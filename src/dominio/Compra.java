@@ -37,6 +37,22 @@ public class Compra implements Parcelable{
 		this.butacasSeleccionadas=butacasSeleccionadas;
 		
 	}
+	
+	public Compra(String fechaRealizada, String fechaVigencia,
+			Obra miObra, boolean pago, Usuario miUsuario, int precioTotal,
+			Funcion funcionSeleccionada,ArrayList<Butaca> butacasSeleccionadas ) {
+		super();
+		
+		this.fechaRealizada = fechaRealizada;
+		this.fechaVigencia=fechaVigencia;
+		this.miObra = miObra;
+		this.pago = pago;
+		this.miUsuario = miUsuario;
+		this.precioTotal = precioTotal;
+		this.funcionSeleccionada=funcionSeleccionada;
+		this.butacasSeleccionadas=butacasSeleccionadas;
+		
+	}
 
 	public String getIdCompra() {
 		return idCompra;

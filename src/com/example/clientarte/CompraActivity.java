@@ -37,9 +37,12 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import backend.ButacaFuncionSectorBackend;
+import backend.CompraBackend;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -48,6 +51,11 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.kinvey.android.AsyncAppData;
+import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
+import com.kinvey.java.Query;
+import com.kinvey.java.core.KinveyClientCallback;
 
 import dominio.Butaca;
 import dominio.Compra;
@@ -97,6 +105,9 @@ public class CompraActivity extends Activity {
 	Spinner sprHorario;
 	private TextView textPrecioTotal;
 	private int cantSeleccionadas;
+	 private ProgressBar bar;
+	private TextView txtCargando;
+	private Client mKinveyClient;
 
 
 
@@ -110,6 +121,10 @@ public class CompraActivity extends Activity {
 		TextView titulo= (TextView)findViewById(R.id.idTitulo);
 		titulo.setText(obra.getNombre());
 		sprHorario= (Spinner)findViewById(R.id.spinner_horario);
+		bar=(ProgressBar)findViewById(R.id.progressBarCompra);
+		 bar.setIndeterminate(true);
+         bar.setVisibility(View.GONE);
+//         txtCargando.setVisibility(true);
 		ArrayList<Funcion>lista= obra.getListaFunciones();	
 		//Creamos el adaptador
 		ArrayAdapter<Funcion> spinner_adapter = new ArrayAdapter<Funcion>(this,android.R.layout.simple_spinner_item, lista);
@@ -132,7 +147,7 @@ public class CompraActivity extends Activity {
 		bttnSectorC=(Button)findViewById(R.id.sectorC);
 		btnComprar=(Button)findViewById(R.id.button_comprar);
 		//		btnComprar.setClickable(false);
-		realizarCompra(obj);
+		realizarCompra(obj,bar);
 
 
 		sprHorario.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -283,15 +298,20 @@ public class CompraActivity extends Activity {
 	}
 
 
-	public void realizarCompra(ObjetosBackend obj)  {
+	public void realizarCompra(ObjetosBackend obj,ProgressBar b)  {
 		final ObjetosBackend o=obj;
+		final ProgressBar bar=b;
+		mKinveyClient=o.getmKinveyClient();
 		//		Log.e("funcion seleccionada",""+ funcionSeleccionada);
-		btnComprar.setOnClickListener(new OnClickListener() {  
+		btnComprar.setOnClickListener(new OnClickListener() { 
 			@Override
 			public void onClick(View v) {
 				if(cant>0 && cantSeleccionadas==0){
 					if(usuario!= null){
 						obtenerButacasSeleccionadas();
+//						ButacaFuncionSectorBackend[] listaButacasLibres=o.verificarButacasDisponibles(funcionSeleccionada,butacasSeleccionadas);
+						
+//						if(butacasSeleccionadas.size()==listaButacasLibres.length){
 //						crearObjetoCompra();
 //						Compra compra= crearObjetoCompra();
 						//Obtenemos fecha actual
@@ -301,24 +321,26 @@ public class CompraActivity extends Activity {
 						//Obtenemos fecha de vigencia
 						String fechaVigencia = df1.format(sumarDiasFecha());
 						Log.e("datos","precio "+ precioTotal+" fecha "+ fechaActual+ " butacas "+ butacasSeleccionadas.size());
-						//						 + " funcion "+ CompraActivity.this.funcionSeleccionada
-//						Compra compra= new Compra(fechaActual,fechaVigencia,obra,false,usuario,precioTotal,CompraActivity.this.funcionSeleccionada,butacasSeleccionadas );
-
-						Compra compra= o.guardarCompra(fechaActual,fechaVigencia,funcionSeleccionada,usuario,obra,precioTotal,butacasSeleccionadas);
-						String s= "Compra: "+compra.getIdCompra() +" Obra: "+ obra.getNombre()+ " Funcion "+ funcionSeleccionada.toString()+ " Precio total "+ precioTotal;
-						Funcion funcionElegida=funcionSeleccionada;
-						String fecha= funcionElegida.getFechaObra();
-						String hora= funcionElegida.getHoraComienzo();
-						String duracion= Double.toString(funcionElegida.getDuracion());
-						Intent intent = new Intent("com.google.zxing.client.android.ENCODE");
-						intent.putExtra("ENCODE_TYPE", "TEXT_TYPE");
-						intent.putExtra("ENCODE_DATA", s);
-						intent.putExtra("fecha", fecha);
-						intent.putExtra("hora", hora);
-						intent.putExtra("duracion", duracion);
-						intent.putExtra("tituloObra", obra.getNombre());
-//						intent.putExtra("compra", compra.toString());
-						CompraActivity.this.startActivityForResult(intent, 0);
+						Compra compra=new Compra(fechaActual,fechaVigencia,obra,false,usuario,precioTotal,funcionSeleccionada,butacasSeleccionadas );
+						guardarCompra(compra,o,bar,mKinveyClient);
+//						String s= " Obra: "+ obra.getNombre()+ " Funcion "+ funcionSeleccionada.toString()+ " Precio total "+ precioTotal;
+//						Funcion funcionElegida=funcionSeleccionada;
+//						String fecha= funcionElegida.getFechaObra();
+//						String hora= funcionElegida.getHoraComienzo();
+//						String duracion= Double.toString(funcionElegida.getDuracion());
+//						Intent intent = new Intent("com.google.zxing.client.android.ENCODE");
+//						intent.putExtra("ENCODE_TYPE", "TEXT_TYPE");
+//						intent.putExtra("ENCODE_DATA", s);
+//						intent.putExtra("fecha", fecha);
+//						intent.putExtra("hora", hora);
+//						intent.putExtra("duracion", duracion);
+//						intent.putExtra("tituloObra", obra.getNombre());
+////						intent.putExtra("compra", compra.toString());
+//						CompraActivity.this.startActivityForResult(intent, 0);
+//						}else{
+//							Toast.makeText(CompraActivity.this,"En este momento alguien le ha ganado de mano y ha elegido las mismas butacas que usted, por favor elija otras" , Toast.LENGTH_SHORT).show();
+//
+//						}
 					}else{
 						AlertDialog.Builder dialogo1 = new AlertDialog.Builder(CompraActivity.this);  
 						dialogo1.setTitle("Importante");  
@@ -352,6 +374,138 @@ public class CompraActivity extends Activity {
 
 
 	}
+	
+	public void guardarCompra(Compra compra,ObjetosBackend obj,ProgressBar b,Client mKinveyClient){
+		final String fechaActual=compra.getFechaRealizada();
+		final String fechaVigencia=compra.getFechaVigencia();
+		final Obra obra=compra.getMiObra();
+		final Usuario usuario=compra.getMiUsuario();
+		final int precioTotal=compra.getPrecioTotal();
+		final Funcion funcionSeleccionada=compra.getFuncionSeleccionada();
+		final ArrayList<Butaca> butacasSeleccionadas=compra.getButacasSeleccionadas();
+		final ObjetosBackend o=obj;
+		final ProgressBar bar=b;
+		bar.setVisibility(View.VISIBLE);
+		
+//        txtCargando.setVisibility(View.VISIBLE);
+		
+
+        //Se setean en la tabla BUTACAFUNCIONSECTOR las butacas como ocupadas
+        for(int x=0;x<butacasSeleccionadas.size();x++){
+        	//Funcion para buscar las butacas en la tabla BUTACAFUNCIONSECTOR
+        	buscarButaca(butacasSeleccionadas.get(x),compra,x,mKinveyClient);
+
+	}
+
+	}
+	
+	//Funcion para buscar las butacas en la tabla BUTACAFUNCIONSECTOR
+	public void buscarButaca(Butaca butaca,final Compra compra,final int cant,final Client mKinveyClient){
+		Query query1 = mKinveyClient.query ();
+		Query query2 = mKinveyClient.query ();
+		query1.equals("idButaca", String.valueOf(butaca.getIdButaca()));
+		query2.equals("idFuncion", String.valueOf(compra.getFuncionSeleccionada().getIdFuncion()));
+		AsyncAppData<ButacaFuncionSectorBackend> searchedEvents = mKinveyClient.appData("ButacaFuncionSector", ButacaFuncionSectorBackend.class);
+		searchedEvents.get(query1.and(query2), new KinveyListCallback<ButacaFuncionSectorBackend>(){			
+			@Override
+			public void onSuccess(ButacaFuncionSectorBackend[] result) {
+				//				ButacaFuncionSectorBackend entity= new ButacaFuncionSectorBackend();
+				//				entity.setEstadoButaca(1);
+				for(int x=0; x<result.length;x++){
+					Log.e("Encontre ButacaFuncionSectorBackend ",result[x].getIdButaca()+"--"+result[x].getEstadoButaca());
+					//Seteo como ocupadas las butacas
+					guardarButacasFuncionSector(result[x],compra,cant,mKinveyClient);
+				}				
+
+			}
+
+			@Override
+			public void onFailure(Throwable error) {
+				Log.e("Error ","no entra a ButacaFuncionSectorBackend");	
+
+			}
+
+
+		});
+	}
+	
+	//Funcion para setear como ocupadas las butacas
+	public void guardarButacasFuncionSector(ButacaFuncionSectorBackend bfsb,final Compra compra, final int cant,final Client mKinveyClient){
+		mKinveyClient.appData("ButacaFuncionSector",ButacaFuncionSectorBackend.class).getEntity(bfsb.getId(), new KinveyClientCallback<ButacaFuncionSectorBackend>() {
+
+			@Override
+			public void onSuccess(ButacaFuncionSectorBackend arg0) {
+				arg0.put("estadoButaca", "1");
+				Log.e("Guardar ButacasCompra","Butacas guardadas en compraButaca "+ arg0.getIdButaca()+"--" +arg0.getIdFuncion()+"--" +arg0.getEstadoButaca() );
+				mKinveyClient.appData("ButacaFuncionSector", ButacaFuncionSectorBackend.class).save(arg0, new KinveyClientCallback<ButacaFuncionSectorBackend>() {
+					@Override
+					public void onSuccess(ButacaFuncionSectorBackend result) {
+						Log.e("seteo ","Seteo las butacas como ocupadas");
+						if(cant==compra.getButacasSeleccionadas().size()-1){
+							guardarCompra(compra,mKinveyClient);
+						}
+					}
+
+					@Override
+					public void onFailure(Throwable error) {
+						Log.e("Error ","Error"+ error);	
+					}
+				});
+			}
+
+			@Override
+			public void onFailure(Throwable arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+
+		});
+
+		
+	}
+	
+	//Funcion para guardar la compra en la base de datos
+	public void guardarCompra(final Compra compra,Client mKinveyClient){
+		CompraBackend compraBknd = new CompraBackend();
+		compraBknd.setFechaRealizada(compra.getFechaRealizada());
+		compraBknd.setFechaVigencia(compra.getFechaVigencia());
+		compraBknd.setIdFuncion(compra.getFuncionSeleccionada().getIdFuncion());
+		compraBknd.setIdUsuario(compra.getMiUsuario().getIdUsuario());
+		compraBknd.setIdObra(compra.getMiObra().getIdObra());
+		compraBknd.setPago(false);
+		compraBknd.setPrecioTotal(compra.getPrecioTotal());
+		AsyncAppData<CompraBackend> myevents = mKinveyClient.appData("Compra",CompraBackend.class);
+		myevents.save(compraBknd, new KinveyClientCallback<CompraBackend>() {
+			@Override
+			public void onSuccess(CompraBackend arg0) {
+				
+				Log.e("idCompra",arg0.getId());
+				compra.setIdCompra(arg0.getId());;
+				String s= " Obra: "+ obra.getNombre()+ " Funcion "+ funcionSeleccionada.toString()+ " Precio total "+ precioTotal;
+				Funcion funcionElegida=compra.getFuncionSeleccionada();
+				String fecha= funcionElegida.getFechaObra();
+				String hora= funcionElegida.getHoraComienzo();
+				String duracion= Double.toString(funcionElegida.getDuracion());
+				Intent intent = new Intent("com.google.zxing.client.android.ENCODE");
+				intent.putExtra("ENCODE_TYPE", "TEXT_TYPE");
+				intent.putExtra("ENCODE_DATA", compra.toString());
+				intent.putExtra("fecha", fecha);
+				intent.putExtra("hora", hora);
+				intent.putExtra("duracion", duracion);
+				intent.putExtra("tituloObra", obra.getNombre());
+//				intent.putExtra("compra", compra.toString());
+				CompraActivity.this.startActivityForResult(intent, 0);
+
+			}
+			@Override
+			public void onFailure(Throwable e) {
+				Toast.makeText(getApplicationContext(), "Ups.. no fue posible guardar su compra, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
+			}
+		});
+
+	}
+	
 	//Funcion para obtener la fecha de vigencia
 	public Date sumarDiasFecha(){
 		Calendar calendar = Calendar.getInstance();

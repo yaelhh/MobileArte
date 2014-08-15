@@ -2,21 +2,24 @@ package backend;
 
 
 import com.google.api.client.util.Key;
+import com.kinvey.android.callback.KinveyListCallback;
+import com.kinvey.java.Query;
 import com.kinvey.java.LinkedResources.LinkedGenericJson;
+import com.kinvey.java.core.KinveyClientCallback;
 
 
 public class ButacaFuncionSectorBackend extends LinkedGenericJson {
 	
 	@Key("_id")
 	 private String id;
-	 @Key
-	 private int estadoButaca;
-	 @Key
-	 private int idButaca;
+	 @Key("estadoButaca")
+	private String estadoButaca;
+	 @Key("idButaca")
+	 private String idButaca;
 	 @Key ("idFuncion")
-	 private int idFuncion;
+	 private String idFuncion;
 	 @Key
-	 private int idSector;
+	 private String idSector;
 	
 	
 	
@@ -32,34 +35,53 @@ public class ButacaFuncionSectorBackend extends LinkedGenericJson {
 		this.id = id;
 	}
 
-	public int getIdButaca() {
-		return idButaca;
-	}
 
-	public void setIdButaca(int idButaca) {
-		this.idButaca = idButaca;
-	}
-	public int getIdFuncion() {
-		return idFuncion;
-	}
-	public void setIdFuncion(int idFuncion) {
-		this.idFuncion = idFuncion;
-	}
-	public int getIdSector() {
-		return idSector;
-	}
-	public void setIdSector(int idSector) {
-		this.idSector = idSector;
-	}
 
-	public int getEstadoButaca() {
+	public String getEstadoButaca() {
 		return estadoButaca;
 	}
 
-	public void setEstadoButaca(int estadoButaca) {
+
+
+	public void setEstadoButaca(String estadoButaca) {
 		this.estadoButaca = estadoButaca;
 	}
-	
-	
-	
+
+
+
+	public String getIdButaca() {
+		return idButaca;
+	}
+
+
+
+	public void setIdButaca(String idButaca) {
+		this.idButaca = idButaca;
+	}
+
+
+
+	public String getIdFuncion() {
+		return idFuncion;
+	}
+
+
+
+	public void setIdFuncion(String idFuncion) {
+		this.idFuncion = idFuncion;
+	}
+
+
+
+	public String getIdSector() {
+		return idSector;
+	}
+
+
+
+	public void setIdSector(String idSector) {
+		this.idSector = idSector;
+	}
+
+		
 }

@@ -6,7 +6,7 @@ android:id="@+id/swipe_container"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:ignore="MergeRootFrame" >
- 
+  
 <ListView
 android:id="@+id/mi_lista"
 android:layout_width="match_parent"

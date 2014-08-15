@@ -246,7 +246,9 @@ public boolean onCreateOptionsMenu(Menu menu) {
     mSearchView = (SearchView) searchItem.getActionView();
     mSearchView.setQueryHint("Busque su obra...");
     mSearchView.setOnQueryTextListener((OnQueryTextListener) this);
-
+    
+    MenuItem notification = menu.findItem(R.id.action_notification);
+    
     return true;
 }
 
