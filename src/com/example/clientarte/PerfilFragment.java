@@ -60,13 +60,10 @@ public class PerfilFragment extends Fragment {
     		btnRegistrar= (Button)rootView.findViewById(R.id.registrarUsuarioPerfil);
     		btnLoguear= (Button)rootView.findViewById(R.id.LoguearDesloguear);
     		btnProxObras = (Button)rootView.findViewById(R.id.btnPrxObras);
-<<<<<<< HEAD
+
     		mKinveyClient = obj.captarUsuarioLogueado();
     		addListenerOnButton(obj);
-=======
-    		addListenerOnButton();
-        
->>>>>>> feature/finalizarCompra
+
         return rootView;
     }
     
@@ -248,17 +245,16 @@ public class PerfilFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-<<<<<<< HEAD
+
 				Toast t3=Toast.makeText(getActivity(),"Usuario logueado AHORA" + obj.captarUsuarioLogueado().user().getUsername(), Toast.LENGTH_SHORT);
 				t3.show();
 			}
-=======
 
-		Toast t3=Toast.makeText(getActivity(),"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
-		t3.show();
-	}
 
->>>>>>> feature/finalizarCompra
+//		Toast t4=Toast.makeText(getActivity(),"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT).show();
+	
+
+
 
 		});
 		

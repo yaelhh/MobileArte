@@ -32,12 +32,8 @@ import com.kinvey.java.Query;
 import com.kinvey.java.User;
 import com.kinvey.java.core.DownloaderProgressListener;
 import com.kinvey.java.core.KinveyClientCallback;
-<<<<<<< HEAD
 import com.kinvey.java.core.MediaHttpDownloader;
-=======
 import com.kinvey.java.query.AbstractQuery.SortOrder;
->>>>>>> feature/finalizarCompra
-
 import dominio.*;
 
 public class ObjetosBackend extends Application{
@@ -78,13 +74,11 @@ public class ObjetosBackend extends Application{
 	private Client mKinveyClient;
 	private UsuarioBackend usuarioLogueado;
 	Query myQuery;
-<<<<<<< HEAD
 
 	private ArrayList<NotificacionesBackend> listaNotificaciones= new ArrayList<NotificacionesBackend>();
-=======
+
 	private Compra compra = null;
 	private ProgressDialog progressDialog;
->>>>>>> feature/finalizarCompra
 
 	//	@Override
 	//	public void onCreate() {
@@ -175,16 +169,16 @@ public class ObjetosBackend extends Application{
 		return listaNotificaciones;
 	}
 
-<<<<<<< HEAD
+
 	public void setListaNotificaciones(
 			ArrayList<NotificacionesBackend> listaNotificaciones) {
 		this.listaNotificaciones = listaNotificaciones;
 	}
-=======
+
 	//	public HashMap<Obra, Funcion> getobraSegunFuncion(){
 	//		return this.obraSegunFuncion;
 	//	}
->>>>>>> feature/finalizarCompra
+
 
 	//Funcion para obtener obras
 	public void crearListObra(){
@@ -723,7 +717,7 @@ public class ObjetosBackend extends Application{
 	public void setmKinveyClient(Client mKinveyClient) {
 		this.mKinveyClient = mKinveyClient;
 	}
-<<<<<<< HEAD
+
 	
 	public void cargarUsuarioLogueado (String nombre){
 		 this.mKinveyClient.user().setUsername(nombre);
@@ -814,10 +808,10 @@ public class ObjetosBackend extends Application{
 			
 				
 				
-=======
 
 
 
-}
->>>>>>> feature/finalizarCompra
+
+
+
 

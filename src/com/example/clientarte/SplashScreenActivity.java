@@ -33,11 +33,11 @@ public class SplashScreenActivity extends Activity {
 	private String appSecret="ad60af2bc83d4899aef2f1dffc6529e1";
 	private String mensaje;
 	private Client mKinveyClient;
-<<<<<<< HEAD
+
 	static final String FILENAME = "usuario_1.jpg";
-=======
+
 	 private ProgressBar mProgressBar;
->>>>>>> feature/finalizarCompra
+
 
 
 	@Override

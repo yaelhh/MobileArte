@@ -54,16 +54,13 @@ public class ProgramacionActivity extends ActionBarActivity implements OnQueryTe
 	private ImageButton imageObra;
 	private Obra miObra;
 	private  Obra obraSeleccionada= new Obra();
-<<<<<<< HEAD
+
 	public static final String TAG = "ArteBackend";
-	
-=======
 	private HashMap<Obra, Funcion> obraSegunFuncion;
 	ArrayList<Obra> obrasDia= new ArrayList<Obra>();
 	private SwipeRefreshLayout swipeLayouts;
 	private  ListView miLista;
 
->>>>>>> feature/finalizarCompra
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -87,14 +84,14 @@ public class ProgramacionActivity extends ActionBarActivity implements OnQueryTe
 				android.R.color.holo_green_light,
 				android.R.color.holo_orange_light,
 				android.R.color.holo_red_light);
-////		//Obtenemos una referencia a nuestra lista.
+		////		//Obtenemos una referencia a nuestra lista.
 		//		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
 		miLista = (ListView) findViewById(R.id.miListaObra);
 		obtenerObraSegunFecha();
-		
-		
-}
-	
+
+
+	}
+
 	public void obtenerObraSegunFecha(){
 		cal.setOnDateChangeListener(new OnDateChangeListener() {
 
@@ -128,13 +125,13 @@ public class ProgramacionActivity extends ActionBarActivity implements OnQueryTe
 				Toast.makeText(getBaseContext(),"Selected Date is\n\n"
 						+dayOfMonth+" : "+(month+1) +" : "+year , 
 						Toast.LENGTH_LONG).show();
-				
 
-			cargarDatos(obrasDia);
+
+				cargarDatos(obrasDia);
 			}
 			//				crearProgramacion(obrasDia);
-		
-	});
+
+		});
 
 
 	}
@@ -201,40 +198,35 @@ public class ProgramacionActivity extends ActionBarActivity implements OnQueryTe
 		handler.postDelayed(new Runnable() {
 			public void run() {
 				//Se supone que aqui hemos realizado las tareas necesarias de refresco, y que ya podemos ocultar la barra de progreso
-//				cargarDatos(listObras);
+				//				cargarDatos(listObras);
 				obtenerObraSegunFecha();
 				swipeLayouts.setRefreshing(false);
 			}
 		}, 3000);
 	}
 
-	
-//Funcion que al seleccionar una obra envie los datos a ObraActivity
-public void ingresoObra(ImageButton imageObra, Obra obra){
-	final Obra obraSeleccionada=obra;
-	imageObra.setOnClickListener(new OnClickListener() {
 
-		@Override
-		public void onClick(View v) {
+	//Funcion que al seleccionar una obra envie los datos a ObraActivity
+	public void ingresoObra(ImageButton imageObra, Obra obra){
+		final Obra obraSeleccionada=obra;
+		imageObra.setOnClickListener(new OnClickListener() {
 
-			int i= v.getId(); 
-			Log.e("ProgramacionActivity - ingresoObra", Integer.toString(i));
+			@Override
+			public void onClick(View v) {
 
-			//					obraSeleccionada= (Obra) listObras.get(i);
+				int i= v.getId(); 
+				Log.e("ProgramacionActivity - ingresoObra", Integer.toString(i));
+
+				//					obraSeleccionada= (Obra) listObras.get(i);
 
 
-			Intent intent = new Intent(ProgramacionActivity.this, ObraActivity.class);
-			intent.putExtra("obra",obraSeleccionada); 
-			startActivity(intent);
-		}
-<<<<<<< HEAD
-	}
-	
-=======
-
+				Intent intent = new Intent(ProgramacionActivity.this, ObraActivity.class);
+				intent.putExtra("obra",obraSeleccionada); 
+				startActivity(intent);
+			}
 	});
 }
->>>>>>> feature/finalizarCompra
+
 
 //Funcion para crear activity en funcion de la lista de obras obtenidas
 public void crearProgramacion(ArrayList<Obra> lObra){ 
