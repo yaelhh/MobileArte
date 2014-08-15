@@ -1309,6 +1309,11 @@ containing a value of this type.
         public static final int Yellow=0x7f08002b;
         public static final int YellowGreen=0x7f080078;
         public static final int abc_search_url_text_holo=0x7f0800b8;
+<<<<<<< HEAD
+        public static final int abc_search_url_text_normal=0x7f080016;
+        public static final int abc_search_url_text_pressed=0x7f080018;
+        public static final int abc_search_url_text_selected=0x7f080017;
+=======
 <<<<<<< 672ea11f791c2093b3dbdf6fe046c1b0d64a6e4c
         public static final int abc_search_url_text_normal=0x7f080017;
         public static final int abc_search_url_text_pressed=0x7f080019;
@@ -1318,6 +1323,7 @@ containing a value of this type.
         public static final int abc_search_url_text_pressed=0x7f080018;
         public static final int abc_search_url_text_selected=0x7f080017;
 >>>>>>> b0f545921f005ad870f027f135c17a71c82d21c0
+>>>>>>> develop
         public static final int aqua=0x7f080022;
         public static final int black=0x7f080028;
         public static final int blue=0x7f080026;
@@ -1327,6 +1333,11 @@ containing a value of this type.
         /**  Valores opciones registro de usuarios 
          */
         public static final int form_highlight=0x7f0800b4;
+<<<<<<< HEAD
+        public static final int fuchsia=0x7f08001b;
+        public static final int ghost_white=0x7f0800b6;
+        public static final int gray=0x7f08001e;
+=======
 <<<<<<< 672ea11f791c2093b3dbdf6fe046c1b0d64a6e4c
         public static final int fuchsia=0x7f08001c;
         public static final int ghost_white=0x7f0800b6;
@@ -1336,6 +1347,7 @@ containing a value of this type.
         public static final int ghost_white=0x7f0800b6;
         public static final int gray=0x7f08001e;
 >>>>>>> b0f545921f005ad870f027f135c17a71c82d21c0
+>>>>>>> develop
         public static final int green=0x7f080025;
         public static final int help_button_view=0x7f080002;
         public static final int help_view=0x7f080003;
@@ -1346,11 +1358,15 @@ containing a value of this type.
         public static final int olive=0x7f08001f;
         public static final int possible_result_points=0x7f080004;
         public static final int purple=0x7f080020;
+<<<<<<< HEAD
+        public static final int red=0x7f08001c;
+=======
 <<<<<<< 672ea11f791c2093b3dbdf6fe046c1b0d64a6e4c
         public static final int red=0x7f08001d;
 =======
         public static final int red=0x7f08001c;
 >>>>>>> b0f545921f005ad870f027f135c17a71c82d21c0
+>>>>>>> develop
         public static final int result_image_border=0x7f080005;
         public static final int result_minor_text=0x7f080006;
         public static final int result_points=0x7f080007;
@@ -1363,17 +1379,25 @@ containing a value of this type.
         public static final int sbc_page_number_text=0x7f08000e;
         public static final int sbc_snippet_text=0x7f08000f;
         public static final int share_text=0x7f080010;
+<<<<<<< HEAD
+        public static final int silver=0x7f08001d;
+=======
 <<<<<<< 672ea11f791c2093b3dbdf6fe046c1b0d64a6e4c
         public static final int silver=0x7f08001e;
 =======
         public static final int silver=0x7f08001d;
 >>>>>>> b0f545921f005ad870f027f135c17a71c82d21c0
+>>>>>>> develop
         public static final int status_text=0x7f080011;
         public static final int teal=0x7f080024;
         public static final int transparent=0x7f080012;
         public static final int viewfinder_frame=0x7f080013;
         public static final int viewfinder_laser=0x7f080014;
         public static final int viewfinder_mask=0x7f080015;
+<<<<<<< HEAD
+        public static final int white=0x7f080019;
+        public static final int yellow=0x7f08001a;
+=======
 <<<<<<< 672ea11f791c2093b3dbdf6fe046c1b0d64a6e4c
         public static final int white=0x7f08001a;
         public static final int yellow=0x7f08001b;
@@ -1381,6 +1405,7 @@ containing a value of this type.
         public static final int white=0x7f080019;
         public static final int yellow=0x7f08001a;
 >>>>>>> b0f545921f005ad870f027f135c17a71c82d21c0
+>>>>>>> develop
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -1983,7 +2008,10 @@ containing a value of this type.
         public static final int wlll=0x7f090113;
 =======
         public static final int wlll=0x7f09010a;
+<<<<<<< HEAD
+=======
 >>>>>>> b0f545921f005ad870f027f135c17a71c82d21c0
+>>>>>>> develop
     }
     public static final class integer {
         /**  The maximum number of action buttons that should be permitted within

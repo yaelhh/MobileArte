@@ -137,6 +137,11 @@ public final class R {
 	}
 	public static final class color {
 		public static final int abc_search_url_text_holo = 0x7f0800b8;
+<<<<<<< HEAD
+		public static final int abc_search_url_text_normal = 0x7f080016;
+		public static final int abc_search_url_text_pressed = 0x7f080018;
+		public static final int abc_search_url_text_selected = 0x7f080017;
+=======
 <<<<<<< 672ea11f791c2093b3dbdf6fe046c1b0d64a6e4c
 		public static final int abc_search_url_text_normal = 0x7f080017;
 		public static final int abc_search_url_text_pressed = 0x7f080019;
@@ -146,6 +151,7 @@ public final class R {
 		public static final int abc_search_url_text_pressed = 0x7f080018;
 		public static final int abc_search_url_text_selected = 0x7f080017;
 >>>>>>> b0f545921f005ad870f027f135c17a71c82d21c0
+>>>>>>> develop
 	}
 	public static final class dimen {
 		public static final int abc_action_bar_default_height = 0x7f0b0003;
@@ -349,6 +355,8 @@ public final class R {
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f030015;
 		public static final int abc_search_view = 0x7f030016;
 		public static final int abc_simple_decor = 0x7f030017;
+<<<<<<< HEAD
+=======
 <<<<<<< 672ea11f791c2093b3dbdf6fe046c1b0d64a6e4c
 		public static final int support_simple_spinner_dropdown_item = 0x7f030058;
 	}
@@ -367,6 +375,7 @@ public final class R {
 		public static final int abc_shareactionprovider_share_with = 0x7f0a0085;
 		public static final int abc_shareactionprovider_share_with_application = 0x7f0a0084;
 =======
+>>>>>>> develop
 		public static final int support_simple_spinner_dropdown_item = 0x7f030057;
 	}
 	public static final class string {
@@ -383,7 +392,10 @@ public final class R {
 		public static final int abc_searchview_description_voice = 0x7f0a0080;
 		public static final int abc_shareactionprovider_share_with = 0x7f0a0084;
 		public static final int abc_shareactionprovider_share_with_application = 0x7f0a0083;
+<<<<<<< HEAD
+=======
 >>>>>>> b0f545921f005ad870f027f135c17a71c82d21c0
+>>>>>>> develop
 	}
 	public static final class style {
 		public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog = 0x7f0e0063;
