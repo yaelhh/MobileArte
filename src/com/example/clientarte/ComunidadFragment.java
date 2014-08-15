@@ -35,7 +35,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 /*  Fragment para seccion Nosotros */ 
 public class ComunidadFragment extends Fragment {
-	
+
 	public static final String TAG = "ArteBackend";
 	private String mensaje;
 	private Client mKinveyClient;
@@ -47,54 +47,52 @@ public class ComunidadFragment extends Fragment {
 
 	View rootView;
 	DatabaseHelper dh;
-	
-    public ComunidadFragment(){}
-     
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    	rootView = inflater.inflate(R.layout.activity_listado, container, false);
-        dh = new DatabaseHelper(getActivity().getApplicationContext());
-      
-      //Conexión de la APP a Kinvey
-        	final ObjetosBackend obj= (ObjetosBackend) getActivity().getApplicationContext();
-      		mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
-      		mKinveyClient.ping(new KinveyPingCallback() {
-      			public void onFailure(Throwable t) {
-      				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
-      			}
-      			public void onSuccess(Boolean b) {
-      				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
-      			}
-      		});
-      		
-      		//btnAgregarComentario = (Button)rootView.findViewById(R.id.btnAgregarComentario);
-      		btnAgregarComentario= (Button)rootView.findViewById(R.id.btnAgregarComentario);
-    		addListenerOnButton(obj);
-      		cargarDatos();
-      				
-          
-        return rootView;
-    }
-    
-    public void addListenerOnButton(ObjetosBackend obj) {
-    	mKinveyClient = obj.getmKinveyClient();
-    	btnAgregarComentario.setOnClickListener(new OnClickListener() {
+
+	public ComunidadFragment(){}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		btnAgregarComentario= (Button)rootView.findViewById(R.id.btnAgregarComentario);
+		rootView = inflater.inflate(R.layout.activity_listado, container, false);
+		dh = new DatabaseHelper(getActivity().getApplicationContext());
+
+		//Conexión de la APP a Kinvey
+		final ObjetosBackend obj= (ObjetosBackend) getActivity().getApplicationContext();
+		mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
+		mKinveyClient.ping(new KinveyPingCallback() {
+			public void onFailure(Throwable t) {
+				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
+			}
+			public void onSuccess(Boolean b) {
+				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
+			}
+		});
+		addListenerOnButton(obj);
+		cargarDatos();
+
+
+		return rootView;
+	}
+
+	public void addListenerOnButton(ObjetosBackend obj) {
+		mKinveyClient = obj.getmKinveyClient();
+		btnAgregarComentario.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//				Intent intent = new Intent(getActivity(), ProgramacionActivity.class);
-//				startActivity(intent);
+				//				Intent intent = new Intent(getActivity(), ProgramacionActivity.class);
+				//				startActivity(intent);
 				if (buscarUsuarioLogueado()){
 					agregarComentarios();
 				}else{
 					mensaje = "Bienvenido usuario: " + mKinveyClient.user().getUsername() + ".";
 					Toast.makeText(getActivity().getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
 				}
-				
+
 			}
 
 		});
-    }
-    
+	}
+
 	public void cargarDatos(){
 		Query myQuery = mKinveyClient.query();
 		mKinveyClient.appData("Comunidad", ComunidadBackend.class).get(myQuery, new KinveyListCallback<ComunidadBackend>() {
@@ -151,37 +149,37 @@ public class ComunidadFragment extends Fragment {
 
 
 	}
-	
+
 	private void agregarComentarios() {
 		ComunidadBackend event = new ComunidadBackend();
 		event.setDescripcionComunidad("Launch Party");
 		//event.setAddress("Kinvey HQ");
 		AsyncAppData<ComunidadBackend> myevents = mKinveyClient.appData("Comunidad",ComunidadBackend.class);
 		myevents.save(event, new KinveyClientCallback<ComunidadBackend>() {
-		  @Override
-		  public void onFailure(Throwable e) {
-		      Log.e(TAG, "failed to save event data", e);
-		  }
-		@Override
-		public void onSuccess(ComunidadBackend arg0) {
-			 
-			
-		}
+			@Override
+			public void onFailure(Throwable e) {
+				Log.e(TAG, "failed to save event data", e);
+			}
+			@Override
+			public void onSuccess(ComunidadBackend arg0) {
+
+
+			}
 		});
-		
+
 	}
-	
+
 	public boolean buscarUsuarioLogueado (){
 		String nombreUsuario = mKinveyClient.user().getUsername().toString();
 		Usuario u = dh.getTodo(nombreUsuario);
 		boolean resultado = false;
 		if (u.getMiNombreUsuario()!= "" && u.getLogueado() == 1){
 			resultado = true;
-			
+
 		}else{
-			 resultado = false;
+			resultado = false;
 		}
 		return resultado;
 	}
-	
+
 }

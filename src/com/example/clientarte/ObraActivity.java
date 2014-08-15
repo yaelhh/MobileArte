@@ -1,10 +1,9 @@
 package com.example.clientarte;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
-
-
 import android.app.ActionBar.LayoutParams;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,7 +14,10 @@ import com.kinvey.android.callback.KinveyPingCallback;
 import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.Query;
 import com.kinvey.java.User;
+import com.kinvey.java.core.DownloaderProgressListener;
 import com.kinvey.java.core.KinveyClientCallback;
+import com.kinvey.java.core.MediaHttpDownloader;
+import com.kinvey.java.core.MediaHttpUploader;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,6 +28,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Gallery;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -40,6 +43,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import backend.DatabaseHelper;
 import backend.ObraBackend;
+import backend.ObrasImagen;
 import backend.SalaBackend;
 import dominio.Obra;
 
@@ -60,6 +64,8 @@ public class ObraActivity extends ActionBarActivity {
 	private String mensaje;
 	private Client kinveyClient;
 	private static final int REQUEST_TEXT = 3;
+	private ImageButton btnAgregarComentarioObra;
+	
 	//	private int requestCode = 1;
 	//	private ListView lvObras;
 	//	private DB_Obra dataSource;// = new DB_Obra(this);
@@ -75,7 +81,7 @@ public class ObraActivity extends ActionBarActivity {
 	Spinner listFunciones;
 	Spinner listHorarios;
 	itemAdapter IA;
-
+	//android:onClick="referenciarIngresarComentario"
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -85,31 +91,13 @@ public class ObraActivity extends ActionBarActivity {
 		//		myDbHelper = new DatabaseHelper(this);
 		obra= new Obra();
 		obra= getIntent().getParcelableExtra("obra");
+		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
+		kinveyClient = obj.captarUsuarioLogueado();
 		btnComprar= (Button)findViewById(R.id.bttnComprar);
+		btnAgregarComentarioObra = (ImageButton)findViewById(R.id.imageButton2);
+		//obtenerImagenObra(kinveyClient);
 		crearActivity();
 		addListenerOnButton();
-		
-		//conectarBackend();
-
-		//		try {
-		//			myDbHelper.createDataBase();
-		//			
-		//		} catch (IOException ioe) {
-		//
-		//			throw new Error("Unable to create database");
-		//
-		//		}
-		//		
-		//		Obra miObra = new Obra ("Redemption", "Jason Statham");
-		//		Obra miObra2 = new Obra ("La Madrastra", "Victoria Ruffo");
-		//		Obra miObra3 = new Obra ("The Wolf of Wall Street", "Leonardo DiCaprio");
-		//		Obra miObra4 = new Obra ("X-Men", "Hugh Jackman");
-		//		myDbHelper.createObra(miObra);
-		//		myDbHelper.createObra(miObra2);
-		//		myDbHelper.createObra(miObra3);
-		//		myDbHelper.createObra(miObra4);
-		//	
-		//		
 	}		
 	
 	public void referenciarIngresarComentario (View view){
@@ -147,6 +135,17 @@ public class ObraActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(ObraActivity.this, CompraActivity.class);
+				intent.putExtra("obra",obra); 
+				startActivity(intent);
+			}
+
+		});
+		
+		btnAgregarComentarioObra.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ObraActivity.this, ComunidadActivity.class);
 				intent.putExtra("obra",obra); 
 				startActivity(intent);
 			}
@@ -326,6 +325,18 @@ public boolean onCreateOptionsMenu(Menu menu) {
 	getMenuInflater().inflate(R.menu.main_backend, menu);
 	return true;
 }
+	
+	
+//		try {
+//	        FileOutputStream fStream = getApplicationContext().openFileOutput("image.png", Context.MODE_PRIVATE);
+//	        ByteArrayOutputStream bos = result.getFile("image").getOutput();
+//	        bos.writeTo(fStream);
+//	        bos.flush();
+//	        fStream.flush();
+//	        bos.close();
+//	        fStream.close();
+//	    } catch (Exception ex) {}
+	
 
 @Override
 public boolean onOptionsItemSelected(MenuItem item) {

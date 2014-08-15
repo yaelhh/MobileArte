@@ -1,8 +1,13 @@
 package com.example.clientarte;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.kinvey.android.Client;
+import com.kinvey.java.Query;
+import com.kinvey.java.core.DownloaderProgressListener;
+import com.kinvey.java.core.MediaHttpDownloader;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -38,6 +43,7 @@ public class ProgramacionActivity extends Activity implements OnQueryTextListene
 	private ImageButton imageObra;
 	private Obra miObra;
 	private  Obra obraSeleccionada= new Obra();
+	public static final String TAG = "ArteBackend";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -150,7 +156,7 @@ public class ProgramacionActivity extends Activity implements OnQueryTextListene
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
+	
 
 	//	public void addListenerOnButton() {
 	//		 

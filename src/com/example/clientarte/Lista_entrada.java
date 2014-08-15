@@ -20,6 +20,11 @@ public class Lista_entrada {
 	    this.textoEncima = textoEncima; 
 	}
 	
+	public Lista_entrada(int userIcon, String idUsuario, String tipo,
+			String titulo, String texto) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String get_textoEncima() { 
 	    return textoEncima; 
 	}

@@ -6,6 +6,7 @@ import java.util.Date;
 
 
 
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -56,6 +57,13 @@ public Usuario(Parcel in){
 	readFromParcel(in);
 }
 
+	public Usuario(String nomUsuario, String pass, int i, String fechaN) {
+		this.miNombreUsuario = nomUsuario;
+		this.password = pass;
+		this.estaLogueado = i;
+		this.fechaNacimiento = fechaN;
+	}
+	
 	//get and set
 	public int getIdUsuario() {
 		return idUsuario;

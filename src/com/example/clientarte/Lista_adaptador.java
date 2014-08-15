@@ -27,7 +27,12 @@ public abstract class Lista_adaptador extends BaseAdapter {
         this.R_layout_IdView = R_layout_IdView; 
     }
       
-    @Override
+    public Lista_adaptador(Class<NotificacionesActivity> class1,
+			int activityNotificaciones, ArrayList<Lista_entrada> datos) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
     public View getView(int posicion, View view, ViewGroup pariente) {
         if (view == null) {
 			LayoutInflater vi = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 

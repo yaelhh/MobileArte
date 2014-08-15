@@ -2,9 +2,10 @@ package backend;
 
 import com.google.api.client.json.GenericJson;
 import com.google.api.client.util.Key;
+import com.kinvey.java.LinkedResources.LinkedGenericJson;
 
 
-public class ObraBackend extends GenericJson {
+public class ObraBackend extends LinkedGenericJson {
 
 	@Key("_id") // nombre del campo definido en el backend
 	private int idObras;
@@ -12,9 +13,14 @@ public class ObraBackend extends GenericJson {
 	private String descripcionObras;
 	@Key
 	private String nombreObras;
+//	@Key("imagenAdjunta")
+//    private String text;
 	 
 	
-	public ObraBackend() {}
+	public ObraBackend() {
+		//"attachment" is the JSON element used to maintain a Linked File.
+		//putFile("attachment");
+	}
 	
 	public ObraBackend (String nombreObra) {
 		super();

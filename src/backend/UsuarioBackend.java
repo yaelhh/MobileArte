@@ -1,10 +1,16 @@
 package backend;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.Editable;
 
-import com.google.api.client.json.GenericJson;
+
+
+
+
 import com.google.api.client.util.Key;
 import com.kinvey.java.LinkedResources.LinkedGenericJson;
+import com.kinvey.java.model.KinveyMetaData;
 
 
 public class UsuarioBackend extends LinkedGenericJson {
@@ -15,11 +21,11 @@ public class UsuarioBackend extends LinkedGenericJson {
 	private String nombre;
 	@Key
 	private String apellido;
-	@Key
+	@Key("username")
 	private String username;
 	@Key
 	private String password;
-	@Key
+	@Key("fechaNacimiento")
 	private String fechaNacimiento;
 	@Key
 	private String mascaras;
@@ -31,12 +37,20 @@ public class UsuarioBackend extends LinkedGenericJson {
 	private String estaLogueado;
 	@Key
 	private String imagenAdjunta;
-	 
 	
 	public UsuarioBackend() {
 		//"attachment" is the JSON element used to maintain a Linked File.
-      //  putFile("attachment");
+        //putFile("attachment");
 	}
+	
+//	public UsuarioBackend(String userid){
+//		meta = new KinveyMetaData();
+//        acl = new KinveyMetaData.AccessControlList();
+//        putFile(attachmentName);
+//        author = new KinveyReference();
+//        author.setCollection(User.USER_COLLECTION_NAME);
+//        author.setId(userid);
+//	}
 	
 	public UsuarioBackend (String miNombre, String miApellido) {
 		super();
@@ -127,7 +141,7 @@ public class UsuarioBackend extends LinkedGenericJson {
 		this.imagenAdjunta = imagenAdjunta;
 	}
 	
-    
+	
 
 	
 	

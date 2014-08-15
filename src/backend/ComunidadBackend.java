@@ -15,7 +15,7 @@ public class ComunidadBackend extends LinkedGenericJson{
 	private String usuario;
 	@Key("imagenComentario")
 	private String idImagen;
-	@Key
+	@Key("idObra")
 	private String idObra;
 	 
 	
@@ -29,6 +29,11 @@ public class ComunidadBackend extends LinkedGenericJson{
 		this.descripcion = desc;
 	}
 	
+	public ComunidadBackend(String usuario2, String descripcionComunidad,
+			String idObra2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getIdComunidad() {
 		return this.idComunidad;
 	}

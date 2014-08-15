@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -153,11 +154,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String COLUMNA_NOMBREUSUARIO = "nombreUsuario";
 	private static final String COLUMNA_PASSWORD = "password";
 	private static final String COLUMNA_ESTADOUSUARIO = "estadoUsuario";
+	private static final String COLUMNA_FNACIMIENTO = "fechaNacimiento";
 	
 	private static final String CREATE_TABLA_USUARIOS = "CREATE TABLE "
             + TABLA_USUARIOS + "(" + COLUMNA_IDUSUARIOS + " INTEGER PRIMARY KEY," + COLUMNA_NOMBREUSUARIO
             + " TEXT," + COLUMNA_PASSWORD + " TEXT," + COLUMNA_ESTADOUSUARIO
-            + " INTEGER" + ")";
+            + " INTEGER," +  COLUMNA_FNACIMIENTO + " TEXT " + ")";
     
     
  
@@ -178,6 +180,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 		values.put(COLUMNA_NOMBREUSUARIO, todo.getMiNombreUsuario());
 		values.put(COLUMNA_PASSWORD, todo.getPassword());
 		values.put(COLUMNA_ESTADOUSUARIO, 1);
+		values.put(COLUMNA_FNACIMIENTO, todo.getFechaNacimiento());
 		long todo_id = db.insert(TABLA_USUARIOS, null, values);
 		return todo_id;
 	}
@@ -188,16 +191,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         String selectQuery = "SELECT  * FROM " + TABLA_USUARIOS + " WHERE "
                 + COLUMNA_NOMBREUSUARIO + " = " + nUsuario;
         Cursor c = db.rawQuery(selectQuery, null);
- 
+        
         if (c != null)
             c.moveToFirst();
- 
+        
         Usuario u = new Usuario();
         u.setIdUsuario(c.getInt(c.getColumnIndex(COLUMNA_IDUSUARIOS)));
         u.setMiNombreUsuario((c.getString(c.getColumnIndex(COLUMNA_NOMBREUSUARIO))));
         u.setPassword(c.getString(c.getColumnIndex(COLUMNA_PASSWORD)));
         u.setEstaLogueado(c.getInt(c.getColumnIndex(COLUMNA_ESTADOUSUARIO)));
- 
+        
         return u;
     }
 	
@@ -236,6 +239,77 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
         return tags;
     }
+
+    public Usuario obtenerUsuarioLogueado(String estaLogueado) {
+    	SQLiteDatabase db = this.getReadableDatabase();
+
+    	String selectQuery = "SELECT  * FROM " + TABLA_USUARIOS + " WHERE "
+    			+ COLUMNA_ESTADOUSUARIO + " = " + estaLogueado;
+    	Usuario u = new Usuario();
+    	Cursor c = db.rawQuery(selectQuery, null);
+    	if(db!=null){
+    		try { 
+    			if (c != null)
+    				c.moveToFirst();
+
+
+    			u.setIdUsuario(c.getInt(c.getColumnIndex(COLUMNA_IDUSUARIOS)));
+    			u.setMiNombreUsuario((c.getString(c.getColumnIndex(COLUMNA_NOMBREUSUARIO))));
+    			u.setPassword(c.getString(c.getColumnIndex(COLUMNA_PASSWORD)));
+    			u.setEstaLogueado(c.getInt(c.getColumnIndex(COLUMNA_ESTADOUSUARIO)));
+    		} catch (Exception ioex) {
+    			ioex.printStackTrace(); 
+    		}
+    	}
+    		return u;
+    	}
 	
+	public int actualizarUsuarioLogueado(String nombreUsuario){
+		int filasAfectadas = 0;
+		SQLiteDatabase db = getWritableDatabase();
+		if(db!=null){
+			ContentValues values = new ContentValues();
+			values.put(COLUMNA_ESTADOUSUARIO, 1);
+			filasAfectadas = (int) db.update(TABLA_USUARIOS, values, "estadoUsuario = ?", new String[]{String.valueOf(nombreUsuario)});  
+		}
+		db.close();   
+		return filasAfectadas;
+	}
+	
+	public void actualizarUsuarioLogueadoDeslogueado(String nombreUsuario){
+		SQLiteDatabase db = getWritableDatabase();
+		String query = "UPDATE db_usuarios SET estadoUsuario='0' WHERE nombreUsuario " + "=" + "'"+ nombreUsuario+ "'";
+		if(db!=null){
+			db.execSQL(query);
+		}
+		db.close();   
+	}
+	
+	public Usuario obtenerFechaCumpleanos (String nUsuario) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Usuario u = new Usuario();
+		if (db!=null){
+			String query = "SELECT * FROM " + TABLA_USUARIOS + "  WHERE " + COLUMNA_NOMBREUSUARIO + "=" + "'"+ nUsuario+ "'";
+			Cursor c = db.rawQuery(query, null);
+			try { 
+				if (c != null)
+					c.moveToFirst();
+
+
+				u.setIdUsuario(c.getInt(c.getColumnIndex(COLUMNA_IDUSUARIOS)));
+				u.setMiNombreUsuario((c.getString(c.getColumnIndex(COLUMNA_NOMBREUSUARIO))));
+				u.setPassword(c.getString(c.getColumnIndex(COLUMNA_PASSWORD)));
+				u.setEstaLogueado(c.getInt(c.getColumnIndex(COLUMNA_ESTADOUSUARIO)));
+				u.setFechaNacimiento(c.getString(c.getColumnIndex(COLUMNA_FNACIMIENTO)));
+			} catch (Exception ioex) {
+				 ioex.printStackTrace(); 
+			}
+		}
+		return u;
+	}
+	
+	//ContentValues valores = new ContentValues();
+//    valores.put(COLUMNA_ESTADOUSUARIO, 0);
+//    db.update("db_usuarios", valores, "nombreUsuario=" + nombreUsuario, null);
  
 }

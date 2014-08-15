@@ -102,8 +102,8 @@
             android:layout_above="@+id/button2"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="36dp"
-            android:onClick="login"
             android:text="@string/button_login" />
+        	<!--android:onClick="login"-->
         
      </RelativeLayout>
     

@@ -3,6 +3,7 @@ package com.example.clientarte;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import backend.DatabaseHelper;
 import backend.SalaBackend;
 
 import com.kinvey.android.Client;
@@ -20,6 +21,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -32,7 +35,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 	private String appKey="kid_VT8_It3ePE";
 	private String appSecret="1b0fa51481984d2da5910f78a9d26ccc";
 	private String mensaje;
-	
+	DatabaseHelper dh;
+	private Button btnLogin;
 	
 	private Client mKinveyClient;
 	
@@ -42,7 +46,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_login);
-
+		dh = new DatabaseHelper(getApplicationContext());
+		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
+		
 		//Conexión de la APP a Kinvey
 		mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
 		mKinveyClient.ping(new KinveyPingCallback() {
@@ -53,8 +59,18 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
 			}
 		});
+		mKinveyClient = obj.captarUsuarioLogueado();
 		emailUsuario = (EditText)findViewById(R.id.txtMailUsuarioLogin);
 		passUsuario = (EditText)findViewById(R.id.txtPassLogin);
+		
+		btnLogin= (Button)findViewById(R.id.buttonLogin);
+		btnLogin.setOnClickListener(new OnClickListener() {  
+			@Override
+			public void onClick(View v) {
+				login(obj);
+			}
+		});
+
 
 
 	}
@@ -62,6 +78,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 	//@Override
 		public void cerrar (View view) {
 			super.onDestroy();
+			modificarEstadoDeslogueado(mKinveyClient.user().getUsername());
 			mKinveyClient.user().logout().execute();
 			mensaje = "Hasta luego.";
 	       Log.d("Realizando Kinvey Logout", mensaje);
@@ -75,16 +92,14 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 		
 	
 		//Login
-		public void login (View view) {
-			//			usuario = (EditText) findViewById(R.id.etNombreUsuario);
-			//			password = (EditText) findViewById(R.id.etPassUsuario);
-			//Verificar si el usuario está "logeado"
+		public void login (final ObjetosBackend obj) {
 			final String usuario = emailUsuario.getText().toString();
-			String password = passUsuario.getText().toString();
+			final String password = passUsuario.getText().toString();
+			
 			if (!mKinveyClient.user().isUserLoggedIn()) {
-				//Si no está "logeado" se realiza el login
 				//if (emailValidator(usuario)){
 				mKinveyClient.user().login(usuario, password, new KinveyUserCallback() {
+				//obj.captarUsuarioLogueado().user().login(usuario, password, new KinveyUserCallback() {
 					public void onFailure(Throwable error) {
 						mensaje = "Error al realizar el login.";
 						Log.e("Realizando Kinvey Login", mensaje, error);
@@ -99,8 +114,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 						Intent intent = new Intent();
 						intent.putExtra("username",mKinveyClient.user().getUsername());
 						//intent.putExtra("logueado", true);
-						       setResult( Activity.RESULT_OK, intent );
-						       LoginActivity.this.finish();
+						obj.cargarUsuarioLogueado(usuario);
+						modificarEstado(mKinveyClient.user().getUsername().toString());
+						setResult( Activity.RESULT_OK, intent );
+						LoginActivity.this.finish();
 						//salirLoguin();
 					}
 				});
@@ -112,6 +129,19 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 			//				mensaje = "El email ingresado no es correcto, revise formato";
 			//				Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
 			//			}
+		}
+		
+		public void modificarEstado (String nombreUsuario){
+			int i = dh.actualizarUsuarioLogueado(nombreUsuario);
+			String men = i + "";
+			Log.d("Los campos afectados fueron" + men, men );
+		}
+		
+		public void modificarEstadoDeslogueado (String nombreUsuario){
+//			int i = dh.actualizarUsuarioLogueadoDeslogueado(nombreUsuario);
+//			String men = i + "";
+//			Log.d("Los campos afectados fueron" + men, men );
+			dh.actualizarUsuarioLogueadoDeslogueado(nombreUsuario);
 		}
 		
 		public void salirLoguin(){
