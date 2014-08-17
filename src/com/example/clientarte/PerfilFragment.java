@@ -131,10 +131,16 @@ public class PerfilFragment extends Fragment {
     		
     
 
+<<<<<<< 8a56b019027e0b215327bd641bb423760733d5ce
     public void desloguearUsuario (ObjetosBackend obj) {
 		//super.onDestroy();
 		try{
 		mKinveyClient = obj.captarUsuarioLogueado();
+=======
+	public void desloguearUsuario (ObjetosBackend obj) {
+		//super.onDestroy();
+		mKinveyClient=obj.captarUsuarioLogueado();
+>>>>>>> 16c003e6586b220188a279caa9534e0a96fef792
 		String usuarioLog = mKinveyClient.user().getUsername().toString();
 		modificarEstadoDeslogueado(usuarioLog);
 		onCreateDialog();
@@ -194,6 +200,10 @@ public class PerfilFragment extends Fragment {
 			public void onClick(DialogInterface dialogo1, int id) { 
 //				Intent intent = new Intent(PerfilActivity.this, LoginActivity.class); 
 //				startActivity(intent); 
+<<<<<<< 8a56b019027e0b215327bd641bb423760733d5ce
+=======
+				
+>>>>>>> 16c003e6586b220188a279caa9534e0a96fef792
 				desloguearUsuario (obj);
 
 			} 
@@ -288,9 +298,16 @@ public class PerfilFragment extends Fragment {
 				if (!obj.captarUsuarioLogueado().user().isUserLoggedIn()){	
 					mensajeConfirmacion();
 				}else{
+<<<<<<< 8a56b019027e0b215327bd641bb423760733d5ce
 					if (obj.captarUsuarioLogueado().user().isUserLoggedIn()) {
 						Intent intent = new Intent(getActivity(), EditarUsuarioActivity.class);
 						startActivity(intent);
+=======
+					
+					if (mKinveyClient.user().isUserLoggedIn()) {
+						mensajeConfirmacionDesloguear(obj);
+						//desloguearUsuario();
+>>>>>>> 16c003e6586b220188a279caa9534e0a96fef792
 					}
 				}
 			}
