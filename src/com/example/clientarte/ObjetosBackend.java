@@ -143,7 +143,6 @@ public class ObjetosBackend extends Application{
 		//		crearListObra();
 		//		crearListFunciones();
 		ArrayList<NotificacionesBackend> listaNotificaciones= new ArrayList<NotificacionesBackend>();
-
 	}
 
 
@@ -200,7 +199,7 @@ public class ObjetosBackend extends Application{
 			}
 			@Override
 			public void onFailure(Throwable arg0) {
-				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece de estar logueado y tener conexión a internet", Toast.LENGTH_LONG).show();
 
 
 			}
@@ -338,7 +337,7 @@ public class ObjetosBackend extends Application{
 
 			@Override
 			public void onFailure(Throwable arg0) {
-				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece de estar logueado y tener conexión a internet", Toast.LENGTH_LONG).show();
 
 			}
 		});

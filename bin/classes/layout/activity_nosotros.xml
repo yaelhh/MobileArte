@@ -16,13 +16,21 @@
         android:padding="5dp"
         android:spacing="8dp" />
 
+<ScrollView
+    android:id="@+id/ScrollViewHistoriaSodre"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_weight="586.88" >
+
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="match_parent"
-        android:layout_height="138sp"
+        android:layout_width="318dp"
+        android:layout_height="150dp"
         android:layout_weight="0.39"
         android:padding="5dp"
         android:text="@string/HistoriaSodre" />
+
+  </ScrollView>
 
     <LinearLayout
         android:id="@+id/container2"
@@ -30,12 +38,18 @@
         android:layout_height="168dp"
         android:orientation="horizontal" >
 
+    <ScrollView
+        android:id="@+id/ScrollViewHorarioSodre"
+        android:layout_width="160dp"
+        android:layout_height="160dp" >
+
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="168dp"
-            android:layout_height="match_parent"
+            android:layout_width="142dp"
+            android:layout_height="160dp"
             android:padding="5dp"
             android:text="@string/HorarioSodre" />
+        </ScrollView>
         </LinearLayout>
 		
 

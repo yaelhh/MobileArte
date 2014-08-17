@@ -53,23 +53,44 @@ public class SplashScreenActivity extends Activity {
 
 		setContentView(R.layout.activity_splash_screen);
         mProgressBar = (ProgressBar) findViewById (R.id.progress_bar);
+      //mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
+      		mKinveyClient = new Client.Builder(getApplicationContext()).build();
+      		mKinveyClient.ping(new KinveyPingCallback() { 
+
+
+      			public void onFailure(Throwable t) {
+      				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t); 
+      			}
+
+      			public void onSuccess(Boolean b) { 
+      				Log.d("Probando Kinvey Connection", "Kinvey Ping Success"); 
+      			}
+      		});
+
 
 
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
-
+				
+				if(mKinveyClient.user().isUserLoggedIn()){
 				// Start the next activity
 				Intent mainIntent = new Intent().setClass(
 						SplashScreenActivity.this, MainActivity.class);
 						startActivity(mainIntent);
-
+				}else{
+					Intent mainIntent = new Intent().setClass(
+							SplashScreenActivity.this, LoginActivity.class);
+							startActivity(mainIntent);
+				}
 				// Close the activity so the user won't able to go back this
 				// activity pressing Back button
 				finish();
 			}
 		};
-
+		
+		
+		
 		// Simulate a long loading process on application startup.
 		Timer timer = new Timer();
 		timer.schedule(task, SPLASH_SCREEN_DELAY);

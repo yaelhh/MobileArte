@@ -2,14 +2,23 @@ package com.example.clientarte;
 
 import java.util.ArrayList;
 
+import backend.ButacaFuncionSectorBackend;
+
+import com.kinvey.android.AsyncAppData;
+import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
+import com.kinvey.java.Query;
+
 import dominio.*;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +42,10 @@ public class SectorAActivity extends Activity {
 	Button btnOk;
 	int PrecioTotal;
 	ArrayList<Butaca> lstButaca=new ArrayList<Butaca>();
+	private Client mKinveyClient;
+	private Funcion funcion;
+	private ProgressBar bar;
+
 
 	// Sector miSector= new Sector(1, 25);
 
@@ -44,10 +57,14 @@ public class SectorAActivity extends Activity {
 		Bundle extras = getIntent().getExtras();
 		cantEntradas= extras.getInt("cantEntrada");
 		SectorA = getIntent().getParcelableExtra("sector");
-//		PrecioTotal= cantEntradas*SectorA.getPrecioSector();
+		funcion=getIntent().getParcelableExtra("funcion");
+		//		PrecioTotal= cantEntradas*SectorA.getPrecioSector();
 		gv.setNumColumns(SectorA.getLinea());
 		btnOk=(Button)findViewById(R.id.bttnOk);
-//		btnOk.setClickable(false);
+		//		btnOk.setClickable(false);
+		bar=(ProgressBar)findViewById(R.id.progress_bar_sector);
+		 bar.setIndeterminate(true);
+        bar.setVisibility(View.GONE);
 
 		// Mostrar id de butacas en el log
 		for (int i = 0; i < SectorA.getTotalButacas()-1; i++) {
@@ -63,7 +80,9 @@ public class SectorAActivity extends Activity {
 		twCantButacaOcupada.setText("  " + contOcupada);
 		twEntradas= (TextView)findViewById(R.id.twEntradas);
 		twEntradas.setText("Le quedan por elegir "+ cantEntradas + " butacas");
-		
+		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
+		mKinveyClient=obj.getmKinveyClient();
+
 
 		seleccionarButaca();
 	}
@@ -104,13 +123,15 @@ public class SectorAActivity extends Activity {
 
 				switch (listButacas.get(position).getEstadoButaca()){
 				case 0:
-					if (cantEntradas>0 || cantSeleccionadas < cantEntradas) {
-						butacaXSector[position] = R.drawable.butaca_amarilla;
-						listButacas.get(position).setEstadoButaca(2);
-						PrecioTotal+=SectorA.getPrecioSector();
-						cantSeleccionadas++;
-						lstButaca.add(listButacas.get(position));
-						
+					if (cantSeleccionadas < cantEntradas) {
+						VerificarButaca(position);
+						//						butacaXSector[position] = R.drawable.butaca_amarilla;
+						//						listButacas.get(position).setEstadoButaca(2);
+						//						PrecioTotal+=SectorA.getPrecioSector();
+						//						cantSeleccionadas++;
+						//						lstButaca.add(listButacas.get(position));
+
+
 					} else {
 						Toast.makeText(SectorAActivity.this,"Ya seleccionó todas las entradas elegidas" , Toast.LENGTH_SHORT).show();
 
@@ -124,28 +145,80 @@ public class SectorAActivity extends Activity {
 					lstButaca.remove(listButacas.get(position));
 					PrecioTotal-=SectorA.getPrecioSector();
 					cantSeleccionadas--;
+					IA.setmThumbIds(butacaXSector);
+					gv.setAdapter(IA);
 				}
 
-				IA.setmThumbIds(butacaXSector);
-				gv.setAdapter(IA);
-//				if(cantSeleccionadas==cantEntradas){
-//					btnOk.setClickable(true);
-//				}
+				
+				//				if(cantSeleccionadas==cantEntradas){
+				//					btnOk.setClickable(true);
+				//				}
 
 			}
 
 		});
 	}
-	public void butacasElegidas(View v){
-		SectorA.setListaButacas(listButacas);
-		Intent intent = new Intent();
-		intent.putExtra("sectorElegido",SectorA );
-		intent.putExtra("yaSeleccionadas", true);
-		intent.putExtra("precioTotal", PrecioTotal);
-		intent.putExtra("ButacasSeleccionadas", lstButaca);
-		intent.putExtra("cantSeleccionadas", cantSeleccionadas);
-        setResult( Activity.RESULT_OK, intent );
-        SectorAActivity.this.finish();
-//		finish();
+
+	public void VerificarButaca(final int position){
+		bar.setVisibility(View.VISIBLE);
+		Query query1 = mKinveyClient.query ();
+		Query query2 = mKinveyClient.query ();
+		query1.equals("idButaca", String.valueOf(listButacas.get(position).getIdButaca()));
+		query2.equals("idFuncion", String.valueOf(funcion.getIdFuncion()));
+		
+		AsyncAppData<ButacaFuncionSectorBackend> searchedEvents = mKinveyClient.appData("ButacaFuncionSector", ButacaFuncionSectorBackend.class);
+		searchedEvents.get(query1.and(query2), new KinveyListCallback<ButacaFuncionSectorBackend>(){			
+			@Override
+			public void onSuccess(ButacaFuncionSectorBackend[] result) {
+
+//				for(int x=0; x<result.length;x++){
+					if(result[0].getEstadoButaca().equalsIgnoreCase("0")){
+						Log.e("Encontre ButacaFuncionSectorBackend ",result[0].getIdButaca()+"--"+result[0].getEstadoButaca());
+
+						butacaXSector[position] = R.drawable.butaca_amarilla;
+						listButacas.get(position).setEstadoButaca(2);
+						PrecioTotal+=SectorA.getPrecioSector();
+						cantSeleccionadas++;
+						lstButaca.add(listButacas.get(position));
+						IA.setmThumbIds(butacaXSector);
+						gv.setAdapter(IA);
+						bar.setVisibility(View.GONE);
+					}else{
+						Toast.makeText(SectorAActivity.this,"Ups.. alguien le ganó de mano, y compró esta butaca por favor selecione una nueva" , Toast.LENGTH_SHORT).show();
+						butacaXSector[position] = R.drawable.butaca_roja;
+						listButacas.get(position).setEstadoButaca(1);
+						IA.setmThumbIds(butacaXSector);
+						gv.setAdapter(IA);
+						bar.setVisibility(View.GONE);
+
+						
+					}
+
+//				}
+			}
+
+			@Override
+			public void onFailure(Throwable error) {
+				Toast.makeText(SectorAActivity.this,"Ha ocurrido un error y no se pudo conectar para verificar que la butaca este en este momento disponible, verifique su conexión a internet" , Toast.LENGTH_SHORT).show();
+				bar.setVisibility(View.GONE);
+			}
+
+
+		});
 	}
+
+
+
+public void butacasElegidas(View v){
+	SectorA.setListaButacas(listButacas);
+	Intent intent = new Intent();
+	intent.putExtra("sectorElegido",SectorA );
+	intent.putExtra("yaSeleccionadas", true);
+	intent.putExtra("precioTotal", PrecioTotal);
+	intent.putExtra("ButacasSeleccionadas", lstButaca);
+	intent.putExtra("cantSeleccionadas", cantSeleccionadas);
+	setResult( Activity.RESULT_OK, intent );
+	SectorAActivity.this.finish();
+	//		finish();
+}
 }
