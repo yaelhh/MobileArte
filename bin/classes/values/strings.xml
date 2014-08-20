@@ -43,11 +43,9 @@
     <string name="dialogo_linea_1">Prueba 1</string>
     <string name="dialogo_linea_2">Prueba 1</string>
     <string name="fechaNacimiento">Ingrese su cumpleanos:</string>
-
     <string name="nombreUsuarioCuenta">Sebastian</string>
     <string name="button_escribirComentario">Escribir comentario</string>
     <string name="imagen_content_description">Imagen a mostrar</string>
-    
 
     <!-- Valores de la opcion registro de usuarios -->
     <string name="enter_email">Email</string>
@@ -146,5 +144,6 @@ Prensa y comunicación comunicacion@auditorio.uy   </string>
     <string name="title_activity_prueba_obra">PruebaObraActivity</string>
     <string name="addCliente">Nuevo Cliente</string>
     <string name="title_activity_compra_realizada">CompraRealizadaActivity</string>
+    <string name="title_activity_prox_obras">ProxObrasActivity</string>
 
 </resources>

@@ -3,13 +3,7 @@ package dominio;
 
 import java.util.ArrayList;
 
-
-
-import com.kinvey.java.LinkedResources.LinkedGenericJson;
-import com.google.api.client.json.GenericJson;
-import com.google.api.client.util.Key;
-
-import android.R.integer;
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -75,7 +69,7 @@ public class Obra implements Parcelable{
 		this.idObra = idObra;
 		this.nombre = nombre;
 		listaFunciones= new ArrayList<Funcion>();
-		listaImagenes = new int[3];
+		listaImagenes= new int[3];
 
 	}
 	public Obra(int idObra, String nombre, String descripcion) {
@@ -84,7 +78,7 @@ public class Obra implements Parcelable{
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		listaFunciones= new ArrayList<Funcion>();
-		listaImagenes = new int[3];
+		listaImagenes= new int[3];
 
 	}
 	
@@ -101,12 +95,12 @@ public class Obra implements Parcelable{
 		super();
 		this.nombre = nombre;
 		listaFunciones= new ArrayList<Funcion>();
-		listaImagenes = new int[3];
+		listaImagenes= new int[3];
 	}
 	public Obra (Parcel in) {
 //		listaButacas = new ArrayList<Butaca>();
 		listaFunciones= new ArrayList<Funcion>();
-		listaImagenes = new int[3];
+		listaImagenes= new int[3];
 		readFromParcel(in);
 	}
 	public Obra() {

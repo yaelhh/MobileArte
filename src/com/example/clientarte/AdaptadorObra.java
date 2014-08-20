@@ -2,15 +2,11 @@ package com.example.clientarte;
 
 import java.util.ArrayList;
 
-import dominio.Obra;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 public abstract class AdaptadorObra extends BaseAdapter {
 

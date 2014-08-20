@@ -1,11 +1,7 @@
 package dominio;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-import com.kinvey.java.LinkedResources.LinkedGenericJson;
-
-import android.R.integer;
 import android.os.Parcel;
 import android.os.Parcelable;
 

@@ -2,23 +2,22 @@ package com.example.clientarte;
 
 import java.util.ArrayList;
 
-import dominio.Funcion;
-import dominio.Obra;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.CalendarView;
+import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Toast;
-import android.widget.CalendarView.OnDateChangeListener;
+import dominio.Funcion;
+import dominio.Obra;
 
 /*  Fragment para seccion Programacion */ 
 public class ProgramacionFragment extends Fragment {
@@ -77,8 +76,8 @@ public class ProgramacionFragment extends Fragment {
 			imageObra= new ImageButton(getActivity());
 			imageObra.setId(x);
 			imageObra.setContentDescription(miObra.getNombre());
-			Integer imagen= miObra.getListaImagenes()[0];
-			imageObra.setBackgroundResource(imagen);
+//			Integer imagen= miObra.getListaImagenes()[0];
+//			imageObra.setBackgroundResource(imagen);
 			imageObra.setPadding(10, 10, 10, 10);
 			ingresoObra(imageObra); 
 			//        imageObra.setOnClickListener(new OnClickListener() {

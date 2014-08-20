@@ -1,14 +1,8 @@
 package backend;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.api.client.util.Key;
 import com.kinvey.java.LinkedResources.LinkedGenericJson;
-
-import android.os.Parcel;
-import android.os.Parcelable;
 
 
 public class SectorBackend extends LinkedGenericJson {

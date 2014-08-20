@@ -1,28 +1,27 @@
 package com.example.clientarte;
 
-import java.io.File;
+
+
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.EnumMap;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
-import android.R.layout;
+
+
+
+
+
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract.Intents;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,8 +34,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -44,19 +41,15 @@ import android.widget.Toast;
 import backend.ButacaFuncionSectorBackend;
 import backend.CompraBackend;
 import backend.CompraButacasBackend;
+import backend.UsuarioBackend;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.java.Query;
+import com.kinvey.java.core.DownloaderProgressListener;
 import com.kinvey.java.core.KinveyClientCallback;
+import com.kinvey.java.core.MediaHttpDownloader;
 
 import dominio.Butaca;
 import dominio.Compra;
@@ -312,6 +305,7 @@ public class CompraActivity extends Activity {
 					//Se verifica que el usuario este logueado
 					if(o.captarUsuarioLogueado()!= null){
 						usuario=new Usuario();
+						usuario.setMiNombreUsuario(o.captarUsuarioLogueado().user().getUsername());
 						obtenerButacasSeleccionadas();
 						//						ButacaFuncionSectorBackend[] listaButacasLibres=o.verificarButacasDisponibles(funcionSeleccionada,butacasSeleccionadas);
 
@@ -476,7 +470,7 @@ public class CompraActivity extends Activity {
 		compraBknd.setFechaRealizada(compra.getFechaRealizada());
 		compraBknd.setFechaVigencia(compra.getFechaVigencia());
 		compraBknd.setIdFuncion(compra.getFuncionSeleccionada().getIdFuncion());
-		compraBknd.setIdUsuario(compra.getMiUsuario().getIdUsuario());
+		compraBknd.setIdUsuario(compra.getMiUsuario().getMiNombreUsuario());
 		compraBknd.setIdObra(compra.getMiObra().getIdObra());
 		compraBknd.setPago(false);
 		compraBknd.setPrecioTotal(compra.getPrecioTotal());
@@ -499,11 +493,12 @@ public class CompraActivity extends Activity {
 				intent.putExtra("hora", hora);
 				intent.putExtra("duracion", duracion);
 				intent.putExtra("tituloObra", obra.getNombre());
+				intent.putExtra("nuevo", "si");
 				//				intent.putExtra("compra", compra.toString());
 				CompraActivity.this.startActivityForResult(intent, 0);
 				bar.setVisibility(View.GONE);
 				guardarButacasCompra(compra);
-				guardarMascara(compra.getMiUsuario());
+				guardarMascara(compra.getMiUsuario(),compra.getPrecioTotal());
 
 			}
 			@Override
@@ -517,8 +512,62 @@ public class CompraActivity extends Activity {
 	}
 
 	//Funcion para cargarle mascaras al usuario
-	public void guardarMascara(Usuario usuarioCompra){
-		
+	public void guardarMascara(Usuario usuarioCompra, final int precio){
+		Query query2 = mKinveyClient.query ();
+		query2.equals("username",usuarioCompra.getMiNombreUsuario() );
+		AsyncAppData<UsuarioBackend> searchedEvents = mKinveyClient.appData("Usuario", UsuarioBackend.class);
+		searchedEvents.get(query2, new KinveyListCallback<UsuarioBackend>(){			
+			@Override
+			public void onSuccess(UsuarioBackend[] result) {
+				Log.e("Encontre usuario","la suma mascaras al usuario");
+
+				for(int x=0; x<result.length;x++){
+					Log.e("Encontre usuario","la suma mascaras al usuario "+result[x].getIdUsuario());
+					mKinveyClient.appData("Usuario",UsuarioBackend.class).getEntity(result[x].getIdUsuario(), new KinveyClientCallback<UsuarioBackend>() {
+
+						@Override
+						public void onSuccess(UsuarioBackend arg0) {
+							int mascaras= (int) (precio*0.05);
+							mascaras +=Integer.parseInt(arg0.getMascaras());
+							arg0.put("mascaras", String.valueOf(mascaras));
+							mKinveyClient.appData("Usuario", UsuarioBackend.class).save(arg0, new KinveyClientCallback<UsuarioBackend>() {
+								@Override
+								public void onSuccess(UsuarioBackend result) {
+									Log.e("sumo mascaras","se le suman 50 mascaras");
+									
+								}
+
+								@Override
+								public void onFailure(Throwable error) {
+									Log.e("Error ","Error"+ error);	
+									bar.setVisibility(View.GONE);
+								}
+							});
+						}
+
+						@Override
+						public void onFailure(Throwable arg0) {
+							// TODO Auto-generated method stub
+							bar.setVisibility(View.GONE);
+
+						}
+
+
+					});
+
+				}				
+
+			}
+
+			@Override
+			public void onFailure(Throwable error) {
+				Log.e("Error ","no entra a ButacaFuncionSectorBackend");	
+				bar.setVisibility(View.GONE);
+
+			}
+
+
+		});
 	}
 	//Funcion para setear como ocupadas las butacas
 	public void librarButacasFuncionSector(ButacaFuncionSectorBackend bfsb,final Compra compra,final int cant,final Client mKinveyClient){
@@ -577,38 +626,38 @@ public class CompraActivity extends Activity {
 	}
 
 	//Funcion para volver a setear las butacas como libres ya que no fue posible realizar la compra
-		public void cancelarCompra(final Compra compra){
-			for(int x=0;x<compra.getButacasSeleccionadas().size();x++){
-				Butaca b=compra.getButacasSeleccionadas().get(x);   
-				Query query1 = mKinveyClient.query ();
-				Query query2 = mKinveyClient.query ();
-				query1.equals("idButaca", String.valueOf(b.getIdButaca()));
-				query2.equals("idFuncion", String.valueOf(compra.getFuncionSeleccionada().getIdFuncion()));
-				AsyncAppData<ButacaFuncionSectorBackend> searchedEvents = mKinveyClient.appData("ButacaFuncionSector", ButacaFuncionSectorBackend.class);
-				searchedEvents.get(query1.and(query2), new KinveyListCallback<ButacaFuncionSectorBackend>(){			
-					@Override
-					public void onSuccess(ButacaFuncionSectorBackend[] result) {
-						//				ButacaFuncionSectorBackend entity= new ButacaFuncionSectorBackend();
-						//				entity.setEstadoButaca(1);
-						for(int x=0; x<result.length;x++){
-							Log.e("Encontre ButacaFuncionSectorBackend para cancelarla ",result[x].getIdButaca()+"--"+result[x].getEstadoButaca());
-							//Seteo como libres las butacas
-							librarButacasFuncionSector(result[x],compra,cant,mKinveyClient);
-							bar.setVisibility(View.GONE);
-						}				
-
-					}
-
-					@Override
-					public void onFailure(Throwable error) {
-						Log.e("Error ","no entra a ButacaFuncionSectorBackend");	
+	public void cancelarCompra(final Compra compra){
+		for(int x=0;x<compra.getButacasSeleccionadas().size();x++){
+			Butaca b=compra.getButacasSeleccionadas().get(x);   
+			Query query1 = mKinveyClient.query ();
+			Query query2 = mKinveyClient.query ();
+			query1.equals("idButaca", String.valueOf(b.getIdButaca()));
+			query2.equals("idFuncion", String.valueOf(compra.getFuncionSeleccionada().getIdFuncion()));
+			AsyncAppData<ButacaFuncionSectorBackend> searchedEvents = mKinveyClient.appData("ButacaFuncionSector", ButacaFuncionSectorBackend.class);
+			searchedEvents.get(query1.and(query2), new KinveyListCallback<ButacaFuncionSectorBackend>(){			
+				@Override
+				public void onSuccess(ButacaFuncionSectorBackend[] result) {
+					//				ButacaFuncionSectorBackend entity= new ButacaFuncionSectorBackend();
+					//				entity.setEstadoButaca(1);
+					for(int x=0; x<result.length;x++){
+						Log.e("Encontre ButacaFuncionSectorBackend para cancelarla ",result[x].getIdButaca()+"--"+result[x].getEstadoButaca());
+						//Seteo como libres las butacas
+						librarButacasFuncionSector(result[x],compra,cant,mKinveyClient);
 						bar.setVisibility(View.GONE);
-					}
+					}				
+
+				}
+
+				@Override
+				public void onFailure(Throwable error) {
+					Log.e("Error ","no entra a ButacaFuncionSectorBackend");	
+					bar.setVisibility(View.GONE);
+				}
 
 
-				});
-			}
+			});
 		}
+	}
 
 	//Funcion para obtener la fecha de vigencia
 	public Date sumarDiasFecha(){
@@ -698,4 +747,8 @@ public class CompraActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	}
+
+
+
+
+}

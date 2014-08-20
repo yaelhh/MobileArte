@@ -1,9 +1,7 @@
 package dominio;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-import android.R.integer;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -53,7 +51,16 @@ public class Compra implements Parcelable{
 		this.butacasSeleccionadas=butacasSeleccionadas;
 		
 	}
-
+	public Compra(String idCompra,Obra miObra,boolean pago,int precioTotal,
+			Funcion funcionSeleccionada ) {
+		super();
+		this.idCompra=idCompra;
+		this.miObra = miObra;
+		this.pago = pago;
+		this.precioTotal = precioTotal;
+		this.funcionSeleccionada=funcionSeleccionada;		
+	}
+	
 	public String getIdCompra() {
 		return idCompra;
 	}

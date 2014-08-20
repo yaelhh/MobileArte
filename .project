@@ -3,7 +3,6 @@
 	<name>ClientArte</name>
 	<comment></comment>
 	<projects>
-		<project>CaptureActivity</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

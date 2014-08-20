@@ -3,20 +3,9 @@ package com.example.clientarte;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import backend.DatabaseHelper;
-import backend.SalaBackend;
-
-import com.kinvey.android.Client;
-import com.kinvey.android.callback.KinveyPingCallback;
-import com.kinvey.android.callback.KinveyUserCallback;
-import com.kinvey.android.callback.KinveyUserDeleteCallback;
-import com.kinvey.java.User;
-import com.kinvey.java.core.KinveyClientCallback;
 
 import android.accounts.AccountAuthenticatorActivity;
-import android.accounts.AccountManager;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +14,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import backend.DatabaseHelper;
+import backend.SalaBackend;
+
+import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyPingCallback;
+import com.kinvey.android.callback.KinveyUserCallback;
+import com.kinvey.java.User;
+import com.kinvey.java.core.KinveyClientCallback;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 	

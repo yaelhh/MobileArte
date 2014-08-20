@@ -1,14 +1,7 @@
 package backend;
 
-import java.util.Date;
-
 import com.google.api.client.json.GenericJson;
 import com.google.api.client.util.Key;
-import com.kinvey.java.LinkedResources.LinkedGenericJson;
-
-import android.R.integer;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 public class FuncionBackend extends GenericJson {
 	//Variables

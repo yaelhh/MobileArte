@@ -2,7 +2,6 @@ package com.example.clientarte;
 
 import java.util.ArrayList;
 
-import dominio.Notificaciones;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import dominio.Notificaciones;
 
 public class NotificacionesAdapter extends BaseAdapter {
 	 

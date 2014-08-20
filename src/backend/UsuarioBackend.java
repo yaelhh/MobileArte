@@ -1,16 +1,7 @@
 package backend;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.text.Editable;
-
-
-
-
-
 import com.google.api.client.util.Key;
 import com.kinvey.java.LinkedResources.LinkedGenericJson;
-import com.kinvey.java.model.KinveyMetaData;
 
 
 public class UsuarioBackend extends LinkedGenericJson {

@@ -1,6 +1,5 @@
 package com.example.clientarte;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.AlertDialog;
@@ -17,10 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.SimpleAdapter;
 import backend.DBAdapter;
 import backend.Obras.UsuarioColumns;
-import dominio.Obra;
 
 
 public class SQLiteActivity extends ListActivity {

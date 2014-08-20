@@ -13,19 +13,12 @@
  */
 package backend;
 
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 import com.google.api.client.util.Key;
-import com.kinvey.android.Client;
 import com.kinvey.java.User;
 import com.kinvey.java.LinkedResources.LinkedGenericJson;
 import com.kinvey.java.model.KinveyMetaData;

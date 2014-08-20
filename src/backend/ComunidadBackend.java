@@ -1,6 +1,5 @@
 package backend;
 
-import com.google.api.client.json.GenericJson;
 import com.google.api.client.util.Key;
 import com.kinvey.java.LinkedResources.LinkedGenericJson;
 

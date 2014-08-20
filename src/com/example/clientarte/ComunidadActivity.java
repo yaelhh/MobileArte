@@ -1,8 +1,5 @@
 package com.example.clientarte;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.AlertDialog;
@@ -13,7 +10,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +18,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -32,25 +27,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import backend.ComunidadBackend;
 import backend.DatabaseHelper;
-import backend.SalaBackend;
-import backend.UsuarioBackend;
 
 import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
-import com.kinvey.android.callback.KinveyPingCallback;
-import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.Query;
-import com.kinvey.java.User;
-import com.kinvey.java.core.DownloaderProgressListener;
 import com.kinvey.java.core.KinveyClientCallback;
-import com.kinvey.java.core.MediaHttpDownloader;
-import com.kinvey.java.core.MediaHttpUploader;
-import com.kinvey.java.model.FileMetaData;
-import com.kinvey.java.query.AbstractQuery.SortOrder;
 
 import dominio.Obra;
-import dominio.Sala;
 import dominio.Usuario;
 
 public class ComunidadActivity extends ActionBarActivity {

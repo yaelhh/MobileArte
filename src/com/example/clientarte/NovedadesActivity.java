@@ -1,11 +1,7 @@
 package com.example.clientarte;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 
-import dominio.Funcion;
-import dominio.Obra;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,23 +9,20 @@ import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Gallery;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import dominio.Obra;
 
 public class NovedadesActivity extends ActionBarActivity implements SwipeRefreshLayout.OnRefreshListener {
 	private ArrayList<Obra>listaObras= new ArrayList<Obra>();
@@ -78,7 +71,7 @@ public class NovedadesActivity extends ActionBarActivity implements SwipeRefresh
 		ArrayList<ListaEntradaObra> datos = new ArrayList<ListaEntradaObra>(); 
 		for(int x=0;x<listObras.size();x++){
 			Obra obraActual= listObras.get(x);
-			datos.add(new ListaEntradaObra(obraActual.getListaImagenes()[0],obraActual.getNombre()));
+			datos.add(new ListaEntradaObra(R.drawable.carmen_1,obraActual.getNombre()));
 		}
 		miLista.setAdapter(new Lista_adaptador(this, R.layout.entrada_obras, datos){
 			@Override
@@ -241,8 +234,8 @@ public class NovedadesActivity extends ActionBarActivity implements SwipeRefresh
 			return rootView;
 		}
 	}
-
-
+	
+	
 
 
 }

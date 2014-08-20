@@ -2,7 +2,6 @@ package com.example.clientarte;
 
 import java.util.ArrayList;
 
-import dominio.Obra;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,12 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+import dominio.Obra;
 
 /*  Fragment para seccion perfil */ 
 public class NovedadesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
@@ -68,7 +68,7 @@ public class NovedadesFragment extends Fragment implements SwipeRefreshLayout.On
 		ArrayList<ListaEntradaObra> datos = new ArrayList<ListaEntradaObra>(); 
 		for(int x=0;x<listObras.size();x++){
 			Obra obraActual= listObras.get(x);
-			datos.add(new ListaEntradaObra(obraActual.getListaImagenes()[0],obraActual.getNombre()));
+//			datos.add(new ListaEntradaObra(obraActual.getListaImagenes()[0],obraActual.getNombre()));
 		}
 		miLista.setAdapter(new Lista_adaptador(getActivity(), R.layout.entrada_obras, datos){
 			@Override

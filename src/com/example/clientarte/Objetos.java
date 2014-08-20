@@ -5,12 +5,11 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.widget.TextView;
-
-import com.example.clientarte.R.drawable;
-import com.kinvey.android.Client;
-
-import dominio.*;
+import dominio.Butaca;
+import dominio.Funcion;
+import dominio.Obra;
+import dominio.Sala;
+import dominio.Sector;
 
 public class Objetos {
 	
@@ -73,16 +72,16 @@ public class Objetos {
 		listaImagenes[0]=R.drawable.carmen_1;
 		listaImagenes[1]=R.drawable.carmen_2;
 		listaImagenes[2]=R.drawable.carmen_3;
-		obra1.setListaImagenes(listaImagenes);
+//		obra1.setListaImagenes(listaImagenes);
 		obra1.setDescripcion("Carmen es una opéra comique francesa en cuatro actos con música de Georges Bizet y libreto en francés de Ludovic Halévy y Henri Meilhac, basado en la novela Carmen de Prosper Mérimée, publicada por vez primera en 1845,2 la cual a su vez posiblemente estuviera influida por el poema narrativo Los gitanos (1824) de Aleksander Pushkin.3 Mérimée había leído el poema en ruso en 1840 y lo tradujo al francés en 1852");
 		
 		obra2= new Obra(2,"Les Luthiers. ‘Viejos hazmerreíres’");
 		obra2.setListaFunciones(listaFunciones);
-		int[] listaImagenes2= new int[3];
-		listaImagenes2[0]=R.drawable.les_1;
-		listaImagenes2[1]=R.drawable.les_2;
-		listaImagenes2[2]=R.drawable.les_3;
-		obra2.setListaImagenes(listaImagenes2);
+//		int[] listaImagenes2= new int[3];
+//		listaImagenes2[0]=R.drawable.les_1;
+//		listaImagenes2[1]=R.drawable.les_2;
+//		listaImagenes2[2]=R.drawable.les_3;
+//		obra2.setListaImagenes(listaImagenes2);
 		obra2.setDescripcion("“Viejos hazmerreíres” es una antología de grandes éxitos de Les Luthiers, pero con un total reordenamiento de las escenas.Los momentos más brillantes y reideros en un nuevo contexto.");
 		listaObra= new ArrayList<Obra>();
 		listaObra.add(obra1);

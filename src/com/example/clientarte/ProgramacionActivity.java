@@ -1,44 +1,35 @@
 package com.example.clientarte;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
 
-import com.kinvey.android.Client;
-import com.kinvey.java.Query;
-import com.kinvey.java.core.DownloaderProgressListener;
-import com.kinvey.java.core.MediaHttpDownloader;
-
-import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.CalendarView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.AdapterView.*;
+import android.widget.CalendarView;
+import android.widget.CalendarView.OnDateChangeListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Toast;
 import dominio.Funcion;
 import dominio.Obra;
+
+
 
 
 
@@ -141,7 +132,7 @@ public class ProgramacionActivity extends ActionBarActivity implements OnQueryTe
 		ArrayList<ListaEntradaObra> datos = new ArrayList<ListaEntradaObra>(); 
 		for(int x=0;x<listObras.size();x++){
 			Obra obraActual= listObras.get(x);
-			datos.add(new ListaEntradaObra(obraActual.getListaImagenes()[0],obraActual.getNombre()));
+//			datos.add(new ListaEntradaObra(obraActual.getListaImagenes().get(0),obraActual.getNombre()));
 		}
 		miLista.setAdapter(new Lista_adaptador(this, R.layout.entrada_obras, datos){
 			@Override
@@ -241,9 +232,9 @@ public void crearProgramacion(ArrayList<Obra> lObra){
 		imageObra= new ImageButton(this);
 		imageObra.setId(x);
 		imageObra.setContentDescription(miObra.getNombre());
-		Integer imagen= miObra.getListaImagenes()[0];
-		imageObra.setBackgroundResource(imagen);
-		imageObra.setPadding(10, 10, 10, 10);
+//		Integer imagen= miObra.getListaImagenes()[0];
+//		imageObra.setBackgroundResource(imagen);
+//		imageObra.setPadding(10, 10, 10, 10);
 		ingresoObra(imageObra,miObra); 
 		//Le agrego al layout el imageButton creado
 		layout.addView(imageObra, 470, 140);

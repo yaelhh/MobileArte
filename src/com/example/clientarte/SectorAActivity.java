@@ -2,14 +2,6 @@ package com.example.clientarte;
 
 import java.util.ArrayList;
 
-import backend.ButacaFuncionSectorBackend;
-
-import com.kinvey.android.AsyncAppData;
-import com.kinvey.android.Client;
-import com.kinvey.android.callback.KinveyListCallback;
-import com.kinvey.java.Query;
-
-import dominio.*;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +13,17 @@ import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import backend.ButacaFuncionSectorBackend;
+
+import com.kinvey.android.AsyncAppData;
+import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
+import com.kinvey.java.Query;
+
+import dominio.Butaca;
+import dominio.Funcion;
+import dominio.Sala;
+import dominio.Sector;
 
 public class SectorAActivity extends Activity {
 	ArrayList<Butaca> listButacas = new ArrayList<Butaca>();
@@ -170,7 +173,7 @@ public class SectorAActivity extends Activity {
 		searchedEvents.get(query1.and(query2), new KinveyListCallback<ButacaFuncionSectorBackend>(){			
 			@Override
 			public void onSuccess(ButacaFuncionSectorBackend[] result) {
-
+				Log.e("Entre al onSuccess", result.length+"es la cantidad del resultado q trajo");
 //				for(int x=0; x<result.length;x++){
 					if(result[0].getEstadoButaca().equalsIgnoreCase("0")){
 						Log.e("Encontre ButacaFuncionSectorBackend ",result[0].getIdButaca()+"--"+result[0].getEstadoButaca());

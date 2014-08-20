@@ -17,10 +17,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.NetworkOnMainThreadException;
-import android.util.Log;
-import dominio.Funcion;
-import dominio.Obra;
 import dominio.Usuario;
 
 public class DatabaseHelper extends SQLiteOpenHelper{

@@ -1,16 +1,10 @@
 package com.example.clientarte;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -20,9 +14,6 @@ import android.widget.ProgressBar;
 
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyPingCallback;
-import com.kinvey.java.core.DownloaderProgressListener;
-import com.kinvey.java.core.MediaHttpDownloader;
-import com.kinvey.java.model.FileMetaData;
 
 public class SplashScreenActivity extends Activity {
 

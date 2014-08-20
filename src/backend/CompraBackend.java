@@ -2,7 +2,6 @@ package backend;
 
 import com.google.api.client.util.Key;
 import com.kinvey.java.LinkedResources.LinkedGenericJson;
-import dominio.Obra;
 
 
 public class CompraBackend extends LinkedGenericJson {
@@ -18,7 +17,7 @@ public class CompraBackend extends LinkedGenericJson {
 	@Key
 	private boolean pago;
 	@Key
-	private int idUsuario;
+	private String idUsuario;
 	@Key
 	private int precioTotal;
 	@Key
@@ -66,11 +65,11 @@ public class CompraBackend extends LinkedGenericJson {
 		this.pago = pago;
 	}
 
-	public int getIdUsuario() {
+	public String getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(int idUsuario) {
+	public void setIdUsuario(String idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 

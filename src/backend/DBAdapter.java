@@ -1,7 +1,5 @@
 package backend;
 
-import java.util.ArrayList;
-
 import android.app.Service;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -13,7 +11,6 @@ import android.os.IBinder;
 import android.provider.BaseColumns;
 import backend.Obras.UsuarioColumns;
 import backend.Obras.UsuarioTable;
-import dominio.Obra;
 
 public class DBAdapter extends Service {
 

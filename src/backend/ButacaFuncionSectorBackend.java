@@ -2,10 +2,7 @@ package backend;
 
 
 import com.google.api.client.util.Key;
-import com.kinvey.android.callback.KinveyListCallback;
-import com.kinvey.java.Query;
 import com.kinvey.java.LinkedResources.LinkedGenericJson;
-import com.kinvey.java.core.KinveyClientCallback;
 
 
 public class ButacaFuncionSectorBackend extends LinkedGenericJson {
