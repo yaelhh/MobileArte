@@ -2,16 +2,15 @@ package com.example.clientarte;
 
 import java.io.IOException;
 
-import com.kinvey.android.Client;
-import com.kinvey.android.callback.KinveyPingCallback;
-import com.kinvey.android.callback.KinveyUserCallback;
-import com.kinvey.java.User;
-
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import backend.DatabaseHelper;
-import dominio.Obra;
+
+import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyPingCallback;
+import com.kinvey.android.callback.KinveyUserCallback;
+import com.kinvey.java.User;
 
 
 

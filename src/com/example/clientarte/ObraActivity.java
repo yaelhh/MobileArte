@@ -1,12 +1,26 @@
 package com.example.clientarte;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import android.app.ActionBar.LayoutParams;
-import android.app.ProgressDialog;
+
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Gallery;
+import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.TextView;
+import backend.DatabaseHelper;
+import backend.ObraBackend;
 
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
@@ -14,37 +28,9 @@ import com.kinvey.android.callback.KinveyPingCallback;
 import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.Query;
 import com.kinvey.java.User;
-import com.kinvey.java.core.DownloaderProgressListener;
 import com.kinvey.java.core.KinveyClientCallback;
-import com.kinvey.java.core.MediaHttpDownloader;
-import com.kinvey.java.core.MediaHttpUploader;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Gallery;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import backend.DatabaseHelper;
 import dominio.Funcion;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import backend.DatabaseHelper;
-import backend.ObraBackend;
-import backend.ObrasImagen;
-import backend.SalaBackend;
 import dominio.Obra;
 
 

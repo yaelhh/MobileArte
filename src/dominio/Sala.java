@@ -3,7 +3,6 @@ package dominio;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.R.integer;
 import android.os.Parcel;
 import android.os.Parcelable;
 

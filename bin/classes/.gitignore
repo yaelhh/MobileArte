@@ -1,7 +1,4 @@
 /android/
 /com/
-/dominio/
-/logica/
-/loginBackend/
+/.gitignore
 /backend/
-/layout/

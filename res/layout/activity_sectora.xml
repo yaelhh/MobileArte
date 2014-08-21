@@ -70,11 +70,9 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical" >
-
+		<RelativeLayout 
+		     android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
             <GridView
                 android:id="@+id/grdSectorA"
                 android:layout_width="574dp"
@@ -85,7 +83,19 @@
                 android:scrollbarStyle="insideInset" >
 
             </GridView>
-        </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_bar_sector"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="108dp"
+                android:layout_marginTop="101dp" />
+
+            </RelativeLayout>
+        
     </HorizontalScrollView>
 
     <RelativeLayout
@@ -113,6 +123,8 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:text="@string/escenario" />
+        
+        
     </RelativeLayout>
 
 </LinearLayout>

@@ -12,9 +12,7 @@
  * 
  */
 package loginBackend;
-import com.example.clientarte.LoginActivity;
-import com.kinvey.android.Client;
-import com.kinvey.java.User;
+import java.io.IOException;
 
 import android.accounts.AbstractAccountAuthenticator;
 import android.accounts.Account;
@@ -25,7 +23,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import java.io.IOException;
+import com.example.clientarte.LoginActivity;
+import com.kinvey.android.Client;
+import com.kinvey.java.User;
 
 
 /**

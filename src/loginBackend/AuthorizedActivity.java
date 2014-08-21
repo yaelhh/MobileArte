@@ -26,12 +26,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import com.google.api.client.*;
 import android.accounts.AccountAuthenticatorActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
 
 /**
  * Provides GET (and eventually POST) methods that are authorized using an OAuth2 token requested on 

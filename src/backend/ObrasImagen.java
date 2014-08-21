@@ -6,36 +6,42 @@ import com.kinvey.java.LinkedResources.LinkedGenericJson;
 public class ObrasImagen extends LinkedGenericJson{
 	
 	@Key("_id") // nombre del campo definido en el backend
-	private int idObra;
+	private String idObraImagen;
+	@Key("idObra")
+	private String idObra;
 	@Key("imagen")
-	private String imagen;
+	private String idImagen;
+	
 	
 	public ObrasImagen() {
 		//"attachment" is the JSON element used to maintain a Linked File.
-		putFile("attachment");
+        putFile("attachment");
 	}
 	
-
-	public ObrasImagen(int idObra, String imagen) {
-		super();
-		this.idObra = idObra;
-		this.imagen = imagen;
+	public String getIdObraImagen() {
+		return idObraImagen;
 	}
 
-	public int getIdObra() {
+
+	public void setIdObraImagen(String idObraImagen) {
+		this.idObraImagen = idObraImagen;
+	}
+
+	
+	public String getIdObra() {	
 		return idObra;
 	}
 
-	public void setIdObra(int idObra) {
+	public void setIdObra(String idObra) {
 		this.idObra = idObra;
 	}
 
-	public String getImagen() {
-		return imagen;
+	public String getidImagen() {
+		return idImagen;
 	}
 
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
+	public void setidImagen(String imagen) {
+		this.idImagen = imagen;
 	}
 	
 	

@@ -13,9 +13,9 @@
  */
 package loginBackend;
 
-import com.kinvey.android.Client;
-
 import android.app.Application;
+
+import com.kinvey.android.Client;
 
 /**
  * Global application class.  Instantiates the KCS Client and sets global constants.

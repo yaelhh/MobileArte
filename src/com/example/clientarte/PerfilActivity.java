@@ -4,12 +4,6 @@ package com.example.clientarte;
 /*import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;*/
 
-
-import backend.UsuarioBackend;
-
-import com.kinvey.android.Client;
-import com.kinvey.android.callback.KinveyPingCallback;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -22,6 +16,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyPingCallback;
 
 
 

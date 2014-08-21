@@ -3,10 +3,9 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="libs/openyoutubeactivity-1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Agustina/Downloads/YouTubeAndroidPlayerApi-1.0.0.zip"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

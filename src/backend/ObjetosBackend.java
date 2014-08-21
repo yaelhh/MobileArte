@@ -1,31 +1,21 @@
 package backend;
 
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.app.Activity;
 import android.app.Application;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import backend.*;
 
-import com.example.clientarte.R.drawable;
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
-import com.kinvey.android.callback.KinveyPingCallback;
-import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.Query;
-import com.kinvey.java.User;
 
-import dominio.*;
+import dominio.Butaca;
+import dominio.Funcion;
+import dominio.Obra;
+import dominio.Sala;
+import dominio.Sector;
+import dominio.Usuario;
 
 public class ObjetosBackend extends Application{
 

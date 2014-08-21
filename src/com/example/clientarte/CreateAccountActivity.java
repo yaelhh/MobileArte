@@ -4,36 +4,15 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
-import backend.DatabaseHelper;
-import backend.UpdateEntity;
-import backend.UsuarioBackend;
 
-import com.kinvey.android.Client;
-import com.kinvey.android.callback.KinveyListCallback;
-import com.kinvey.android.callback.KinveyPingCallback;
-import com.kinvey.android.callback.KinveyUserCallback;
-import com.kinvey.java.File;
-import com.kinvey.java.Query;
-import com.kinvey.java.User;
-import com.kinvey.java.core.KinveyClientCallback;
-import com.kinvey.java.core.MediaHttpUploader;
-import com.kinvey.java.core.MetaUploadProgressListener;
-import com.kinvey.java.model.FileMetaData;
-import com.kinvey.java.model.KinveyMetaData;
-
-import dominio.Usuario;
-import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.YuvImage;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.CalendarContract.Calendars;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -43,13 +22,27 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
-import android.app.DatePickerDialog;
+import backend.DatabaseHelper;
+import backend.UpdateEntity;
+import backend.UsuarioBackend;
+
+import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
+import com.kinvey.android.callback.KinveyPingCallback;
+import com.kinvey.android.callback.KinveyUserCallback;
+import com.kinvey.java.Query;
+import com.kinvey.java.User;
+import com.kinvey.java.core.KinveyClientCallback;
+import com.kinvey.java.core.MediaHttpUploader;
+import com.kinvey.java.core.MetaUploadProgressListener;
+import com.kinvey.java.model.FileMetaData;
+import com.kinvey.java.model.KinveyMetaData;
+
+import dominio.Usuario;
 
 public class CreateAccountActivity extends ActionBarActivity {
 

@@ -9,20 +9,10 @@ package com.example.clientarte;
 //import android.content.Context;
 import java.util.ArrayList;
 
-import backend.ObraBackend;
-
-import com.kinvey.android.AsyncAppData;
-import com.kinvey.android.Client;
-import com.kinvey.android.callback.KinveyListCallback;
-import com.kinvey.android.callback.KinveyPingCallback;
-import com.kinvey.java.Query;
-
-import dominio.Obra;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 //import android.support.v4.app.ActionBarDrawerToggle;
 //import android.support.v4.widget.DrawerLayout;
 //import android.text.Layout;
@@ -30,12 +20,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 //import android.widget.ListView;
 import android.widget.Toast;
+
+import com.kinvey.android.Client;
+
+import dominio.Obra;
 
 
 //import com.example.clientarte.MainActivity;
