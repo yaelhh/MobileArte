@@ -47,7 +47,6 @@ public class ProgramacionActivity extends ActionBarActivity implements OnQueryTe
 	private  Obra obraSeleccionada= new Obra();
 
 	public static final String TAG = "ArteBackend";
-	private HashMap<Obra, Funcion> obraSegunFuncion;
 	ArrayList<Obra> obrasDia= new ArrayList<Obra>();
 	private SwipeRefreshLayout swipeLayouts;
 	private  ListView miLista;
@@ -132,7 +131,7 @@ public class ProgramacionActivity extends ActionBarActivity implements OnQueryTe
 		ArrayList<ListaEntradaObra> datos = new ArrayList<ListaEntradaObra>(); 
 		for(int x=0;x<listObras.size();x++){
 			Obra obraActual= listObras.get(x);
-//			datos.add(new ListaEntradaObra(obraActual.getListaImagenes().get(0),obraActual.getNombre()));
+			datos.add(new ListaEntradaObra(obraActual.getListaImagenes()[0],obraActual.getNombre()));
 		}
 		miLista.setAdapter(new Lista_adaptador(this, R.layout.entrada_obras, datos){
 			@Override

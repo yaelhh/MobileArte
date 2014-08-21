@@ -197,7 +197,7 @@ public class ObjetosBackend extends Application{
 				for (int i = 0; i < resultadoconsulta.length; i++) {
 					Obra obra= new Obra(resultadoconsulta[i].getIdObra(),resultadoconsulta[i].getNombreObras(),resultadoconsulta[i].getDescripcipnObras());
 //					cargarImagen(obra);
-//					imagen(obra);
+					imagen(obra);
 					listaObra.add(obra);
 				}
 				Log.e("Obras","Listas de obras cargadas");
@@ -212,14 +212,17 @@ public class ObjetosBackend extends Application{
 	}
 	
 	public void imagen(Obra obra){
-//		switch (obra.getIdObra()){
-//		case 1:
+	switch (obra.getIdObra()){
+		case 1:
 			obra.getListaImagenes()[0]=R.drawable.carmen_1;
-//			break;
-//		case 2:
+			obra.getListaImagenes()[0]=R.drawable.carmen_2;
+			obra.getListaImagenes()[0]=R.drawable.carmen_3;
+			break;
+		case 6:
 			obra.getListaImagenes()[1]=R.drawable.les_2;
-//			break;	
-//		}	
+			obra.getListaImagenes()[1]=R.drawable.les_3;
+			break;	
+		}	
 	}
 	/** 
 	 Cargo las imagenes a la obra
