@@ -1,11 +1,8 @@
 package backend;
 
-<<<<<<< HEAD
-=======
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.Editable;
->>>>>>> develop
 import com.google.api.client.util.Key;
 import com.kinvey.java.LinkedResources.LinkedGenericJson;
 

@@ -4,9 +4,6 @@ package com.example.clientarte;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
-<<<<<<< HEAD
-=======
 import backend.ComunidadBackend;
 import backend.DatabaseHelper;
 import backend.NotificacionesBackend;
@@ -20,7 +17,7 @@ import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.Query;
 import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
->>>>>>> develop
+
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -174,10 +171,6 @@ public class MainActivity extends Activity implements OnQueryTextListener {
 		MostrarFragment(1);
 		//validarUsuarioNotificaciones(obj);
 		//accederServicioNotificaciones();
-<<<<<<< HEAD
-//		validarCumpleanosDesdeBase(obj);
-=======
->>>>>>> develop
 		
 		
 		try{

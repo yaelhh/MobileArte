@@ -3,8 +3,6 @@ package com.example.clientarte;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-<<<<<<< HEAD
-=======
 import backend.ComunidadBackend;
 import backend.DatabaseHelper;
 import backend.NotificacionesBackend;
@@ -23,9 +21,9 @@ import com.kinvey.java.core.KinveyClientCallback;
 import dominio.Notificaciones;
 import dominio.Obra;
 import dominio.Usuario;
->>>>>>> develop
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
