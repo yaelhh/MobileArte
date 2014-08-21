@@ -48,6 +48,11 @@
     <string name="button_escribirComentario">Escribir comentario</string>
     <string name="imagen_content_description">Imagen a mostrar</string>
     
+    
+    
+    <string name="youtubevideoid">Youtube video id</string>
+    <string name="defaultYoutubeVideoId">_JkkkdH6zTQ</string>
+    <string name="viewVideoButton">Buscar</string>
 
     <!-- Valores de la opcion registro de usuarios -->
     <string name="enter_email">Email</string>

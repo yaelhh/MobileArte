@@ -38,6 +38,12 @@
             android:text="@string/HorarioSodre" />
         </LinearLayout>
 		
+    <com.google.android.maps.MapView
+    android:id="@+id/mapa"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:apiKey="0ss-5q6s3FKYkkp3atMUH..."
+    android:clickable="true" />
 
 		
 		<!--  <fragment
