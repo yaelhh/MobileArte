@@ -1,6 +1,9 @@
 package com.example.clientarte;
 
 
+import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapView;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -11,18 +14,31 @@ import android.widget.Toast;
 import android.widget.SearchView.OnQueryTextListener;
 
 
-
-public class NosotrosActivity extends  Activity implements OnQueryTextListener{
+//public class NosotrosActivity extends  Activity implements OnQueryTextListener{
+public class NosotrosActivity extends  MapActivity implements OnQueryTextListener{
 
 	private SearchView mSearchView;
+	private MapView mapa = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nosotros);
-
+		
+		//Obtenemos una referencia al control MapView
+		 mapa = (MapView)findViewById(R.id.mapa);
+		 
+		//Mostramos los controles de zoom sobre el mapa
+	        mapa.setBuiltInZoomControls(true);
 		
 	}
+	
+	@Override
+    protected boolean isRouteDisplayed() {
+    	return false;
+    }
+	
+	
 	@Override
 	public boolean onQueryTextChange(String newText) {
 

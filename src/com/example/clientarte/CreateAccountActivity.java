@@ -513,7 +513,7 @@ public class CreateAccountActivity extends ActionBarActivity {
 				new StringBuilder()                    
 				// Month is 0 based so add 1                    
 				.append(mDay).append("/")                    
-				.append(mMonth).append("/")
+				.append(mMonth + 1).append("/")
 				.append(mYear).append(" "));    
 	}
 

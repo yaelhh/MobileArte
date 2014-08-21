@@ -308,6 +308,15 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 		return u;
 	}
 	
+	public void actualizarPassUsuarioLogueado(String nombreUsuario, String pass){
+		SQLiteDatabase db = getWritableDatabase();
+		String query = "UPDATE db_usuarios SET password=" + "'" + pass + "'" + " WHERE nombreUsuario " + "=" + "'"+ nombreUsuario+ "'";
+		if(db!=null){
+			db.execSQL(query);
+		}
+		db.close();  
+	}
+	
 	//ContentValues valores = new ContentValues();
 //    valores.put(COLUMNA_ESTADOUSUARIO, 0);
 //    db.update("db_usuarios", valores, "nombreUsuario=" + nombreUsuario, null);
