@@ -22,13 +22,14 @@ import com.kinvey.android.callback.KinveyPingCallback;
 
 /*  Fragment para seccion perfil */ 
 public class PerfilFragment extends Fragment {
-	private Button btnCuenta;
+	//private Button btnCuenta;
 	private Button btnProxObras;
 	private Button btnObrasVistas;
 	private Button btnMascaras;
 	private Button btnCanjeMasc;
 	private Button btnRegistrar;
 	private Button btnLoguear;
+	private Button btnEditarUsuario;
 
 	
 	private String mensaje;
@@ -55,12 +56,18 @@ public class PerfilFragment extends Fragment {
       				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
       			}
       		});
-      		btnCuenta= (Button)rootView.findViewById(R.id.btnCuenta);
+      		//btnCuenta= (Button)rootView.findViewById(R.id.btnCuenta);
     		btnRegistrar= (Button)rootView.findViewById(R.id.registrarUsuarioPerfil);
     		btnLoguear= (Button)rootView.findViewById(R.id.LoguearDesloguear);
     		btnProxObras = (Button)rootView.findViewById(R.id.btnPrxObras);
+<<<<<<< HEAD
     		btnObrasVistas= (Button)rootView.findViewById(R.id.BtnObrasVistas);
     		mKinveyClient = obj.captarUsuarioLogueado();
+=======
+    		btnEditarUsuario= (Button)rootView.findViewById(R.id.btnCuenta);
+    		
+    		//mKinveyClient = obj.captarUsuarioLogueado();
+>>>>>>> develop
     		addListenerOnButton(obj);
 
         return rootView;
@@ -128,13 +135,30 @@ public class PerfilFragment extends Fragment {
     		
     
 
+<<<<<<< HEAD
 	public void desloguearUsuario (ObjetosBackend obj) {
 		//super.onDestroy();
 		mKinveyClient=obj.captarUsuarioLogueado();
+=======
+<<<<<<< 8a56b019027e0b215327bd641bb423760733d5ce
+    public void desloguearUsuario (ObjetosBackend obj) {
+		//super.onDestroy();
+		try{
+		mKinveyClient = obj.captarUsuarioLogueado();
+=======
+	public void desloguearUsuario (ObjetosBackend obj) {
+		//super.onDestroy();
+		mKinveyClient=obj.captarUsuarioLogueado();
+>>>>>>> 16c003e6586b220188a279caa9534e0a96fef792
+>>>>>>> develop
 		String usuarioLog = mKinveyClient.user().getUsername().toString();
 		modificarEstadoDeslogueado(usuarioLog);
 		onCreateDialog();
 		mKinveyClient.user().logout().execute();
+		}catch (Exception io){
+			Toast tIO = Toast.makeText(getActivity(),"Ha ocurrido un error al desloguear usuario. ", Toast.LENGTH_SHORT);
+			tIO.show();
+		}
 	}
 	
 	public void modificarEstadoDeslogueado (String nombreUsuario){
@@ -186,7 +210,14 @@ public class PerfilFragment extends Fragment {
 			public void onClick(DialogInterface dialogo1, int id) { 
 //				Intent intent = new Intent(PerfilActivity.this, LoginActivity.class); 
 //				startActivity(intent); 
+<<<<<<< HEAD
 				
+=======
+<<<<<<< 8a56b019027e0b215327bd641bb423760733d5ce
+=======
+				
+>>>>>>> 16c003e6586b220188a279caa9534e0a96fef792
+>>>>>>> develop
 				desloguearUsuario (obj);
 
 			} 
@@ -259,17 +290,38 @@ public class PerfilFragment extends Fragment {
 
 		});
 		
-		btnCuenta.setOnClickListener(new OnClickListener() {	 
+//		btnCuenta.setOnClickListener(new OnClickListener() {	 
+//			@Override
+//			public void onClick(View v) {
+//				mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
+//				if (!mKinveyClient.user().isUserLoggedIn()) {
+//					mensajeConfirmacion();
+//				}else{
+//					
+//					if (mKinveyClient.user().isUserLoggedIn()) {
+//						mensajeConfirmacionDesloguear();
+//						//desloguearUsuario();
+//					}
+//				}
+//			}
+//		});
+		
+		btnEditarUsuario.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
-				if (!mKinveyClient.user().isUserLoggedIn()) {
+				if (!obj.captarUsuarioLogueado().user().isUserLoggedIn()){	
 					mensajeConfirmacion();
 				}else{
+<<<<<<< 8a56b019027e0b215327bd641bb423760733d5ce
+					if (obj.captarUsuarioLogueado().user().isUserLoggedIn()) {
+						Intent intent = new Intent(getActivity(), EditarUsuarioActivity.class);
+						startActivity(intent);
+=======
 					
 					if (mKinveyClient.user().isUserLoggedIn()) {
 						mensajeConfirmacionDesloguear(obj);
 						//desloguearUsuario();
+>>>>>>> 16c003e6586b220188a279caa9534e0a96fef792
 					}
 				}
 			}

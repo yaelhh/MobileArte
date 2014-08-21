@@ -5,6 +5,22 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+<<<<<<< HEAD
+=======
+import backend.ComunidadBackend;
+import backend.DatabaseHelper;
+import backend.NotificacionesBackend;
+import backend.UsuarioBackend;
+
+import com.kinvey.android.AsyncAppData;
+import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
+import com.kinvey.android.callback.KinveyPingCallback;
+import com.kinvey.android.callback.KinveyUserCallback;
+import com.kinvey.java.Query;
+import com.kinvey.java.User;
+import com.kinvey.java.core.KinveyClientCallback;
+>>>>>>> develop
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -158,8 +174,17 @@ public class MainActivity extends Activity implements OnQueryTextListener {
 		MostrarFragment(1);
 		//validarUsuarioNotificaciones(obj);
 		//accederServicioNotificaciones();
+<<<<<<< HEAD
 //		validarCumpleanosDesdeBase(obj);
+=======
+>>>>>>> develop
 		
+		
+		try{
+			validarCumpleanosDesdeBase(obj);
+		}catch(Exception ioException){
+			
+		}
 		
 	}	
 
@@ -341,7 +366,7 @@ public class MainActivity extends Activity implements OnQueryTextListener {
 	//                .build();
 	//    }
 
-	private void accederServicioNotificaciones(Usuario u){
+	private void accederServicioNotificaciones(Usuario u, ObjetosBackend o){
 		String cantMascaras = 100 + "";
 		String Tipo = "Feliz cumple";
 		//String Titulo = "Feliz cumple" + u.getNombre() + u.getApellido();
@@ -358,6 +383,8 @@ public class MainActivity extends Activity implements OnQueryTextListener {
 		// Lanzo la notificacion creada en el paso anterior
 		nm.notify(1, notif);
 		persistirNotificacion(Tipo, Titulo, Texto);
+		//modificarUsuarioMascaras(cantMascaras, o);
+		obtenerDatosUsuarioEditar(o, mKinvey);
 	}
 
 	public void persistirNotificacion(String tipo, String titulo, String texto){
@@ -432,7 +459,7 @@ public class MainActivity extends Activity implements OnQueryTextListener {
 			try{
 				if (u != null){
 					if (validarFecha(u)){
-						accederServicioNotificaciones(u);
+						accederServicioNotificaciones(u, ob);
 					}
 				}
 			}catch (Exception i){
@@ -446,16 +473,109 @@ public class MainActivity extends Activity implements OnQueryTextListener {
 
 	public boolean validarFecha(Usuario u){
 		Calendar c = Calendar.getInstance();
-		SimpleDateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat df1 = new SimpleDateFormat("dd/MM");
 		String fechaActual = df1.format(c.getTime());
+		
 		boolean retorno = false;
-		if (u.getFechaNacimiento().equalsIgnoreCase(fechaActual)){
+		String fechaCortada = u.getFechaNacimiento().substring(0, 5);
+		//if (u.getFechaNacimiento().equalsIgnoreCase(fechaActual)){
+		if (fechaCortada.equalsIgnoreCase(fechaActual)){
 			retorno = true;
 		}else{
 			retorno = false;
 		}
 
 		return retorno;
+	}
+	
+	public void obtenerDatosUsuarioEditar(final ObjetosBackend obj, Client kinvey){
+		final UsuarioBackend usuarioLogueado = new UsuarioBackend();
+		String idU = kinvey.user().getUsername().toString();
+		Query query = kinvey.query ();
+		query.equals("username", idU);
+		AsyncAppData<UsuarioBackend> searchedEvents = kinvey.appData("Usuario", UsuarioBackend.class);
+		searchedEvents.get(query, new KinveyListCallback<UsuarioBackend>() {
+			@Override
+			public void onSuccess(UsuarioBackend[] resultadoconsulta) { 
+				for (int i = 0; i < resultadoconsulta.length; i++) {
+					Log.e("Obtener datos usuario", resultadoconsulta[i].getNombreUsuario().toString());
+					usuarioLogueado.setIdUsuario(resultadoconsulta[i].getIdUsuario().toString());
+					usuarioLogueado.setNombreUsuario(resultadoconsulta[i].getNombreUsuario().toString());
+					usuarioLogueado.setNombre(resultadoconsulta[i].getNombre().toString());
+					usuarioLogueado.setApellido(resultadoconsulta[i].getApellido().toString());
+					usuarioLogueado.setPassword(resultadoconsulta[i].getPassword().toString());
+					usuarioLogueado.setMascaras(resultadoconsulta[i].getMascaras());
+					usuarioLogueado.setFechaNacimiento(resultadoconsulta[i].getFechaNacimiento().toString());
+					obj.guardarUsuarioBackendLogueado(usuarioLogueado);
+					modificarUsuarioMascaras(usuarioLogueado);
+					//dibujarCampos(usuarioLogueado);
+					
+				}
+			}
+
+
+
+			@Override
+			public void onFailure(Throwable arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+		//return usuarioLogueado;
+		//return usuarioLogueado;
+	}
+	
+	//public void modificarUsuarioMascaras(final String cantMascaras, ObjetosBackend o){
+	public void modificarUsuarioMascaras(final UsuarioBackend entity){
+		//final UsuarioBackend entity = o.obtenerUsuarioBackendLogueado();
+		
+		mKinvey.appData("Usuario",UsuarioBackend.class).getEntity(entity.getIdUsuario(), new KinveyClientCallback<UsuarioBackend>() {
+
+			@Override
+			public void onSuccess(UsuarioBackend arg0) {
+				int cantActual = Integer.parseInt(entity.getMascaras());
+				int total = cantActual + 100;
+				//arg0.put("estadoButaca", "1");
+				arg0.put("apellido", entity.getApellido());
+				arg0.put("estaLogueado", entity.getEstaLogueado());
+				//arg0.put("fechaNacimiento", entity.getFechaNacimiento());
+				//arg0.put("mascaras", entity.getMascaras() + cantMascaras);
+				arg0.put("mascaras", total + "");
+				arg0.put("nombre", entity.getNombre());
+				arg0.put("password", entity.getPassword());
+				arg0.put("username", entity.getNombreUsuario());
+				//Log.e("Guardar ButacasCompra","Butacas guardadas en compraButaca "+ arg0.getIdButaca()+"--" +arg0.getIdFuncion()+"--" +arg0.getEstadoButaca() );
+				Log.e("Editar usuarios", "Prueba de edicion" + arg0.getNombreUsuario()+"--" +arg0.getNombre()+"--" +arg0.getApellido());
+				mKinvey.appData("Usuario", UsuarioBackend.class).save(arg0, new KinveyClientCallback<UsuarioBackend>() {
+					@Override
+					public void onSuccess(UsuarioBackend result) {
+						Log.e("seteo ","Seteo los datos del usuario");
+						//dh.actualizarPassUsuarioLogueado(result.getNombreUsuario().toString(), result.getPassword().toString());
+						//kinveyClient.user().logout();
+						//limpiarCampos();
+						//llamarLogin();
+						
+						
+//						if(cant==compra.getButacasSeleccionadas().size()-1){
+//							guardarCompra(compra,mKinveyClient);
+//						}
+					}
+
+					@Override
+					public void onFailure(Throwable error) {
+						Log.e("Error ","Error"+ error);	
+					}
+				});
+			}
+
+			@Override
+			public void onFailure(Throwable arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+
+		});
 	}
 	
 	

@@ -51,6 +51,8 @@ public class ObraActivity extends ActionBarActivity {
 	private Client kinveyClient;
 	private static final int REQUEST_TEXT = 3;
 	private ImageButton btnAgregarComentarioObra;
+	private ImageButton btnVerVideo;
+	private ImageButton btnCompartirFacebook;
 	
 	//	private int requestCode = 1;
 	//	private ListView lvObras;
@@ -81,6 +83,8 @@ public class ObraActivity extends ActionBarActivity {
 		kinveyClient = obj.captarUsuarioLogueado();
 		btnComprar= (Button)findViewById(R.id.bttnComprar);
 		btnAgregarComentarioObra = (ImageButton)findViewById(R.id.imageButton2);
+		btnVerVideo = (ImageButton)findViewById(R.id.imageButton3);
+		btnCompartirFacebook = (ImageButton)findViewById(R.id.imageButton1);
 		//obtenerImagenObra(kinveyClient);
 		crearActivity();
 		addListenerOnButton();
@@ -137,6 +141,43 @@ public class ObraActivity extends ActionBarActivity {
 			}
 
 		});
+		
+		btnVerVideo.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ObraActivity.this, VideoActivity.class);
+				intent.putExtra("obra",obra); 
+				startActivity(intent);
+			}
+
+		});
+	
+	
+	btnCompartirFacebook.setOnClickListener(new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			 
+			String titulo = obra.getNombre().toString();
+			String urlYT = "https://www.youtube.com/results?search_query=" +titulo.trim();
+			String cuerpoMensaje = "Me ha interesado: " + " "+  titulo +  " " + "ingresa a Art-e y opina!!" + " " + urlYT;
+			Compartir(titulo, cuerpoMensaje);
+		}
+
+	});
+}
+	
+	
+	public void Compartir(String titulo,String cuerpoMensaje ){
+		   Intent intentCompartir = new Intent(Intent.ACTION_SEND);
+		   intentCompartir.setType("text/plain");
+		   intentCompartir.putExtra(Intent.EXTRA_SUBJECT, titulo);
+		   intentCompartir.putExtra(Intent.EXTRA_TEXT, cuerpoMensaje);
+		   intentCompartir.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+		   //startActivity(Intent.createChooser(intentCompartir ,  titulo));
+		   this.startActivity(Intent.createChooser(intentCompartir,  titulo ));
 	}
 
 

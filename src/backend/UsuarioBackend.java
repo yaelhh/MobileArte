@@ -1,5 +1,11 @@
 package backend;
 
+<<<<<<< HEAD
+=======
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.text.Editable;
+>>>>>>> develop
 import com.google.api.client.util.Key;
 import com.kinvey.java.LinkedResources.LinkedGenericJson;
 
@@ -9,24 +15,41 @@ public class UsuarioBackend extends LinkedGenericJson {
 	@Key("_id") // nombre del campo definido en el backend
 	private String idUsuario;
 	@Key
-	private String nombre;
-	@Key
 	private String apellido;
-	@Key("username")
-	private String username;
 	@Key
-	private String password;
-	@Key("fechaNacimiento")
+	private String estaLogueado;
+	@Key
 	private String fechaNacimiento;
 	@Key
 	private String mascaras;
 	@Key
+	private String nombre;
+	@Key
+	private String password;
+	@Key("username")
+	private String username;
+	
+//	@Key("_id") // nombre del campo definido en el backend
+//	private String idUsuario;
+//	@Key("apellido")
+//	private String apellido;
+//	@Key("estaLogueado")
+//	private String estaLogueado;
+//	@Key("fechaNacimiento")
+//	private String fechaNacimiento;
+//	@Key("mascaras")
+//	private String mascaras;
+//	@Key("nombre")
+//	private String nombre;
+//	@Key("password")
+//	private String password;
+//	@Key("username")
+//	private String username;
+	
 	private String idMiObrasVistas;	
-	@Key
+	
 	private String idMisProximasObras;
-	@Key
-	private String estaLogueado;
-	@Key
+	
 	private String imagenAdjunta;
 	
 	public UsuarioBackend() {
@@ -34,6 +57,22 @@ public class UsuarioBackend extends LinkedGenericJson {
         //putFile("attachment");
 	}
 	
+	
+	
+	public UsuarioBackend(String idUsuario, String apellido, String estaLogueado, String fechaNacimiento, String mascaras, String nombre, String password, String username) {
+		super();
+		this.idUsuario = idUsuario;
+		this.apellido = apellido;
+		this.estaLogueado = estaLogueado;
+		this.fechaNacimiento = fechaNacimiento;
+		this.mascaras = mascaras;
+		this.nombre = nombre;
+		this.password = password;
+		this.username = username;
+	}
+
+
+
 //	public UsuarioBackend(String userid){
 //		meta = new KinveyMetaData();
 //        acl = new KinveyMetaData.AccessControlList();

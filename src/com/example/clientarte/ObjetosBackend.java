@@ -186,6 +186,7 @@ public class ObjetosBackend extends Application{
 
 
 	//Funcion para obtener obras
+<<<<<<< HEAD
 	public void crearListObra(){
 		Query query = mKinveyClient.query();
 		
@@ -285,6 +286,33 @@ public class ObjetosBackend extends Application{
 	}
 		
 
+=======
+//	public void crearListObra(){
+//		Query query = mKinveyClient.query();
+//		/**
+//		 Cargo las obras de la tabla
+//		 */
+//		query.addSort("_id", SortOrder.DESC);
+//
+//		mKinveyClient.appData("Obras", ObraBackend.class).get(query, new KinveyListCallback<ObraBackend>() {
+//			@Override
+//			public void onSuccess(ObraBackend[] resultadoconsulta) {
+//				for (int i = 0; i < resultadoconsulta.length; i++) {
+//					Obra obra= new Obra(resultadoconsulta[i].getIdObra(),resultadoconsulta[i].getNombreObras(),resultadoconsulta[i].getDescripcipnObras());
+//					obra.getListaImagenes()[0]=R.drawable.carmen_1;
+//					listaObra.add(obra);
+//				}
+//				Log.e("Obras","Listas de obras cargadas");
+//			}
+//			@Override
+//			public void onFailure(Throwable arg0) {
+//				Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece tener conexión a internet", Toast.LENGTH_LONG).show();
+//
+//
+//			}
+//		});
+//	}
+>>>>>>> develop
 	/** 
 		 Cargo las funciones de la tabla
 	 */
@@ -878,9 +906,50 @@ public class ObjetosBackend extends Application{
 		});
 		return usuBackend;
 	}
+<<<<<<< HEAD
 
 
 
+=======
+	
+	public void guardarUsuarioBackendLogueado(UsuarioBackend u){
+		this.usuarioLogueado = u;
+	}
+	
+	public UsuarioBackend obtenerUsuarioBackendLogueado(){
+		//this.usuarioLogueado = u;
+		return this.usuarioLogueado;
+	}
+	
+	//Funcion para obtener obras 
+	public void crearListObra(){ 
+	Query query = mKinveyClient.query(); 
+
+	query.addSort("_id", SortOrder.DESC); 
+
+	mKinveyClient.appData("Obras", ObraBackend.class).get(query, new KinveyListCallback<ObraBackend>() { 
+	@Override 
+	public void onSuccess(ObraBackend[] resultadoconsulta) { 
+	for (int i = 0; i < resultadoconsulta.length; i++) { 
+	Obra obra= new Obra(resultadoconsulta[i].getIdObra(),resultadoconsulta[i].getNombreObras(),resultadoconsulta[i].getDescripcipnObras()); 
+	// cargarImagen(obra); 
+	// imagen(obra); 
+	listaObra.add(obra); 
+	} 
+	Log.e("Obras","Listas de obras cargadas"); 
+	} 
+	@Override 
+	public void onFailure(Throwable arg0) { 
+	Toast.makeText(getApplicationContext(), "Ups.. no nos pudimos conectar con la base de datos, asegurece de estar logueado y tener conexión a internet", Toast.LENGTH_LONG).show(); 
+
+
+	} 
+	}); 
+	}
+	
+	
+		
+>>>>>>> develop
 }
 
 
