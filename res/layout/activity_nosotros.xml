@@ -52,7 +52,7 @@
         </ScrollView>
         </LinearLayout>
 		
-    <com.google.android.maps.MapView
+  <!--  <com.google.android.maps.MapView
     android:id="@+id/mapa"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -60,7 +60,7 @@
     android:clickable="true" />
 
 		
-		<!--  <fragment
+		  <fragment
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -108,7 +108,6 @@
             android:clickable="true" />
     </LinearLayout>
 
-<<<<<<< HEAD
 </LinearLayout>
 
 
