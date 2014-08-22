@@ -4,32 +4,65 @@ package com.example.clientarte;
 
 
 
-import android.app.Activity;
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.AlertDialog;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
-import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.ItemizedOverlay;
+import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapController;
+import com.google.android.maps.MapView;
+import com.google.android.maps.OverlayItem;
 
 
-public class NosotrosActivity extends  Activity implements OnQueryTextListener{
+public class NosotrosActivity extends android.support.v4.app.FragmentActivity {
 //public class NosotrosActivity extends  MapActivity implements OnQueryTextListener{
 
 	private SearchView mSearchView;
+//	private Fr mapView;
+	private MapController myMapController;
 //	private MapView mapa = null;
-	
+//	public static FragmentManager fragmentManager;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nosotros);
-		
-		//Obtenemos una referencia al control MapView
-//		 mapa = (MapView)findViewById(R.id.mapa);
+//		fragmentManager = getSupportFragmentManager();
+		GoogleMap mapa = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+		LatLng sobre = new LatLng(-34.904416, -56.198482);
+		CameraPosition camPos = new CameraPosition.Builder()
+		        .target(sobre)   //Centramos el mapa en Sodre
+		        .zoom(17)         //Establecemos el zoom en 19
+		        .bearing(20)      //Establecemos la orientación con el noreste arriba
+		        .tilt(70)         //Bajamos el punto de vista de la cámara 70 grados
+		        .build();
+		 mapa.addMarker(new MarkerOptions()
+	        .position(sobre)
+	        .title("Teatro: Sodre"));
+		CameraUpdate camUpd3 =
+		    CameraUpdateFactory.newCameraPosition(camPos);
 		 
-		//Mostramos los controles de zoom sobre el mapa
-//	        mapa.setBuiltInZoomControls(true);
-		
+		mapa.animateCamera(camUpd3);
+//		CameraUpdate camUpd1 =CameraUpdateFactory.newLatLng(new LatLng(-34.904416, -56.198482));		 
+//		mapa.moveCamera(camUpd1);
+	
 	}
 	
 //	@Override
@@ -38,35 +71,16 @@ public class NosotrosActivity extends  Activity implements OnQueryTextListener{
 //    }
 	
 	
-	@Override
-	public boolean onQueryTextChange(String newText) {
-
-	    Toast.makeText(this, newText, Toast.LENGTH_SHORT).show();
-
-	    return false;
-	}
-	@Override
-	public boolean onQueryTextSubmit(String text) {
-
-	    Toast.makeText(this, "Searching for " + text, Toast.LENGTH_LONG).show();
-
-	    return false;
-	}
-
 
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        mSearchView = (SearchView) searchItem.getActionView();
-        mSearchView.setQueryHint("Search…");
-        mSearchView.setOnQueryTextListener(this);
-        
+       
         return true;
     }
-	
+
 	
 
 	

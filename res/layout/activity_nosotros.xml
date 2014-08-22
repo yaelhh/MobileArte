@@ -11,37 +11,37 @@
     <Gallery
         android:id="@+id/gallery"
         android:layout_width="fill_parent"
-        android:layout_height="138dp"
+        android:layout_height="111dp"
         android:background="@drawable/nosotros"
         android:padding="5dp"
         android:spacing="8dp" />
 
-<ScrollView
-    android:id="@+id/ScrollViewHistoriaSodre"
-    android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:layout_weight="586.88" >
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="318dp"
-        android:layout_height="150dp"
-        android:layout_weight="0.39"
-        android:padding="5dp"
-        android:text="@string/HistoriaSodre" />
-
-  </ScrollView>
-
-    <LinearLayout
-        android:id="@+id/container2"
+    <ScrollView
+        android:id="@+id/ScrollViewHistoriaSodre"
         android:layout_width="match_parent"
-        android:layout_height="168dp"
-        android:orientation="horizontal" >
+        android:layout_height="137dp" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="318dp"
+            android:layout_height="134dp"
+            android:padding="5dp"
+            android:text="@string/HistoriaSodre" />
+
+    </ScrollView>
+
+
+
+      <LinearLayout
+          android:id="@+id/container2"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="horizontal" >
 
     <ScrollView
         android:id="@+id/ScrollViewHorarioSodre"
-        android:layout_width="160dp"
-        android:layout_height="160dp" >
+        android:layout_width="135dp"
+        android:layout_height="208dp" >
 
         <TextView
             android:id="@+id/textView2"
@@ -50,6 +50,7 @@
             android:padding="5dp"
             android:text="@string/HorarioSodre" />
         </ScrollView>
+<<<<<<< HEAD
         </LinearLayout>
 		
   <!--  <com.google.android.maps.MapView
@@ -61,13 +62,37 @@
 
 		
 		  <fragment
+=======
+
+   
+  <fragment
+>>>>>>> 2631d665896870f62725f33a82af1556a615c0fe
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.google.android.gms.maps.MapFragment"/>-->
+        class="com.google.android.gms.maps.SupportMapFragment"/>
+    
+    </LinearLayout>
+		
+    
+		
+		
+		<!-- <com.google.android.maps.MapView
+        android:id="@+id/map"
+        android:layout_width="184dp"
+        android:layout_height="215dp"
+        android:clickable="true"
+        android:enabled="true"
+        android:apiKey="AIzaSyCRJm4M9O6qUcB6gU40ZCBL8sGmRQglzzw"  -->
         
        
-
+<!--  <com.google.android.maps.MapView
+    android:id="@+id/mapa"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:apiKey="AIzaSyCRJm4M9O6qUcB6gU40ZCBL8sGmRQglzzw"
+    android:clickable="true" />
+-->
  </LinearLayout>   
 
   <!--  <Gallery

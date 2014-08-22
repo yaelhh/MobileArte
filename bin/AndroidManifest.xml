@@ -19,6 +19,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+<<<<<<< HEAD
 	
 <!-- The following two permissions are not required to use
      Google Maps Android API v2, but are recommended.
@@ -26,6 +27,17 @@
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/> -->
   
 <uses-feature
+=======
+
+    <!--
+     The following two permissions are not required to use
+     Google Maps Android API v2, but are recommended.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature
+>>>>>>> 2631d665896870f62725f33a82af1556a615c0fe
         android:glEsVersion="0x00020000"
         android:required="true" />
 
@@ -46,6 +58,15 @@
             android:value="AIzaSyCMIudgB3mpht9TGstyneIVK2pr3yRC9Hc" />
         
 
+<<<<<<< HEAD
+=======
+        <!-- <uses-library android:name="com.google.android.maps" /> -->
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCRJm4M9O6qUcB6gU40ZCBL8sGmRQglzzw" />
+
+>>>>>>> 2631d665896870f62725f33a82af1556a615c0fe
         <activity
             android:name="com.example.clientarte.SplashScreenActivity"
             android:label="@string/app_name"
@@ -141,7 +162,7 @@
         </activity>
 
         <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
+            android:name="com.google.android.maps.v2.AIzaSyCRJm4M9O6qUcB6gU40ZCBL8sGmRQglzzw"
             android:value="AIzaSyCRJm4M9O6qUcB6gU40ZCBL8sGmRQglzzw" />
 
         <activity
@@ -208,6 +229,14 @@
                 </action>
             </intent-filter>
         </service>
+<<<<<<< HEAD
+=======
+
+        <activity
+            android:name="com.example.clientarte.ObrasFavoritasActivity"
+            android:label="@string/title_activity_obras_favoritas" >
+        </activity>
+>>>>>>> 2631d665896870f62725f33a82af1556a615c0fe
     </application>
 
 </manifest>

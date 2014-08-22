@@ -16,6 +16,7 @@ import java.util.HashMap;
 
 
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -102,7 +103,8 @@ public class CompraActivity extends Activity {
 	private ProgressBar bar;
 	private TextView txtCargando;
 	private Client mKinveyClient;
-
+	private int mascaras=0;
+	private int Descuento=0;
 
 
 	@Override
@@ -112,6 +114,9 @@ public class CompraActivity extends Activity {
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
 		obra= new Obra();
 		obra= getIntent().getParcelableExtra("obra");
+		mascaras=getIntent().getExtras().getInt("mascaras");
+		Descuento=mascaras*3;
+		Log.e("Precio total con mascaras ", precioTotal+" MAscaras "+ mascaras);
 		TextView titulo= (TextView)findViewById(R.id.idTitulo);
 		titulo.setText(obra.getNombre());
 		sprHorario= (Spinner)findViewById(R.id.spinner_horario);
@@ -303,63 +308,23 @@ public class CompraActivity extends Activity {
 				//Se verifica que se hayan seleccionado las butacas
 				if(cant>0 && cantSeleccionadas==0){
 					//Se verifica que el usuario este logueado
-					if(o.captarUsuarioLogueado()!= null){
-						usuario=new Usuario();
-						usuario.setMiNombreUsuario(o.captarUsuarioLogueado().user().getUsername());
-						obtenerButacasSeleccionadas();
-						//						ButacaFuncionSectorBackend[] listaButacasLibres=o.verificarButacasDisponibles(funcionSeleccionada,butacasSeleccionadas);
 
-						//						if(butacasSeleccionadas.size()==listaButacasLibres.length){
-						//						crearObjetoCompra();
-						//						Compra compra= crearObjetoCompra();
-						//Obtenemos fecha actual
-						Calendar c = Calendar.getInstance();
-						SimpleDateFormat df1 = new SimpleDateFormat("dd-MMM-yyyy");
-						String fechaActual = df1.format(c.getTime());
-						//Obtenemos fecha de vigencia
-						String fechaVigencia = df1.format(sumarDiasFecha());
-						Log.e("datos","precio "+ precioTotal+" fecha "+ fechaActual+ " butacas "+ butacasSeleccionadas.size());
-						Compra compra=new Compra(fechaActual,fechaVigencia,obra,false,usuario,precioTotal,funcionSeleccionada,butacasSeleccionadas );
-						guardarCompra(compra,o,bar,mKinveyClient);
-						//						String s= " Obra: "+ obra.getNombre()+ " Funcion "+ funcionSeleccionada.toString()+ " Precio total "+ precioTotal;
-						//						Funcion funcionElegida=funcionSeleccionada;
-						//						String fecha= funcionElegida.getFechaObra();
-						//						String hora= funcionElegida.getHoraComienzo();
-						//						String duracion= Double.toString(funcionElegida.getDuracion());
-						//						Intent intent = new Intent("com.google.zxing.client.android.ENCODE");
-						//						intent.putExtra("ENCODE_TYPE", "TEXT_TYPE");
-						//						intent.putExtra("ENCODE_DATA", s);
-						//						intent.putExtra("fecha", fecha);
-						//						intent.putExtra("hora", hora);
-						//						intent.putExtra("duracion", duracion);
-						//						intent.putExtra("tituloObra", obra.getNombre());
-						////						intent.putExtra("compra", compra.toString());
-						//						CompraActivity.this.startActivityForResult(intent, 0);
-						//						}else{
-						//							Toast.makeText(CompraActivity.this,"En este momento alguien le ha ganado de mano y ha elegido las mismas butacas que usted, por favor elija otras" , Toast.LENGTH_SHORT).show();
-						//
-						//						}
+					usuario=new Usuario();
+					usuario.setMiNombreUsuario(o.captarUsuarioLogueado().user().getUsername());
+					obtenerButacasSeleccionadas();
+					Calendar c = Calendar.getInstance();
+					SimpleDateFormat df1 = new SimpleDateFormat("dd-MMM-yyyy");
+					String fechaActual = df1.format(c.getTime());
+					//Obtenemos fecha de vigencia
+					String fechaVigencia = df1.format(sumarDiasFecha());
+					Compra compra=new Compra(fechaActual,fechaVigencia,obra,false,usuario,precioTotal,funcionSeleccionada,butacasSeleccionadas );
+					if(Descuento>0){
+						calcularDescuento(compra,o,bar,mKinveyClient);
 					}else{
-						AlertDialog.Builder dialogo1 = new AlertDialog.Builder(CompraActivity.this);  
-						dialogo1.setTitle("Importante");  
-						dialogo1.setMessage("Para continuar la compra necesita estar logueado,¿Desea loguearse?");            
-						dialogo1.setCancelable(false);  
-						dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {  
-							public void onClick(DialogInterface dialogo1, int id) {  
-								Intent intent = new Intent(CompraActivity.this, LoginActivity.class);
-								startActivity(intent);
-
-							}  
-						});  
-						dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {  
-							public void onClick(DialogInterface dialogo1, int id) {  
-								cancelar();
-							}  
-						});            
-						dialogo1.show();        
-
-
+						Log.e("datos","precio "+ precioTotal+" fecha "+ fechaActual+ " butacas "+ butacasSeleccionadas.size());
+						guardarCompra(compra,o,bar,mKinveyClient);
 					}
+
 				}else{
 					Toast.makeText(CompraActivity.this,"Debe seleccionar todas las butacas antes de continuar" , Toast.LENGTH_SHORT).show();
 
@@ -372,7 +337,67 @@ public class CompraActivity extends Activity {
 
 
 	}
+	//Calcula el descuento de las mascaras
+	public void calcularDescuento(final Compra compra,final ObjetosBackend obj,final ProgressBar b,final Client kinveyClient){
+		if(Descuento<=precioTotal){
+			compra.setPrecioTotal(precioTotal-Descuento);
+			Toast.makeText(CompraActivity.this,"A usted se le han descontado "+ mascaras+" máscaras " +"Un total de $" +Descuento , Toast.LENGTH_SHORT).show();
+			mascaras=0;
+		}else{
+			mascaras= (Descuento-precioTotal)/3;
+			Toast.makeText(CompraActivity.this,"A usted se le han descontado "+ mascaras+" máscaras " +"Un total de $" +Descuento , Toast.LENGTH_SHORT).show();
+			compra.setPrecioTotal(0);
+		}
+		final UsuarioBackend usuarioLogueado = new UsuarioBackend();
+		String idU = kinveyClient.user().getUsername().toString();
+		Query query = kinveyClient.query ();
+		query.equals("username", idU);
+		AsyncAppData<UsuarioBackend> searchedEvents = kinveyClient.appData("Usuario", UsuarioBackend.class);
+		searchedEvents.get(query, new KinveyListCallback<UsuarioBackend>() {
+			@Override
+			public void onSuccess(UsuarioBackend[] resultadoconsulta) { 
+				mKinveyClient.appData("Usuario",UsuarioBackend.class).getEntity(resultadoconsulta[0].getIdUsuario(), new KinveyClientCallback<UsuarioBackend>() {
 
+					@Override
+					public void onSuccess(UsuarioBackend arg0) {
+						arg0.put("mascaras", String.valueOf(mascaras));
+						Log.e("Guardar mascaras","seteo la nueva cant de mascaras "+ mascaras );
+						mKinveyClient.appData("Usuario", UsuarioBackend.class).save(arg0, new KinveyClientCallback<UsuarioBackend>() {
+							@Override
+							public void onSuccess(UsuarioBackend result) {
+								Log.e("seteo ","Seteo mascarass" +result.getMascaras());
+								guardarCompra(compra,obj,bar,mKinveyClient);
+							}
+
+							@Override
+							public void onFailure(Throwable error) {
+								Log.e("Error ","Error"+ error);	
+							}
+						});
+					}
+
+					@Override
+					public void onFailure(Throwable arg0) {
+						// TODO Auto-generated method stub
+						bar.setVisibility(View.GONE);
+
+					}
+
+
+				});
+			}
+
+
+
+			@Override
+			public void onFailure(Throwable arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+
+	}
 	public void guardarCompra(Compra compra,ObjetosBackend obj,ProgressBar b,Client mKinveyClient){
 		final String fechaActual=compra.getFechaRealizada();
 		final String fechaVigencia=compra.getFechaVigencia();
@@ -534,7 +559,7 @@ public class CompraActivity extends Activity {
 								@Override
 								public void onSuccess(UsuarioBackend result) {
 									Log.e("sumo mascaras","se le suman 50 mascaras");
-									
+
 								}
 
 								@Override

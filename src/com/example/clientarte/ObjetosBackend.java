@@ -216,11 +216,11 @@ public class ObjetosBackend extends Application{
 	switch (obra.getIdObra()){
 		case 1:
 			obra.getListaImagenes()[0]=R.drawable.carmen_1;
-			obra.getListaImagenes()[0]=R.drawable.carmen_2;
-			obra.getListaImagenes()[0]=R.drawable.carmen_3;
+			obra.getListaImagenes()[1]=R.drawable.carmen_2;
+			obra.getListaImagenes()[2]=R.drawable.carmen_3;
 			break;
 		case 6:
-			obra.getListaImagenes()[1]=R.drawable.les_2;
+			obra.getListaImagenes()[0]=R.drawable.les_2;
 			obra.getListaImagenes()[1]=R.drawable.les_3;
 			break;	
 		}	

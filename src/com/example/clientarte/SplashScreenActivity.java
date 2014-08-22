@@ -60,29 +60,31 @@ public class SplashScreenActivity extends Activity {
       				Log.d("Probando Kinvey Connection", "Kinvey Ping Success"); 
       			}
       		});
-      		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
     		
-      		if(mKinveyClient.user().getUsername()==null){
-      			mKinveyClient.user().login(appKey, appSecret, new KinveyClientCallback<User>() {
-					
-					@Override
-					public void onSuccess(User arg0) {
-						// TODO Auto-generated method stub
-						obj.inicialize(mKinveyClient); 
-			    		
-			    		obj.traerDatos();
-					}
-					
-					@Override
-					public void onFailure(Throwable arg0) {
-						// TODO Auto-generated method stub
-						
-					}
-				});
-      		}
-//obj.inicialize(mKinveyClient); 
+//      		if(mKinveyClient.user().getUsername()==null){
+//      			mKinveyClient.user().login(appKey, appSecret, new KinveyClientCallback<User>() {
+//					
+//					@Override
+//					public void onSuccess(User arg0) {
+//						// TODO Auto-generated method stub
+//						obj.inicialize(mKinveyClient); 
+//			    		
+//			    		obj.traerDatos();
+//					}
+//					
+//					@Override
+//					public void onFailure(Throwable arg0) {
+//						// TODO Auto-generated method stub
+//						
+//					}
+//				});
+      		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
+
+      		obj.inicialize(mKinveyClient); 
 //    		
-//    		obj.traerDatos();
+    		obj.traerDatos();
+//      		}
+      		
 //      		if(mKinveyClient.user().getUsername()==null){
 //    			conectarBackend( obj);	
 //    		}
@@ -139,39 +141,39 @@ public class SplashScreenActivity extends Activity {
 	        return(new File(this.getFilesDir(), SplashScreenActivity.FILENAME));
 	 }
 	
-	public void conectarBackend (final ObjetosBackend obj){ 
-
-		mKinveyClient = new Client.Builder(appKey, appSecret, this).build();
-		mKinveyClient.ping(new KinveyPingCallback() { 
-			public void onFailure(Throwable t) {
-				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t); 
-			}
-			public void onSuccess(Boolean b) { 
-				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
-			}
-		});
-		//mKinveyClient.user().login("nlema", "nlema", new KinveyUserCallback() { 
-		if (!mKinveyClient.user().isUserLoggedIn()) { 
-			mKinveyClient.user().login(new KinveyUserCallback() { 
-				public void onFailure(Throwable error) { 
-					mensaje = "Error al realizar el login.";
-					Log.e("Realizando Kinvey Login", mensaje, error); 
-				}
-				@Override
-				public void onSuccess(User u) {
-					obj.inicialize(mKinveyClient); 
-		    		obj.traerDatos();
-					mensaje = "Bienvenido usuario: " + u.getId() + "."; 
-					Log.d("Realizando Kinvey Login", mensaje);
-				}
-				
-			});
-		} else { 
-			mensaje = "Utilizando usuario implícito cacheado: " + mKinveyClient.user().getId() + ".";
-			Log.d("Realizando Kinvey Login", mensaje); 
-		}
-	}
-	 
+//	public void conectarBackend (final ObjetosBackend obj){ 
+//
+//		mKinveyClient = new Client.Builder(appKey, appSecret, this).build();
+//		mKinveyClient.ping(new KinveyPingCallback() { 
+//			public void onFailure(Throwable t) {
+//				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t); 
+//			}
+//			public void onSuccess(Boolean b) { 
+//				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
+//			}
+//		});
+//		//mKinveyClient.user().login("nlema", "nlema", new KinveyUserCallback() { 
+//		if (!mKinveyClient.user().isUserLoggedIn()) { 
+//			mKinveyClient.user().login(new KinveyUserCallback() { 
+//				public void onFailure(Throwable error) { 
+//					mensaje = "Error al realizar el login.";
+//					Log.e("Realizando Kinvey Login", mensaje, error); 
+//				}
+//				@Override
+//				public void onSuccess(User u) {
+//					obj.inicialize(mKinveyClient); 
+//		    		obj.traerDatos();
+//					mensaje = "Bienvenido usuario: " + u.getId() + "."; 
+//					Log.d("Realizando Kinvey Login", mensaje);
+//				}
+//				
+//			});
+//		} else { 
+//			mensaje = "Utilizando usuario implícito cacheado: " + mKinveyClient.user().getId() + ".";
+//			Log.d("Realizando Kinvey Login", mensaje); 
+//		}
+//	}
+//	 
 	 
 	
 	//private void descargarIma(File target) throws IOException {

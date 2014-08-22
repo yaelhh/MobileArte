@@ -87,18 +87,6 @@
         <requestFocus />
     </EditText>
 
-    <Button
-        android:id="@+id/btnCancelarRegistro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="38dp"
-        android:layout_marginRight="82dp"
-        android:minWidth="@dimen/button_min_width"
-        android:text="@string/cancelar"
-        android:textColor="@color/ghost_white" />
-
 <!-- <Button
     android:id="@+id/pickDate"
     android:layout_width="wrap_content"
@@ -128,6 +116,17 @@
     android:text="" />
 
 <Button
+    android:id="@+id/btnCancelarRegistro"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="18dp"
+    android:layout_toRightOf="@+id/textViewCumpleanos"
+    android:minWidth="@dimen/button_min_width"
+    android:text="@string/cancelar"
+    android:textColor="@color/ghost_white" />
+
+<Button
     android:id="@+id/btnRegister"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -138,5 +137,29 @@
     android:onClick="registerAccount"
     android:text="@string/register"
     android:textColor="@color/ghost_white" />
+
+<TextView
+    android:id="@+id/txtLabelMascaras"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_below="@+id/dateDisplay"
+    android:layout_marginTop="14dp"
+    android:text="Máscaras" />
+
+<TextView
+    android:id="@+id/txtMasaras"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBaseline="@+id/txtLabelMascaras"
+    android:layout_alignBottom="@+id/txtLabelMascaras"
+    android:layout_alignLeft="@+id/dateDisplay" />
+
+<ProgressBar
+    android:id="@+id/progressBarRegistrar"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignTop="@+id/etEmailAddress"
+    android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

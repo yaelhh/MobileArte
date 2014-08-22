@@ -29,7 +29,7 @@ import dominio.Funcion;
 import dominio.Obra;
 
 /*  Fragment para seccion Programacion */ 
-public class ProgramacionFragment extends Fragment implements OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener{
+public class ProgramacionFragment extends android.support.v4.app.Fragment implements OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener{
 	CalendarView cal;
 	private SearchView mSearchView;
 	private ImageButton mObra;
