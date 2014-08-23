@@ -11,12 +11,11 @@
         android:background="@color/Gray" >
 
         <TextView
-            android:id="@+id/n"
+            android:id="@+id/nombreUsuarioCuenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/imageView1"
             android:layout_below="@+id/imageView1"
-            android:text="@string/nombreUsuarioCuenta"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/Black"
             android:textSize="25sp" />
@@ -35,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/n"
+            android:layout_below="@+id/nombreUsuarioCuenta"
             android:layout_marginTop="38dp"
             
             android:text="@string/Cuenta" />
@@ -54,8 +53,8 @@
             android:id="@+id/btnCanjear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/btnMascaras"
-            android:layout_alignBottom="@+id/btnMascaras"
+            android:layout_alignBaseline="@+id/btnFavoritos"
+            android:layout_alignBottom="@+id/btnFavoritos"
             android:layout_alignParentRight="true"
             android:text="@string/Canjear" />
 
@@ -87,13 +86,13 @@
             android:text="@string/RegistroUsuario" />
 
         <Button
-            android:id="@+id/btnMascaras"
+            android:id="@+id/btnFavoritos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignRight="@+id/BtnObrasVistas"
             android:layout_below="@+id/BtnObrasVistas"
-            android:text="@string/Mascaras" />
+            android:text="@string/Favoritos" />
 
     </RelativeLayout>
 

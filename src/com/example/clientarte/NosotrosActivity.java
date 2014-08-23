@@ -11,9 +11,19 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.Menu;
 import android.widget.SearchView;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapActivity;
@@ -22,32 +32,37 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 
 
-public class NosotrosActivity extends MapActivity {
+public class NosotrosActivity extends android.support.v4.app.FragmentActivity {
 //public class NosotrosActivity extends  MapActivity implements OnQueryTextListener{
 
 	private SearchView mSearchView;
-	private MapView mapView;
+//	private Fr mapView;
 	private MapController myMapController;
 //	private MapView mapa = null;
-	
+//	public static FragmentManager fragmentManager;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nosotros);
-		
-		//Obtenemos una referencia al control MapView
-		mapView = (MapView)findViewById(R.id.map);
-	 myMapController = mapView.getController();
-//	 GeoPoint centro = new GeoPoint((int)-34.904307,(int)-56.198644);
-	 mapView.setBuiltInZoomControls(true);
-	  List mapOverlays = mapView.getOverlays();
-	Drawable drawable = this.getResources().getDrawable(R.drawable.ic_action_place);
-	 HelloItemizedOverlay itemizedoverlay = new HelloItemizedOverlay( drawable, this);
-	  GeoPoint point = new GeoPoint(-27337005, -55866165);
-	 OverlayItem overlayitem = new OverlayItem(point, "Bazinga!", "Ha upei desde Encarnacion!");
-	 itemizedoverlay.addOverlay(overlayitem);
-	 mapOverlays.add(itemizedoverlay);
-		
+//		fragmentManager = getSupportFragmentManager();
+		GoogleMap mapa = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+		LatLng sobre = new LatLng(-34.904416, -56.198482);
+		CameraPosition camPos = new CameraPosition.Builder()
+		        .target(sobre)   //Centramos el mapa en Sodre
+		        .zoom(17)         //Establecemos el zoom en 19
+		        .bearing(20)      //Establecemos la orientación con el noreste arriba
+		        .tilt(70)         //Bajamos el punto de vista de la cámara 70 grados
+		        .build();
+		 mapa.addMarker(new MarkerOptions()
+	        .position(sobre)
+	        .title("Teatro: Sodre"));
+		CameraUpdate camUpd3 =
+		    CameraUpdateFactory.newCameraPosition(camPos);
+		 
+		mapa.animateCamera(camUpd3);
+//		CameraUpdate camUpd1 =CameraUpdateFactory.newLatLng(new LatLng(-34.904416, -56.198482));		 
+//		mapa.moveCamera(camUpd1);
+	
 	}
 	
 //	@Override
@@ -66,43 +81,6 @@ public class NosotrosActivity extends MapActivity {
         return true;
     }
 
-	@Override
-	protected boolean isRouteDisplayed() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-
-	public class HelloItemizedOverlay extends ItemizedOverlay {
-	private ArrayList mOverlays = new ArrayList();
-	private Context mContext;
-	 public HelloItemizedOverlay(Drawable defaultMarker, Context context) {
-	 super(boundCenterBottom(defaultMarker));
-	 mContext = context;
-	
-	 }
-	 public void addOverlay(OverlayItem overlay) {
-	 mOverlays.add(overlay);
-	 populate();
-	}
-	@Override
-	protected OverlayItem createItem(int i) {
-	 return (OverlayItem) mOverlays.get(i);
-	 }
-	 @Override
-	 public int size() {
-	 return mOverlays.size();
-	}
-	@Override
-	protected boolean onTap(int index) {
-	  OverlayItem item = (OverlayItem) mOverlays.get(index);
-	 AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
-	  dialog.setTitle(item.getTitle());
-	  dialog.setMessage(item.getSnippet());
-	  dialog.show();
-	 return true;
-	 }
-	}
 	
 
 	

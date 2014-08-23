@@ -30,6 +30,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class EditarUsuarioActivity extends ActionBarActivity {
 	public EditText mEditPassword;
 	public EditText mEditPasswordConfirm;
 	private Button mRegisterAccount;
+	private TextView mMascaras;
 	public static final String TAG = "ArteBackend";
 	static final int DATE_DIALOG_ID = 0;
 	DatabaseHelper dh;
@@ -53,6 +55,7 @@ public class EditarUsuarioActivity extends ActionBarActivity {
 	private int mYear;    
 	private int mMonth;    
 	private int mDay;    
+	private ProgressBar bar;
 	
 	
 	@Override
@@ -61,7 +64,9 @@ public class EditarUsuarioActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
 		dh = new DatabaseHelper(getApplicationContext());
-
+		bar=(ProgressBar)findViewById(R.id.progressBarRegistrar);
+		bar.setIndeterminate(true);
+		bar.setVisibility(View.GONE);
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
 		kinveyClient = obj.captarUsuarioLogueado();
 		//Conexión de la APP a Kinvey
@@ -83,6 +88,7 @@ public class EditarUsuarioActivity extends ActionBarActivity {
 		
 		
 		//entity = obj.obtenerUsuarioBackendLogueado();
+		mMascaras= (TextView)findViewById(R.id.txtMasaras);
 		
 		btnEditarUsuario= (Button)findViewById(R.id.btnRegister);
 		btnEditarUsuario.setOnClickListener(new OnClickListener() {  
@@ -104,6 +110,7 @@ public class EditarUsuarioActivity extends ActionBarActivity {
 	
 	
 	public void obtenerDatosUsuarioEditar(final ObjetosBackend obj, Client kinvey){
+		bar.setVisibility(View.VISIBLE);
 		final UsuarioBackend usuarioLogueado = new UsuarioBackend();
 		String idU = kinveyClient.user().getUsername().toString();
 		Query query = kinveyClient.query ();
@@ -161,6 +168,9 @@ public class EditarUsuarioActivity extends ActionBarActivity {
 			mEditPassword.setText(ub.getPassword().toString());
 			mEditPasswordConfirm.setText(ub.getPassword().toString());
 			mDateDisplay.setText(ub.getFechaNacimiento().toString());
+			mMascaras.setText(ub.getMascaras().toString());
+			bar.setVisibility(View.GONE);
+
 		}else{
 			Toast tIO = Toast.makeText(EditarUsuarioActivity.this,"Ha ocurrido un error cargar usuario, verifique su conexión a la red . ", Toast.LENGTH_SHORT);
 			tIO.show();

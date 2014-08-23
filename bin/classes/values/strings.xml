@@ -31,7 +31,7 @@
     <string name="RegistroUsuario">Registrar</string>
     <string name="Prox_obras">Próximas obras</string>
     <string name="Obras_vistas">Obras vistas</string>
-    <string name="Mascaras">Mascaras</string>
+    <string name="Favoritos">Favoritos</string>
     <string name="Canjear">Canjear mascaras</string>
     <string name="butacas">Butacas</string>
     <string name="containerProgramacion">containerProgramacion</string>
@@ -49,7 +49,6 @@
     <string name="youtubevideoid">Youtube video id</string>
     <string name="defaultYoutubeVideoId">_JkkkdH6zTQ</string>
     <string name="viewVideoButton">Buscar</string>
-
 
     <!-- Valores de la opcion registro de usuarios -->
     <string name="enter_email">Email</string>
@@ -149,5 +148,6 @@ Prensa y comunicación comunicacion@auditorio.uy   </string>
     <string name="addCliente">Nuevo Cliente</string>
     <string name="title_activity_compra_realizada">CompraRealizadaActivity</string>
     <string name="title_activity_prox_obras">ProxObrasActivity</string>
+    <string name="title_activity_obras_favoritas">ObrasFavoritasActivity</string>
 
 </resources>

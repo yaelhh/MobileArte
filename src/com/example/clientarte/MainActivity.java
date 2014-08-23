@@ -4,6 +4,7 @@ package com.example.clientarte;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+
 import backend.ComunidadBackend;
 import backend.DatabaseHelper;
 import backend.NotificacionesBackend;
@@ -19,9 +20,17 @@ import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
 
 
+
+
+
+
+
+
+
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
+
+
+import android.app.FragmentTransaction;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -32,6 +41,9 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
@@ -54,7 +66,7 @@ import dominio.Usuario;
 
 
 
-public class MainActivity extends Activity implements OnQueryTextListener {
+public class MainActivity extends FragmentActivity implements OnQueryTextListener {
 
 
 	private String[] titulos;
@@ -76,6 +88,7 @@ public class MainActivity extends Activity implements OnQueryTextListener {
 	private DatabaseHelper dh;
 	private Button btnNot;
 	private MenuItem notificacion;
+	public static FragmentManager fragmentManager;
 
 	//Variables de la notificacion
 	NotificationManager nm;
@@ -92,6 +105,7 @@ public class MainActivity extends Activity implements OnQueryTextListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_main);	
 		dh = new DatabaseHelper(getApplicationContext());
+		fragmentManager = getSupportFragmentManager();
 
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
 		mKinvey = obj.getmKinveyClient();
@@ -185,7 +199,7 @@ public class MainActivity extends Activity implements OnQueryTextListener {
 	@SuppressWarnings("unused")
 	public void MostrarFragment(int position) {
 		// update the main content by replacing fragments
-		Fragment fragment = null;
+		android.support.v4.app.Fragment fragment = null;
 		switch (position) {
 		case 1:
 			fragment = new HomeFragment();
@@ -217,8 +231,10 @@ public class MainActivity extends Activity implements OnQueryTextListener {
 		}
 		//Validamos si el fragment no es nulo
 		if (fragment != null) {
-			FragmentManager fragmentManager = getFragmentManager();
-			fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+			
+			android.support.v4.app.FragmentManager fragmentManager =(android.support.v4.app.FragmentManager) getSupportFragmentManager(); //Or getFragmentManager() if you're not using the support library
+		    fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+			
 
 			// Actualizamos el contenido segun la opcion elegida
 			NavList.setItemChecked(position, true);

@@ -20,15 +20,21 @@
 
         <TextView
             android:id="@+id/textView_superior"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/textView_inferior"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+        <ScrollView
+            android:id="@+id/ScrollViewInferior"
+            android:layout_width="match_parent"
+            android:layout_height="84dp" >
+
+            <TextView
+                android:id="@+id/textView_inferior"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </ScrollView>
     </LinearLayout>
 
 </LinearLayout>

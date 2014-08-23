@@ -53,6 +53,7 @@ public class ObraActivity extends ActionBarActivity {
 	private ImageButton btnAgregarComentarioObra;
 	private ImageButton btnVerVideo;
 	private ImageButton btnCompartirFacebook;
+	private int mascaras=0;
 	
 	//	private int requestCode = 1;
 	//	private ListView lvObras;
@@ -79,6 +80,7 @@ public class ObraActivity extends ActionBarActivity {
 		//		myDbHelper = new DatabaseHelper(this);
 		obra= new Obra();
 		obra= getIntent().getParcelableExtra("obra");
+		mascaras=getIntent().getExtras().getInt("mascaras");
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
 		kinveyClient = obj.captarUsuarioLogueado();
 		btnComprar= (Button)findViewById(R.id.bttnComprar);
@@ -126,6 +128,7 @@ public class ObraActivity extends ActionBarActivity {
 			public void onClick(View v) {
 				Intent intent = new Intent(ObraActivity.this, CompraActivity.class);
 				intent.putExtra("obra",obra); 
+				intent.putExtra("mascaras", mascaras);
 				startActivity(intent);
 			}
 

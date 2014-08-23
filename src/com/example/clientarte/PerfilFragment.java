@@ -14,22 +14,28 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import backend.DatabaseHelper;
+import backend.UsuarioBackend;
 
+import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyPingCallback;
+import com.kinvey.java.Query;
 
 /*  Fragment para seccion perfil */ 
-public class PerfilFragment extends Fragment {
+public class PerfilFragment extends android.support.v4.app.Fragment {
 	//private Button btnCuenta;
 	private Button btnProxObras;
 	private Button btnObrasVistas;
-	private Button btnMascaras;
+	private Button btnFavoritos;
 	private Button btnCanjeMasc;
 	private Button btnRegistrar;
 	private Button btnLoguear;
 	private Button btnEditarUsuario;
+	private TextView txtNombreUsuario;
 
 
 	private String mensaje;
@@ -46,6 +52,7 @@ public class PerfilFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.activity_perfil, container, false);
 		dh = new DatabaseHelper(getActivity().getApplicationContext());
 		final ObjetosBackend obj= (ObjetosBackend) getActivity().getApplicationContext();
+		txtNombreUsuario=(TextView)rootView.findViewById(R.id.nombreUsuarioCuenta);
 		//Conexión de la APP a Kinvey
 		mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
 		mKinveyClient.ping(new KinveyPingCallback() {
@@ -54,6 +61,8 @@ public class PerfilFragment extends Fragment {
 			}
 			public void onSuccess(Boolean b) {
 				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
+				txtNombreUsuario.setText(mKinveyClient.user().getUsername());
+
 			}
 		});
 		//btnCuenta= (Button)rootView.findViewById(R.id.btnCuenta);
@@ -63,6 +72,8 @@ public class PerfilFragment extends Fragment {
 		btnObrasVistas= (Button)rootView.findViewById(R.id.BtnObrasVistas);
 		mKinveyClient = obj.captarUsuarioLogueado();
 		btnEditarUsuario= (Button)rootView.findViewById(R.id.btnCuenta);
+		btnCanjeMasc=(Button)rootView.findViewById(R.id.btnCanjear);
+		btnFavoritos=(Button)rootView.findViewById(R.id.btnFavoritos);
 
 		//mKinveyClient = obj.captarUsuarioLogueado();
 
@@ -234,6 +245,8 @@ public class PerfilFragment extends Fragment {
 				Toast t=Toast.makeText(getActivity(),"Me traigo datos" + userNameLogueado, Toast.LENGTH_SHORT);
 				t.show();
 				mKinveyClient.user().setUsername(userNameLogueado);
+				txtNombreUsuario.setText(mKinveyClient.user().getUsername());
+
 				Toast t2=Toast.makeText(getActivity(),"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
 				t2.show();
 
@@ -334,7 +347,58 @@ public class PerfilFragment extends Fragment {
 			}
 
 		});
+		
+		btnCanjeMasc.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getActivity());  
+				dialogo1.setTitle("Canjear mascaras");  
+				dialogo1.setMessage("¿Desea canjear sus mascaras?");            
+				dialogo1.setCancelable(false);  
+				dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {  
+					public void onClick(DialogInterface dialogo1, int id) {  
+						final UsuarioBackend usuarioLogueado = new UsuarioBackend();
+						String idU = mKinveyClient.user().getUsername().toString();
+						Query query = mKinveyClient.query ();
+						query.equals("username", idU);
+						AsyncAppData<UsuarioBackend> searchedEvents = mKinveyClient.appData("Usuario", UsuarioBackend.class);
+						searchedEvents.get(query, new KinveyListCallback<UsuarioBackend>() {
+							@Override
+							public void onSuccess(UsuarioBackend[] resultadoconsulta) { 
+								Intent intent = new Intent(getActivity(), NovedadesActivity.class);
+								intent.putExtra("mascaras", resultadoconsulta[0].getMascaras());
+								Log.e("PerfilFragment mascaras", resultadoconsulta[0].getMascaras());
+								startActivity(intent);	
+						}
+						@Override
+						public void onFailure(Throwable arg0) {
+							// TODO Auto-generated method stub
 
+						}
+					});
+					}  
+				});  
+				dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {  
+					public void onClick(DialogInterface dialogo1, int id) {  
+						cancelar();
+					}  
+				});            
+				dialogo1.show();        
+
+
+			}
+			
+
+		});
+		btnFavoritos.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(), ObrasFavoritasActivity.class);
+				startActivity(intent);
+			}
+
+		});
 		}
-
+	
+	
 	}

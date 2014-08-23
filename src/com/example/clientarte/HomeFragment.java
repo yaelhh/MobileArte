@@ -14,7 +14,7 @@ import android.widget.ImageButton;
 
 
 /*  Fragment para seccion perfil */ 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends android.support.v4.app.Fragment {
 	private ImageButton botonprogramacion, botonComunidad, botonNosotros, botonNovedades;
 	private SearchView mSearchView;
 	Fragment fragment = null;

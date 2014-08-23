@@ -3,6 +3,7 @@ package com.example.clientarte;
 import java.util.ArrayList;
 
 
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -31,7 +33,7 @@ import com.kinvey.java.core.KinveyClientCallback;
 import dominio.Usuario;
 
 /*  Fragment para seccion Nosotros */ 
-public class ComunidadFragment extends Fragment {
+public class ComunidadFragment extends android.support.v4.app.Fragment {
 
 	public static final String TAG = "ArteBackend";
 	private String mensaje;
@@ -40,7 +42,7 @@ public class ComunidadFragment extends Fragment {
 	private ViewGroup layout;
 	private ScrollView scroll;
 	private ListView lista;
-	private Button btnAgregarComentario;
+	private ImageButton btnAgregarComentario;
 
 	View rootView;
 	DatabaseHelper dh;
@@ -49,9 +51,9 @@ public class ComunidadFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		btnAgregarComentario= (Button)rootView.findViewById(R.id.btnAgregarComentario);
 		rootView = inflater.inflate(R.layout.activity_listado, container, false);
 		dh = new DatabaseHelper(getActivity().getApplicationContext());
+		btnAgregarComentario= (ImageButton)rootView.findViewById(R.id.btnAgregarComentario);
 
 		//Conexión de la APP a Kinvey
 		final ObjetosBackend obj= (ObjetosBackend) getActivity().getApplicationContext();

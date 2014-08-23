@@ -21,7 +21,7 @@ import android.widget.Toast;
 import dominio.Obra;
 
 /*  Fragment para seccion perfil */ 
-public class NovedadesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class NovedadesFragment extends android.support.v4.app.Fragment implements SwipeRefreshLayout.OnRefreshListener{
 	
 	private ArrayList<Obra>listaObras= new ArrayList<Obra>();
 	private ViewGroup layout;
