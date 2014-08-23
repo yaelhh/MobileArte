@@ -12,14 +12,21 @@
     <permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+	
+<!-- The following two permissions are not required to use
+     Google Maps Android API v2, but are recommended.
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/> -->
+  
 
     <!--
      The following two permissions are not required to use
@@ -42,12 +49,15 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
-        <!-- <uses-library android:name="com.google.android.maps" /> -->
-
-        <meta-data
+    <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCRJm4M9O6qUcB6gU40ZCBL8sGmRQglzzw" />
+  <meta-data
+            android:name="com.google.android.maps.v2.AIzaSyCRJm4M9O6qUcB6gU40ZCBL8sGmRQglzzw"
+            android:value="AIzaSyCRJm4M9O6qUcB6gU40ZCBL8sGmRQglzzw" />
+<!-- <uses-library android:name="com.google.android.maps" /> -->
+
+     
 
         <activity
             android:name="com.example.clientarte.SplashScreenActivity"
@@ -143,9 +153,7 @@
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
         </activity>
 
-        <meta-data
-            android:name="com.google.android.maps.v2.AIzaSyCRJm4M9O6qUcB6gU40ZCBL8sGmRQglzzw"
-            android:value="AIzaSyCRJm4M9O6qUcB6gU40ZCBL8sGmRQglzzw" />
+        
 
         <activity
             android:name="com.example.clientarte.SectorAActivity"
@@ -212,10 +220,12 @@
             </intent-filter>
         </service>
 
+
         <activity
             android:name="com.example.clientarte.ObrasFavoritasActivity"
             android:label="@string/title_activity_obras_favoritas" >
         </activity>
+
     </application>
 
 </manifest>

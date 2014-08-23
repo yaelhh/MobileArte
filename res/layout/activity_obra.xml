@@ -128,6 +128,12 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@android:drawable/btn_star_big_off" />
+              <ImageButton
+                android:id="@+id/favoritoSi"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@android:drawable/btn_star_big_on"
+                android:visibility="invisible" />
         </LinearLayout>
     </LinearLayout>
 

@@ -22,7 +22,7 @@ public final class R {
 		public static final int useDefaultMargins = 0x7f01007f;
 	}
 	public static final class dimen {
-		public static final int default_gap = 0x7f0b0015;
+		public static final int default_gap = 0x7f0c0015;
 	}
 	public static final class id {
 		public static final int alignBounds = 0x7f080029;
@@ -33,7 +33,7 @@ public final class R {
 		public static final int center_vertical = 0x7f08002f;
 		public static final int clip_horizontal = 0x7f080036;
 		public static final int clip_vertical = 0x7f080035;
-		public static final int end = 0x7f080016;
+		public static final int end = 0x7f080020;
 		public static final int fill = 0x7f080034;
 		public static final int fill_horizontal = 0x7f080032;
 		public static final int fill_vertical = 0x7f080030;

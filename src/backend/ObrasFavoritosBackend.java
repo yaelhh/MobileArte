@@ -49,4 +49,7 @@ public class ObrasFavoritosBackend extends LinkedGenericJson {
 	public String getIdObraFavorito() {
 		return idObraFavorito;
 	}
+
+
 }
+
