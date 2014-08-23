@@ -37,7 +37,7 @@ public class NosotrosActivity extends android.support.v4.app.FragmentActivity {
 
 	private SearchView mSearchView;
 //	private Fr mapView;
-	private MapController myMapController;
+//	private MapController myMapController;
 //	private MapView mapa = null;
 //	public static FragmentManager fragmentManager;
 	@Override
