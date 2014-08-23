@@ -81,7 +81,6 @@ public class ObraActivity extends ActionBarActivity {
 	private ImageButton btnAgregarComentarioObra;
 	private ImageButton btnVerVideo;
 	private ImageButton btnCompartirFacebook;
-<<<<<<< HEAD
 	private int mascaras=0;
 	
 	//	private int requestCode = 1;
@@ -95,10 +94,9 @@ public class ObraActivity extends ActionBarActivity {
 	/*DBAdapter dbAdapter;
 	Boolean mBound;*/
 	// Database Helper
-=======
+
 	private ImageButton btnFavoritos;
 	private ImageButton btnFavoritosSi;
->>>>>>> 04750b5... Commit 23/08/2014_01
 	DatabaseHelper db;
 	Spinner listFunciones;
 	Spinner listHorarios;
@@ -162,12 +160,6 @@ public class ObraActivity extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-<<<<<<< HEAD
-				Intent intent = new Intent(ObraActivity.this, CompraActivity.class);
-				intent.putExtra("obra",obra); 
-				intent.putExtra("mascaras", mascaras);
-				startActivity(intent);
-=======
 				if (!obj.captarUsuarioLogueado().user().getUsername().equalsIgnoreCase("adm")){
 					Intent intent = new Intent(ObraActivity.this, CompraActivity.class);
 					intent.putExtra("obra",obra); 
@@ -176,7 +168,6 @@ public class ObraActivity extends ActionBarActivity {
 					Toast.makeText(ObraActivity.this,"Para realizar la compra debe estar logueado. Gracias!" , Toast.LENGTH_SHORT).show();
 				}
 				
->>>>>>> 04750b5... Commit 23/08/2014_01
 			}
 
 		});

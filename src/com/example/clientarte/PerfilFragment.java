@@ -23,12 +23,9 @@ import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyPingCallback;
-<<<<<<< HEAD
 import com.kinvey.java.Query;
-=======
 import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.User;
->>>>>>> 04750b5... Commit 23/08/2014_01
 
 /*  Fragment para seccion perfil */ 
 public class PerfilFragment extends android.support.v4.app.Fragment {
@@ -232,11 +229,11 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 							Intent intent = new Intent(getActivity(), EditarUsuarioActivity.class);
 							startActivity(intent);
 
-//							if (mKinveyClient.user().isUserLoggedIn()) {
-//								mensajeConfirmacionDesloguear(obj);
-//								//desloguearUsuario();
-//
-//							}
+							//							if (mKinveyClient.user().isUserLoggedIn()) {
+							//								mensajeConfirmacionDesloguear(obj);
+							//								//desloguearUsuario();
+							//
+							//							}
 						}
 					}
 				}
@@ -258,7 +255,7 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 						mensajeConfirmacionDesloguear(obj);
 					}
 				}
-			
+
 			}
 		});
 
@@ -270,7 +267,7 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 			}
 
 		});
-		
+
 		btnCanjeMasc.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -292,14 +289,14 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 								intent.putExtra("mascaras", resultadoconsulta[0].getMascaras());
 								Log.e("PerfilFragment mascaras", resultadoconsulta[0].getMascaras());
 								startActivity(intent);	
-						}
-						@Override
-						public void onFailure(Throwable arg0) {
-							// TODO Auto-generated method stub
+							}
+							@Override
+							public void onFailure(Throwable arg0) {
+								// TODO Auto-generated method stub
 
-<<<<<<< HEAD
-						}
-					});
+
+							}
+						});
 					}  
 				});  
 				dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {  
@@ -311,16 +308,25 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 
 
 			}
-			
-=======
-		}
-	
+
+		});
+		btnFavoritos.setOnClickListener(new OnClickListener() { 
+			@Override 
+			public void onClick(View v) { 
+				Intent intent = new Intent(getActivity(), ObrasFavoritasActivity.class); 
+				startActivity(intent); 
+			} 
+
+		}); 
+	}
+
+
 	public void loginAdministrador () {
 		String usuario = "adm";
 		String password = "000";
 		//Verificar si el usuario está "logeado"
 		if (!mKinveyClient.user().isUserLoggedIn()) {
-		//Si no está "logeado" se realiza el login
+			//Si no está "logeado" se realiza el login
 			mKinveyClient.user().login(usuario, password, new KinveyUserCallback() {
 				public void onFailure(Throwable error) {
 					mensaje = "Error al realizar el login.";
@@ -340,18 +346,9 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 			Log.d("Realizando Kinvey Login", mensaje);
 		}
 	}
->>>>>>> 04750b5... Commit 23/08/2014_01
 
-		});
-		btnFavoritos.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), ObrasFavoritasActivity.class);
-				startActivity(intent);
-			}
 
-		});
-		}
-	
-	
-	}
+
+
+
+}

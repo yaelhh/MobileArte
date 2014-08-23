@@ -9,17 +9,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-=======
->>>>>>> 04750b5... Commit 23/08/2014_01
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -310,8 +299,6 @@ public class CompraActivity extends Activity {
 				//Se verifica que se hayan seleccionado las butacas
 				if(cant>0 && cantSeleccionadas==0){
 					//Se verifica que el usuario este logueado
-<<<<<<< HEAD
-
 					usuario=new Usuario();
 					usuario.setMiNombreUsuario(o.captarUsuarioLogueado().user().getUsername());
 					obtenerButacasSeleccionadas();
@@ -324,44 +311,9 @@ public class CompraActivity extends Activity {
 					if(Descuento>0){
 						calcularDescuento(compra,o,bar,mKinveyClient);
 					}else{
-=======
-					if(o.captarUsuarioLogueado()!= null){
-						usuario=new Usuario();
-						usuario.setMiNombreUsuario(o.captarUsuarioLogueado().user().getUsername());
-						obtenerButacasSeleccionadas();
-						//Obtenemos fecha actual
-						Calendar c = Calendar.getInstance();
-						SimpleDateFormat df1 = new SimpleDateFormat("dd-MMM-yyyy");
-						String fechaActual = df1.format(c.getTime());
-						//Obtenemos fecha de vigencia
-						String fechaVigencia = df1.format(sumarDiasFecha());
->>>>>>> 04750b5... Commit 23/08/2014_01
 						Log.e("datos","precio "+ precioTotal+" fecha "+ fechaActual+ " butacas "+ butacasSeleccionadas.size());
 						guardarCompra(compra,o,bar,mKinveyClient);
-<<<<<<< HEAD
-=======
 
-					}else{
-						AlertDialog.Builder dialogo1 = new AlertDialog.Builder(CompraActivity.this);  
-						dialogo1.setTitle("Importante");  
-						dialogo1.setMessage("Para continuar la compra necesita estar logueado,¿Desea loguearse?");            
-						dialogo1.setCancelable(false);  
-						dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {  
-							public void onClick(DialogInterface dialogo1, int id) {  
-								Intent intent = new Intent(CompraActivity.this, LoginActivity.class);
-								startActivity(intent);
-
-							}  
-						});  
-						dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {  
-							public void onClick(DialogInterface dialogo1, int id) {  
-								cancelar();
-							}  
-						});            
-						dialogo1.show();        
-
-
->>>>>>> 04750b5... Commit 23/08/2014_01
 					}
 
 				}else{

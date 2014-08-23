@@ -49,9 +49,7 @@ public class ObrasFavoritosBackend extends LinkedGenericJson {
 	public String getIdObraFavorito() {
 		return idObraFavorito;
 	}
-<<<<<<< HEAD
-}
-=======
+
 
 }
->>>>>>> 04750b5... Commit 23/08/2014_01
+
