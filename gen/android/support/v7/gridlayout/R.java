@@ -25,24 +25,24 @@ public final class R {
 		public static final int default_gap = 0x7f0c0015;
 	}
 	public static final class id {
-		public static final int alignBounds = 0x7f080029;
-		public static final int alignMargins = 0x7f08002a;
-		public static final int bottom = 0x7f08002c;
-		public static final int center = 0x7f080033;
-		public static final int center_horizontal = 0x7f080031;
-		public static final int center_vertical = 0x7f08002f;
-		public static final int clip_horizontal = 0x7f080036;
-		public static final int clip_vertical = 0x7f080035;
-		public static final int end = 0x7f080020;
-		public static final int fill = 0x7f080034;
-		public static final int fill_horizontal = 0x7f080032;
-		public static final int fill_vertical = 0x7f080030;
-		public static final int horizontal = 0x7f080027;
-		public static final int left = 0x7f08002d;
-		public static final int right = 0x7f08002e;
-		public static final int start = 0x7f080037;
-		public static final int top = 0x7f08002b;
-		public static final int vertical = 0x7f080028;
+		public static final int alignBounds = 0x7f090029;
+		public static final int alignMargins = 0x7f09002a;
+		public static final int bottom = 0x7f09002c;
+		public static final int center = 0x7f090033;
+		public static final int center_horizontal = 0x7f090031;
+		public static final int center_vertical = 0x7f09002f;
+		public static final int clip_horizontal = 0x7f090036;
+		public static final int clip_vertical = 0x7f090035;
+		public static final int end = 0x7f090020;
+		public static final int fill = 0x7f090034;
+		public static final int fill_horizontal = 0x7f090032;
+		public static final int fill_vertical = 0x7f090030;
+		public static final int horizontal = 0x7f090027;
+		public static final int left = 0x7f09002d;
+		public static final int right = 0x7f09002e;
+		public static final int start = 0x7f090037;
+		public static final int top = 0x7f09002b;
+		public static final int vertical = 0x7f090028;
 	}
 	public static final class styleable {
 		public static final int[] GridLayout = { 0x7f01007c, 0x7f01007d, 0x7f01007e, 0x7f01007f, 0x7f010080, 0x7f010081, 0x7f010082 };

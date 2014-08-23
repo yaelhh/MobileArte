@@ -1,26 +1,25 @@
 package com.example.clientarte;
 
-import java.util.ArrayList; 
-import java.util.List; 
+import java.util.ArrayList;
+import java.util.List;
 
-import android.app.AlertDialog; 
-import android.content.Context; 
-import android.graphics.drawable.Drawable; 
-import android.os.Bundle; 
-import android.support.v4.app.Fragment; 
-import android.support.v4.app.FragmentManager; 
-import android.view.Menu; 
-import android.widget.SearchView; 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.view.Menu;
+import android.widget.SearchView;
 
-import com.google.android.gms.maps.CameraUpdate; 
-import com.google.android.gms.maps.CameraUpdateFactory; 
-import com.google.android.gms.maps.GoogleMap; 
-import com.google.android.gms.maps.MapFragment; 
-import com.google.android.gms.maps.SupportMapFragment; 
-import com.google.android.gms.maps.model.CameraPosition; 
-import com.google.android.gms.maps.model.LatLng; 
-import com.google.android.gms.maps.model.MarkerOptions; 
-
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 
 
@@ -29,15 +28,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class NosotrosActivity extends android.support.v4.app.FragmentActivity {
 //public class NosotrosActivity extends  MapActivity implements OnQueryTextListener{
 
-	private SearchView mSearchView;
-//	private Fr mapView;
-<<<<<<< HEAD
-//	private MapController myMapController;
-=======
-	//private MapController myMapController;
->>>>>>> origin/develop
-//	private MapView mapa = null;
-//	public static FragmentManager fragmentManager;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
