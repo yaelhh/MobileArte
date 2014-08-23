@@ -2,9 +2,24 @@ package com.example.clientarte;
 
 import java.util.ArrayList;
 
+
+
+
+
+
+
+
+
+
+
+
+
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableContainer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,22 +28,35 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
+import backend.ComunidadBackend;
 import backend.DatabaseHelper;
 import backend.ObraBackend;
+import backend.ObrasFavoritosBackend;
+import backend.UsuarioBackend;
 
+import com.google.android.gms.internal.bt;
+import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
+import com.kinvey.android.callback.KinveyDeleteCallback;
 import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyPingCallback;
 import com.kinvey.android.callback.KinveyUserCallback;
 import com.kinvey.java.Query;
 import com.kinvey.java.User;
 import com.kinvey.java.core.KinveyClientCallback;
+import com.kinvey.java.model.KinveyDeleteResponse;
 
 import dominio.Funcion;
 import dominio.Obra;
@@ -53,6 +81,7 @@ public class ObraActivity extends ActionBarActivity {
 	private ImageButton btnAgregarComentarioObra;
 	private ImageButton btnVerVideo;
 	private ImageButton btnCompartirFacebook;
+<<<<<<< HEAD
 	private int mascaras=0;
 	
 	//	private int requestCode = 1;
@@ -66,6 +95,10 @@ public class ObraActivity extends ActionBarActivity {
 	/*DBAdapter dbAdapter;
 	Boolean mBound;*/
 	// Database Helper
+=======
+	private ImageButton btnFavoritos;
+	private ImageButton btnFavoritosSi;
+>>>>>>> 04750b5... Commit 23/08/2014_01
 	DatabaseHelper db;
 	Spinner listFunciones;
 	Spinner listHorarios;
@@ -87,9 +120,12 @@ public class ObraActivity extends ActionBarActivity {
 		btnAgregarComentarioObra = (ImageButton)findViewById(R.id.imageButton2);
 		btnVerVideo = (ImageButton)findViewById(R.id.imageButton3);
 		btnCompartirFacebook = (ImageButton)findViewById(R.id.imageButton1);
-		//obtenerImagenObra(kinveyClient);
+		btnFavoritos = (ImageButton)findViewById(R.id.favorito);
+		btnFavoritosSi = (ImageButton)findViewById(R.id.favoritoSi);
+				//obtenerImagenObra(kinveyClient);
+		validarFavorito(obra.getNombre());
 		crearActivity();
-		addListenerOnButton();
+		addListenerOnButton(obj);
 	}		
 	
 	public void referenciarIngresarComentario (View view){
@@ -121,15 +157,26 @@ public class ObraActivity extends ActionBarActivity {
 
 	}
 
-	public void addListenerOnButton(){
+	public void addListenerOnButton(final ObjetosBackend obj){
 		btnComprar.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+<<<<<<< HEAD
 				Intent intent = new Intent(ObraActivity.this, CompraActivity.class);
 				intent.putExtra("obra",obra); 
 				intent.putExtra("mascaras", mascaras);
 				startActivity(intent);
+=======
+				if (!obj.captarUsuarioLogueado().user().getUsername().equalsIgnoreCase("adm")){
+					Intent intent = new Intent(ObraActivity.this, CompraActivity.class);
+					intent.putExtra("obra",obra); 
+					startActivity(intent);
+				}else{
+					Toast.makeText(ObraActivity.this,"Para realizar la compra debe estar logueado. Gracias!" , Toast.LENGTH_SHORT).show();
+				}
+				
+>>>>>>> 04750b5... Commit 23/08/2014_01
 			}
 
 		});
@@ -169,7 +216,146 @@ public class ObraActivity extends ActionBarActivity {
 		}
 
 	});
+	
+	btnFavoritos.setOnClickListener(new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			if (!obj.captarUsuarioLogueado().user().getUsername().equalsIgnoreCase("adm")){
+				save(obra.getNombre());
+				btnFavoritos.setVisibility(View.GONE);
+				btnFavoritosSi.setVisibility(View.VISIBLE);
+			}else{
+				
+			}
+		}
+
+	});
+	
+	btnFavoritosSi.setOnClickListener(new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			if (!obj.captarUsuarioLogueado().user().getUsername().equalsIgnoreCase("adm")){
+				borrarFavorito(obra.getNombre());
+				btnFavoritos.setVisibility(View.VISIBLE);
+				btnFavoritosSi.setVisibility(View.GONE);
+			}else{
+				
+			}
+		}
+
+	});
 }
+	
+	public void validarFavorito(String nomO){
+		String nomU = kinveyClient.user().getUsername().toString();
+		Query query1 = kinveyClient.query ();
+		Query query2 = kinveyClient.query ();
+		query1.equals("nombreObra", String.valueOf(nomO));
+		query1.equals("nombreUsuario", String.valueOf(nomU));
+		AsyncAppData<ObrasFavoritosBackend> searchedEvents = kinveyClient.appData("ObrasFavoritos", ObrasFavoritosBackend.class);
+		searchedEvents.get(query1.and(query2) , new KinveyListCallback<ObrasFavoritosBackend>() {
+			@Override
+			public void onSuccess(ObrasFavoritosBackend[] resultadoconsulta) { 
+				for (int i = 0; i<resultadoconsulta.length; i++){
+					if (resultadoconsulta.length>=1){
+						btnFavoritos.setVisibility(View.GONE);
+						btnFavoritosSi.setVisibility(View.VISIBLE);
+					}	else{
+						btnFavoritos.setVisibility(View.VISIBLE);
+						btnFavoritosSi.setVisibility(View.GONE);
+					}
+				}
+				
+			}
+			@Override
+			public void onFailure(Throwable arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+
+	}
+	
+	public void borrarFavorito (String nomObra){
+		String nomU = kinveyClient.user().getUsername().toString();
+		Query query1 = kinveyClient.query ();
+		Query query2 = kinveyClient.query ();
+		query1.equals("nombreObra", String.valueOf(nomObra));
+		query1.equals("nombreUsuario", String.valueOf(nomU));
+		final ObrasFavoritosBackend entity = new ObrasFavoritosBackend ();
+
+		AsyncAppData<ObrasFavoritosBackend> searchedEvents = kinveyClient.appData("ObrasFavoritos", ObrasFavoritosBackend.class);
+		searchedEvents.get(query1.and(query2) , new KinveyListCallback<ObrasFavoritosBackend>() {
+
+			
+			@Override
+			public void onFailure(Throwable arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+
+			@Override
+			public void onSuccess(ObrasFavoritosBackend[] arg0) {
+				String idF = "";
+				for (int i=0;i<arg0.length;i++){
+					idF=arg0[i].getIdObraFavorito().toString();
+				}
+				eliminar(idF);
+				
+			}
+
+
+		});
+
+
+	}
+	
+	public void eliminar (String id){
+		String eventId = id;
+		AsyncAppData<ObrasFavoritosBackend> myevents = kinveyClient.appData("ObrasFavoritos", ObrasFavoritosBackend.class);
+		myevents.delete(eventId, new KinveyDeleteCallback() {
+		@Override
+		public void onSuccess(KinveyDeleteResponse response) { 
+			Log.e(TAG, "bORRO REGISTRO");
+		}
+		public void onFailure(Throwable error) {
+			}
+		});
+	}
+	
+	
+
+	
+	public void save (String nomObra){
+		String nomU = kinveyClient.user().getUsername().toString();
+		final ObrasFavoritosBackend entity = new ObrasFavoritosBackend ();
+		entity.put("nombreObra", nomObra);
+		entity.put("nombreUsuario", nomU);
+		kinveyClient.appData("ObrasFavoritos", ObrasFavoritosBackend.class).save(entity, new KinveyClientCallback<ObrasFavoritosBackend>() {
+
+
+			@Override
+			public void onSuccess(ObrasFavoritosBackend result) {
+
+				Toast.makeText(ObraActivity.this,"Revoluciones: " + result.getNombreObra()
+						+ "\nDescription: " , Toast.LENGTH_LONG).show();
+
+
+			}
+
+			@Override
+			public void onFailure(Throwable error) {
+				Log.e(TAG, "AppData.save Failure", error);
+				Toast.makeText(ObraActivity.this, "Save All error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+			}
+		});
+	}
+
+	
 	
 	
 	public void Compartir(String titulo,String cuerpoMensaje ){
@@ -182,105 +368,6 @@ public class ObraActivity extends ActionBarActivity {
 		   //startActivity(Intent.createChooser(intentCompartir ,  titulo));
 		   this.startActivity(Intent.createChooser(intentCompartir,  titulo ));
 	}
-
-
-
-
-//		listFunciones.setAdapter(new itemAdapter(this, R.layout.activity_obra, obra.getListaFunciones()) {
-//		IA= new itemAdapter(this, R.layout.activity_obra, obra.getListaFunciones()) {
-//
-//			@Override
-//			public void onEntrada(Object entrada, View view) {
-//				if (entrada != null) {
-//					TextView texto_superior_entrada = (TextView) view.findViewById(R.id.labelHorario); 
-//					if (texto_superior_entrada != null) 
-//						texto_superior_entrada.setText("Hola"); 
-//				}
-//
-//			}
-//		};
-
-
-
-//			@Override
-//			public void onEntrada(Object entrada, View view) {
-//				// TODO Auto-generated method stub
-//				
-//			 }
-//		}
-//	});
-//		
-//		
-//		
-//		
-//
-//			@Override
-//			public void onEntrada(Object entrada, View view) {
-//		        if (entrada != null) {
-//		            TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior); 
-//		            if (texto_superior_entrada != null) 
-//		            	texto_superior_entrada.setText(((Lista_entrada) entrada).get_textoEncima()); 
-//
-//		            TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior); 
-//		            if (texto_inferior_entrada != null)
-//		            	texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo()); 
-//
-//		            ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen); 
-//		            if (imagen_entrada != null)
-//		            	imagen_entrada.setImageResource(((Lista_entrada) entrada).get_idImagen());
-//		        }
-//			}
-//		});
-//			
-
-//}
-//listFunciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//	@Override
-//	public void onItemClick(AdapterView adapter, View view, int position, long arg) {
-//
-//		// Sets the visibility of the indeterminate progress bar in the
-//		// title
-//		setProgressBarIndeterminateVisibility(true);
-//
-//		// Show progress dialog
-//		       Di progressDialog = ProgressDialog.show(ObraActivity.this, "ProgressDialog", "Loading!");
-//		 
-//		        // Tells JavaScript to open windows automatically.
-//		        webView.getSettings().setJavaScriptEnabled(true);
-//		 
-//		        // Sets our custom WebViewClient.
-//		        webView.setWebViewClient(new myWebClient());
-//		 
-//		        // Loads the given URL
-//		        Item item = (Item) listView.getAdapter().getItem(position);
-//		            webView.loadUrl(item.getUrl());
-//	}
-//});
-//}
-
-
-//		DatabaseHelper myDbHelper = new DatabaseHelper(this);
-//		myDbHelper = new DatabaseHelper(this);
-
-
-//		try {
-//			myDbHelper.createDataBase();
-//			
-//		} catch (IOException ioe) {
-//
-//			throw new Error("Unable to create database");
-//
-//		}
-//		
-//		Obra miObra = new Obra ("Redemption", "Jason Statham");
-//		Obra miObra2 = new Obra ("La Madrastra", "Victoria Ruffo");
-//		Obra miObra3 = new Obra ("The Wolf of Wall Street", "Leonardo DiCaprio");
-//		Obra miObra4 = new Obra ("X-Men", "Hugh Jackman");
-//		myDbHelper.createObra(miObra);
-//		myDbHelper.createObra(miObra2);
-//		myDbHelper.createObra(miObra3);
-//		myDbHelper.createObra(miObra4);
-
 
 		
 

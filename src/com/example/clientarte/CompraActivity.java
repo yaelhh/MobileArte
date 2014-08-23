@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+<<<<<<< HEAD
 
 
 
@@ -17,6 +18,8 @@ import java.util.HashMap;
 
 
 
+=======
+>>>>>>> 04750b5... Commit 23/08/2014_01
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -84,7 +87,6 @@ public class CompraActivity extends Activity {
 	private HashMap<String, Boolean> hashComodidades = new HashMap <String, Boolean> ();	
 	private Sala sala;
 	private Butaca miButaca;
-	//	private Objetos obj;
 	private Obra obra;
 	private Sector sectorA;
 	private Sector sectorB;
@@ -123,7 +125,6 @@ public class CompraActivity extends Activity {
 		bar=(ProgressBar)findViewById(R.id.progressBarCompra);
 		bar.setIndeterminate(true);
 		bar.setVisibility(View.GONE);
-		//         txtCargando.setVisibility(true);
 		ArrayList<Funcion>lista= obra.getListaFunciones();	
 		//Creamos el adaptador
 		ArrayAdapter<Funcion> spinner_adapter = new ArrayAdapter<Funcion>(this,android.R.layout.simple_spinner_item, lista);
@@ -135,8 +136,6 @@ public class CompraActivity extends Activity {
 		sala= obtenerSala(obj);
 		txtSala.setText(sala.getNombreSala());
 		cantEntradas=(EditText)findViewById(R.id.idCantidadEntradas);
-		//		       cant=cantEntradas.getText().toString();
-
 		usuario= new Usuario();
 
 		//El cantButaca va a ser de acuerdo al sector que estemos creando, aca lo inicializamos asi
@@ -145,7 +144,10 @@ public class CompraActivity extends Activity {
 		bttnSectorC=(Button)findViewById(R.id.sectorC);
 		btnComprar=(Button)findViewById(R.id.button_comprar);
 		//		btnComprar.setClickable(false);
-		realizarCompra(obj,bar);
+		
+			realizarCompra(obj,bar);
+		
+		
 
 
 		sprHorario.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -297,7 +299,7 @@ public class CompraActivity extends Activity {
 	}
 
 
-	public void realizarCompra(ObjetosBackend obj,ProgressBar b)  {
+	public void realizarCompra(final ObjetosBackend obj,ProgressBar b)  {
 		final ObjetosBackend o=obj;
 		final ProgressBar bar=b;
 		mKinveyClient=o.getmKinveyClient();
@@ -308,6 +310,7 @@ public class CompraActivity extends Activity {
 				//Se verifica que se hayan seleccionado las butacas
 				if(cant>0 && cantSeleccionadas==0){
 					//Se verifica que el usuario este logueado
+<<<<<<< HEAD
 
 					usuario=new Usuario();
 					usuario.setMiNombreUsuario(o.captarUsuarioLogueado().user().getUsername());
@@ -321,21 +324,52 @@ public class CompraActivity extends Activity {
 					if(Descuento>0){
 						calcularDescuento(compra,o,bar,mKinveyClient);
 					}else{
+=======
+					if(o.captarUsuarioLogueado()!= null){
+						usuario=new Usuario();
+						usuario.setMiNombreUsuario(o.captarUsuarioLogueado().user().getUsername());
+						obtenerButacasSeleccionadas();
+						//Obtenemos fecha actual
+						Calendar c = Calendar.getInstance();
+						SimpleDateFormat df1 = new SimpleDateFormat("dd-MMM-yyyy");
+						String fechaActual = df1.format(c.getTime());
+						//Obtenemos fecha de vigencia
+						String fechaVigencia = df1.format(sumarDiasFecha());
+>>>>>>> 04750b5... Commit 23/08/2014_01
 						Log.e("datos","precio "+ precioTotal+" fecha "+ fechaActual+ " butacas "+ butacasSeleccionadas.size());
 						guardarCompra(compra,o,bar,mKinveyClient);
+<<<<<<< HEAD
+=======
+
+					}else{
+						AlertDialog.Builder dialogo1 = new AlertDialog.Builder(CompraActivity.this);  
+						dialogo1.setTitle("Importante");  
+						dialogo1.setMessage("Para continuar la compra necesita estar logueado,¿Desea loguearse?");            
+						dialogo1.setCancelable(false);  
+						dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {  
+							public void onClick(DialogInterface dialogo1, int id) {  
+								Intent intent = new Intent(CompraActivity.this, LoginActivity.class);
+								startActivity(intent);
+
+							}  
+						});  
+						dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {  
+							public void onClick(DialogInterface dialogo1, int id) {  
+								cancelar();
+							}  
+						});            
+						dialogo1.show();        
+
+
+>>>>>>> 04750b5... Commit 23/08/2014_01
 					}
 
 				}else{
 					Toast.makeText(CompraActivity.this,"Debe seleccionar todas las butacas antes de continuar" , Toast.LENGTH_SHORT).show();
 
 				}
-
 			}
-
 		});
-
-
-
 	}
 	//Calcula el descuento de las mascaras
 	public void calcularDescuento(final Compra compra,final ObjetosBackend obj,final ProgressBar b,final Client kinveyClient){

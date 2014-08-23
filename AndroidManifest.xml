@@ -52,7 +52,10 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 <<<<<<< HEAD
+<<<<<<< HEAD
         <uses-library android:name="com.google.android.maps" />
+=======
+>>>>>>> 04750b5... Commit 23/08/2014_01
 
           <meta-data
             android:name="com.google.android.maps.AIzaSyCMIudgB3mpht9TGstyneIVK2pr3yRC9Hc"

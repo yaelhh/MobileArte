@@ -23,7 +23,12 @@ import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
 import com.kinvey.android.callback.KinveyListCallback;
 import com.kinvey.android.callback.KinveyPingCallback;
+<<<<<<< HEAD
 import com.kinvey.java.Query;
+=======
+import com.kinvey.android.callback.KinveyUserCallback;
+import com.kinvey.java.User;
+>>>>>>> 04750b5... Commit 23/08/2014_01
 
 /*  Fragment para seccion perfil */ 
 public class PerfilFragment extends android.support.v4.app.Fragment {
@@ -81,69 +86,6 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 
 		return rootView;
 	}
-
-	//    public void validarUsuarioOpcion(View view){
-	//    	mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
-	//    	//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-	//    	if (!mKinveyClient.user().isUserLoggedIn()) {
-	//    		mensajeConfirmacion();
-	//    		//			PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
-	//    		//                    LoginActivity.class));
-	//    		//			PerfilActivity.this.finish();
-	//    	}else{
-	//    		if (mKinveyClient.user().isUserLoggedIn()) {
-	//    			mensajeConfirmacionDesloguear();
-	//    			//desloguearUsuario();
-	//    		}
-	//    	}
-	//    }
-
-	//    public void desloguearUsuario () {
-	//
-	//      		btnCuenta=(Button)rootView.findViewById(R.id.btnCuenta);
-	//      		btnCuenta.setOnClickListener(new OnClickListener() {
-	//      			 
-	//    			@Override
-	//    			public void onClick(View v) {
-	//    				mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
-	//    				//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-	//    				if (!mKinveyClient.user().isUserLoggedIn()) {
-	//    					mensajeConfirmacion();
-	////    					PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
-	////    		                    LoginActivity.class));
-	////    					PerfilActivity.this.finish();
-	//    				}else{
-	//    					if (mKinveyClient.user().isUserLoggedIn()) {
-	//    					mensajeConfirmacionDesloguear();
-	//    					//desloguearUsuario();
-	//    				}
-	//    				}
-	//
-	//  			}
-	//
-	//    		});
-	//        return rootView;
-	//    }
-
-	//    public void validarUsuarioOpcion(View view){
-	//		mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
-	//		//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-	//		if (!mKinveyClient.user().isUserLoggedIn()) {
-	//			mensajeConfirmacion();
-	////			PerfilActivity.this.startActivity(new Intent(PerfilActivity.this, 
-	////                    LoginActivity.class));
-	////			PerfilActivity.this.finish();
-	//		}else{
-	//			if (mKinveyClient.user().isUserLoggedIn()) {
-	//			mensajeConfirmacionDesloguear();
-	//			//desloguearUsuario();
-	//		}
-	//		}
-	//	}
-
-
-
-
 
 	public void desloguearUsuario (ObjetosBackend obj) {
 		//super.onDestroy();
@@ -210,6 +152,7 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 				//				Intent intent = new Intent(PerfilActivity.this, LoginActivity.class); 
 				//				startActivity(intent); 
 				desloguearUsuario (obj);
+				loginAdministrador ();
 
 			} 
 		}); 
@@ -275,58 +218,37 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 				t3.show();
 			}
 
-
-			//		Toast t4=Toast.makeText(getActivity(),"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT).show();
-
-
-
-
 		});
-
-		//		btnCuenta.setOnClickListener(new OnClickListener() {	 
-		//			@Override
-		//			public void onClick(View v) {
-		//				mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
-		//				if (!mKinveyClient.user().isUserLoggedIn()) {
-		//					mensajeConfirmacion();
-		//				}else{
-		//					
-		//					if (mKinveyClient.user().isUserLoggedIn()) {
-		//						mensajeConfirmacionDesloguear();
-		//						//desloguearUsuario();
-		//					}
-		//				}
-		//			}
-		//		});
 
 		btnEditarUsuario.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (!obj.captarUsuarioLogueado().user().isUserLoggedIn()){	
-					mensajeConfirmacion();
-				}else{
+				if (!obj.captarUsuarioLogueado().user().getUsername().equalsIgnoreCase("adm")){
+					if (!obj.captarUsuarioLogueado().user().isUserLoggedIn()){	
+						mensajeConfirmacion();
+					}else{
 
-					if (obj.captarUsuarioLogueado().user().isUserLoggedIn()) {
-						Intent intent = new Intent(getActivity(), EditarUsuarioActivity.class);
-						startActivity(intent);
+						if (obj.captarUsuarioLogueado().user().isUserLoggedIn()) {
+							Intent intent = new Intent(getActivity(), EditarUsuarioActivity.class);
+							startActivity(intent);
 
-						if (mKinveyClient.user().isUserLoggedIn()) {
-							mensajeConfirmacionDesloguear(obj);
-							//desloguearUsuario();
-
+//							if (mKinveyClient.user().isUserLoggedIn()) {
+//								mensajeConfirmacionDesloguear(obj);
+//								//desloguearUsuario();
+//
+//							}
 						}
 					}
 				}
 			}
-			});
+		});
 
 		btnLoguear.setOnClickListener(new OnClickListener() {	 
 			@Override
 			public void onClick(View v) {
-				//AsyncUser<User> usu = obj.captarUsuarioLogueado().user();
-				//mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
-				//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
-				//if (!mKinveyClient.user().isUserLoggedIn()) {
+				if (obj.captarUsuarioLogueado().user().getUsername().equalsIgnoreCase("adm")){
+					desloguearUsuario(obj);
+				}	
 				if (!obj.captarUsuarioLogueado().user().isUserLoggedIn()){	
 					mensajeConfirmacion();
 
@@ -336,6 +258,7 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 						mensajeConfirmacionDesloguear(obj);
 					}
 				}
+			
 			}
 		});
 
@@ -374,6 +297,7 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 						public void onFailure(Throwable arg0) {
 							// TODO Auto-generated method stub
 
+<<<<<<< HEAD
 						}
 					});
 					}  
@@ -388,6 +312,35 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 
 			}
 			
+=======
+		}
+	
+	public void loginAdministrador () {
+		String usuario = "adm";
+		String password = "000";
+		//Verificar si el usuario está "logeado"
+		if (!mKinveyClient.user().isUserLoggedIn()) {
+		//Si no está "logeado" se realiza el login
+			mKinveyClient.user().login(usuario, password, new KinveyUserCallback() {
+				public void onFailure(Throwable error) {
+					mensaje = "Error al realizar el login.";
+					Log.e("Realizando Kinvey Login", mensaje, error);
+				}
+				@Override
+				public void onSuccess(User u) {
+					//Se muestra mensaje de bienvenida por pantalla
+					mensaje = "Bienvenido usuario: " + u.getUsername() + ".";
+					Toast.makeText(getActivity(), mensaje, Toast.LENGTH_LONG).show();
+					//Se graba registro en el log
+					Log.d("Realizando Kinvey Login", mensaje);
+				}
+			});
+		} else {
+			mensaje = "Utilizando usuario cacheado: " + mKinveyClient.user().getUsername() + ".";
+			Log.d("Realizando Kinvey Login", mensaje);
+		}
+	}
+>>>>>>> 04750b5... Commit 23/08/2014_01
 
 		});
 		btnFavoritos.setOnClickListener(new OnClickListener() {
