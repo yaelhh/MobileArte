@@ -1,9 +1,5 @@
 package com.example.clientarte;
 
-
-
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,22 +20,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.maps.GeoPoint;
-import com.google.android.maps.ItemizedOverlay;
-import com.google.android.maps.MapActivity;
-import com.google.android.maps.MapController;
-import com.google.android.maps.MapView;
-import com.google.android.maps.OverlayItem;
+
+
+
 
 
 public class NosotrosActivity extends android.support.v4.app.FragmentActivity {
 //public class NosotrosActivity extends  MapActivity implements OnQueryTextListener{
 
-	private SearchView mSearchView;
-//	private Fr mapView;
-//	private MapController myMapController;
-//	private MapView mapa = null;
-//	public static FragmentManager fragmentManager;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

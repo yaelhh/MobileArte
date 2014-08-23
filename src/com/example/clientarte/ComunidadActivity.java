@@ -79,17 +79,6 @@ public class ComunidadActivity extends ActionBarActivity {
 			cargarDatosFiltrados(obra.getIdObra());
 		}
 
-
-//		btnAgregarComentario= (ImageButton)findViewById(R.id.btnAgregarComentario);
-//		btnAgregarComentario.setOnClickListener(new OnClickListener() {  
-//			@Override
-//			public void onClick(View v) {
-//				if(validarBoton(mKinveyClient, obj)){
-//					ingresarComentario(obra.getIdObra());	
-//				}
-				
-//			}
-//		});
 		btnAgregarComentario= (ImageButton)findViewById(R.id.btnAgregarComentario);
 		addListenerOnButton(obj);
 	}
@@ -100,17 +89,22 @@ public class ComunidadActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				if(validarBoton(mKinveyClient, obj)){
-					if (obra != null){
-						ingresarComentario(obra.getIdObra());	
-					}
-					if (obra == null){
-						ingresarComentarioSinObra();
-					}else{
-						Toast t2 = Toast.makeText(obj, "No logueado", 8);
-						t2.show();
+					if (!obj.captarUsuarioLogueado().user().getUsername().equalsIgnoreCase("adm")){
+						if (obra != null){
+							ingresarComentario(obra.getIdObra());	
+						}
+						if (obra == null){
+							ingresarComentarioSinObra();
+						}else{
+							Toast t2 = Toast.makeText(obj, "No logueado", 8);
+							t2.show();
+						}
 					}
 
 				}
+				String texto = "Si desea ingresar un comentario debe estar logueado. Gracias";
+				Toast toast = Toast.makeText(ComunidadActivity.this, texto, Toast.LENGTH_LONG);
+				toast.show();
 
 			}
 		});
@@ -177,35 +171,6 @@ public class ComunidadActivity extends ActionBarActivity {
 	}
 
 
-//	public void conectarBackend (){
-//		mKinveyClient = new Client.Builder(appKey, appSecret, this).build();
-//		mKinveyClient.ping(new KinveyPingCallback() {
-//			public void onFailure(Throwable t) {
-//				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
-//			}
-//			public void onSuccess(Boolean b) {
-//				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
-//			}
-//		});
-//		//mKinveyClient.user().login("nlema", "nlema", new KinveyUserCallback() {
-//		if (!mKinveyClient.user().isUserLoggedIn()) {
-//			mKinveyClient.user().login(new KinveyUserCallback() {
-//				public void onFailure(Throwable error) {
-//					mensaje = "Error al realizar el login.";
-//					Log.e("Realizando Kinvey Login", mensaje, error);
-//				}
-//				@Override
-//				public void onSuccess(User u) {
-//					mensaje = "Bienvenido usuario: " + u.getId() + ".";
-//					Log.d("Realizando Kinvey Login", mensaje);
-//				}
-//			});
-//		} else {
-//			mensaje = "Utilizando usuario implícito cacheado: " + mKinveyClient.user().getId() + ".";
-//			Log.d("Realizando Kinvey Login", mensaje);
-//		}
-//
-//	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
