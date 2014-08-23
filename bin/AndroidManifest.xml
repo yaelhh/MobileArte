@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.clientarte"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!--
+     The following two permissions are not required to use
+     Google Maps Android API v2, but are recommended.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <uses-sdk
+        android:minSdkVersion="12"
+        android:targetSdkVersion="19" />
+
+    <application
+        android:name="com.example.clientarte.ObjetosBackend"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <!-- <uses-library android:name="com.google.android.maps" /> -->
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCRJm4M9O6qUcB6gU40ZCBL8sGmRQglzzw" />
+
+        <activity
+            android:name="com.example.clientarte.SplashScreenActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.clientarte.ProgramacionActivity"
+            android:label="@string/title_activity_principal"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.PrincipalActivity"
+            android:label="@string/title_activity_programacion"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.BusquedaActivity"
+            android:label="@string/title_activity_busqueda"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.PerfilActivity"
+            android:label="@string/title_activity_perfil"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.MainActivity"
+            android:label="@string/title_activity_splash_screen"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.NovedadesActivity"
+            android:label="@string/title_activity_novedades_main"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.CreateAccountActivity"
+            android:label="@string/title_activity_create_account"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.ObraActivity"
+            android:label="@string/title_activity_obra"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.LoginActivity"
+            android:label="@string/action_settings"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.OpenYouTubePlayerActivity"
+            android:label="@string/action_settings"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.SettingsActivity"
+            android:label="@string/action_settings"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.CompraActivity"
+            android:label="@string/title_activity_compra"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.PruebaasientosActivity"
+            android:label="@string/title_activity_pruebaasientos"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.NosotrosActivity"
+            android:label="@string/title_activity_nosotros"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.ComunidadActivity"
+            android:label="@string/title_activity_comunidad"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.EditarUsuarioActivity"
+            android:label="@string/title_activity_comunidad"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.AIzaSyCRJm4M9O6qUcB6gU40ZCBL8sGmRQglzzw"
+            android:value="AIzaSyCRJm4M9O6qUcB6gU40ZCBL8sGmRQglzzw" />
+
+        <activity
+            android:name="com.example.clientarte.SectorAActivity"
+            android:label="@string/title_activity_sectora"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.CompraRealizadaActivity"
+            android:label="@string/title_activity_compra_realizada" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.ProxObrasActivity"
+            android:label="@string/title_activity_prox_obras" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.ObrasVistas"
+            android:label="@string/title_activity_prox_obras" >
+        </activity>
+        <activity
+            android:name="com.example.clientarte.VideoActivity"
+            android:label="@string/title_activity_compra_realizada" >
+        </activity>
+        <activity
+            android:name="com.google.zxing.client.android.encode.EncodeActivity"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.zxing.client.android.ENCODE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.clientarte.NotificacionesActivity"
+            android:label="@string/title_activity_principal"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.google.zxing.client.android.history.HistoryActivity"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name="com.kinvey.sample.signin.KinveyAuthenticationService" >
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" >
+                </action>
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="com.example.clientarte.ObrasFavoritasActivity"
+            android:label="@string/title_activity_obras_favoritas" >
+        </activity>
+    </application>
+
+</manifest>
