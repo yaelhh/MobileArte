@@ -57,6 +57,9 @@ public class NotificacionesBackend extends GenericJson{
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
+	public String getIdNotificacion() {
+		return idNotificacion;
+	}
 	
 	
 

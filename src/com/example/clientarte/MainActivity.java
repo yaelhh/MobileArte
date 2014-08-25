@@ -109,7 +109,7 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_main);	
 		dh = new DatabaseHelper(getApplicationContext());
-		
+
 		fragmentManager = getSupportFragmentManager();
 		setTitle("Art-e");
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
@@ -280,9 +280,14 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 		switch (item.getItemId()) {
 		case R.id.action_notification:
 			//composeMessage();
-			Intent intent = new Intent(MainActivity.this, NotificacionesActivity.class);
-			startActivity(intent);
-			return true;
+			if (mKinvey.user().getUsername().toString().equalsIgnoreCase("adm")){
+				Toast.makeText(getApplicationContext(), "Debe estar logueado para ver las notificaciones.", Toast.LENGTH_LONG).show();
+			}else{
+				Intent intent = new Intent(MainActivity.this, NotificacionesActivity.class);
+				startActivity(intent);
+				return true;	
+			}
+			
 		default:
 
 
@@ -346,8 +351,14 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 	}
 
 	public void llamarNotificacionesActvity(){
-		Intent intent = new Intent(MainActivity.this, NotificacionesActivity.class);
-		startActivity(intent);
+		if(!mKinvey.user().getUsername().toString().equalsIgnoreCase("adm")){
+			Intent intent = new Intent(MainActivity.this, NotificacionesActivity.class);
+			startActivity(intent);
+			Log.e("llamo a notificaciones dentro if",mKinvey.user().getUsername().toString() );
+		}else{
+			Toast.makeText(this,"Debe estar logeado para poder ver sus notificaciones", Toast.LENGTH_SHORT).show();
+
+		}
 	}
 
 	@Override 
@@ -491,7 +502,7 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 						}
 					}
 				}catch (Exception i){
-//					Toast.makeText(MainActivity.this, "Segui tranqui", icono_v).show();	
+					//					Toast.makeText(MainActivity.this, "Segui tranqui", icono_v).show();	
 				}
 
 			}

@@ -67,15 +67,16 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 				//				if(!mKinveyClient.user().getUsername().equalsIgnoreCase("adm")){
 				//				txtNombreUsuario.setText(mKinveyClient.user().getUsername());
 				//				}
+				try{
+					if(!mKinveyClient.user().getUsername().toString().equalsIgnoreCase("adm")){
+						txtNombreUsuario.setText(mKinveyClient.user().getUsername().toString());
+					}
+				}catch(Exception e){
+					Log.e("Setear nombre usuario","No pudo setear el nombre de usuario");
+				}
 			}
 		});
-		try{
-			if(!mKinveyClient.user().getUsername().equalsIgnoreCase("adm")){
-				txtNombreUsuario.setText(mKinveyClient.user().getUsername().toString());
-			}
-		}catch(Exception e){
-			Log.e("Setear nombre usuario","No pudo setear el nombre de usuario");
-		}
+		
 		mKinveyClient = obj.captarUsuarioLogueado();
 		//btnCuenta= (Button)rootView.findViewById(R.id.btnCuenta);
 		//		btnRegistrar= (Button)rootView.findViewById(R.id.registrarUsuarioPerfil);
@@ -245,7 +246,11 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 							//							}
 						}
 					}
+				}else{
+					Toast.makeText(getActivity(), "Debe estar logueado para editar sus datos", Toast.LENGTH_LONG).show();
+
 				}
+				
 			}
 		});
 
@@ -344,25 +349,30 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 		String usuario = "adm";
 		String password = "000";
 		//Verificar si el usuario está "logeado"
+		try{
 		if (!mKinveyClient.user().isUserLoggedIn()) {
 			//Si no está "logeado" se realiza el login
 			mKinveyClient.user().login(usuario, password, new KinveyUserCallback() {
 				public void onFailure(Throwable error) {
 					mensaje = "Error al realizar el login.";
-					Log.e("No pudo realizar Kinvey Login", mensaje, error);
+					Log.e("No pudo realizar Kinvey Login con ADM", mensaje, error);
 				}
 				@Override
 				public void onSuccess(User u) {
 					//Se muestra mensaje de bienvenida por pantalla
 					Toast.makeText(getActivity(), mensaje, Toast.LENGTH_LONG).show();
 					//Se graba registro en el log
-					Log.e("Realizando Kinvey Login", "mensaje");
+					Log.e("Realizando Kinvey Login con ADM", "mensaje");
 					txtNombreUsuario.setText("");
 				}
 			});
 		} else {
 			mensaje = "Utilizando usuario cacheado: " + mKinveyClient.user().getUsername() + ".";
-			Log.e("Usuario Logueado", mensaje);
+			Log.e("Usuario Logueado ADM", mensaje);
+		}
+		}catch(Exception e){
+			Log.e("login administrador catch ", "error "+ e);
+
 		}
 	}
 

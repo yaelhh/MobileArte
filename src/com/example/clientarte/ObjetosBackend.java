@@ -314,7 +314,7 @@ public class ObjetosBackend extends Application{
 				for (int i = 0; i < resultadoconsulta.length; i++) {
 					//					ArrayList<Funcion> listaFuncionesObra= new ArrayList<Funcion>();
 					Funcion funcion= new Funcion(resultadoconsulta[i].getIdFuncion(),Double.parseDouble(resultadoconsulta[i].getDuracion()),resultadoconsulta[i].getFechaObra(),resultadoconsulta[i].getHoraComienzo());
-					for(int x=0;x<listaObra.size()-1;x++){
+					for(int x=0;x<listaObra.size();x++){
 						if(resultadoconsulta[i].getIdObra()==listaObra.get(x).getIdObra()){
 							//													if(resultadoconsulta[i].getIdObra().equalsIgnoreCase(listaObra.get(x).getIdObra())){
 							Log.e("resultado "+ i+" " +resultadoconsulta[i].getIdObra(), "lista  "+x+" "+listaObra.get(x).getIdObra());

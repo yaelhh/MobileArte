@@ -70,9 +70,9 @@ public class ComunidadActivity extends ActionBarActivity {
 		mKinveyClient = obj.captarUsuarioLogueado();
 		//validarBoton(mKinveyClient, obj);
 
-//		if (!mKinveyClient.user().isUserLoggedIn()) {
-//			conectarBackend ();
-//		}
+		//		if (!mKinveyClient.user().isUserLoggedIn()) {
+		//			conectarBackend ();
+		//		}
 		if (obra == null){
 			cargarDatos(mKinveyClient);
 		}else{
@@ -82,7 +82,7 @@ public class ComunidadActivity extends ActionBarActivity {
 		btnAgregarComentario= (ImageButton)findViewById(R.id.btnAgregarComentario);
 		addListenerOnButton(obj);
 	}
-	
+
 	public void addListenerOnButton( final ObjetosBackend obj) {
 
 		btnAgregarComentario.setOnClickListener(new OnClickListener() {
@@ -96,8 +96,8 @@ public class ComunidadActivity extends ActionBarActivity {
 						if (obra == null){
 							ingresarComentarioSinObra();
 						}else{
-							Toast t2 = Toast.makeText(obj, "No logueado", 8);
-							t2.show();
+							//							Toast t2 = Toast.makeText(obj, "No logueado", 8);
+							//							t2.show();
 						}
 					}
 
@@ -124,7 +124,7 @@ public class ComunidadActivity extends ActionBarActivity {
 		}
 		return retorno;
 	}
-	
+
 	public void mensajeConfirmacionLoguin(){
 		AlertDialog.Builder dialogo1 = new AlertDialog.Builder(ComunidadActivity.this); 
 		dialogo1.setTitle("Importante"); 
@@ -166,7 +166,7 @@ public class ComunidadActivity extends ActionBarActivity {
 			}
 
 		}
-	
+
 		return retorno;
 	}
 
@@ -210,45 +210,49 @@ public class ComunidadActivity extends ActionBarActivity {
 		mKinveyClient.appData("Comunidad", ComunidadBackend.class).get(myQuery, new KinveyListCallback<ComunidadBackend>() {
 			@Override
 			public void onSuccess(ComunidadBackend[] resultadoconsulta) {
-				lista = (ListView) findViewById(R.id.ListView_listado);
-				ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();  
-				for (int i = 0; i < resultadoconsulta.length; i++) {
-					datos.add(new Lista_entrada(R.drawable.user_icon,resultadoconsulta[i].getUsuario(),resultadoconsulta[i].getDescripcionComunidad()));
-				}
-				lista.setAdapter(new Lista_adaptador(ComunidadActivity.this, R.layout.activity_entradalv,datos) {
+				if(resultadoconsulta.length>0){
+					lista = (ListView) findViewById(R.id.ListView_listado);
+					ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();  
+					for (int i = 0; i < resultadoconsulta.length; i++) {
+						datos.add(new Lista_entrada(R.drawable.user_icon,resultadoconsulta[i].getUsuario(),resultadoconsulta[i].getDescripcionComunidad()));
+					}
+					lista.setAdapter(new Lista_adaptador(ComunidadActivity.this, R.layout.activity_entradalv,datos) {
 
-					@Override
-					public void onEntrada(Object entrada, View view) {
-						if (entrada != null) {
-							TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior); 
-							if (texto_superior_entrada != null) 
-								texto_superior_entrada.setText(((Lista_entrada) entrada).get_textoEncima()); 
+						@Override
+						public void onEntrada(Object entrada, View view) {
+							if (entrada != null) {
+								TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior); 
+								if (texto_superior_entrada != null) 
+									texto_superior_entrada.setText(((Lista_entrada) entrada).get_textoEncima()); 
 
-							TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior); 
-							if (texto_inferior_entrada != null)
-								texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo()); 
+								TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior); 
+								if (texto_inferior_entrada != null)
+									texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo()); 
 
-							ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen); 
-							if (imagen_entrada != null)
-								imagen_entrada.setImageResource(((Lista_entrada) entrada).get_idImagen());
+								ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen); 
+								if (imagen_entrada != null)
+									imagen_entrada.setImageResource(((Lista_entrada) entrada).get_idImagen());
+							}
+
+						}
+					});
+
+					lista.setOnItemClickListener(new OnItemClickListener() { 
+						@Override
+						public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
+							Lista_entrada elegido = (Lista_entrada) pariente.getItemAtPosition(posicion); 
+
+							CharSequence texto = "Seleccionado: " + elegido.get_textoDebajo();
+							Toast toast = Toast.makeText(ComunidadActivity.this, texto, Toast.LENGTH_LONG);
+							toast.show();
 						}
 
-					}
-				});
 
-				lista.setOnItemClickListener(new OnItemClickListener() { 
-					@Override
-					public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
-						Lista_entrada elegido = (Lista_entrada) pariente.getItemAtPosition(posicion); 
+					});
+				}else{
+					Toast.makeText(ComunidadActivity.this, "Se el primero en ingresar un comentario", Toast.LENGTH_LONG).show();
 
-						CharSequence texto = "Seleccionado: " + elegido.get_textoDebajo();
-						Toast toast = Toast.makeText(ComunidadActivity.this, texto, Toast.LENGTH_LONG);
-						toast.show();
-					}
-
-
-				});
-
+				}
 			}
 
 			@Override
@@ -275,7 +279,7 @@ public class ComunidadActivity extends ActionBarActivity {
 
 
 	}
-	
+
 	public void ingresarComentarioSinObra() {
 		//mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
 		if (!mKinveyClient.user().isUserLoggedIn()) {
@@ -324,6 +328,7 @@ public class ComunidadActivity extends ActionBarActivity {
 				String value = input.getText().toString();
 				Log.d(TAG, "Usuario: " + value);
 				guardarDatosComentarios(value);
+				input.setText("");
 				return;
 			}
 		});
@@ -332,6 +337,7 @@ public class ComunidadActivity extends ActionBarActivity {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				input.setText("");
 				return;
 			}
 		});
@@ -339,52 +345,87 @@ public class ComunidadActivity extends ActionBarActivity {
 		return builder.create();
 	}
 
-	public void guardarDatosComentarios(String valor){
-		//ObjetosBackend obb = ((ObjetosBackend) mKinveyClient).getmKinveyClient();
-		Usuario u =	obtenerUsuarioLogueado();
+	//	public void guardarDatosComentarios(String valor){
+	//		//ObjetosBackend obb = ((ObjetosBackend) mKinveyClient).getmKinveyClient();
+	//		Usuario u =	obtenerUsuarioLogueado();
+	//		ComunidadBackend event = new ComunidadBackend();
+	//		event.setDescripcionComunidad(valor);
+	//		//event.setUsuario(mKinveyClient.user().getUsername().toString());
+	//		event.setUsuario(u.getMiNombreUsuario());
+	//		if (obra != null){
+	//			String obr = obra.getIdObra()+"";
+	//			if (obr == ""){
+	//				event.setIdObra("");
+	//			}else{
+	//				event.setIdObra(obra.getIdObra()+"");	
+	//			}
+	//		}else{
+	//			event.setIdObra("");
+	//
+	//		}
+	//
+	//
+	//		//event.setIdObra(event);
+	//
+	//		AsyncAppData<ComunidadBackend> myevents = mKinveyClient.appData("Comunidad",ComunidadBackend.class);
+	//		myevents.save(event, new KinveyClientCallback<ComunidadBackend>() {
+	//
+	//			@Override
+	//			public void onFailure(Throwable e) {
+	//				Log.e(TAG, "failed to save event data", e);
+	//			}
+	//			@Override
+	//			public void onSuccess(ComunidadBackend arg0) {
+	//
+	//				actualizarDatos();
+	//			}
+	//		});
+	//
+	//	}
+
+	public void guardarDatosComentarios(String valor){ 
+		obtenerUsuarioLogueado();
+		String u = mKinveyClient.user().getUsername().toString(); 
 		ComunidadBackend event = new ComunidadBackend();
 		event.setDescripcionComunidad(valor);
-		//event.setUsuario(mKinveyClient.user().getUsername().toString());
-		event.setUsuario(u.getMiNombreUsuario());
-		if (obra != null){
-			String obr = obra.getIdObra()+"";
+		event.setUsuario(u);
+		if (obra != null){ 
+			String obr = obra.getIdObra()+""; 
 			if (obr == ""){
 				event.setIdObra("");
 			}else{
-				event.setIdObra(obra.getIdObra()+"");	
+				event.setIdObra(obra.getIdObra()+"");
+
 			}
 		}else{
 			event.setIdObra("");
-
 		}
-
-
-		//event.setIdObra(event);
-
 		AsyncAppData<ComunidadBackend> myevents = mKinveyClient.appData("Comunidad",ComunidadBackend.class);
 		myevents.save(event, new KinveyClientCallback<ComunidadBackend>() {
-
 			@Override
-			public void onFailure(Throwable e) {
+			public void onFailure(Throwable e) { 
 				Log.e(TAG, "failed to save event data", e);
 			}
 			@Override
-			public void onSuccess(ComunidadBackend arg0) {
-
+			public void onSuccess(ComunidadBackend arg0) { 
 				actualizarDatos();
 			}
 		});
-
 	}
-	
+
+
 	public Usuario obtenerUsuarioLogueado(){
 		String estaLogueado = 1 + "";
 		Usuario u = dh.obtenerUsuarioLogueado (estaLogueado);
 		return u;
 	}
 
-	public void actualizarDatos(){
-		cargarDatos(mKinveyClient);
+	public void actualizarDatos(){ 
+		if (obra!=null){
+			cargarDatosFiltrados(obra.getIdObra());
+		}else{
+			cargarDatos(mKinveyClient);
+		}
 	}
 
 	public void mensajeConfirmacion(){
@@ -446,45 +487,49 @@ public class ComunidadActivity extends ActionBarActivity {
 		searchedEvents.get(query, new KinveyListCallback<ComunidadBackend>() {
 			@Override
 			public void onSuccess(ComunidadBackend[] resultadoconsulta) { 
-				lista = (ListView) findViewById(R.id.ListView_listado);
-				ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();  
-				for (int i = 0; i < resultadoconsulta.length; i++) {
-					datos.add(new Lista_entrada(R.drawable.user_icon,resultadoconsulta[i].getUsuario(),resultadoconsulta[i].getDescripcionComunidad()));
-				}
-				lista.setAdapter(new Lista_adaptador(ComunidadActivity.this, R.layout.activity_entradalv,datos) {
+				if(resultadoconsulta.length>0){
+					lista = (ListView) findViewById(R.id.ListView_listado);
+					ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();  
+					for (int i = 0; i < resultadoconsulta.length; i++) {
+						datos.add(new Lista_entrada(R.drawable.user_icon,resultadoconsulta[i].getUsuario(),resultadoconsulta[i].getDescripcionComunidad()));
+					}
+					lista.setAdapter(new Lista_adaptador(ComunidadActivity.this, R.layout.activity_entradalv,datos) {
 
-					@Override
-					public void onEntrada(Object entrada, View view) {
-						if (entrada != null) {
-							TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior); 
-							if (texto_superior_entrada != null) 
-								texto_superior_entrada.setText(((Lista_entrada) entrada).get_textoEncima()); 
+						@Override
+						public void onEntrada(Object entrada, View view) {
+							if (entrada != null) {
+								TextView texto_superior_entrada = (TextView) view.findViewById(R.id.textView_superior); 
+								if (texto_superior_entrada != null) 
+									texto_superior_entrada.setText(((Lista_entrada) entrada).get_textoEncima()); 
 
-							TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior); 
-							if (texto_inferior_entrada != null)
-								texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo()); 
+								TextView texto_inferior_entrada = (TextView) view.findViewById(R.id.textView_inferior); 
+								if (texto_inferior_entrada != null)
+									texto_inferior_entrada.setText(((Lista_entrada) entrada).get_textoDebajo()); 
 
-							ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen); 
-							if (imagen_entrada != null)
-								imagen_entrada.setImageResource(((Lista_entrada) entrada).get_idImagen());
+								ImageView imagen_entrada = (ImageView) view.findViewById(R.id.imageView_imagen); 
+								if (imagen_entrada != null)
+									imagen_entrada.setImageResource(((Lista_entrada) entrada).get_idImagen());
+							}
+
+						}
+					});
+
+					lista.setOnItemClickListener(new OnItemClickListener() { 
+						@Override
+						public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
+							Lista_entrada elegido = (Lista_entrada) pariente.getItemAtPosition(posicion); 
+
+							CharSequence texto = "Seleccionado: " + elegido.get_textoDebajo();
+							Toast toast = Toast.makeText(ComunidadActivity.this, texto, Toast.LENGTH_LONG);
+							toast.show();
 						}
 
-					}
-				});
 
-				lista.setOnItemClickListener(new OnItemClickListener() { 
-					@Override
-					public void onItemClick(AdapterView<?> pariente, View view, int posicion, long id) {
-						Lista_entrada elegido = (Lista_entrada) pariente.getItemAtPosition(posicion); 
+					});
+				}else{
+					Toast.makeText(ComunidadActivity.this, "Se el primero en ingresar un comentario", Toast.LENGTH_LONG).show();
 
-						CharSequence texto = "Seleccionado: " + elegido.get_textoDebajo();
-						Toast toast = Toast.makeText(ComunidadActivity.this, texto, Toast.LENGTH_LONG);
-						toast.show();
-					}
-
-
-				});
-
+				}
 			}
 
 			@Override

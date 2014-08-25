@@ -15,10 +15,12 @@ import java.util.ArrayList;
 
 
 
+
 import android.content.Intent;
 import android.graphics.LightingColorFilter;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableContainer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -84,7 +86,7 @@ public class ObraActivity extends ActionBarActivity {
 	private ImageButton btnVerVideo;
 	private ImageButton btnCompartirFacebook;
 	private int mascaras=0;
-	
+
 	//	private int requestCode = 1;
 	//	private ListView lvObras;
 	//	private DB_Obra dataSource;// = new DB_Obra(this);
@@ -119,18 +121,18 @@ public class ObraActivity extends ActionBarActivity {
 		kinveyClient = obj.captarUsuarioLogueado();
 		btnComprar= (Button)findViewById(R.id.bttnComprar);
 		btnComprar.getBackground().setColorFilter(new LightingColorFilter(330000 , 0xFFFFFF));
-		
+
 		btnAgregarComentarioObra = (ImageButton)findViewById(R.id.imageButton2);
 		btnVerVideo = (ImageButton)findViewById(R.id.imageButton3);
 		btnCompartirFacebook = (ImageButton)findViewById(R.id.imageButton1);
 		btnFavoritos = (ImageButton)findViewById(R.id.favorito);
 		btnFavoritosSi = (ImageButton)findViewById(R.id.favoritoSi);
-				//obtenerImagenObra(kinveyClient);
+		//obtenerImagenObra(kinveyClient);
 		validarFavorito(obra.getNombre());
 		crearActivity();
 		addListenerOnButton(obj);
 	}		
-	
+
 	public void referenciarIngresarComentario (View view){
 		Intent intent = new Intent(ObraActivity.this, ComunidadActivity.class); 
 		ObraActivity.this.startActivityForResult(intent, REQUEST_TEXT);
@@ -172,11 +174,11 @@ public class ObraActivity extends ActionBarActivity {
 				}else{
 					Toast.makeText(ObraActivity.this,"Para realizar la compra debe estar logueado. Gracias!" , Toast.LENGTH_SHORT).show();
 				}
-				
+
 			}
 
 		});
-		
+
 		btnAgregarComentarioObra.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -187,94 +189,110 @@ public class ObraActivity extends ActionBarActivity {
 			}
 
 		});
-		
+
 		btnVerVideo.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) { 
+				String videoId = obra.getNombre().toString();
+				startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.youtube.com/results?search_query="+videoId.trim())));
+				Log.i("Video", "Video Playing...."); 
+			}
+		});
+
+
+		btnCompartirFacebook.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(ObraActivity.this, VideoActivity.class);
-				intent.putExtra("obra",obra); 
-				startActivity(intent);
+
+				String titulo = obra.getNombre().toString().trim();
+				String urlYT = "https://www.youtube.com/results?search_query=" +titulo;
+				String cuerpoMensaje = "Me ha interesado: " + " "+  titulo +  " " + "ingresa a Art-e y opina!!" + " " + urlYT;
+				Compartir(titulo, cuerpoMensaje);
 			}
 
 		});
-	
-	
-	btnCompartirFacebook.setOnClickListener(new OnClickListener() {
 
-		@Override
-		public void onClick(View v) {
-			 
-			String titulo = obra.getNombre().toString();
-			String urlYT = "https://www.youtube.com/results?search_query=" +titulo.trim();
-			String cuerpoMensaje = "Me ha interesado: " + " "+  titulo +  " " + "ingresa a Art-e y opina!!" + " " + urlYT;
-			Compartir(titulo, cuerpoMensaje);
-		}
+		btnFavoritos.setOnClickListener(new OnClickListener() {
 
-	});
-	
-	btnFavoritos.setOnClickListener(new OnClickListener() {
-
-		@Override
-		public void onClick(View v) {
-			if (!obj.captarUsuarioLogueado().user().getUsername().equalsIgnoreCase("adm")){
-				save(obra.getNombre());
-				btnFavoritos.setVisibility(View.GONE);
-				btnFavoritosSi.setVisibility(View.VISIBLE);
-			}else{
-				
+			@Override
+			public void onClick(View v) {
+				try{
+				if (!obj.captarUsuarioLogueado().user().getUsername().toString().equalsIgnoreCase("adm")){
+					save(obra.getNombre());
+					btnFavoritos.setVisibility(View.GONE);
+					btnFavoritosSi.setVisibility(View.VISIBLE);
+				}else{
+					Toast.makeText(ObraActivity.this, "Debe estar logueado para marcar la obra como favorita. " , Toast.LENGTH_LONG).show();
+				}
+				}catch (Exception e){
+					Log.e(TAG, "Entro  catch de boton favoritos" +obj.captarUsuarioLogueado().user().getUsername().toString());
+					Toast.makeText(ObraActivity.this, "Debe estar logueado para marcar la obra como favorita. " , Toast.LENGTH_LONG).show();
+				}
 			}
-		}
 
-	});
-	
-	btnFavoritosSi.setOnClickListener(new OnClickListener() {
+		});
 
-		@Override
-		public void onClick(View v) {
-			if (!obj.captarUsuarioLogueado().user().getUsername().equalsIgnoreCase("adm")){
-				borrarFavorito(obra.getNombre());
-				btnFavoritos.setVisibility(View.VISIBLE);
-				btnFavoritosSi.setVisibility(View.GONE);
-			}else{
-				
+		btnFavoritosSi.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				try{
+				if (!obj.captarUsuarioLogueado().user().getUsername().equalsIgnoreCase("adm")){
+					borrarFavorito(obra.getNombre());
+					btnFavoritos.setVisibility(View.VISIBLE);
+					btnFavoritosSi.setVisibility(View.GONE);
+				}else{
+					Toast.makeText(ObraActivity.this, "Debe estar logueado para marcar la obra como favorita. " , Toast.LENGTH_LONG).show();
+				}
+				}catch (Exception e){
+					Log.e(TAG, "Entro  catch de boton favoritos" +obj.captarUsuarioLogueado().user().getUsername().toString());
+					Toast.makeText(ObraActivity.this, "Debe estar logueado para marcar la obra como favorita. " , Toast.LENGTH_LONG).show();
+				}
 			}
-		}
 
-	});
-}
-	
+		});
+	}
+
 	public void validarFavorito(String nomO){
+		try{
 		String nomU = kinveyClient.user().getUsername().toString();
 		Query query1 = kinveyClient.query ();
 		Query query2 = kinveyClient.query ();
 		query1.equals("nombreObra", String.valueOf(nomO));
 		query1.equals("nombreUsuario", String.valueOf(nomU));
-		AsyncAppData<ObrasFavoritosBackend> searchedEvents = kinveyClient.appData("ObrasFavoritos", ObrasFavoritosBackend.class);
-		searchedEvents.get(query1.and(query2) , new KinveyListCallback<ObrasFavoritosBackend>() {
-			@Override
-			public void onSuccess(ObrasFavoritosBackend[] resultadoconsulta) { 
-				for (int i = 0; i<resultadoconsulta.length; i++){
-					if (resultadoconsulta.length>=1){
-						btnFavoritos.setVisibility(View.GONE);
-						btnFavoritosSi.setVisibility(View.VISIBLE);
-					}	else{
-						btnFavoritos.setVisibility(View.VISIBLE);
-						btnFavoritosSi.setVisibility(View.GONE);
+		
+		if(!nomU.equalsIgnoreCase("adm")){
+			AsyncAppData<ObrasFavoritosBackend> searchedEvents = kinveyClient.appData("ObrasFavoritos", ObrasFavoritosBackend.class);
+			searchedEvents.get(query1.and(query2) , new KinveyListCallback<ObrasFavoritosBackend>() {
+				@Override
+				public void onSuccess(ObrasFavoritosBackend[] resultadoconsulta) { 
+					for (int i = 0; i<resultadoconsulta.length; i++){
+						if (resultadoconsulta.length>=1){
+							btnFavoritos.setVisibility(View.GONE);
+							btnFavoritosSi.setVisibility(View.VISIBLE);
+						}	else{
+							btnFavoritos.setVisibility(View.VISIBLE);
+							btnFavoritosSi.setVisibility(View.GONE);
+						}
 					}
+
 				}
-				
-			}
-			@Override
-			public void onFailure(Throwable arg0) {
-				// TODO Auto-generated method stub
+				@Override
+				public void onFailure(Throwable arg0) {
+					// TODO Auto-generated method stub
 
-			}
-		});
-
+				}
+			});
+		}else{
+			//Toast.makeText(ObraActivity.this, "Debe estar logueado para marcar la obra como favorita. " , Toast.LENGTH_LONG).show();
+		}
+		}catch(Exception e){
+			
+		}
 
 	}
-	
+
 	public void borrarFavorito (String nomObra){
 		String nomU = kinveyClient.user().getUsername().toString();
 		Query query1 = kinveyClient.query ();
@@ -286,11 +304,11 @@ public class ObraActivity extends ActionBarActivity {
 		AsyncAppData<ObrasFavoritosBackend> searchedEvents = kinveyClient.appData("ObrasFavoritos", ObrasFavoritosBackend.class);
 		searchedEvents.get(query1.and(query2) , new KinveyListCallback<ObrasFavoritosBackend>() {
 
-			
+
 			@Override
 			public void onFailure(Throwable arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 
@@ -301,7 +319,7 @@ public class ObraActivity extends ActionBarActivity {
 					idF=arg0[i].getIdObraFavorito().toString();
 				}
 				eliminar(idF);
-				
+
 			}
 
 
@@ -309,23 +327,23 @@ public class ObraActivity extends ActionBarActivity {
 
 
 	}
-	
+
 	public void eliminar (String id){
 		String eventId = id;
 		AsyncAppData<ObrasFavoritosBackend> myevents = kinveyClient.appData("ObrasFavoritos", ObrasFavoritosBackend.class);
 		myevents.delete(eventId, new KinveyDeleteCallback() {
-		@Override
-		public void onSuccess(KinveyDeleteResponse response) { 
-			Log.e(TAG, "bORRO REGISTRO");
-		}
-		public void onFailure(Throwable error) {
+			@Override
+			public void onSuccess(KinveyDeleteResponse response) { 
+				Log.e(TAG, "bORRO REGISTRO");
+			}
+			public void onFailure(Throwable error) {
 			}
 		});
 	}
-	
-	
 
-	
+
+
+
 	public void save (String nomObra){
 		String nomU = kinveyClient.user().getUsername().toString();
 		final ObrasFavoritosBackend entity = new ObrasFavoritosBackend ();
@@ -337,8 +355,8 @@ public class ObraActivity extends ActionBarActivity {
 			@Override
 			public void onSuccess(ObrasFavoritosBackend result) {
 
-				Toast.makeText(ObraActivity.this,"Revoluciones: " + result.getNombreObra()
-						+ "\nDescription: " , Toast.LENGTH_LONG).show();
+//				Toast.makeText(ObraActivity.this,"Revoluciones: " + result.getNombreObra()
+//						+ "\nDescription: " , Toast.LENGTH_LONG).show();
 
 
 			}
@@ -346,139 +364,139 @@ public class ObraActivity extends ActionBarActivity {
 			@Override
 			public void onFailure(Throwable error) {
 				Log.e(TAG, "AppData.save Failure", error);
-				Toast.makeText(ObraActivity.this, "Save All error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+				Toast.makeText(ObraActivity.this, "Ha ocurrido un error " + error.getMessage(), Toast.LENGTH_LONG).show();
 			}
 		});
 	}
 
-	
-	
-	
-	public void Compartir(String titulo,String cuerpoMensaje ){
-		   Intent intentCompartir = new Intent(Intent.ACTION_SEND);
-		   intentCompartir.setType("text/plain");
-		   intentCompartir.putExtra(Intent.EXTRA_SUBJECT, titulo);
-		   intentCompartir.putExtra(Intent.EXTRA_TEXT, cuerpoMensaje);
-		   intentCompartir.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-		   //startActivity(Intent.createChooser(intentCompartir ,  titulo));
-		   this.startActivity(Intent.createChooser(intentCompartir,  titulo ));
+
+
+	public void Compartir(String titulo,String cuerpoMensaje ){
+		Intent intentCompartir = new Intent(Intent.ACTION_SEND);
+		intentCompartir.setType("text/plain");
+		intentCompartir.putExtra(Intent.EXTRA_SUBJECT, titulo);
+		intentCompartir.putExtra(Intent.EXTRA_TEXT, cuerpoMensaje);
+		intentCompartir.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+		//startActivity(Intent.createChooser(intentCompartir ,  titulo));
+		this.startActivity(Intent.createChooser(intentCompartir,  titulo ));
 	}
 
-		
 
-public void conectarBackend (){
-	kinveyClient = new Client.Builder(appKey, appSecret, this).build();
-	kinveyClient.ping(new KinveyPingCallback() {
-		public void onFailure(Throwable t) {
-			Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
+
+	public void conectarBackend (){
+		kinveyClient = new Client.Builder(appKey, appSecret, this).build();
+		kinveyClient.ping(new KinveyPingCallback() {
+			public void onFailure(Throwable t) {
+				Log.e("Probando Kinvey Connection", "Kinvey Ping Failed", t);
+			}
+			public void onSuccess(Boolean b) {
+				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
+			}
+		});
+		//mKinveyClient.user().login("nlema", "nlema", new KinveyUserCallback() {
+		if (!kinveyClient.user().isUserLoggedIn()) {
+			kinveyClient.user().login(new KinveyUserCallback() {
+				public void onFailure(Throwable error) {
+					mensaje = "Error al realizar el login.";
+					Log.e("Realizando Kinvey Login", mensaje, error);
+				}
+				@Override
+				public void onSuccess(User u) {
+					mensaje = "Bienvenido usuario: " + u.getId() + ".";
+					Log.d("Realizando Kinvey Login", mensaje);
+				}
+			});
+		} else {
+			mensaje = "Utilizando usuario implícito cacheado: " + kinveyClient.user().getId() + ".";
+			Log.d("Realizando Kinvey Login", mensaje);
 		}
-		public void onSuccess(Boolean b) {
-			Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
-		}
-	});
-	//mKinveyClient.user().login("nlema", "nlema", new KinveyUserCallback() {
-	if (!kinveyClient.user().isUserLoggedIn()) {
-		kinveyClient.user().login(new KinveyUserCallback() {
-			public void onFailure(Throwable error) {
-				mensaje = "Error al realizar el login.";
-				Log.e("Realizando Kinvey Login", mensaje, error);
+
+	}
+
+	//Recuperar una obra
+	public void recuperarObra (View view) {
+		//appData es la interface para guardar y recuperar entidades 
+		kinveyClient.appData("Obra", ObraBackend.class).getEntity("01", new KinveyClientCallback<ObraBackend>() {
+			@Override
+			public void onSuccess(ObraBackend result) {
+				mensaje = "Obra id: " + result.getIdObra() + ", Nombre: " + result.getNombreObras()+ ", Descripcion: " + result.getDescripcipnObras();
+				Log.d(TAG + "- recuperarObra", mensaje);
 			}
 			@Override
-			public void onSuccess(User u) {
-				mensaje = "Bienvenido usuario: " + u.getId() + ".";
-				Log.d("Realizando Kinvey Login", mensaje);
+			public void onFailure(Throwable error) {
+				Log.e(TAG + "- recuperarObra", "Falla en AppData.getEntity", error);
+			}
+
+		});
+	}
+
+	//Recuperar todas las obras
+	public void recuperarObras(View view) {
+		Query myQuery = kinveyClient.query();
+		kinveyClient.appData("Obra", ObraBackend.class).get(myQuery, new KinveyListCallback<ObraBackend>() {
+			@Override
+			public void onSuccess(ObraBackend[] resultadoconsulta) {
+				//for (Sala sala : result) {
+				for (int i = 0; i < resultadoconsulta.length; i++) {
+					mensaje = "Obra id: " + resultadoconsulta[i].getIdObra() + ", Nombre: " + resultadoconsulta[i].getNombreObras() + ", Descripcion: " + resultadoconsulta[i].getDescripcipnObras();
+					Log.d(TAG + "- recuperarObras", mensaje);
+				}
+			}
+			@Override
+			public void onFailure(Throwable error) {
+				Log.e(TAG, "AppData.get by Query Failure", error);
 			}
 		});
-	} else {
-		mensaje = "Utilizando usuario implícito cacheado: " + kinveyClient.user().getId() + ".";
-		Log.d("Realizando Kinvey Login", mensaje);
-	}
-
-}
-
-//Recuperar una obra
-public void recuperarObra (View view) {
-	//appData es la interface para guardar y recuperar entidades 
-	kinveyClient.appData("Obra", ObraBackend.class).getEntity("01", new KinveyClientCallback<ObraBackend>() {
-		@Override
-		public void onSuccess(ObraBackend result) {
-			mensaje = "Obra id: " + result.getIdObra() + ", Nombre: " + result.getNombreObras()+ ", Descripcion: " + result.getDescripcipnObras();
-			Log.d(TAG + "- recuperarObra", mensaje);
-		}
-		@Override
-		public void onFailure(Throwable error) {
-			Log.e(TAG + "- recuperarObra", "Falla en AppData.getEntity", error);
-		}
-
-	});
-}
-
-//Recuperar todas las obras
-public void recuperarObras(View view) {
-	Query myQuery = kinveyClient.query();
-	kinveyClient.appData("Obra", ObraBackend.class).get(myQuery, new KinveyListCallback<ObraBackend>() {
-		@Override
-		public void onSuccess(ObraBackend[] resultadoconsulta) {
-			//for (Sala sala : result) {
-			for (int i = 0; i < resultadoconsulta.length; i++) {
-				mensaje = "Obra id: " + resultadoconsulta[i].getIdObra() + ", Nombre: " + resultadoconsulta[i].getNombreObras() + ", Descripcion: " + resultadoconsulta[i].getDescripcipnObras();
-				Log.d(TAG + "- recuperarObras", mensaje);
-			}
-		}
-		@Override
-		public void onFailure(Throwable error) {
-			Log.e(TAG, "AppData.get by Query Failure", error);
-		}
-	});
-}
-
-@Override
-public boolean onCreateOptionsMenu(Menu menu) {
-	getMenuInflater().inflate(R.menu.main_backend, menu);
-	return true;
-}
-	
-	
-//		try {
-//	        FileOutputStream fStream = getApplicationContext().openFileOutput("image.png", Context.MODE_PRIVATE);
-//	        ByteArrayOutputStream bos = result.getFile("image").getOutput();
-//	        bos.writeTo(fStream);
-//	        bos.flush();
-//	        fStream.flush();
-//	        bos.close();
-//	        fStream.close();
-//	    } catch (Exception ex) {}
-	
-
-@Override
-public boolean onOptionsItemSelected(MenuItem item) {
-	// Handle action bar item clicks here. The action bar will
-	// automatically handle clicks on the Home/Up button, so long
-	// as you specify a parent activity in AndroidManifest.xml.
-	int id = item.getItemId();
-	if (id == R.id.action_settings) {
-		return true;
-	}
-	return super.onOptionsItemSelected(item);
-}
-
-/**
- * A placeholder fragment containing a simple view.
- */
-public static class PlaceholderFragment extends Fragment {
-
-	public PlaceholderFragment() {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_main_backend, container,
-				false);
-		return rootView;
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main_backend, menu);
+		return true;
 	}
-}
+
+
+	//		try {
+	//	        FileOutputStream fStream = getApplicationContext().openFileOutput("image.png", Context.MODE_PRIVATE);
+	//	        ByteArrayOutputStream bos = result.getFile("image").getOutput();
+	//	        bos.writeTo(fStream);
+	//	        bos.flush();
+	//	        fStream.flush();
+	//	        bos.close();
+	//	        fStream.close();
+	//	    } catch (Exception ex) {}
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
+	/**
+	 * A placeholder fragment containing a simple view.
+	 */
+	public static class PlaceholderFragment extends Fragment {
+
+		public PlaceholderFragment() {
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_main_backend, container,
+					false);
+			return rootView;
+		}
+	}
 
 }	
 //		db = new DatabaseHelper(getApplicationContext());

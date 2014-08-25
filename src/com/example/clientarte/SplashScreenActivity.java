@@ -107,7 +107,7 @@ public class SplashScreenActivity extends Activity {
 		String password = "000";
 		//Verificar si el usuario está "logeado"
 		if (!mKinveyClient.user().isUserLoggedIn()) {
-		//Si no está "logeado" se realiza el login
+			//Si no está "logeado" se realiza el login
 			mKinveyClient.user().login(usuario, password, new KinveyUserCallback() {
 				public void onFailure(Throwable error) {
 					mensaje = "Error al realizar el login.";
@@ -117,11 +117,12 @@ public class SplashScreenActivity extends Activity {
 				public void onSuccess(User u) {
 					//Se muestra mensaje de bienvenida por pantalla
 					if (!mKinveyClient.user().getUsername().equalsIgnoreCase("adm")){
-					mensaje = "Bienvenido usuario: " + u.getUsername() + ".";
-					Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
-					//Se graba registro en el log
-					Log.d("Realizando Kinvey Login", mensaje);
-				}
+
+						//Se graba registro en el log
+						Log.e("Realizando Kinvey Login", "Usuario logueado" + mKinveyClient.user().getUsername().toString());
+					}else{
+						Log.e("Usuario logueado por defecto " , mKinveyClient.user().getUsername().toString());
+					}
 				}
 			});
 		} else {
