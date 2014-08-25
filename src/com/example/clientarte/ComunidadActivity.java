@@ -60,7 +60,7 @@ public class ComunidadActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listado);
-
+		setTitle("Comunidad");
 		obra= new Obra();
 		obra= getIntent().getParcelableExtra("obra");
 		dh = new DatabaseHelper(getApplicationContext());

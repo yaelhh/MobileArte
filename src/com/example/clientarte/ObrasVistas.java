@@ -47,7 +47,7 @@ public class ObrasVistas extends ActionBarActivity implements SwipeRefreshLayout
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_prox_obras);
 
-
+		setTitle("Obras vistas");
 		//Obtenemos una referencia al viewgroup SwipeLayou
 		swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container_prox_obras);
 		//Indicamos que listener recogerá la retrollamada (callback), en este caso, será el metodo OnRefresh de esta clase.

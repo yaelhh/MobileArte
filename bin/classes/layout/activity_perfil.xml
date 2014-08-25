@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/Gray" >
+        android:background="@drawable/fondo_telon" >
 
         <TextView
             android:id="@+id/nombreUsuarioCuenta"
@@ -76,14 +76,14 @@
             android:layout_alignParentRight="true"
             android:text="@string/EstadoUsuario" />
 
-        <Button
+       <!--   <Button
             android:id="@+id/registrarUsuarioPerfil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/LoguearDesloguear"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:text="@string/RegistroUsuario" />
+            android:text="@string/RegistroUsuario" />-->
 
         <Button
             android:id="@+id/btnFavoritos"

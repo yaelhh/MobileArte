@@ -55,6 +55,7 @@ public class ProgramacionActivity extends ActionBarActivity implements OnQueryTe
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_programacion);
+		setTitle("Cartelera");
 		cal = (CalendarView) findViewById(R.id.calendarView1);
 		//		layout= (ViewGroup)findViewById(R.id.contenedorDeObras);
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
@@ -91,7 +92,7 @@ public class ProgramacionActivity extends ActionBarActivity implements OnQueryTe
 				//				Log.e("Al principio",listObras.get(0).getNombre());
 				if(obrasDia.size()>0){
 					obrasDia= new ArrayList<Obra>();
-					miLista.removeAllViews();			
+//					miLista.clearAnimation();			
 				}
 
 				String anio=String.valueOf(year);

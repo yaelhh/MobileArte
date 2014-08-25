@@ -76,7 +76,7 @@
             android:onClick="registroUsuario"
             android:text="@string/button_registrarse" />
 
-        <Button
+      <!--   <Button
             android:id="@+id/button1"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
@@ -92,18 +92,17 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/button1"
             android:layout_toLeftOf="@+id/button2"
-            android:onClick="recuperarSala"/>
+            android:onClick="recuperarSala"/> -->
+        	<!--android:onClick="login"-->
 
         <Button
             android:id="@+id/buttonLogin"
             style="@color/Blue"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/button2"
+            android:layout_above="@+id/buttonRegistrarseLogin"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="36dp"
             android:text="@string/button_login" />
-        	<!--android:onClick="login"-->
         
      </RelativeLayout>
     

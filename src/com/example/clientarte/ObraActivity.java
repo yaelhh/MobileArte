@@ -14,7 +14,9 @@ import java.util.ArrayList;
 
 
 
+
 import android.content.Intent;
+import android.graphics.LightingColorFilter;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableContainer;
 import android.os.Bundle;
@@ -112,9 +114,12 @@ public class ObraActivity extends ActionBarActivity {
 		obra= new Obra();
 		obra= getIntent().getParcelableExtra("obra");
 		mascaras=getIntent().getExtras().getInt("mascaras");
+		setTitle(obra.getNombre());
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
 		kinveyClient = obj.captarUsuarioLogueado();
 		btnComprar= (Button)findViewById(R.id.bttnComprar);
+		btnComprar.getBackground().setColorFilter(new LightingColorFilter(330000 , 0xFFFFFF));
+		
 		btnAgregarComentarioObra = (ImageButton)findViewById(R.id.imageButton2);
 		btnVerVideo = (ImageButton)findViewById(R.id.imageButton3);
 		btnCompartirFacebook = (ImageButton)findViewById(R.id.imageButton1);

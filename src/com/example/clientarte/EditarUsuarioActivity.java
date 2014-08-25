@@ -64,6 +64,7 @@ public class EditarUsuarioActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
 		dh = new DatabaseHelper(getApplicationContext());
+		setTitle("Editar Usuario");
 		bar=(ProgressBar)findViewById(R.id.progressBarRegistrar);
 		bar.setIndeterminate(true);
 		bar.setVisibility(View.GONE);
@@ -99,13 +100,13 @@ public class EditarUsuarioActivity extends ActionBarActivity {
 			}
 		});
 		
-		btnCancelar= (Button)findViewById(R.id.btnCancelarRegistro);
-		btnCancelar.setOnClickListener(new OnClickListener() {  
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
+//		btnCancelar= (Button)findViewById(R.id.btnCancelarRegistro);
+//		btnCancelar.setOnClickListener(new OnClickListener() {  
+//			@Override
+//			public void onClick(View v) {
+//				finish();
+//			}
+//		});
 	}	
 	
 	

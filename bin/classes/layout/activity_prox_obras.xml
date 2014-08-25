@@ -1,6 +1,6 @@
 <android.support.v4.widget.SwipeRefreshLayout 
  xmlns:android="http://schemas.android.com/apk/res/android"
-android:background="@drawable/telon"
+android:background="@drawable/fondo_telon"
 xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/swipe_container_prox_obras"
 android:layout_width="match_parent"

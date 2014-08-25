@@ -3,7 +3,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/telon"
+    android:background="@drawable/fondo_telon"
     android:orientation="vertical"
     tools:context="com.example.clientarte.NosotrosActivity"
     tools:ignore="MergeRootFrame" >
@@ -50,14 +50,11 @@
             android:padding="5dp"
             android:text="@string/HorarioSodre" />
         </ScrollView>
-
-        </LinearLayout>
-		
-  
-	  <fragment 
+  <fragment 
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         class="com.google.android.gms.maps.SupportMapFragment"/>
     
+	   </LinearLayout>
     </LinearLayout>

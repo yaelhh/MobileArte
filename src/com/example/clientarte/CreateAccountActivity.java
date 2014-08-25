@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import backend.DatabaseHelper;
@@ -86,7 +88,8 @@ public class CreateAccountActivity extends ActionBarActivity {
 	//private Button mPickDate;    
 	private int mYear;    
 	private int mMonth;    
-	private int mDay;    
+	private int mDay;  
+	private ProgressBar bar;
 
 
 	// the callback received when the user "sets" the date in the dialog    
@@ -107,7 +110,10 @@ public class CreateAccountActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
 		dh = new DatabaseHelper(getApplicationContext());
-
+		setTitle("Registrarse");
+		bar=(ProgressBar)findViewById(R.id.progressBarRegistrar);
+		bar.setIndeterminate(true);
+		bar.setVisibility(View.GONE);
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
 		//kinveyClient = obj.getUsuKinvey();
 		kinveyClient = new Client.Builder(this.getApplicationContext()).build();
@@ -140,14 +146,14 @@ public class CreateAccountActivity extends ActionBarActivity {
 			}
 		});
 		
-		btnCancelar= (Button)findViewById(R.id.btnCancelarRegistro);
-		btnCancelar.setOnClickListener(new OnClickListener() {  
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
-		
+//		btnCancelar= (Button)findViewById(R.id.btnCancelarRegistro);
+//		btnCancelar.setOnClickListener(new OnClickListener() {  
+//			@Override
+//			public void onClick(View v) {
+//				finish();
+//			}
+//		});
+//		
 		//mDateDisplay = (TextView) findViewById(R.id.dateDisplay);   
 //		fe = (TextView) findViewById(R.id.textViewCumpleanos);
 //		fe.setOnClickListener(new View.OnClickListener()

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -20,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -102,11 +104,13 @@ public class CompraActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_compra);
+		
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
 		obra= new Obra();
 		obra= getIntent().getParcelableExtra("obra");
 		mascaras=getIntent().getExtras().getInt("mascaras");
 		Descuento=mascaras*3;
+		setTitle(obra.getNombre());
 		Log.e("Precio total con mascaras ", precioTotal+" MAscaras "+ mascaras);
 		TextView titulo= (TextView)findViewById(R.id.idTitulo);
 		titulo.setText(obra.getNombre());

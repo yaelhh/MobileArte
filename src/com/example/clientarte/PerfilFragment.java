@@ -55,6 +55,7 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 		dh = new DatabaseHelper(getActivity().getApplicationContext());
 		final ObjetosBackend obj= (ObjetosBackend) getActivity().getApplicationContext();
 		txtNombreUsuario=(TextView)rootView.findViewById(R.id.nombreUsuarioCuenta);
+		
 		//Conexión de la APP a Kinvey
 		mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
 		mKinveyClient.ping(new KinveyPingCallback() {
@@ -63,12 +64,20 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 			}
 			public void onSuccess(Boolean b) {
 				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
-				txtNombreUsuario.setText(mKinveyClient.user().getUsername());
-
+//				if(!mKinveyClient.user().getUsername().equalsIgnoreCase("adm")){
+//				txtNombreUsuario.setText(mKinveyClient.user().getUsername());
+//				}
 			}
 		});
+		try{
+		if(!mKinveyClient.user().getUsername().equalsIgnoreCase("adm")){
+			txtNombreUsuario.setText(mKinveyClient.user().getUsername());
+			}
+		}catch(Exception e){
+			Log.e("Setear nombre usuario","No pudo setear el nombre de usuario");
+		}
 		//btnCuenta= (Button)rootView.findViewById(R.id.btnCuenta);
-		btnRegistrar= (Button)rootView.findViewById(R.id.registrarUsuarioPerfil);
+//		btnRegistrar= (Button)rootView.findViewById(R.id.registrarUsuarioPerfil);
 		btnLoguear= (Button)rootView.findViewById(R.id.LoguearDesloguear);
 		btnProxObras = (Button)rootView.findViewById(R.id.btnPrxObras);
 		btnObrasVistas= (Button)rootView.findViewById(R.id.BtnObrasVistas);
@@ -170,15 +179,15 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 
 	public void cancelar() {
 		//finish();
-		Toast t=Toast.makeText(getActivity(),"Presiono cancelar", Toast.LENGTH_SHORT);
-		t.show();
+//		Toast t=Toast.makeText(getActivity(),"Presiono cancelar", Toast.LENGTH_SHORT);
+//		t.show();
 	}
 
 
 	@Override 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		View view = null;
-		if (requestCode == 2) { 
+//		if (requestCode == 2) { 
 			if (resultCode == getActivity().RESULT_OK) { 
 				//BUSCO USUARIO SEGUN NOMBRE DE USUARIO KINVEY LOGUEADO
 				String userNameLogueado = data.getStringExtra("username");
@@ -192,7 +201,7 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 
 			} else if (resultCode == getActivity().RESULT_CANCELED) {  
 			} 
-		}
+//		}
 	}
 
 
@@ -206,16 +215,16 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 			}
 
 		});
-		btnRegistrar.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-				Toast t3=Toast.makeText(getActivity(),"Usuario logueado AHORA" + obj.captarUsuarioLogueado().user().getUsername(), Toast.LENGTH_SHORT);
-				t3.show();
-			}
-
-		});
+//		btnRegistrar.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//
+//				Toast t3=Toast.makeText(getActivity(),"Usuario logueado AHORA" + obj.captarUsuarioLogueado().user().getUsername(), Toast.LENGTH_SHORT);
+//				t3.show();
+//			}
+//
+//		});
 
 		btnEditarUsuario.setOnClickListener(new OnClickListener() {
 			@Override
@@ -243,21 +252,26 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 		btnLoguear.setOnClickListener(new OnClickListener() {	 
 			@Override
 			public void onClick(View v) {
-				if (obj.captarUsuarioLogueado().user().getUsername().equalsIgnoreCase("adm")){
-					desloguearUsuario(obj);
-				}	
-				if (!obj.captarUsuarioLogueado().user().isUserLoggedIn()){	
-					mensajeConfirmacion();
+				try{
+					if (obj.captarUsuarioLogueado().user().getUsername().equalsIgnoreCase("adm")){
+						desloguearUsuario(obj);
+					}	
+					if (!obj.captarUsuarioLogueado().user().isUserLoggedIn()){	
+						mensajeConfirmacion();
 
-				}else{
-					//if (mKinveyClient.user().isUserLoggedIn()) {
-					if (obj.captarUsuarioLogueado().user().isUserLoggedIn()) {
-						mensajeConfirmacionDesloguear(obj);
+					}else{
+						//if (mKinveyClient.user().isUserLoggedIn()) {
+						if (obj.captarUsuarioLogueado().user().isUserLoggedIn()) {
+							mensajeConfirmacionDesloguear(obj);
+						}
 					}
-				}
 
+				}
+				catch(Exception e){
+					Log.e("Excepction", "No encuentra ADM no tiene conexion a kinvey");
+				}
 			}
-		});
+			});
 
 		btnObrasVistas.setOnClickListener(new OnClickListener() {
 			@Override
@@ -318,37 +332,37 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 			} 
 
 		}); 
-	}
-
-
-	public void loginAdministrador () {
-		String usuario = "adm";
-		String password = "000";
-		//Verificar si el usuario está "logeado"
-		if (!mKinveyClient.user().isUserLoggedIn()) {
-			//Si no está "logeado" se realiza el login
-			mKinveyClient.user().login(usuario, password, new KinveyUserCallback() {
-				public void onFailure(Throwable error) {
-					mensaje = "Error al realizar el login.";
-					Log.e("Realizando Kinvey Login", mensaje, error);
-				}
-				@Override
-				public void onSuccess(User u) {
-					//Se muestra mensaje de bienvenida por pantalla
-					mensaje = "Bienvenido usuario: " + u.getUsername() + ".";
-					Toast.makeText(getActivity(), mensaje, Toast.LENGTH_LONG).show();
-					//Se graba registro en el log
-					Log.d("Realizando Kinvey Login", mensaje);
-				}
-			});
-		} else {
-			mensaje = "Utilizando usuario cacheado: " + mKinveyClient.user().getUsername() + ".";
-			Log.d("Realizando Kinvey Login", mensaje);
 		}
+
+
+		public void loginAdministrador () {
+			String usuario = "adm";
+			String password = "000";
+			//Verificar si el usuario está "logeado"
+			if (!mKinveyClient.user().isUserLoggedIn()) {
+				//Si no está "logeado" se realiza el login
+				mKinveyClient.user().login(usuario, password, new KinveyUserCallback() {
+					public void onFailure(Throwable error) {
+						mensaje = "Error al realizar el login.";
+						Log.e("No pudo realizar Kinvey Login", mensaje, error);
+					}
+					@Override
+					public void onSuccess(User u) {
+						//Se muestra mensaje de bienvenida por pantalla
+						Toast.makeText(getActivity(), mensaje, Toast.LENGTH_LONG).show();
+						//Se graba registro en el log
+						Log.e("Realizando Kinvey Login", "mensaje");
+						txtNombreUsuario.setText("");
+					}
+				});
+			} else {
+				mensaje = "Utilizando usuario cacheado: " + mKinveyClient.user().getUsername() + ".";
+				Log.e("Usuario Logueado", mensaje);
+			}
+		}
+
+
+
+
+
 	}
-
-
-
-
-
-}

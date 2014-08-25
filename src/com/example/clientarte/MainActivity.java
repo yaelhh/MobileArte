@@ -27,6 +27,7 @@ import com.kinvey.java.core.KinveyClientCallback;
 
 
 
+
 import android.app.Activity;
 
 
@@ -62,6 +63,7 @@ import com.kinvey.android.AsyncAppData;
 import com.kinvey.android.Client;
 import com.kinvey.java.core.KinveyClientCallback;
 
+import dominio.Obra;
 import dominio.Usuario;
 
 
@@ -89,6 +91,8 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 	private Button btnNot;
 	private MenuItem notificacion;
 	public static FragmentManager fragmentManager;
+	private ArrayList<Obra>listaObras=new ArrayList<Obra>();
+
 
 	//Variables de la notificacion
 	NotificationManager nm;
@@ -105,9 +109,11 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_main);	
 		dh = new DatabaseHelper(getApplicationContext());
+		
 		fragmentManager = getSupportFragmentManager();
-
+		setTitle("Art-e");
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
+		listaObras= obj.getListObras();
 		mKinvey = obj.getmKinveyClient();
 		//Drawer Layout
 		NavDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -135,10 +141,10 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 		//Novedades
 		NavItms.add(new Item_objct(titulos[4], NavIcons.getResourceId(4, -1)));
 		//Perfil
-		NavItms.add(new Item_objct(titulos[5], NavIcons.getResourceId(5, -1)));
+		//		NavItms.add(new Item_objct(titulos[5], NavIcons.getResourceId(5, -1)));
 		//Ajustes
-		NavItms.add(new Item_objct(titulos[6], NavIcons.getResourceId(6, -1)));
-		
+		//		NavItms.add(new Item_objct(titulos[6], NavIcons.getResourceId(6, -1)));
+
 
 		//Declaramos y seteamos nuestro adaptador al cual le pasamos el array con los titulos	       
 		NavAdapter= new NavigationAdapter(this,NavItms);
@@ -185,14 +191,14 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 		MostrarFragment(1);
 		//validarUsuarioNotificaciones(obj);
 		//accederServicioNotificaciones();
-		
-		
+
+
 		try{
 			validarCumpleanosDesdeBase(obj);
 		}catch(Exception ioException){
-			
+
 		}
-		
+
 	}	
 
 	/*Pasando la posicion de la opcion en el menu nos mostrara el Fragment correspondiente*/
@@ -210,13 +216,13 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 		case 3:
 			fragment = new NosotrosFragment();
 			break;
+			//		case 4:
+			//			fragment = new ComunidadFragment();
+			//			break;
 		case 4:
-			fragment = new ComunidadFragment();
-			break;
-		case 5:
 			fragment = new NovedadesFragment();
 			break;  
-		case 6:
+		case 5:
 			fragment = new PerfilFragment();
 			break;          
 			/*case 7:
@@ -231,10 +237,10 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 		}
 		//Validamos si el fragment no es nulo
 		if (fragment != null) {
-			
+
 			android.support.v4.app.FragmentManager fragmentManager =(android.support.v4.app.FragmentManager) getSupportFragmentManager(); //Or getFragmentManager() if you're not using the support library
-		    fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-			
+			fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
 
 			// Actualizamos el contenido segun la opcion elegida
 			NavList.setItemChecked(position, true);
@@ -279,24 +285,24 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 			return true;
 		default:
 
-			
+
 		}  
 		return super.onOptionsItemSelected(item);
 	} 	
-	
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//	// Handle presses on the action bar items
-//	switch (item.getItemId()) {
-//	case R.id.action_notification:
-//	//composeMessage();
-//		Intent intent = new Intent(MainActivity.this, NotificacionesActivity.class);
-//		startActivity(intent);
-//	return true;
-//	default:
-//	return super.onOptionsItemSelected(item);
-//	}
-//	}
+
+	//	@Override
+	//	public boolean onOptionsItemSelected(MenuItem item) {
+	//	// Handle presses on the action bar items
+	//	switch (item.getItemId()) {
+	//	case R.id.action_notification:
+	//	//composeMessage();
+	//		Intent intent = new Intent(MainActivity.this, NotificacionesActivity.class);
+	//		startActivity(intent);
+	//	return true;
+	//	default:
+	//	return super.onOptionsItemSelected(item);
+	//	}
+	//	}
 	//@Override
 	public boolean onQueryTextChange(String newText) {
 
@@ -307,7 +313,20 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 	//@Override
 	public boolean onQueryTextSubmit(String text) {
 
-		Toast.makeText(this, "Searching for " + text, Toast.LENGTH_LONG).show();
+		ArrayList<Obra> listObraBuscadas= new ArrayList<Obra>();
+		for(int x=0;x<listaObras.size();x++){
+			if(listaObras.get(x).getNombre().toLowerCase().contains(text.toLowerCase())){
+				listObraBuscadas.add(listaObras.get(x));
+			}
+		}
+		if(listObraBuscadas.size()>0){
+			Intent intent = new Intent(MainActivity.this, NovedadesActivity.class);
+			intent.putExtra("listObras",listObraBuscadas);
+			intent.putExtra("mascaras", "0");
+			startActivity(intent);
+		}else{
+			Toast.makeText(this, "No se han encontrado obras con ese nombre", Toast.LENGTH_LONG).show();
+		}
 		return false;
 	}
 
@@ -321,11 +340,11 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 		mSearchView = (SearchView) searchItem.getActionView();
 		mSearchView.setQueryHint("Search...");
 		mSearchView.setOnQueryTextListener((OnQueryTextListener) this);
-		
-		
+
+
 		return true;
 	}
-	
+
 	public void llamarNotificacionesActvity(){
 		Intent intent = new Intent(MainActivity.this, NotificacionesActivity.class);
 		startActivity(intent);
@@ -459,23 +478,23 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 	public void validarCumpleanosDesdeBase(ObjetosBackend ob){
 		//		eliminarNotificacion();
 		if (mKinvey.user() != null){
-			
-		
-		if (mKinvey.user().isUserLoggedIn()){
-			String nombreLogueado = ob.captarUsuarioLogueado().user().getUsername().toString();
-			//UsuarioBackend usuario = ob.obtenerNacimientoUsuario(mKinvey.user().getUsername().toString());
-			Usuario u = dh.obtenerFechaCumpleanos(nombreLogueado);
-			try{
-				if (u != null){
-					if (validarFecha(u)){
-						accederServicioNotificaciones(u, ob);
-					}
-				}
-			}catch (Exception i){
-				Toast.makeText(MainActivity.this, "Segui tranqui", icono_v).show();	
-			}
 
-		}
+
+			if (mKinvey.user().isUserLoggedIn()){
+				String nombreLogueado = ob.captarUsuarioLogueado().user().getUsername().toString();
+				//UsuarioBackend usuario = ob.obtenerNacimientoUsuario(mKinvey.user().getUsername().toString());
+				Usuario u = dh.obtenerFechaCumpleanos(nombreLogueado);
+				try{
+					if (u != null){
+						if (validarFecha(u)){
+							accederServicioNotificaciones(u, ob);
+						}
+					}
+				}catch (Exception i){
+//					Toast.makeText(MainActivity.this, "Segui tranqui", icono_v).show();	
+				}
+
+			}
 		}
 
 	}
@@ -484,7 +503,7 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 		Calendar c = Calendar.getInstance();
 		SimpleDateFormat df1 = new SimpleDateFormat("dd/MM");
 		String fechaActual = df1.format(c.getTime());
-		
+
 		boolean retorno = false;
 		String fechaCortada = u.getFechaNacimiento().substring(0, 5);
 		//if (u.getFechaNacimiento().equalsIgnoreCase(fechaActual)){
@@ -496,7 +515,7 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 
 		return retorno;
 	}
-	
+
 	public void obtenerDatosUsuarioEditar(final ObjetosBackend obj, Client kinvey){
 		final UsuarioBackend usuarioLogueado = new UsuarioBackend();
 		String idU = kinvey.user().getUsername().toString();
@@ -518,7 +537,7 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 					obj.guardarUsuarioBackendLogueado(usuarioLogueado);
 					modificarUsuarioMascaras(usuarioLogueado);
 					//dibujarCampos(usuarioLogueado);
-					
+
 				}
 			}
 
@@ -533,11 +552,11 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 		//return usuarioLogueado;
 		//return usuarioLogueado;
 	}
-	
+
 	//public void modificarUsuarioMascaras(final String cantMascaras, ObjetosBackend o){
 	public void modificarUsuarioMascaras(final UsuarioBackend entity){
 		//final UsuarioBackend entity = o.obtenerUsuarioBackendLogueado();
-		
+
 		mKinvey.appData("Usuario",UsuarioBackend.class).getEntity(entity.getIdUsuario(), new KinveyClientCallback<UsuarioBackend>() {
 
 			@Override
@@ -563,11 +582,11 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 						//kinveyClient.user().logout();
 						//limpiarCampos();
 						//llamarLogin();
-						
-						
-//						if(cant==compra.getButacasSeleccionadas().size()-1){
-//							guardarCompra(compra,mKinveyClient);
-//						}
+
+
+						//						if(cant==compra.getButacasSeleccionadas().size()-1){
+						//							guardarCompra(compra,mKinveyClient);
+						//						}
 					}
 
 					@Override
@@ -586,8 +605,8 @@ public class MainActivity extends FragmentActivity implements OnQueryTextListene
 
 		});
 	}
-	
-	
+
+
 
 
 }

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo"
+    android:background="@drawable/fondo_telon"
     tools:context="com.example.clientarte.CreateAccountActivity" >
 
     <!--
@@ -115,7 +115,7 @@
     android:layout_toRightOf="@+id/textViewCumpleanos"
     android:text="" />
 
-<Button
+<!--  <Button
     android:id="@+id/btnCancelarRegistro"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -125,18 +125,7 @@
     android:minWidth="@dimen/button_min_width"
     android:text="@string/cancelar"
     android:textColor="@color/ghost_white" />
-
-<Button
-    android:id="@+id/btnRegister"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignBaseline="@+id/btnCancelarRegistro"
-    android:layout_alignBottom="@+id/btnCancelarRegistro"
-    android:layout_toLeftOf="@+id/btnCancelarRegistro"
-    android:minWidth="@dimen/button_min_width"
-    android:onClick="registerAccount"
-    android:text="@string/register"
-    android:textColor="@color/ghost_white" />
+-->
 
 <TextView
     android:id="@+id/txtLabelMascaras"
@@ -161,5 +150,18 @@
     android:layout_height="wrap_content"
     android:layout_alignTop="@+id/etEmailAddress"
     android:layout_centerHorizontal="true" />
+
+<Button
+    android:id="@+id/btnRegister"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignRight="@+id/txtMasaras"
+    android:layout_below="@+id/txtMasaras"
+    android:layout_marginTop="19dp"
+    android:layout_toRightOf="@+id/txtLabelMascaras"
+    android:minWidth="@dimen/button_min_width"
+    android:onClick="registerAccount"
+    android:text="@string/register"
+    android:textColor="@color/ghost_white" />
 
 </RelativeLayout>

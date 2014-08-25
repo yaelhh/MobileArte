@@ -5,7 +5,8 @@ xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/swipe_container"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:ignore="MergeRootFrame" >
+tools:ignore="MergeRootFrame" 
+android:background="@drawable/fondo_telon">
   
 <ListView
 android:id="@+id/mi_lista"

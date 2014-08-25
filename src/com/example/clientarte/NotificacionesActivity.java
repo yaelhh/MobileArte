@@ -53,7 +53,7 @@ public class NotificacionesActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_notificaciones);
-
+		setTitle("Notificaciones");
 		//Instanciamos el listView
 		listView = (ListView) findViewById(R.id.listViewNotificaciones);
 

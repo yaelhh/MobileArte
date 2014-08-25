@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Gray"
+    android:background="@drawable/fondo_telon"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/idTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20dp"
+        android:padding="23dp"
+         android:textStyle="bold|italic"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <!--
@@ -25,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingRight="10dp"
-        android:text="@string/horario" />
+        android:text="@string/funciones" />
 
     <Spinner
         android:id="@+id/spinner_horario"

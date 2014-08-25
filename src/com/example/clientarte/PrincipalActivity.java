@@ -50,7 +50,7 @@ private ArrayList<Obra>listaObras=new ArrayList<Obra>();
 		setContentView(R.layout.fragment_pricipal);
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
 		ArrayList<Obra>listaObras= obj.getListObras();
-		
+		setTitle("Art-e");
 //		//Conexión de la APP a Kinvey
 //				mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
 //				mKinveyClient.ping(new KinveyPingCallback() {

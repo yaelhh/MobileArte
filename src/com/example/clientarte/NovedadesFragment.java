@@ -39,6 +39,7 @@ public class NovedadesFragment extends android.support.v4.app.Fragment implement
             Bundle savedInstanceState) {
   
         View rootView = inflater.inflate(R.layout.activity_novedades, container, false);
+        getActivity().setTitle("Novedades");
         swipeLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_container);
 		//Indicamos que listener recogerá la retrollamada (callback), en este caso, será el metodo OnRefresh de esta clase.
 		swipeLayout.setOnRefreshListener(this);
@@ -50,13 +51,15 @@ public class NovedadesFragment extends android.support.v4.app.Fragment implement
 		//Obtenemos una referencia a nuestra lista.
 		//		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
 		miLista = (ListView) rootView.findViewById(R.id.mi_lista);
-		Bundle extras = getActivity().getIntent().getExtras();
-		if(extras!=null){
-			listaObras= extras.getParcelableArrayList("listObras");
-		}else{
-			final ObjetosBackend obj= (ObjetosBackend) getActivity().getApplicationContext();
-			listaObras= obj.getListObras();
-		}
+//		Bundle extras = getActivity().getIntent().getExtras();
+//		if(extras!=null){
+//			listaObras= extras.getParcelableArrayList("listObras");
+//		}else{
+//			final ObjetosBackend obj= (ObjetosBackend) getActivity().getApplicationContext();
+//			listaObras= obj.getListObras();
+//		}
+		final ObjetosBackend obj= (ObjetosBackend) getActivity().getApplicationContext();
+		listaObras= obj.getListObras();
 		cargarDatos(listaObras);
 
           
@@ -68,7 +71,7 @@ public class NovedadesFragment extends android.support.v4.app.Fragment implement
 		ArrayList<ListaEntradaObra> datos = new ArrayList<ListaEntradaObra>(); 
 		for(int x=0;x<listObras.size();x++){
 			Obra obraActual= listObras.get(x);
-//			datos.add(new ListaEntradaObra(obraActual.getListaImagenes()[0],obraActual.getNombre()));
+			datos.add(new ListaEntradaObra(obraActual.getListaImagenes()[0],obraActual.getNombre()));
 		}
 		miLista.setAdapter(new Lista_adaptador(getActivity(), R.layout.entrada_obras, datos){
 			@Override

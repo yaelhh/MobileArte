@@ -219,9 +219,25 @@ public class ObjetosBackend extends Application{
 			obra.getListaImagenes()[1]=R.drawable.carmen_2;
 			obra.getListaImagenes()[2]=R.drawable.carmen_3;
 			break;
-		case 6:
-			obra.getListaImagenes()[0]=R.drawable.les_2;
-			obra.getListaImagenes()[1]=R.drawable.les_3;
+		case 2:
+			obra.getListaImagenes()[0]=R.drawable.les_1;
+			obra.getListaImagenes()[1]=R.drawable.les_2;
+			obra.getListaImagenes()[2]=R.drawable.les_3;
+			break;	
+		case 3:
+			obra.getListaImagenes()[0]=R.drawable.flamenco_hoy_1;
+			obra.getListaImagenes()[1]=R.drawable.flamenco_hoy_2;
+			obra.getListaImagenes()[2]=R.drawable.flamenco_hoy_3;
+			break;	
+		case 4:
+			obra.getListaImagenes()[0]=R.drawable.don_quijote_1;
+			obra.getListaImagenes()[1]=R.drawable.don_quijote_2;
+			obra.getListaImagenes()[2]=R.drawable.don_quijote_3;
+			break;
+		case 5:
+			obra.getListaImagenes()[0]=R.drawable.deborah_1;
+			obra.getListaImagenes()[1]=R.drawable.deborah_2;
+			obra.getListaImagenes()[2]=R.drawable.deborah_3;
 			break;	
 		}	
 	}

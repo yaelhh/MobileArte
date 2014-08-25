@@ -41,7 +41,7 @@ public class NovedadesActivity extends ActionBarActivity implements SwipeRefresh
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_novedades);
-
+		setTitle("Novedades");
 		//Obtenemos una referencia al viewgroup SwipeLayou
 		swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
 		//Indicamos que listener recogerá la retrollamada (callback), en este caso, será el metodo OnRefresh de esta clase.

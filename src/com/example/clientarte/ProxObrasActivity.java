@@ -49,7 +49,7 @@ public class ProxObrasActivity extends ActionBarActivity implements SwipeRefresh
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_prox_obras);
 
-
+		setTitle("Próximas Obras");
 		//Obtenemos una referencia al viewgroup SwipeLayou
 		swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container_prox_obras);
 		//Indicamos que listener recogerá la retrollamada (callback), en este caso, será el metodo OnRefresh de esta clase.

@@ -51,7 +51,7 @@ public class ObrasFavoritasActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_notificaciones);
-
+		setTitle("Favoritos");
 		miLista = (ListView) findViewById(R.id.listViewNotificaciones);
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
 		cargarDatos(obj);

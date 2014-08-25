@@ -25,6 +25,7 @@ public class NosotrosFragment extends android.support.v4.app.Fragment {
             Bundle savedInstanceState) {
   
         View rootView = inflater.inflate(R.layout.activity_nosotros, container, false);
+        getActivity().setTitle("Acerca de nosotros");
         GoogleMap mapa = ((SupportMapFragment) MainActivity.fragmentManager.findFragmentById(R.id.map)).getMap();
 		LatLng sobre = new LatLng(-34.904416, -56.198482);
 		CameraPosition camPos = new CameraPosition.Builder()

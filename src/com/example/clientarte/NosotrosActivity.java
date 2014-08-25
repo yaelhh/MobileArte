@@ -33,6 +33,7 @@ public class NosotrosActivity extends android.support.v4.app.FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nosotros);
+		setTitle("Acerca de nosotros");
 //		fragmentManager = getSupportFragmentManager();
 		GoogleMap mapa = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 		LatLng sobre = new LatLng(-34.904416, -56.198482);

@@ -61,6 +61,7 @@ public class SectorAActivity extends Activity {
 		cantEntradas= extras.getInt("cantEntrada");
 		SectorA = getIntent().getParcelableExtra("sector");
 		funcion=getIntent().getParcelableExtra("funcion");
+		setTitle("Sector elegido");
 		//		PrecioTotal= cantEntradas*SectorA.getPrecioSector();
 		gv.setNumColumns(SectorA.getLinea());
 		btnOk=(Button)findViewById(R.id.bttnOk);

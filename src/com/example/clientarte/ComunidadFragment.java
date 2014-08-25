@@ -54,7 +54,7 @@ public class ComunidadFragment extends android.support.v4.app.Fragment {
 		rootView = inflater.inflate(R.layout.activity_listado, container, false);
 		dh = new DatabaseHelper(getActivity().getApplicationContext());
 		btnAgregarComentario= (ImageButton)rootView.findViewById(R.id.btnAgregarComentario);
-
+		getActivity().setTitle("Comunidad");
 		//Conexión de la APP a Kinvey
 		final ObjetosBackend obj= (ObjetosBackend) getActivity().getApplicationContext();
 		mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();

@@ -57,7 +57,7 @@ public class ProgramacionFragment extends android.support.v4.app.Fragment implem
   
        rootView = inflater.inflate(R.layout.activity_programacion, container, false);
 		cal = (CalendarView) rootView.findViewById(R.id.calendarView1);
-
+		getActivity().setTitle("Cartelera");
 //       layout= (ViewGroup)rootView.findViewById(R.id.containerProgramacion);
        final ObjetosBackend obj= (ObjetosBackend) getActivity().getApplicationContext();
 		listObras= obj.getListObras();
@@ -89,7 +89,7 @@ public class ProgramacionFragment extends android.support.v4.app.Fragment implem
 				//				Log.e("Al principio",listObras.get(0).getNombre());
 				if(obrasDia.size()>0){
 					obrasDia= new ArrayList<Obra>();
-					miLista.removeAllViews();			
+//					miLista.removeAllViews();			
 				}
 
 				String anio=String.valueOf(year);

@@ -43,7 +43,7 @@ public class PerfilActivity extends Activity {
 		setContentView(R.layout.activity_perfil);
 
 		btnCuenta= (Button)findViewById(R.id.btnCuenta);
-		btnRegistrar= (Button)findViewById(R.id.registrarUsuarioPerfil);
+//		btnRegistrar= (Button)findViewById(R.id.registrarUsuarioPerfil);
 		btnLoguear= (Button)findViewById(R.id.LoguearDesloguear);
 		
 		//Conexión de la APP a Kinvey
@@ -60,9 +60,9 @@ public class PerfilActivity extends Activity {
 		//final UsuarioBackend obj= (UsuarioBackend)getApplicationContext();
 
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
-		btnCuenta= (Button)findViewById(R.id.btnCuenta);
-		btnRegistrar= (Button)findViewById(R.id.registrarUsuarioPerfil);
-		btnLoguear= (Button)findViewById(R.id.LoguearDesloguear);
+//		btnCuenta= (Button)findViewById(R.id.btnCuenta);
+//		btnRegistrar= (Button)findViewById(R.id.registrarUsuarioPerfil);
+//		btnLoguear= (Button)findViewById(R.id.LoguearDesloguear);
 		addListenerOnButton(obj);
 
 	}
@@ -223,6 +223,7 @@ public class PerfilActivity extends Activity {
 				mKinveyClient.user().setUsername(userNameLogueado);
 				Toast t2=Toast.makeText(this,"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
 				t2.show();
+			
 
 			} else if (resultCode == RESULT_CANCELED) {  
 			} 

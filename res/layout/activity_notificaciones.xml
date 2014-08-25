@@ -2,8 +2,9 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#999999"
-    android:padding="2dp" >
+    android:background="@drawable/fondo_telon"
+    android:padding="2dp"
+     >
 
     <ListView
         android:id="@+id/listViewNotificaciones"
