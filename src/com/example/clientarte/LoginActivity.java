@@ -45,7 +45,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 		setContentView(R.layout.activity_login);
 		dh = new DatabaseHelper(getApplicationContext());
 		final ObjetosBackend obj= (ObjetosBackend) getApplicationContext();
-		
+		setTitle("Login");
 		//Conexión de la APP a Kinvey
 		mKinveyClient = new Client.Builder(this.getApplicationContext()).build();
 		mKinveyClient.ping(new KinveyPingCallback() {
@@ -100,6 +100,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 					public void onFailure(Throwable error) {
 						mensaje = "Error al realizar el login.";
 						Log.e("Realizando Kinvey Login", mensaje, error);
+						Toast.makeText(getApplicationContext(),"Nombre de usuario o contraseña incorrecta" , Toast.LENGTH_LONG).show();
 					}
 					@Override
 					public void onSuccess(User u) {

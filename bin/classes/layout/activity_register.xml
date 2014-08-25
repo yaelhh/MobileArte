@@ -103,7 +103,9 @@
     android:layout_alignParentLeft="true"
     android:layout_below="@+id/etPasswordConfirm"
     android:layout_marginTop="27dp"
-    android:text="@string/fechaNacimiento" />
+    android:text="@string/fechaNacimiento"
+     android:textColor="@color/ebony"
+        android:textColorHint="@color/hint_color" />
 
 <TextView
     android:id="@+id/dateDisplay"
@@ -134,7 +136,9 @@
     android:layout_alignParentLeft="true"
     android:layout_below="@+id/dateDisplay"
     android:layout_marginTop="14dp"
-    android:text="Máscaras" />
+    android:text="Máscaras" 
+     android:textColor="@color/ebony"
+     android:textColorHint="@color/hint_color"/>
 
 <TextView
     android:id="@+id/txtMasaras"

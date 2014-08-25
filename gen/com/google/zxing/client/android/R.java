@@ -36,9 +36,9 @@ public final class R {
 		public static final int viewfinder_mask = 0x7f080015;
 	}
 	public static final class drawable {
-		public static final int launcher_icon = 0x7f0200af;
-		public static final int share_via_barcode = 0x7f0200b8;
-		public static final int shopper_icon = 0x7f0200b9;
+		public static final int launcher_icon = 0x7f0200ab;
+		public static final int share_via_barcode = 0x7f0200b4;
+		public static final int shopper_icon = 0x7f0200b5;
 	}
 	public static final class id {
 		public static final int auto_focus = 0x7f090000;

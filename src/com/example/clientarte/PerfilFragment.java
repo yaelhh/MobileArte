@@ -55,7 +55,7 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 		dh = new DatabaseHelper(getActivity().getApplicationContext());
 		final ObjetosBackend obj= (ObjetosBackend) getActivity().getApplicationContext();
 		txtNombreUsuario=(TextView)rootView.findViewById(R.id.nombreUsuarioCuenta);
-		
+
 		//Conexión de la APP a Kinvey
 		mKinveyClient = new Client.Builder(getActivity().getApplicationContext()).build();
 		mKinveyClient.ping(new KinveyPingCallback() {
@@ -64,24 +64,24 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 			}
 			public void onSuccess(Boolean b) {
 				Log.d("Probando Kinvey Connection", "Kinvey Ping Success");
-//				if(!mKinveyClient.user().getUsername().equalsIgnoreCase("adm")){
-//				txtNombreUsuario.setText(mKinveyClient.user().getUsername());
-//				}
+				//				if(!mKinveyClient.user().getUsername().equalsIgnoreCase("adm")){
+				//				txtNombreUsuario.setText(mKinveyClient.user().getUsername());
+				//				}
 			}
 		});
 		try{
-		if(!mKinveyClient.user().getUsername().equalsIgnoreCase("adm")){
-			txtNombreUsuario.setText(mKinveyClient.user().getUsername());
+			if(!mKinveyClient.user().getUsername().equalsIgnoreCase("adm")){
+				txtNombreUsuario.setText(mKinveyClient.user().getUsername().toString());
 			}
 		}catch(Exception e){
 			Log.e("Setear nombre usuario","No pudo setear el nombre de usuario");
 		}
+		mKinveyClient = obj.captarUsuarioLogueado();
 		//btnCuenta= (Button)rootView.findViewById(R.id.btnCuenta);
-//		btnRegistrar= (Button)rootView.findViewById(R.id.registrarUsuarioPerfil);
+		//		btnRegistrar= (Button)rootView.findViewById(R.id.registrarUsuarioPerfil);
 		btnLoguear= (Button)rootView.findViewById(R.id.LoguearDesloguear);
 		btnProxObras = (Button)rootView.findViewById(R.id.btnPrxObras);
 		btnObrasVistas= (Button)rootView.findViewById(R.id.BtnObrasVistas);
-		mKinveyClient = obj.captarUsuarioLogueado();
 		btnEditarUsuario= (Button)rootView.findViewById(R.id.btnCuenta);
 		btnCanjeMasc=(Button)rootView.findViewById(R.id.btnCanjear);
 		btnFavoritos=(Button)rootView.findViewById(R.id.btnFavoritos);
@@ -179,29 +179,29 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 
 	public void cancelar() {
 		//finish();
-//		Toast t=Toast.makeText(getActivity(),"Presiono cancelar", Toast.LENGTH_SHORT);
-//		t.show();
+		//		Toast t=Toast.makeText(getActivity(),"Presiono cancelar", Toast.LENGTH_SHORT);
+		//		t.show();
 	}
 
 
 	@Override 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		View view = null;
-//		if (requestCode == 2) { 
-			if (resultCode == getActivity().RESULT_OK) { 
-				//BUSCO USUARIO SEGUN NOMBRE DE USUARIO KINVEY LOGUEADO
-				String userNameLogueado = data.getStringExtra("username");
-				Toast t=Toast.makeText(getActivity(),"Me traigo datos" + userNameLogueado, Toast.LENGTH_SHORT);
-				t.show();
-				mKinveyClient.user().setUsername(userNameLogueado);
-				txtNombreUsuario.setText(mKinveyClient.user().getUsername());
+		//		if (requestCode == 2) { 
+		if (resultCode == getActivity().RESULT_OK) { 
+			//BUSCO USUARIO SEGUN NOMBRE DE USUARIO KINVEY LOGUEADO
+			String userNameLogueado = data.getStringExtra("username");
+			Toast t=Toast.makeText(getActivity(),"Me traigo datos" + userNameLogueado, Toast.LENGTH_SHORT);
+			t.show();
+			mKinveyClient.user().setUsername(userNameLogueado);
+			txtNombreUsuario.setText(mKinveyClient.user().getUsername().toString());
 
-				Toast t2=Toast.makeText(getActivity(),"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
-				t2.show();
+			Toast t2=Toast.makeText(getActivity(),"Usuario Logueado" + mKinveyClient.user().getUsername(), Toast.LENGTH_SHORT);
+			t2.show();
 
-			} else if (resultCode == getActivity().RESULT_CANCELED) {  
-			} 
-//		}
+		} else if (resultCode == getActivity().RESULT_CANCELED) {  
+		} 
+		//		}
 	}
 
 
@@ -215,16 +215,16 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 			}
 
 		});
-//		btnRegistrar.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//
-//				Toast t3=Toast.makeText(getActivity(),"Usuario logueado AHORA" + obj.captarUsuarioLogueado().user().getUsername(), Toast.LENGTH_SHORT);
-//				t3.show();
-//			}
-//
-//		});
+		//		btnRegistrar.setOnClickListener(new OnClickListener() {
+		//
+		//			@Override
+		//			public void onClick(View v) {
+		//
+		//				Toast t3=Toast.makeText(getActivity(),"Usuario logueado AHORA" + obj.captarUsuarioLogueado().user().getUsername(), Toast.LENGTH_SHORT);
+		//				t3.show();
+		//			}
+		//
+		//		});
 
 		btnEditarUsuario.setOnClickListener(new OnClickListener() {
 			@Override
@@ -271,7 +271,7 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 					Log.e("Excepction", "No encuentra ADM no tiene conexion a kinvey");
 				}
 			}
-			});
+		});
 
 		btnObrasVistas.setOnClickListener(new OnClickListener() {
 			@Override
@@ -299,10 +299,15 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 						searchedEvents.get(query, new KinveyListCallback<UsuarioBackend>() {
 							@Override
 							public void onSuccess(UsuarioBackend[] resultadoconsulta) { 
-								Intent intent = new Intent(getActivity(), NovedadesActivity.class);
-								intent.putExtra("mascaras", resultadoconsulta[0].getMascaras());
-								Log.e("PerfilFragment mascaras", resultadoconsulta[0].getMascaras());
-								startActivity(intent);	
+								if(Integer.valueOf(resultadoconsulta[0].getMascaras())>0){
+
+									Intent intent = new Intent(getActivity(), NovedadesActivity.class);
+									intent.putExtra("mascaras", resultadoconsulta[0].getMascaras());
+									Log.e("PerfilFragment mascaras", resultadoconsulta[0].getMascaras());
+									startActivity(intent);	
+								}else{
+									Toast.makeText(getActivity(),"No tiene mascaras para canjear", Toast.LENGTH_SHORT).show();
+								}
 							}
 							@Override
 							public void onFailure(Throwable arg0) {
@@ -332,37 +337,37 @@ public class PerfilFragment extends android.support.v4.app.Fragment {
 			} 
 
 		}); 
-		}
-
-
-		public void loginAdministrador () {
-			String usuario = "adm";
-			String password = "000";
-			//Verificar si el usuario está "logeado"
-			if (!mKinveyClient.user().isUserLoggedIn()) {
-				//Si no está "logeado" se realiza el login
-				mKinveyClient.user().login(usuario, password, new KinveyUserCallback() {
-					public void onFailure(Throwable error) {
-						mensaje = "Error al realizar el login.";
-						Log.e("No pudo realizar Kinvey Login", mensaje, error);
-					}
-					@Override
-					public void onSuccess(User u) {
-						//Se muestra mensaje de bienvenida por pantalla
-						Toast.makeText(getActivity(), mensaje, Toast.LENGTH_LONG).show();
-						//Se graba registro en el log
-						Log.e("Realizando Kinvey Login", "mensaje");
-						txtNombreUsuario.setText("");
-					}
-				});
-			} else {
-				mensaje = "Utilizando usuario cacheado: " + mKinveyClient.user().getUsername() + ".";
-				Log.e("Usuario Logueado", mensaje);
-			}
-		}
-
-
-
-
-
 	}
+
+
+	public void loginAdministrador () {
+		String usuario = "adm";
+		String password = "000";
+		//Verificar si el usuario está "logeado"
+		if (!mKinveyClient.user().isUserLoggedIn()) {
+			//Si no está "logeado" se realiza el login
+			mKinveyClient.user().login(usuario, password, new KinveyUserCallback() {
+				public void onFailure(Throwable error) {
+					mensaje = "Error al realizar el login.";
+					Log.e("No pudo realizar Kinvey Login", mensaje, error);
+				}
+				@Override
+				public void onSuccess(User u) {
+					//Se muestra mensaje de bienvenida por pantalla
+					Toast.makeText(getActivity(), mensaje, Toast.LENGTH_LONG).show();
+					//Se graba registro en el log
+					Log.e("Realizando Kinvey Login", "mensaje");
+					txtNombreUsuario.setText("");
+				}
+			});
+		} else {
+			mensaje = "Utilizando usuario cacheado: " + mKinveyClient.user().getUsername() + ".";
+			Log.e("Usuario Logueado", mensaje);
+		}
+	}
+
+
+
+
+
+}

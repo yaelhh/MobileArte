@@ -1,8 +1,11 @@
 package com.example.clientarte;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+
+
 
 
 
@@ -134,7 +137,7 @@ public class CreateAccountActivity extends ActionBarActivity {
 					//if (validarCamposObligatorios()){
 					//processSignup(view);
 					registroUsuario(v, obj);
-					limpiarCampos();
+					//limpiarCampos();
 
 
 				} else {
@@ -200,7 +203,7 @@ public class CreateAccountActivity extends ActionBarActivity {
 
 				//registrarUsuario();
 				//processSignup(v);
-				limpiarCampos();
+				//limpiarCampos();
 			}
 
 
@@ -231,29 +234,34 @@ public class CreateAccountActivity extends ActionBarActivity {
 		entity.put("estaLogueado","0");
 		entity.put("mascaras","50");
 		//if (validarEdad()){
-		kinveyClient.user().create(entity.getNombreUsuario(), entity.getPassword(), new KinveyUserCallback() {
-			@Override
-			public void onSuccess(User result) {
+		if (validarCampos()&& validarFecha()){
+			kinveyClient.user().create(entity.getNombreUsuario(), entity.getPassword(), new KinveyUserCallback() {
+				@Override
+				public void onSuccess(User result) {
 
-				Toast.makeText(CreateAccountActivity.this,"Entity Saved\nTitle: " + result.getUsername()
-						+ "\nDescription: " + result.get("Description"), Toast.LENGTH_LONG).show();
+					//				Toast.makeText(CreateAccountActivity.this,"Entity Saved\nTitle: " + result.getUsername()
+					//						+ "\nDescription: " + result.get("Description"), Toast.LENGTH_LONG).show();
 
-				saveUsuaro (entity);
-				loginUsuario(nomUsuario,pass);
-				crearUsuarioBase(nomUsuario, pass, 1, fechaNac);
-				obj.setmKinveyClient(kinveyClient);
-			}
 
-			@Override
-			public void onFailure(Throwable error) {
-				Log.e(TAG, "AppData.save Failure", error);
-				Toast.makeText(CreateAccountActivity.this, "Save All error: " + error.getMessage(), Toast.LENGTH_LONG).show();
-			}
-		});
-		//}
-		//});
+					saveUsuaro (entity);
+					loginUsuario(nomUsuario,pass);
+					crearUsuarioBase(nomUsuario, pass, 1, fechaNac);
+					obj.setmKinveyClient(kinveyClient);
+					limpiarCampos();
+					finish();
+
+				}
+
+				@Override
+				public void onFailure(Throwable error) {
+					Log.e(TAG, "AppData.save Failure", error);
+					Toast.makeText(CreateAccountActivity.this, "El usuario ya existe, debe ingresar otro nombre de usuario", Toast.LENGTH_LONG).show();
+				}
+			});
+			//}
+			//});
+		}
 	}
-
 	public void saveUsuaro (UsuarioBackend entity){
 		kinveyClient.appData("Usuario", UsuarioBackend.class).save(entity, new KinveyClientCallback<UsuarioBackend>() {
 
@@ -261,10 +269,8 @@ public class CreateAccountActivity extends ActionBarActivity {
 			@Override
 			public void onSuccess(UsuarioBackend result) {
 
-				Toast.makeText(CreateAccountActivity.this,"Revoluciones: " + result.getNombreUsuario()
-						+ "\nDescription: " , Toast.LENGTH_LONG).show();
-
-
+				Toast.makeText(CreateAccountActivity.this,"Su usuario ha sido creado corretamente. Bienvenid@:" + " " + result.getNombreUsuario()
+						, Toast.LENGTH_LONG).show();
 			}
 
 			@Override
@@ -298,6 +304,20 @@ public class CreateAccountActivity extends ActionBarActivity {
 		}
 
 	}
+	
+	public boolean validarFecha (){
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat df1 = new SimpleDateFormat("yyyy");
+		String fechaActual = df1.format(c.getTime());
+		 
+		if  (Integer.parseInt(fechaActual)-mYear>=18){
+			return true;
+		}else{
+			Toast.makeText(CreateAccountActivity.this,"Usted debe ser mayor a 18 años.", Toast.LENGTH_LONG).show();
+			return false;
+		}
+	}
+	
 
 
 
@@ -400,6 +420,26 @@ public class CreateAccountActivity extends ActionBarActivity {
 		}
 	}
 
+	private boolean validarCampos() {
+		mEditFirstName = (EditText) findViewById(R.id.etFirstName);
+		mEditLastName = (EditText) findViewById(R.id.etLastName);
+		mEditEmailAddress = (EditText) findViewById(R.id.etEmailAddress);
+		mEditPassword = (EditText) findViewById(R.id.etPassword);
+		mEditPasswordConfirm = (EditText) findViewById(R.id.etPasswordConfirm);
+		
+		String nomUsuario = mEditEmailAddress.getText().toString();
+		String nombrePila = mEditEmailAddress.getText().toString();
+		String apellido = mEditEmailAddress.getText().toString();
+		String pass = mEditPassword.getText().toString();
+		String confirPass = mEditPasswordConfirm.getText().toString();
+		if (nomUsuario.isEmpty()|| nombrePila.isEmpty()||apellido.isEmpty()||pass.isEmpty()){
+			Toast.makeText(getApplicationContext(), "Debe ingresar todos los datos requeridos.", Toast.LENGTH_SHORT).show();
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
 	private boolean validatePasswordMatch() {
 		mEditFirstName = (EditText) findViewById(R.id.etFirstName);
 		mEditLastName = (EditText) findViewById(R.id.etLastName);

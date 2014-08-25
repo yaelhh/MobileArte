@@ -21,7 +21,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="26dp"
-            android:text="@string/Arte"
+           
             android:textAppearance="@style/AppBaseTheme"
             android:textColor="@color/Black"
             android:textColorLink="@color/Black"
