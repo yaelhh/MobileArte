@@ -33,7 +33,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
 
 		botonNosotros=(ImageButton)rootView.findViewById(R.id.ImageNosotros);
 		botonNovedades =(ImageButton)rootView.findViewById(R.id.ImageNovedades);
-		
+		getActivity().setTitle("Inicio");
 		addListenerOnButton();
 		return rootView;
     }
