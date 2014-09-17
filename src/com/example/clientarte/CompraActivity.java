@@ -307,7 +307,7 @@ public class CompraActivity extends Activity {
 					usuario.setMiNombreUsuario(o.captarUsuarioLogueado().user().getUsername());
 					obtenerButacasSeleccionadas();
 					Calendar c = Calendar.getInstance();
-					SimpleDateFormat df1 = new SimpleDateFormat("dd-MMM-yyyy");
+					SimpleDateFormat df1 = new SimpleDateFormat("dd-MM-yyyy");
 					String fechaActual = df1.format(c.getTime());
 					//Obtenemos fecha de vigencia
 					String fechaVigencia = df1.format(sumarDiasFecha());

@@ -425,7 +425,7 @@ public class ObjetosBackend extends Application{
 				}
 				Log.e("lsectores.size"," "+lSector. size());
 				funcionA.setListaSectores(lSector);
-				Log.e("funciones",funcionA.getIdFuncion()+" "+lSector. size());
+				Log.e("funciones","idFuncion"+" "+funcionA.getIdFuncion()+" "+"lSector.size"+" "+ lSector. size());
 				//				lSector.clear();
 				Log.e("Butacas","Listas de Butacas cargadas");
 
@@ -492,7 +492,7 @@ public class ObjetosBackend extends Application{
 								Sala salaActual=listaSalas.get(y);
 								if(resultadoconsulta[i].getIdSalas().equalsIgnoreCase(salaActual.getIdSala())){
 									listaSalas.get(y).getListaObras().add(obraActual);
-									Log.e(salaActual.getIdSala(),obraActual.getIdObra()+"");
+									Log.e("IdSala "+salaActual.getIdSala(),"idObra "+ obraActual.getIdObra()+"");
 								}	
 							}
 						}

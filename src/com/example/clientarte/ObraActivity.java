@@ -85,6 +85,7 @@ public class ObraActivity extends ActionBarActivity {
 	private ImageButton btnAgregarComentarioObra;
 	private ImageButton btnVerVideo;
 	private ImageButton btnCompartirFacebook;
+	private ImageButton btnCompraLibro;
 	private int mascaras=0;
 
 	//	private int requestCode = 1;
@@ -121,7 +122,7 @@ public class ObraActivity extends ActionBarActivity {
 		kinveyClient = obj.captarUsuarioLogueado();
 		btnComprar= (Button)findViewById(R.id.bttnComprar);
 		btnComprar.getBackground().setColorFilter(new LightingColorFilter(330000 , 0xFFFFFF));
-
+		btnCompraLibro=(ImageButton)findViewById(R.id.ImageBtnLibro);
 		btnAgregarComentarioObra = (ImageButton)findViewById(R.id.imageButton2);
 		btnVerVideo = (ImageButton)findViewById(R.id.imageButton3);
 		btnCompartirFacebook = (ImageButton)findViewById(R.id.imageButton1);
@@ -249,6 +250,15 @@ public class ObraActivity extends ActionBarActivity {
 					Log.e(TAG, "Entro  catch de boton favoritos" +obj.captarUsuarioLogueado().user().getUsername().toString());
 					Toast.makeText(ObraActivity.this, "Debe estar logueado para marcar la obra como favorita. " , Toast.LENGTH_LONG).show();
 				}
+			}
+
+		});
+		btnCompraLibro.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				 Intent i = new Intent(Intent.ACTION_VIEW);
+				 i.setData(Uri.parse("http://www.isadoralibros.com.uy/sitio/libros/buscar/q/"+obra.getNombre()));
+				 startActivity(i);
 			}
 
 		});
